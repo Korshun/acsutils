@@ -1,6 +1,3 @@
-#library "acsstr"
-#include "zcommon.acs"
-
 function str StrAdd(str a, str b)
 {
 	return StrParam(s:a, s:b);
