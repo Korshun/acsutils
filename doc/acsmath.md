@@ -83,3 +83,27 @@ This is useful for HudMessages.
 	int y = ClearFraction(b * sin(x));
 	
 	HudMessage(..., x, y, ...);
+
+
+Other
+-----
+
+### `fixed lerp(fixed a, fixed b, fixed alpha)`
+Performs (linear interpolation)[https://en.wikipedia.org/wiki/Linear_interpolation]
+
+In other words, "mixes" the values `a` and `b` using `alpha` to determine
+how close the resulting value will be to either `a` or `b`.
+
+#### Examples
+	lerp(a, b, 0.0) == a;
+	lerp(a, b, 1.0) == b;
+	lerp(a, b, 0.5) == (a + b) / 2; // Average of a and b.
+
+	// Simple animation.
+	for (int time = 0; time < 1.0; time += 0.05)
+	{
+		int x = lerp(x1, x2, time); 
+		int y = lerp(y1, y2, time);
+		DrawSomething(x, y);
+		Delay(1);
+	}

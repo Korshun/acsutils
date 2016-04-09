@@ -125,3 +125,9 @@ function int round(int x)
 		return -(x>>16) - 1;
 	return -(x>>16);
 }
+
+// fixed lerp(fixed a, fixed b, fixed alpha)
+function int lerp(int a, int b, int alpha)
+{
+	return FixedMul(a, 1.0 - alpha) + FixedMul(b, alpha);
+}
