@@ -52,6 +52,12 @@ Returns the tangent of `x`.
 ### `fixed atan(angle x)`
 Returns the arctangent of `x`.
 
+### `fixed sec(angle x)`
+Returns the secant of `x`.
+
+### `fixed cosec(angle x)`
+returns the cosecant of `x`.
+
 
 Vectors
 -------
