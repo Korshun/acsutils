@@ -5,6 +5,8 @@ acsmath - math functions
 Implementations of functions missing from Zandronum
 ===================================================
 
+### `int zan_Sqrt(int number)`
+[ZDoom Wiki](http://zdoom.org/wiki/Sqrt)
 
 Generic operations on numbers
 =============================
