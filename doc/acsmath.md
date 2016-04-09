@@ -44,7 +44,7 @@ Returns the greater of `a` and `b`.
 Trigonometry
 ------------
 
-Note: `sin` and `cos` are already in ZDoom.
+Note: [`sin`](http://zdoom.org/wiki/Sin) and [`cos`](http://zdoom.org/wiki/Cos) are already in ZDoom.
 
 ### `fixed tan(angle x)`
 Returns the tangent of `x`.
