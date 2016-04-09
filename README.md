@@ -16,7 +16,7 @@ Download the libraries from `src/` folder, copy them to your mod and `#include` 
 	#include "acsstr.acs"
 	#include "acsutils.acs"
 	
-Some libraries can depend on each other or on `zcommon.acs`.
+Some libraries can depend on other libraries or on `zcommon.acs`.
 Be sure to include their dependencies before you include them.
 Their dependencies are enumerated in the documentation on them.
 See the file `src/compile_all.acs` for an include order that makes
