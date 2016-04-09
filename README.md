@@ -23,7 +23,7 @@ See the file `src/compile_all.acs` for an include order that makes
 all libraries work.
 
 
-**The easiest way is to simply use ALL libraries** by copying `src/compile_all.acs.
+**The easiest way is to simply use ALL libraries** by copying `src/compile_all.acs`.
 
 ## Included libraries
 * `acsmath` - math functions missing from ZDoom
