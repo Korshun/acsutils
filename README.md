@@ -22,6 +22,9 @@ Download the libraries from `src/` folder, copy them to your mod and `#include` 
 * `acsstr` - common string functions coming from other programming languages
 
 
+See the `doc/` folder for documentation on each library.
+
+
 ## Authors
 * Korshun
 * DjSkaarj
