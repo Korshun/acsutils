@@ -47,3 +47,9 @@ function int tan(int x)
 {
 	return FixedDiv(sin(x), cos(x));
 }
+
+// fixed atan(angle x)
+function int atan(int x)
+{
+	return FixedDiv(cos(x), sin(x));
+}
