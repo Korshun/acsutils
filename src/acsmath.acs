@@ -102,3 +102,26 @@ function int zan_Sqrt(int number)
 
 	return oldAns;
 }
+
+// fixed ClearFraction(fixed x)
+function int ClearFraction(int x)
+{
+	return (x>>16)<<16;
+}
+
+// int round(fixed x)
+function int round(int x)
+{
+	if (x > 0)
+	{
+		if ((x & 0x0000ffff) > 0.5)
+			return (x>>16) + 1;
+		return (x>>16);
+	}
+	
+	x = -x;
+	
+	if ((x & 0x0000ffff) > 0.5)
+		return -(x>>16) - 1;
+	return -(x>>16);
+}

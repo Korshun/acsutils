@@ -59,3 +59,27 @@ Vectors
 ### `fixed length2d(fixed x, fixed y)`
 ### `fixed length3d(fixed x, fixed y, fixed z)`
 Returns the length of the given 2d or 3d vector.
+
+Rounding
+--------
+
+### `int round(fixed x)`
+Rounds the number and returns it **as an integer**.
+
+#### Examples
+	int a = round(123.456); // a = 123
+	int a = round(122.678); // a = 123
+
+### `fixed ClearFraction(fixed x)`
+Zeroes the fractional part of `x` and returns the result.
+
+This is useful for HudMessages.
+
+#### Examples
+	int a = ClearFraction(123.456); // a = 123.0
+
+
+	int x = ClearFraction(a * sin(x));
+	int y = ClearFraction(b * sin(x));
+	
+	HudMessage(..., x, y, ...);
