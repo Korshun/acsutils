@@ -1,6 +1,11 @@
 acsmath - math functions
 ------------------------
 
+
+Implementations of functions missing from Zandronum
+===================================================
+
+
 Generic operations on numbers
 =============================
 

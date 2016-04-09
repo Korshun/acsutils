@@ -84,3 +84,21 @@ function int length2d(int x, int y)
 
 	 return len;
 }
+
+// From ZDoom wiki.
+function int zan_Sqrt(int number)
+{
+	if(number <= 3) { return number > 0; }
+
+	int oldAns = number >> 1,                     // initial guess
+	    newAns = (oldAns + number / oldAns) >> 1; // first iteration
+
+	// main iterative method
+	while(newAns < oldAns)
+	{
+		oldAns = newAns;
+		newAns = (oldAns + number / oldAns) >> 1;
+	}
+
+	return oldAns;
+}
