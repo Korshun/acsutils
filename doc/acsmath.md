@@ -29,8 +29,8 @@ Returns the greater of `a` and `b`.
 
 Note: `sin` and `cos` are already in ZDoom.
 
-#### fixed tan(angle x)
+#### `fixed tan(angle x)`
 Returns the tangent of `x`.
 
-#### fixed atan(angle x)
+#### `fixed atan(angle x)`
 Returns the arctangent of `x`.
