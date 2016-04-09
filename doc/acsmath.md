@@ -36,3 +36,11 @@ Returns the tangent of `x`.
 
 ### `fixed atan(angle x)`
 Returns the arctangent of `x`.
+
+
+Vectors
+=======
+
+### `fixed length2d(fixed x, fixed y)`
+### `fixed length3d(fixed x, fixed y, fixed z)`
+Returns the length of the given 2d or 3d vector.

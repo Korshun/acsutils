@@ -53,3 +53,34 @@ function int atan(int x)
 {
 	return FixedDiv(cos(x), sin(x));
 }
+
+
+// From ZDoom wiki. Modified to work on coordinates instead of actors.
+// fixed length3d(fixed x, fixed y, fixed z)
+function int length3d(int x, int y, int z)
+{
+	 int len;
+
+	 int ang = vectorangle(x,y);
+	 if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
+	 else len = fixeddiv(x, cos(ang));
+
+	 ang = vectorangle(len, z);
+	 if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(z, sin(ang));
+	 else len = fixeddiv(len, cos(ang));
+
+	 return len;
+}
+
+// The function above simplified for 2D.
+// fixed length2d(fixed x, fixed y)
+function int length2d(int x, int y)
+{
+	 int len;
+
+	 int ang = vectorangle(x,y);
+	 if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
+	 else len = fixeddiv(x, cos(ang));
+
+	 return len;
+}
