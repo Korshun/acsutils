@@ -3,7 +3,7 @@ acsmath - math functions
 
 ### Generic operations on numbers
 
-#### num abs(num x)
+#### `num abs(num x)`
 Returns the absolute value of `x`.
 
 ##### Examples
