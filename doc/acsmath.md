@@ -89,7 +89,8 @@ Other
 -----
 
 ### `fixed lerp(fixed a, fixed b, fixed alpha)`
-Performs (linear interpolation)[https://en.wikipedia.org/wiki/Linear_interpolation]
+Performs [linear interpolation](https://en.wikipedia.org/wiki/Linear_interpolation)
+between two numbers `a` and `b` using factor `alpha` and returns the result.
 
 In other words, "mixes" the values `a` and `b` using `alpha` to determine
 how close the resulting value will be to either `a` or `b`.
