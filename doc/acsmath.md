@@ -1,15 +1,15 @@
 acsmath - math functions
-------------------------
+========================
 
 
 Implementations of functions missing from Zandronum
-===================================================
+---------------------------------------------------
 
 ### `int zan_Sqrt(int number)`
 [ZDoom Wiki](http://zdoom.org/wiki/Sqrt)
 
 Generic operations on numbers
-=============================
+-----------------------------
 
 ### `num abs(num x)`
 Returns the absolute value of `x`.
@@ -34,7 +34,7 @@ Returns the greater of `a` and `b`.
 
 
 Trigonometry
-============
+------------
 
 Note: `sin` and `cos` are already in ZDoom.
 
@@ -46,7 +46,7 @@ Returns the arctangent of `x`.
 
 
 Vectors
-=======
+-------
 
 ### `fixed length2d(fixed x, fixed y)`
 ### `fixed length3d(fixed x, fixed y, fixed z)`

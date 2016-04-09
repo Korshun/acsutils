@@ -1,5 +1,5 @@
 ACS Libraries for ZDoom scripting
----------------------------------
+=================================
 
 
 This is a collection of various libraries made with the purpose of enhancing your ACS code with easy-to-use functions for common stuff.
