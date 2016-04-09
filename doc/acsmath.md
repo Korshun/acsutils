@@ -8,6 +8,14 @@ Implementations of functions missing from Zandronum
 ### `int zan_Sqrt(int number)`
 [ZDoom Wiki](http://zdoom.org/wiki/Sqrt)
 
+
+Constants
+---------
+
+* `fixed PI` - the number Pi.
+* `fixed SQRT_2` - square root of 2
+* `int INT_MAX` - maximum possible value of `int`
+
 Generic operations on numbers
 -----------------------------
 
