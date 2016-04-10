@@ -21,15 +21,15 @@ Checks if two strings are equal. Returns `true` if yes, `false` otherwise. Simpl
 	bool exp2 = StrEquals(a, c); // exp2 = true
 
 ### `int SubStr(str a, str b)`
-Looks for the substring **b** in the string **a**. <...>
+Looks for the substring **b** in the string **a**. **needs more info**
 
 #### Examples
 	str a = "aaabcdddd";
 	str b = "aaaaaaaaa";
 	str sub = "abc";
 	int as = StrSub(a, sub); // as = 2
-				 // 		a a *A B C* d d d d
-				 //		0 1 *2 3 4* 5 6 7 8
+				 // a a *A B C* d d d d
+				 // 0 1 *2 3 4* 5 6 7 8
 
 	int bs = StrSub(b, sub); // bs = -1, the substring wasn't found.
 
@@ -41,24 +41,24 @@ Cuts the substring **b** from the string **a** and returns the resulting string.
 	str b = "abc";
 	str c = StrCut(a, b); // c = "000111"
 
-### `str StrSlice(str s, int l, int r)
+### `str StrSlice(str s, int l, int r)`
 **No description yet**
 
-### `str StrSlice(str s, int l, int r)
+### `str StrSlice(str s, int l, int r)`
 **No description yet**
 
-### `bool IsAscii(str s)
+### `bool IsAscii(str s)`
 Checks if string contain only ASCII symbols. Returns `true` if yes, returns `false` if it contains non-ASCII symbols.
 
 #### Examples
 	str a = "Hello 88005553535 boom"; // ASCII string
-	str b = "Привет, друг!"; // contains Cyrillic letters
+	str b = "ГЏГ°ГЁГўГҐГІ, Г¤Г°ГіГЈ!"; // contains Cyrillic letters
 	bool exp1 = IsAscii(a); // a = true
 	bool exp2 = IsAscii(b); // b = false
 
-### `bool StrHasColorCodes(str s)
+### `bool StrHasColorCodes(str s)`
 **No description yet**
 
-### `str StrStripColorCodes(str s)
+### `str StrStripColorCodes(str s)`
 **No description yet**
 
