@@ -18,7 +18,7 @@ Examples:
 	if (IsZandronum())
 		// Use workaronds
 	else
-		// Use ZDoom 2.7.1. features
+		// Use ZDoom 2.7.1 features
 		
 
 ### `void SetInventory(str item, int amount)`
