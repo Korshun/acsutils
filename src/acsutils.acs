@@ -32,14 +32,14 @@ function void ClearHudMessage(int id)
 	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
 }
 
-//Returns the name of specified player
+//Returns the name of the specified player
 function str PlayerName(int num)
 {
 	return StrParam(n:(num+1));
 }
 
 //Returns the class of the activator (or player name)
-function str GetActivator(void)
+function str ActivatorName(void)
 {
 	return StrParam(n:0);
 }
