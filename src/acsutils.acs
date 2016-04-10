@@ -41,7 +41,7 @@ function str PlayerName(int num)
 }
 
 //Returns the class of the activator (or player name)
-function str GetActivator(void)
+function str ActivatorName(void)
 {
 	return StrParam(n:0);
 }
