@@ -43,6 +43,9 @@ Examples:
     max(3, 5) == 5;
     max(8.0, 7.5) == 8.0;
 
+### `int sign(num x)`
+Returns the sign of `x`. `1` for positive, `-1` for negative, `0` for zero.
+
 
 Trigonometry
 ------------

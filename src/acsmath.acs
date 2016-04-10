@@ -28,6 +28,16 @@ function int clamp(int x, int a, int b)
 	return x;
 }	
 
+// int sign(num x)
+function int sign(int x)
+{
+	if (x > 0)
+		return 1;
+	if (x < 0)
+		return -1;
+	return 0;
+}
+
 // num abs(num x)
 function int abs(int x)
 {
