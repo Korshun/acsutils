@@ -22,21 +22,24 @@ Generic operations on numbers
 ### `num abs(num x)`
 Returns the absolute value of `x`.
 
-#### Examples
+Examples:
+
     abs(2.0) == 2.0;
     abs(-123) == 123;
 
 ### `num min(num a, num b)`
 Returns the lesser of `a` and `b`.
 
-#### Examples
+Examples:
+
     min(3, 5) == 3;
     min(8.0, 7.5) == 7.5;
 
 ### `num max(num a, num b)`
 Returns the greater of `a` and `b`.
 
-#### Examples
+Examples:
+
     max(3, 5) == 5;
     max(8.0, 7.5) == 8.0;
 
@@ -68,7 +71,8 @@ Returns the length of the given 2d or 3d vector.
 ### `fixed, fixed RotateVector(fixed x, fixed y, fixed angle)`
 Rotates the vector by the `angle`. Returns the coordinates of the rotated vector.
 
-#### Examples
+Examples:
+
 	RotateVector(x, y, angle);
 	int newX = r1;
 	int newY = r2;
@@ -77,7 +81,8 @@ Rotates the vector by the `angle`. Returns the coordinates of the rotated vector
 Rotates the point around the the given origin by the `angle`.
 Returns the coordinates of the rotated point.
 
-#### Examples
+Examples:
+
 	RotatePoint(x, y, 1.0, 2.0, angle);
 	int newX = r1;
 	int newY = r2;
@@ -88,7 +93,8 @@ Rounding
 ### `int round(fixed x)`
 Rounds the number and returns it **as an integer**.
 
-#### Examples
+Examples:
+
 	int a = round(123.456); // a = 123
 	int a = round(122.678); // a = 123
 
@@ -97,7 +103,8 @@ Zeroes the fractional part of `x` and returns the result.
 
 This is useful for HudMessages.
 
-#### Examples
+Examples:
+
 	int a = ClearFraction(123.456); // a = 123.0
 
 
@@ -117,7 +124,8 @@ between two numbers `a` and `b` using factor `alpha` and returns the result.
 In other words, "mixes" the values `a` and `b` using `alpha` to determine
 how close the resulting value will be to either `a` or `b`.
 
-#### Examples
+Examples:
+
 	lerp(a, b, 0.0) == a;
 	lerp(a, b, 1.0) == b;
 	lerp(a, b, 0.5) == (a + b) / 2; // Average of a and b.

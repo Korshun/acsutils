@@ -5,7 +5,8 @@ Depends on: `zcommon.acs`
 ### `str StdAdd(str a, str b)`
 Joins two strings together and returns the result. Simplified variant of `StrParam(...)`.
 
-#### Examples
+Examples:
+
 	str a = "hello, ";
 	str b = "world!";
 	str c = StrAdd(a, b); // c = "hello, world"
@@ -13,7 +14,8 @@ Joins two strings together and returns the result. Simplified variant of `StrPar
 ### `str StrEquals(str a, str b)`
 Checks if two strings are equal. Returns `true` if yes, `false` otherwise. Simplified variant of `StrCmp(...)`.
 
-#### Examples
+Examples:
+
 	str a = "hello";
 	str b = "hello1";
 	str c = "hello";
@@ -23,7 +25,8 @@ Checks if two strings are equal. Returns `true` if yes, `false` otherwise. Simpl
 ### `int SubStr(str a, str b)`
 Looks for the substring **b** in the string **a**. **needs more info**
 
-#### Examples
+Examples:
+
 	str a = "aaabcdddd";
 	str b = "aaaaaaaaa";
 	str sub = "abc";
@@ -36,7 +39,8 @@ Looks for the substring **b** in the string **a**. **needs more info**
 ### `str StrSubCut(str a, str b)`
 Cuts the substring **b** from the string **a** and returns the resulting string.
 
-#### Examples
+Examples:
+
 	str a = "000abc111";
 	str b = "abc";
 	str c = StrCut(a, b); // c = "000111"
@@ -50,7 +54,8 @@ Cuts the substring **b** from the string **a** and returns the resulting string.
 ### `bool IsAscii(str s)`
 Checks if string contain only ASCII symbols. Returns `true` if yes, returns `false` if it contains non-ASCII symbols.
 
-#### Examples
+Examples:
+
 	str a = "Hello 88005553535 boom"; // ASCII string
 	str b = "Ïðèâåò, äðóã!"; // contains Cyrillic letters
 	bool exp1 = IsAscii(a); // a = true
