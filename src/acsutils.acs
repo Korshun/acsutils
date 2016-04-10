@@ -14,33 +14,28 @@ function bool IsZandronum(void)
 	return _CachedIsZandronum;
 }
 
-// Sets the amount of inventory items in the activator's inventory.
 function void SetInventory(str item, int amount)
 {
 	TakeInventory(item, INT_MAX);
 	GiveInventory(item, amount);
 }
 
-// Sets the amount of inventory items in the given actor's inventory.
 function void SetActorInventory(int tid, str item, int amount)
 {
 	TakeActorInventory(tid, item, INT_MAX);
 	GiveActorInventory(tid, item, amount);
 }
 
-// Removes the hud message with given id.
 function void ClearHudMessage(int id)
 {
 	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
 }
 
-//Returns the name of the specified player
 function str PlayerName(int num)
 {
 	return StrParam(n:(num+1));
 }
 
-//Returns the class of the activator (or player name)
 function str ActivatorName(void)
 {
 	return StrParam(n:0);
