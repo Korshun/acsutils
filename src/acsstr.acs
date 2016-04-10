@@ -25,6 +25,27 @@ function bool StrSub(str a, str b)
 }
 
 
+function str StrCut(str a, str b)
+{
+	int pos = StrSub(a, b);
+	if(pos == -1)
+		return a;
+	return StrSlice(a, pos, pos+StrLen(b)-1);
+}
+
+
+function str StrSlice(str s, str l, str r)
+{
+	if(r-l <= 0)
+		return s;
+	if(r-l)
+	{
+		return StrParam(s:StrLeft(s, l), s:StrRight(s, StrLen(s)-r-1));
+	}
+	return StrParam(s:StrLeft(s, l), s:StrRight(s, StrLen(s)-r));
+}
+
+
 function bool IsAscii(str s)
 {
 	for(int i = 0; i < StrLen(s); i++)
@@ -59,16 +80,4 @@ function str StrStripColorCodes(str s)
 		else i++;
 	}
 	return tempstr;
-}
-
-
-function str StrSlice(str s, str l, str r)
-{
-	if(r-l <= 0)
-		return s;
-	if(r-l)
-	{
-		return StrParam(s:StrLeft(s, l+1), s:StrRight(s, StrLen(s)-r-1));
-	}
-	return StrParam(s:StrLeft(s, l+1), s:StrRight(s, StrLen(s)-r));
 }
