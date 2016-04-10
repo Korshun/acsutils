@@ -47,7 +47,7 @@ Examples:
 
 	for (int i = 0; i < MAX_PLAYERS; i++)
 	{
-		print(s:"Player ", d:i, "'s name is", s:PlayerName(i));
+		print(s:"Player ", d:i, "'s name is ", s:PlayerName(i));
 	}
 
 ### `str ActivatorName()`
