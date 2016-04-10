@@ -86,6 +86,15 @@ function void RotatePoint(int x, int y, int originX, int originY, int angle)
 	r2 += originY;
 }
 
+// angle, angle VectorToAngles(fixed x, fixed y, fixed z)
+function void VectorToAngles(int x, int y, int z)
+{
+	int xy = length2d(x, y);
+		
+	int r1 = VectorAngle(x, y);
+	int r2 = -VectorAngle(xy, z);
+}
+
 // From ZDoom wiki. Modified to work on coordinates instead of actors.
 // fixed length3d(fixed x, fixed y, fixed z)
 function int length3d(int x, int y, int z)

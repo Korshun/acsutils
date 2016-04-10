@@ -86,6 +86,21 @@ Examples:
 	RotatePoint(x, y, 1.0, 2.0, angle);
 	int newX = r1;
 	int newY = r2;
+	
+### `angle, angle VectorToAngles(fixed x, fixed y, fixed z)`
+Returns a pair of angles (yaw and pitch) that specify the direction equivalent
+to that of the given 3D vector.
+
+Examples:
+	// Make the player look along the vector
+	VectorToAngles(1.0, 2.0, 3.0);
+	int angle = r1;
+	int pitch = r2;
+	SetActorAngle(angle);
+	SetActorPitch(pitch);
+
+Note: the `ActorLookAt` function from `acsutils` does exactly this.
+
 
 Rounding
 --------
