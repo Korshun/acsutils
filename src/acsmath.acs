@@ -143,6 +143,23 @@ function int zan_Sqrt(int number)
 	return oldAns;
 }
 
+function int ipow(int x, int y)
+{
+    y--;
+    while (y--)
+		x *= x;
+    return x;
+}
+
+// fixed fpow(fixed x, int y)
+function int fpow(int x, int y)
+{
+	y--;
+	while (y--)
+		x = FixedMul(x, x);
+	return x;
+}
+
 // fixed ClearFraction(fixed x)
 function int ClearFraction(int x)
 {

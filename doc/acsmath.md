@@ -153,3 +153,9 @@ Examples:
 		DrawSomething(x, y);
 		Delay(1);
 	}
+	
+### `int ipow(int x, int y)`
+### `fixed fpow(fixed x, int y)`
+Returns `x` raised to the power `y`. `y` must be an integer.
+
+`ipow` is for integer `x`, while `fpow` is for fixeds.
