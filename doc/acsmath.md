@@ -51,6 +51,7 @@ Limits `x` to the range [`a`; `b`]. If `x` falls in the range, returns `x`.
 If `x` is less than `a`, returns `a`. If `x` is greater than `b`, returns `b`.
 
 Examples:
+
 	clamp(7, 6, 8) == 7;
 	clamp(0.1, 0.2, 0.3) == 0.1;
 
