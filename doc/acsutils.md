@@ -61,3 +61,6 @@ Examples:
 	
 	SetActivator(2); // Some monster.
 	PrintBold(s:"This monster's type is ", s:ActivatorName());
+
+### `bool ActivatorIsPlayer()`
+Returns true if the activator is a player.

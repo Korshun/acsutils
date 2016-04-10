@@ -40,3 +40,8 @@ function str ActivatorName(void)
 {
 	return StrParam(n:0);
 }
+
+function bool ActivatorIsPlayer(void)
+{
+	return PlayerNumber() >= 0;
+}
