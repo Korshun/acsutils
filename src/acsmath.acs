@@ -66,6 +66,26 @@ function int cosec(int x)
 	return FixedDiv(1.0, cos(x));
 }
 
+// fixed, fixed RotateVector(fixed x, fixed y, angle angle);
+function void RotateVector(int x, int y, int angle)
+{
+	// Rotate around Z axis.
+	int s = sin(-angle);
+	int c = cos(-angle);
+	r1 = FixedMul(x, c) - FixedMul(y, s);
+	r2 = FixedMul(x, s) + FixedMul(y, c);
+}	
+
+// fixed, fixed RotatePoint(fixed x, fixed y, fixed originX, fixed originY, angle angle)
+function void RotatePoint(int x, int y, int originX, int originY, int angle)
+{
+	x -= originX;
+	y -= originY;
+	RotateVector(x, y, angle);
+	r1 += originX;
+	r2 += originY;
+}
+
 // From ZDoom wiki. Modified to work on coordinates instead of actors.
 // fixed length3d(fixed x, fixed y, fixed z)
 function int length3d(int x, int y, int z)

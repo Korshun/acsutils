@@ -58,13 +58,29 @@ Returns the secant of `x`.
 ### `fixed cosec(angle x)`
 returns the cosecant of `x`.
 
-
 Vectors
 -------
 
 ### `fixed length2d(fixed x, fixed y)`
 ### `fixed length3d(fixed x, fixed y, fixed z)`
 Returns the length of the given 2d or 3d vector.
+
+### fixed, fixed RotateVector(fixed x, fixed y, fixed angle)
+Rotates the vector by the `angle`. Returns the coordinates of the rotated vector.
+
+#### Examples
+	RotateVector(x, y, angle);
+	int newX = r1;
+	int newY = r2;
+	
+### fixed, fixed RotatePoint(fixed x, fixed y, fixed originX, fixed originY, fixed angle)
+Rotates the point around the the given origin by the `angle`.
+Returns the coordinates of the rotated point.
+
+#### Examples
+	RotatePoint(x, y, 1.0, 2.0, angle);
+	int newX = r1;
+	int newY = r2;
 
 Rounding
 --------
