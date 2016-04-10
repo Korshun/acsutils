@@ -46,6 +46,13 @@ Examples:
 ### `int sign(num x)`
 Returns the sign of `x`. `1` for positive, `-1` for negative, `0` for zero.
 
+### `num clamp(num x, num a, num b)`
+Limits `x` to the range [`a`; `b`]. If `x` falls in the range, returns `x`.
+If `x` is less than `a`, returns `a`. If `x` is greater than `b`, returns `b`.
+
+Examples:
+	clamp(7, 6, 8) == 7;
+	clamp(0.1, 0.2, 0.3) == 0.1;
 
 Trigonometry
 ------------
