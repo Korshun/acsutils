@@ -12,22 +12,6 @@ function bool IsZandronum(void)
 	return _CachedIsZandronum;
 }
 
-// Zandronum version of SetCVar.
-function void zan_SetCVar(str name, int value)
-{
-	ConsoleCommand(StrParam(s:"set ", s:name, s:" ", d:value));
-}
-
-// If the given cvar is 0, archives it.
-function void InitCVar(str name)
-{
-	if (GetCVar(name) == 0)
-	{
-		zan_SetCVar(name, 0);
-		ConsoleCommand(StrParam(s:"archivecvar ", s:name));
-	}
-}
-
 // Sets the amount of inventory items in the activator's inventory.
 function void SetInventory(str item, int amount)
 {
