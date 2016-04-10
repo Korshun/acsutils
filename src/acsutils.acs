@@ -1,0 +1,47 @@
+// Zandronum version of SetCVar.
+function void zan_SetCVar(str name, int value)
+{
+	ConsoleCommand(StrParam(s:"set ", s:name, s:" ", d:value));
+}
+
+// Sets the amount of inventory items in the activator's inventory.
+function void SetInventory(str item, int amount)
+{
+	TakeInventory(item, INT_MAX);
+	GiveInventory(item, amount);
+}
+
+// Sets the amount of inventory items in the given actor's inventory.
+function void SetActorInventory(int tid, str item, int amount)
+{
+	TakeActorInventory(tid, item, INT_MAX);
+	GiveActorInventory(tid, item, amount);
+}
+
+// Removes the hud message with given id.
+function void ClearHudMessage(int id)
+{
+	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
+}
+
+// If the given cvar is 0, archives it.
+function void InitCVar(str name)
+{
+	if (GetCVar(name) == 0)
+	{
+		zan_SetCVar(name, 0);
+		ConsoleCommand(StrParam(s:"archivecvar ", s:name));
+	}
+}
+
+//Returns the name of specified player
+function str PlayerName(int num)
+{
+	return StrParam(n:(num+1));
+}
+
+//Returns the class of the activator (or player name)
+function str GetActivator(void)
+{
+	return StrParam(n:0);
+}
