@@ -91,8 +91,8 @@ function void VectorToAngles(int x, int y, int z)
 {
 	int xy = length2d(x, y);
 		
-	int r1 = VectorAngle(x, y);
-	int r2 = -VectorAngle(xy, z);
+	r1 = VectorAngle(x, y);
+	r2 = -VectorAngle(xy, z);
 }
 
 // From ZDoom wiki. Modified to work on coordinates instead of actors.
