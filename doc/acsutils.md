@@ -52,6 +52,7 @@ Examples:
 
 ### `str ActivatorName()`
 If the activator is not a player, returns his DECORATE actor name.
+
 If the activator is a player, returns the player's name.
 
 Examples:
