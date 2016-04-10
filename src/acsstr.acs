@@ -34,7 +34,7 @@ function str StrCut(str a, str b)
 }
 
 
-function str StrSlice(str s, str l, str r)
+function str StrSlice(str s, int l, int r)
 {
 	if(r-l <= 0)
 		return s;
