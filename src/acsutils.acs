@@ -1,3 +1,17 @@
+int _CachedIsZandronum = -1;
+function bool IsZandronum(void)
+{
+	if (_CachedIsZandronum != -1)
+		return _CachedIsZandronum;
+		
+    SetDBEntry("acslibs", "isZandronum", true);
+	
+	// ZDoom has no GetDBEntry, so it will return 0.
+	// Zandronum will return 1 because 
+    _CachedIsZandronum = GetDBEntry("acslibs", "isZandronum");
+	return _CachedIsZandronum;
+}
+
 // Zandronum version of SetCVar.
 function void zan_SetCVar(str name, int value)
 {
