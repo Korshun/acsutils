@@ -27,3 +27,5 @@ See the `doc/` folder for documentation on each library.
 ## Authors
 * Korshun
 * DjSkaarj
+
+**Contributions are welcome!**
