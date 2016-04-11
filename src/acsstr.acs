@@ -126,3 +126,10 @@ function str StrToUpper(str s)
 	}
 	return tempstr;
 }
+
+function bool StrIsEmpty(str s)
+{
+	if(!GetChar(s, 0))
+		return true;
+	return false;
+}
