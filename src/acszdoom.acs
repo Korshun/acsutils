@@ -65,3 +65,16 @@ function bool ActivatorIsPlayer(void)
 {
 	return PlayerNumber() >= 0;
 }
+
+function int ActorDistance(int tid1, int tid2)
+{
+	return length3d(GetActorX(tid2) - GetActorX(tid1),
+	                GetActorY(tid2) - GetActorY(tid1),
+	                GetActorZ(tid2) - GetActorZ(tid1));
+}
+
+function int ActorDistance2D(int tid1, int tid2)
+{
+	return length2d(GetActorX(tid2) - GetActorX(tid1),
+	                GetActorY(tid2) - GetActorY(tid1));
+}
