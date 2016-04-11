@@ -22,7 +22,7 @@ Examples:
 	bool exp1 = StrEquals(a, b); // exp1 = false
 	bool exp2 = StrEquals(a, c); // exp2 = true
 
-### `int SubStr(str a, str b)`
+### `int StrSub(str a, str b)`
 Looks for the substring **b** in the string **a**. If the string was found, the function will return the position of the beginning of the first detected substring. If impossible or there's no matching substring, -1 will be returned.
 
 Examples:
@@ -76,7 +76,7 @@ Checks if string **s** has color codes (like /ca, /cb, /cg etc.). Returns `true`
 
 Examples:
 
-	str name1 = PlayerName(0); // The name of the first player, for example: \cgThe_\cjPlayer (contain \cX color codes)
+	str name1 = PlayerName(0); // The name of the first player, for example: \cgThe_\cjPlayer (contains \cX color codes)
 	str name2 = PlayerName(1); // The name of the second player, for example: The_Player (no color codes)
 	bool exp1 = StrHasColorCodes(name1); // exp1 = true
 	bool exp2 = StrHasColorCodes(name2); // exp2 = false
