@@ -26,6 +26,16 @@ function void SetActorInventory(int tid, str item, int amount)
 	GiveActorInventory(tid, item, amount);
 }
 
+function int ScreenWidth(void)
+{
+	return GetCVar("vid_defwidth");
+}
+
+function int ScreenHeight(void)
+{
+	return GetCVar("vid_defheight");
+}
+
 function void ClearHudMessage(int id)
 {
 	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
