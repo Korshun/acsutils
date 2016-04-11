@@ -1,6 +1,5 @@
 #define PI 3.1415926535897932384626433832795
 #define SQRT_2 1.41421356237
-#define INT_MAX 0x7fffffff
 
 // num min(num a, num b)
 function int min(int a, int b)
