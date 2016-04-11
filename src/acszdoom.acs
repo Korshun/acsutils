@@ -36,6 +36,11 @@ function int ScreenHeight(void)
 	return GetCVar("vid_defheight");
 }
 
+function int AspectRatio(void)
+{
+	return FixedDiv(ScreenWidth() * 1.0, ScreenHeight() * 1.0);
+}
+
 function void ClearHudMessage(int id)
 {
 	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
