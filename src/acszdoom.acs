@@ -14,6 +14,11 @@ function bool IsZandronum(void)
 	return _CachedIsZandronum;
 }
 
+function bool IsOpenGL(void)
+{
+	return GetCVar("vid_renderer");
+}
+
 function void SetInventory(str item, int amount)
 {
 	TakeInventory(item, INT_MAX);
