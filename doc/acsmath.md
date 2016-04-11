@@ -1,6 +1,6 @@
 acsmath - math functions
 ========================
-Depends on: nothing
+
 
 Implementations of functions missing from Zandronum
 ---------------------------------------------------

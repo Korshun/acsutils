@@ -1,6 +1,6 @@
 acsstr - string functions
 =========================
-Depends on: `zcommon.acs`
+
 
 ### `str StdAdd(str a, str b)`
 Joins two strings together and returns the result. Simplified variant of `StrParam(...)`.

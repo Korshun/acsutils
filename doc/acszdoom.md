@@ -1,6 +1,6 @@
-acsutils - utilities for ZDoom scripting
+acszdoom - utilities for ZDoom scripting
 ========================================
-Depends on: `zcommon.acs`, `acsmath.acs`
+
 
 Constants
 ---------

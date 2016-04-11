@@ -1,47 +1,5 @@
-#define MAX_PLAYERS 64
+#include "acsretval.acs"
+#include "acsmath.acs"
+#include "acsstr.acs"
+#include "acszdoom.acs"
 
-int _CachedIsZandronum = -1;
-function bool IsZandronum(void)
-{
-	if (_CachedIsZandronum != -1)
-		return _CachedIsZandronum;
-		
-    SetDBEntry("acslibs", "isZandronum", true);
-	
-	// ZDoom has no GetDBEntry, so it will return 0.
-	// Zandronum will return 1 because 
-    _CachedIsZandronum = GetDBEntry("acslibs", "isZandronum");
-	return _CachedIsZandronum;
-}
-
-function void SetInventory(str item, int amount)
-{
-	TakeInventory(item, INT_MAX);
-	GiveInventory(item, amount);
-}
-
-function void SetActorInventory(int tid, str item, int amount)
-{
-	TakeActorInventory(tid, item, INT_MAX);
-	GiveActorInventory(tid, item, amount);
-}
-
-function void ClearHudMessage(int id)
-{
-	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
-}
-
-function str PlayerName(int num)
-{
-	return StrParam(n:(num+1));
-}
-
-function str ActivatorName(void)
-{
-	return StrParam(n:0);
-}
-
-function bool ActivatorIsPlayer(void)
-{
-	return PlayerNumber() >= 0;
-}
