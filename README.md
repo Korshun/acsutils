@@ -2,34 +2,25 @@ ACS Libraries for ZDoom scripting
 =================================
 
 
-This is a collection of various libraries made with the purpose of enhancing your ACS code with easy-to-use functions for common stuff.
+This is a collection of useful ACS functions to make ACS scripting easier.
 
-Use them how you want as long as you give credit to the authors.
+Use it how you want as long as you give credit to the authors.
 
 ## How to use
-Download the libraries from `src/` folder, copy them to your mod and `#include` them. For example:
+Download the libraries from the `src/` folder,
+copy them to your mod and `#include "acsutils.acs"`. For example:
 
 	#library "myproject"
 	#include "zcommon.acs"
-	
-	#include "acsmath.acs"
-	#include "acsstr.acs"
 	#include "acsutils.acs"
 	
-Some libraries can depend on other libraries or on `zcommon.acs`.
-Be sure to include their dependencies before you include them.
-Their dependencies are enumerated in the documentation on them.
-See the file `src/compile_all.acs` for an include order that makes
-all libraries work.
-
-
-**The easiest way is to simply use ALL libraries** by copying `src/compile_all.acs`.
+	// Your code follows.
 
 ## Included libraries
-* `acsmath` - math functions missing from ZDoom
-* `acsutils` - utilities for ZDoom scripting
+* `acsretval` - multiple return values for ACS functions
+* `acsmath` - additional math functions coming from other programming languages
 * `acsstr` - common string functions coming from other programming languages
-
+* `acszdoom` - utilities for ZDoom and Zandronum scripting
 
 See the `doc/` folder for documentation on each library.
 
