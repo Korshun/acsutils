@@ -6,7 +6,7 @@ function bool IsZandronum(void)
 	if (_CachedIsZandronum != -1)
 		return _CachedIsZandronum;
 		
-    SetDBEntry("acslibs", "isZandronum", true);
+    SetDBEntry("acsutils", "isZandronum", true);
 	
 	// ZDoom has no GetDBEntry, so it will return 0.
 	// Zandronum will return 1 because 
