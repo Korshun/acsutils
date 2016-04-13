@@ -155,19 +155,19 @@ function int zan_Sqrt(int number)
 
 function int ipow(int x, int y)
 {
-    y--;
-    while (y--)
-		x *= x;
-    return x;
+    int n = 1;
+    while (y-- > 0)
+		n *= x;
+    return n;
 }
 
 // fixed fpow(fixed x, int y)
 function int fpow(int x, int y)
 {
-	y--;
-	while (y--)
-		x = FixedMul(x, x);
-	return x;
+	int n = 1.0;
+	while (y-- > 0)
+		n = FixedMul(n, x);
+	return n;
 }
 
 // fixed ClearFraction(fixed x)
