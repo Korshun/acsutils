@@ -9,8 +9,8 @@ function bool IsZandronum(void)
     SetDBEntry("acsutils", "isZandronum", true);
 	
 	// ZDoom has no GetDBEntry, so it will return 0.
-	// Zandronum will return 1 because 
-    _CachedIsZandronum = GetDBEntry("acslibs", "isZandronum");
+	// Zandronum will return 1 because the value has been set to 1.
+    _CachedIsZandronum = GetDBEntry("acsutils", "isZandronum");
 	return _CachedIsZandronum;
 }
 
