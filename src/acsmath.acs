@@ -2,6 +2,8 @@
 #define SQRT_2 1.41421356237
 #define MATH_E 2.7182818284590452353602874713526624977572470937
 
+// Generic functions.
+
 // num min(num a, num b)
 function int min(int a, int b)
 {
@@ -46,11 +48,80 @@ function int abs(int x)
 	return -x;
 }
 
+
+// Rounding.
+
+// fixed ClearFraction(fixed x)
+function int ClearFraction(int x)
+{
+	return (x>>16)<<16;
+}
+
+// int round(fixed x)
+function int round(int x)
+{
+	if (x > 0)
+	{
+		if ((x & 0x0000ffff) > 0.5)
+			return (x>>16) + 1;
+		return (x>>16);
+	}
+	
+	x = -x;
+	
+	if ((x & 0x0000ffff) > 0.5)
+		return -(x>>16) - 1;
+	return -(x>>16);
+}
+
+
+// Numeric algorithms.
+
+// int ipow(int x, int y)
+function int ipow(int x, int y)
+{
+    int n = 1;
+    while (y-- > 0)
+		n *= x;
+    return n;
+}
+
+// fixed fpow(fixed x, int y)
+function int fpow(int x, int y)
+{
+	int n = 1.0;
+	while (y-- > 0)
+		n = FixedMul(n, x);
+	return n;
+}
+
 // fixed lerp(fixed a, fixed b, fixed alpha)
 function int lerp(int a, int b, int alpha)
 {
 	return FixedMul(a, 1.0 - alpha) + FixedMul(b, alpha);
 }
+
+// From ZDoom wiki.
+// int zan_Sqrt(int number)
+function int zan_Sqrt(int number)
+{
+	if(number <= 3) { return number > 0; }
+
+	int oldAns = number >> 1,                     // initial guess
+	    newAns = (oldAns + number / oldAns) >> 1; // first iteration
+
+	// main iterative method
+	while(newAns < oldAns)
+	{
+		oldAns = newAns;
+		newAns = (oldAns + number / oldAns) >> 1;
+	}
+
+	return oldAns;
+}
+
+
+// Trigonometry.
 
 // fixed tan(angle x)
 function int tan(int x)
@@ -75,6 +146,9 @@ function int cosec(int x)
 {
 	return FixedDiv(1.0, cos(x));
 }
+
+
+// Vectors.
 
 // fixed, fixed RotateVector(fixed x, fixed y, angle angle);
 function void RotateVector(int x, int y, int angle)
@@ -135,60 +209,7 @@ function int length2d(int x, int y)
 	 return len;
 }
 
-// From ZDoom wiki.
-function int zan_Sqrt(int number)
-{
-	if(number <= 3) { return number > 0; }
 
-	int oldAns = number >> 1,                     // initial guess
-	    newAns = (oldAns + number / oldAns) >> 1; // first iteration
 
-	// main iterative method
-	while(newAns < oldAns)
-	{
-		oldAns = newAns;
-		newAns = (oldAns + number / oldAns) >> 1;
-	}
 
-	return oldAns;
-}
 
-function int ipow(int x, int y)
-{
-    int n = 1;
-    while (y-- > 0)
-		n *= x;
-    return n;
-}
-
-// fixed fpow(fixed x, int y)
-function int fpow(int x, int y)
-{
-	int n = 1.0;
-	while (y-- > 0)
-		n = FixedMul(n, x);
-	return n;
-}
-
-// fixed ClearFraction(fixed x)
-function int ClearFraction(int x)
-{
-	return (x>>16)<<16;
-}
-
-// int round(fixed x)
-function int round(int x)
-{
-	if (x > 0)
-	{
-		if ((x & 0x0000ffff) > 0.5)
-			return (x>>16) + 1;
-		return (x>>16);
-	}
-	
-	x = -x;
-	
-	if ((x & 0x0000ffff) > 0.5)
-		return -(x>>16) - 1;
-	return -(x>>16);
-}
