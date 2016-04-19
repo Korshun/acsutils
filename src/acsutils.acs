@@ -1,5 +1,8 @@
+#define INT_MAX 0x7fffffff
+#define INT_MIN 0x80000000
+#define MAX_PLAYERS 64
+
 #include "acsretval.acs"
-#include "acslimits.acs"
 #include "acsmath.acs"
 #include "acsstr.acs"
 #include "acszdoom.acs"
