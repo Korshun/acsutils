@@ -156,6 +156,23 @@ function int zan_Sqrt(int number)
 	return oldAns;
 }
 
+// From commonFuncs.h by Ijon Tichy.
+// FIXME: does this work for fixeds?
+// int gcf(int a, int b)
+function int gcf(int a, int b)
+{
+    int c;
+    while (1)
+    {
+        if (b == 0) { return a; }
+        c = a % b;
+        a = b;
+        b = c;
+    }
+    
+    return -1;
+}
+
 
 // Trigonometry.
 
