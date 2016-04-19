@@ -25,6 +25,14 @@ function void SetInventory(str item, int amount)
 	GiveInventory(item, amount);
 }
 
+function void ToggleInventory(str item)
+{
+	if (CheckInventory(item) > 0)
+		SetInventory(item, 0);
+	else
+		SetInventory(item, 1);
+}
+
 function void SetActorInventory(int tid, str item, int amount)
 {
 	TakeActorInventory(tid, item, INT_MAX);
