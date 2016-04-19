@@ -1,0 +1,228 @@
+#define CHARFLAG_ISALNUM 1
+#define CHARFLAG_ISALPHA 2
+#define CHARFLAG_ISBLANK 4
+#define CHARFLAG_ISCNTRL 8
+#define CHARFLAG_ISDIGIT 16
+#define CHARFLAG_ISGRAPH 32
+#define CHARFLAG_ISLOWER 64
+#define CHARFLAG_ISPRINT 128
+#define CHARFLAG_ISPUNCT 256
+#define CHARFLAG_ISSPACE 512
+#define CHARFLAG_ISUPPER 1024
+#define CHARFLAG_ISXDIGIT 2048
+
+
+int AsciiTypes[128] =
+{
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	524,
+	520,
+	520,
+	520,
+	520,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	8,
+	644,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	2225,
+	2225,
+	2225,
+	2225,
+	2225,
+	2225,
+	2225,
+	2225,
+	2225,
+	2225,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	3235,
+	3235,
+	3235,
+	3235,
+	3235,
+	3235,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	1187,
+	416,
+	416,
+	416,
+	416,
+	416,
+	416,
+	2275,
+	2275,
+	2275,
+	2275,
+	2275,
+	2275,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	227,
+	416,
+	416,
+	416,
+	416,
+	8,
+};
+
+function bool isalnum(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISALNUM;
+}
+
+function bool isalpha(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISALPHA;
+}
+
+function bool isblank(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISBLANK;
+}
+
+function bool iscntrl(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISCNTRL;
+}
+
+function bool isdigit(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISDIGIT;
+}
+
+function bool isgraph(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISGRAPH;
+}
+
+function bool islower(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISLOWER;
+}
+
+function bool isprint(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISPRINT;
+}
+
+function bool ispunct(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISPUNCT;
+}
+
+function bool isspace(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISSPACE;
+}
+
+function bool isupper(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISUPPER;
+}
+
+function bool isxdigit(int c)
+{
+	return AsciiTypes[c] & CHARFLAG_ISXDIGIT;
+}
+
+#define ASCII_START 0
+#define ASCII_END 127
+#define ASCII_LETTERS_OFFSET 32
+
+function bool isascii(int c)
+{
+	return c >= ASCII_START && c <= ASCII_END;
+}
+
+function int toupper(int c)
+{
+	if (islower(c))
+		return c - ASCII_LETTERS_OFFSET;
+	return c;
+}
+
+function int tolower(int c)
+{
+	if (isupper(c))
+		return c + ASCII_LETTERS_OFFSET;
+	return c;
+}
