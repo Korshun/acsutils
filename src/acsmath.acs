@@ -122,7 +122,7 @@ function int iround(int x)
 }
 
 
-// Numeric algorithms.
+// Numerical algorithms.
 
 // int ipow(int x, int y)
 function int ipow(int x, int y)
