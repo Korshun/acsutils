@@ -243,3 +243,20 @@ function int dot3(int x1, int y1, int z1, int x2, int y2, int z2)
 {
 	return FixedMul(x1, x2) + FixedMul(y1, y2) + FixedMul(z1, z2);
 }
+
+// fixed, fixed normalize2d(fixed x, fixed y)
+function void normalize2d(int x, int y)
+{
+	int l = length2d(x, y);
+	r1 = FixedDiv(x, l);
+	r2 = FixedDiv(y, l);
+}
+
+// fixed, fixed, fixed normalize3d(fixed x, fixed y, fixed z)
+function void normalize3d(int x, int y, int z)
+{
+	int l = length3d(x, y, z);
+	r1 = FixedDiv(x, l);
+	r2 = FixedDiv(y, l);
+	r3 = FixedDiv(z, l);
+}
