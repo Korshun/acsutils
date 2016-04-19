@@ -232,3 +232,14 @@ function int length2d(int x, int y)
 	 return fixeddiv(x, cos(ang));
 }
 
+// fixed dot2(fixed x1, fixed y1, fixed x2, fixed y2)
+function int dot2(int x1, int y1, int x2, int y2)
+{
+	return FixedMul(x1, x2) + FixedMul(y1, y2);
+}
+
+// fixed dot3(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2)
+function int dot3(int x1, int y1, int z1, int x2, int y2, int z2)
+{
+	return FixedMul(x1, x2) + FixedMul(y1, y2) + FixedMul(z1, z2);
+}
