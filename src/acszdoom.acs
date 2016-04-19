@@ -14,6 +14,11 @@ function bool IsZandronum(void)
 	return _CachedIsZandronum;
 }
 
+function bool IsClient(void)
+{
+	return ConsolePlayerNumber() >= 0;
+}
+
 function bool IsOpenGL(void)
 {
 	return GetCVar("vid_renderer");
