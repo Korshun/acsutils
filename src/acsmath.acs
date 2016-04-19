@@ -48,6 +48,13 @@ function int abs(int x)
 	return -x;
 }
 
+// From commonFuncs.h by Ijon Tichy.
+// num middle(num a, num b, num c)
+function int middle(int x, int y, int z)
+{
+    if ((x < z) && (y < z)) { return max(x, y); }
+    return max(min(x, y), z);
+}
 
 // Rounding.
 
