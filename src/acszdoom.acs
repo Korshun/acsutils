@@ -78,3 +78,13 @@ function int ActorDistance2D(int tid1, int tid2)
 	return length2d(GetActorX(tid2) - GetActorX(tid1),
 	                GetActorY(tid2) - GetActorY(tid1));
 }
+
+function int GetActorSpeed(int tid)
+{
+	return length3d(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
+}
+
+function int GetActorSpeed2D(int tid)
+{
+	return length2d(GetActorVelX(tid), GetActorVelY(tid));
+}
