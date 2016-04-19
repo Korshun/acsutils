@@ -56,6 +56,17 @@ function int middle(int x, int y, int z)
     return max(min(x, y), z);
 }
 
+// int cmp(num a, num b)
+function int cmp(int a, int b)
+{
+	if (a > b)
+		return 1;
+	if (a < b)
+		return -1;
+	return 0;
+}
+
+
 // Rounding.
 
 // fixed trunc(fixed x)
