@@ -313,6 +313,18 @@ function int length2d(int x, int y)
 	 return fixeddiv(x, cos(ang));
 }
 
+// fixed length2d2(int x, int y)
+function int length2d2(int x, int y)
+{
+	return FixedMul(x, x) + FixedMul(y, y);
+}
+
+// fixed length3d2(int x, int y, int z)
+function int length3d2(int x, int y, int z)
+{
+	return FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
+}
+
 // fixed dot2(fixed x1, fixed y1, fixed x2, fixed y2)
 function int dot2(int x1, int y1, int x2, int y2)
 {
