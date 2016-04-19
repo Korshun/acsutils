@@ -192,6 +192,39 @@ function int gcf(int a, int b)
 }
 
 
+// Angle conversions.
+
+function int deg2angle(int degrees)
+{
+	return FixedDiv(degrees, 360.0);
+}
+
+function int rad2angle(int radians)
+{
+	return FixedDiv(radians, PI * 2);
+}
+
+function int angle2deg(int angle)
+{
+	return FixedMul(angle, 360.0);
+}
+
+function int angle2rad(int angle)
+{
+	return FixedMul(angle, PI * 2);
+}
+
+function int deg2rad(int degrees)
+{
+	return angle2rad(deg2angle(degrees));
+}
+
+function int rad2deg(int radians)
+{
+	return angle2deg(rad2angle(radians));
+}
+
+
 // Trigonometry.
 
 // fixed tan(angle x)
