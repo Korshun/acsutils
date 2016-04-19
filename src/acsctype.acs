@@ -203,3 +203,19 @@ function bool isxdigit(int c)
 {
 	return AsciiTypes[c] & CHARFLAG_ISXDIGIT;
 }
+
+#define ASCII_LETTERS_OFFSET 32
+
+function int toupper(int c)
+{
+	if (islower(c))
+		return c - ASCII_LETTERS_OFFSET;
+	return c;
+}
+
+function int tolower(int c)
+{
+	if (isupper(c))
+		return c + ASCII_LETTERS_OFFSET;
+	return c;
+}

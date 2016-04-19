@@ -5,7 +5,6 @@
 #define ASCII_LETTERS_BIG_END		90 	// Z
 #define ASCII_LETTERS_SMALL_START	97 	// a
 #define ASCII_LETTERS_SMALL_END		122 	// z
-#define ASCII_LETTERS_OFFSET		32
 
 function str StrAdd(str a, str b)
 {
