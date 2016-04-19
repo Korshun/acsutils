@@ -3,4 +3,5 @@
 #include "acsmath.acs"
 #include "acsstr.acs"
 #include "acszdoom.acs"
+#include "acspack.acs"
 
