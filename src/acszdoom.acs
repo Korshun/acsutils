@@ -79,6 +79,11 @@ function bool ActorIsAlive(int tid)
 	return GetActorProperty(tid, APROP_HEALTH) > 0;
 }
 
+function bool ActivatorIsAlive(void)
+{
+	return ActorIsAlive(0);
+}
+
 function int ActorDistance(int tid1, int tid2)
 {
 	return length3d(GetActorX(tid2) - GetActorX(tid1),
