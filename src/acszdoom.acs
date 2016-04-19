@@ -88,3 +88,12 @@ function int GetActorSpeed2D(int tid)
 {
 	return length2d(GetActorVelX(tid), GetActorVelY(tid));
 }
+
+function bool HasRoom(str classname, int x, int y, int z)
+{
+	int tid = UniqueTid();
+	if (!Spawn(classname, x, y, z, tid))
+		return false;
+	Thing_Remove(tid);
+	return true;
+}
