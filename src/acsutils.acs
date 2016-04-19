@@ -4,6 +4,7 @@
 
 #include "acsretval.acs"
 #include "acsmath.acs"
+#include "acsctype.acs"
 #include "acsstr.acs"
 #include "acszdoom.acs"
 #include "acspack.acs"
