@@ -51,11 +51,13 @@ function int abs(int x)
 
 // Rounding.
 
+// fixed trunc(fixed x)
 function int trunc(int x)
 {
 	return x & 0xffff0000;
 }
 
+// fixed floor(fixed x)
 function int floor(int x)
 {
 	if (x < 0)
@@ -63,6 +65,7 @@ function int floor(int x)
 	return trunc(x);
 }
 
+// fixed ceil(fixed x)
 function int ceil(int x)
 {
 	if (x > 0)
@@ -70,26 +73,31 @@ function int ceil(int x)
 	return trunc(x);
 }
 
+// fixed round(fixed x)
 function int round(int x)
 {
 	return trunc(x + 0.5);
 }
 
+// int itrunc(fixed x)
 function int itrunc(int x)
 {
 	return trunc(x)>>16;
 }
 
+// int ifloor(fixed x)
 function int ifloor(int x)
 {
 	return floor(x)>>16;
 }
 
+// int iceil(fixed x)
 function int iceil(int x)
 {
 	return ceil(x)>>16;
 }
 
+// int iround(fixed x)
 function int iround(int x)
 {
 	return round(x)>>16;
@@ -223,8 +231,4 @@ function int length2d(int x, int y)
 	 if(((ang+0.125)%0.5) > 0.25) return fixeddiv(y, sin(ang));
 	 return fixeddiv(x, cos(ang));
 }
-
-
-
-
 
