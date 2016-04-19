@@ -119,8 +119,15 @@ function int ipow(int x, int y)
 function int fpow(int x, int y)
 {
 	int n = 1.0;
-	while (y-- > 0)
-		n = FixedMul(n, x);
+	if (y > 0)
+	{
+		while (y-- > 0)
+			n = FixedMul(n, x);
+		return n;
+	}
+	
+	while (y++ < 0)
+		n = FixedDiv(n, x);
 	return n;
 }
 
