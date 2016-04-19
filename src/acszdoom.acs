@@ -128,3 +128,17 @@ function int ClientCount(void)
 			count++;
 	return count;
 }
+
+function int PickRandomPlayer(void)
+{
+	int players[MAX_PLAYERS];
+	int numPlayers = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerInGame(i))
+			players[numPlayers++] = i;
+	
+	if (numPlayers == 0)
+		return -1;
+	
+	return Random(0, numPlayers - 1);
+}
