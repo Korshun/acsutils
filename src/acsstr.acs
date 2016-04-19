@@ -100,35 +100,132 @@ function str StrReverse(str s)
 	return tempstr;
 }
 
-function str StrToLower(str s)
-{
-	str tempstr = "";
-	for(int i = 0; i < StrLen(s); i++)
-	{
-		int char = GetChar(s, i);
-		if((char >= ASCII_LETTERS_BIG_START)&&(char <= ASCII_LETTERS_BIG_END))
-			char += ASCII_LETTERS_OFFSET;
-		tempstr = StrParam(s:tempstr, c:char);
-	}
-	return tempstr;
-}
-
-function str StrToUpper(str s)
-{
-	str tempstr = "";
-	for(int i = 0; i < StrLen(s); i++)
-	{
-		int char = GetChar(s, i);
-		if((char >= ASCII_LETTERS_SMALL_START)&&(char <= ASCII_LETTERS_SMALL_END))
-			char -= ASCII_LETTERS_OFFSET;
-		tempstr = StrParam(s:tempstr, c:char);
-	}
-	return tempstr;
-}
-
 function bool StrIsEmpty(str s)
 {
 	if(!GetChar(s, 0))
 		return true;
 	return false;
+}
+
+
+// acsctype wrappers. 
+
+function str StrIsAlNum(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isalnum(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsAlpha(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isalpha(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsBlank(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isblank(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsCntrl(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!iscntrl(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsDigit(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isdigit(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsGraph(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isgraph(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsLower(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!islower(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsPrint(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isprint(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsSpace(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isspace(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsUpper(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isupper(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsXDigit(str s)
+{
+	for (int i = 0; i < StrLen(s); i++)
+		if (!isxdigit(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+
+// Case conversion.
+
+function str StrToLower(str s)
+{
+	str result = "";
+	for (int i = 0; i < StrLen(s); i++)
+		result = StrParam(s:result, c:tolower(GetChar(s, i)));
+		
+	return result;
+}
+
+function str StrToUpper(str s)
+{
+	str result = "";
+	for (int i = 0; i < StrLen(s); i++)
+		result = StrParam(s:result, c:toupper(GetChar(s, i)));
+		
+	return result;
 }
