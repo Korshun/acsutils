@@ -1,0 +1,54 @@
+bool _AllocatePlayerTids;
+int _PlayerAllocStartTid;
+int _PlayerTids[MAX_PLAYERS];
+
+function int PlayerTid(int player)
+{
+	return _PlayerTids[player];
+}
+
+function void EnableUniquePlayerTids(void)
+{
+	_AllocatePlayerTids = true;
+}
+
+function void EnableSequentialPlayerTids(int starttid)
+{
+	_AllocatePlayerTids = true;
+	_PlayerAllocStartTid = starttid;
+}
+
+
+script acsutils_enter ENTER
+{
+	if (!_AllocatePlayerTids)
+		terminate; 
+	
+	int tid;
+	if (_PlayerAllocStartTid)
+		tid = _PlayerAllocStartTid + PlayerNumber();
+	else if (_PlayerTids[PlayerNumber()] == 0)
+		tid = UniqueTid();
+	else
+		tid = _PlayerTids[PlayerNumber()];
+		
+	_PlayerTids[PlayerNumber()] = tid;
+	Thing_ChangeTid(0, tid);
+}
+
+script acsutils_respawn RESPAWN
+{
+	if (!_AllocatePlayerTids)
+		terminate;
+		
+	Thing_ChangeTid(_PlayerTids[PlayerNumber()], 0);
+	Thing_ChangeTid(0, _PlayerTids[PlayerNumber()]);
+}
+
+script acsutils_disconnect (int player) DISCONNECT
+{
+	if (!_AllocatePlayerTids)
+		terminate;
+	
+	_PlayerTids[player] = 0;
+}

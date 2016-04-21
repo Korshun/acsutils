@@ -8,4 +8,4 @@
 #include "acsstr.acs"
 #include "acszdoom.acs"
 #include "acspack.acs"
-
+#include "acsplayertid.acs"

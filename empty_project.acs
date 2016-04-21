@@ -1,3 +1,10 @@
 #library "myproject"
+
+// Script numbers.
+#define acsutils_enter 801
+#define acsutils_respawn 802
+#define acsutils_disconnect 803
+
+// Includes.
 #include "zcommon.acs"
 #include "acsutils.acs"
