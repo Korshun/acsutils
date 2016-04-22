@@ -169,3 +169,20 @@ function int PickRandomClient(void)
 	
 	return Random(0, numPlayers - 1);
 }
+
+function int ActorPlayerNumber(int tid)
+{
+	if (tid == 0)
+		return PlayerNumber();
+
+	int prevtid = ActivatorTid();
+	int newtid = UniqueTid();
+	Thing_ChangeTid(0, newtid);
+	
+	SetActivator(tid);
+	int result = PlayerNumber();
+	
+	SetActivator(newtid);
+	Thing_ChangeTid(0, prevtid);
+	return result;
+}
