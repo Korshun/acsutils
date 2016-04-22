@@ -155,3 +155,17 @@ function int PickRandomPlayer(void)
 	
 	return Random(0, numPlayers - 1);
 }
+
+function int PickRandomClient(void)
+{
+	int players[MAX_PLAYERS];
+	int numPlayers = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsConnected(i))
+			players[numPlayers++] = i;
+	
+	if (numPlayers == 0)
+		return -1;
+	
+	return Random(0, numPlayers - 1);
+}
