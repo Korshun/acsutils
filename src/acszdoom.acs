@@ -128,6 +128,15 @@ function int BotCount(void)
 	return count;
 }
 
+function int SpectatorCount(void)
+{
+	int count = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsSpectator(i))
+			count++;
+	return count;
+}
+
 function bool PlayerIsConnected(int player)
 {
 	return PlayerInGame(player) || PlayerIsSpectator(player);
