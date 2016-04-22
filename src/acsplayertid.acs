@@ -18,9 +18,18 @@ function void EnableSequentialPlayerTids(int starttid)
 	_PlayerAllocStartTid = starttid;
 }
 
+int _PlayerScriptNumber = -1;
+
+function void SetPlayerScript(int number)
+{
+	_PlayerScriptNumber = number;
+}
 
 script acsutils_enter ENTER
 {
+	if (_PlayerScriptNumber != -1)
+		ACS_ExecuteAlways(_PlayerScriptNumber, 0);
+
 	if (!_AllocatePlayerTids)
 		terminate; 
 	
@@ -38,6 +47,9 @@ script acsutils_enter ENTER
 
 script acsutils_respawn RESPAWN
 {
+	if (_PlayerScriptNumber != -1)
+		ACS_ExecuteAlways(_PlayerScriptNumber, 0);
+		
 	if (!_AllocatePlayerTids)
 		terminate;
 		
