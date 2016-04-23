@@ -207,6 +207,30 @@ function int zan_Sqrt(int number)
 	return oldAns;
 }
 
+#define FIXEDSQRT_EPS 0x1e6
+
+// By Monsterovich.
+// fixed zan_FixedSqrt(fixed number)
+function int zan_FixedSqrt(int a)
+{
+	int x = 0;
+	int y = a;
+	int val = 0;
+
+	// x & y shouldn't be zero
+	while ((x != 0 || y != 0) && y - x > FIXEDSQRT_EPS) 
+	{
+		val = FixedDiv(x + y, 2.0);
+
+        if (FixedMul(val, val) >= a)
+			y = val; 
+		else 
+			x = val;
+	}
+
+	return val;
+}
+
 // From commonFuncs.h by Ijon Tichy.
 // FIXME: does this work for fixeds?
 // int gcf(int a, int b)
