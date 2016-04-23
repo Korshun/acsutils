@@ -35,9 +35,9 @@ function int byteang2angle(int byteang)
 	return byteang * 256;
 }
 
-function int angle2byteang(int byteang)
+function int angle2byteang(int angle)
 {
-	return byteang / 256;
+	return angle / 256;
 }
 
 
