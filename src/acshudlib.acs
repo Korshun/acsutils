@@ -74,21 +74,35 @@ function void HudSetCameraAngles(int angle, int pitch)
 	RenderSt3D_CameraPitch = pitch;
 }
 
-#define HUD_CAMERAACTOR_NOAUTOPOSITION 1
-#define HUD_CAMERAACTOR_NOAUTODIRECTION 2
+#define HUD_CAMERAACTOR_NOPOSITION 1
+#define HUD_CAMERAACTOR_NODIRECTION 2
+#define HUD_CAMERAACTOR_NOPREDICTION 4
 
-function void HudSetCameraActorAdvanced(int tid, int flags)
+function void HudSetCameraActorAdvanced(int tid, int offsetX, int offsetY, int offsetZ, int flags)
 {
-	if (!(flags & HUD_CAMERAACTOR_NOAUTOPOSITION))
-		HudSetCameraPosition(GetActorX(tid), GetActorY(tid), GetActorZ(tid) + 41.0);
+	if (!(flags & HUD_CAMERAACTOR_NOPOSITION))
+	{
+		int x = GetActorX(tid);
+		int y = GetActorY(tid);
+		int z = GetActorZ(tid) + 41.0;
 		
-	if (!(flags & HUD_CAMERAACTOR_NOAUTODIRECTION))
+		if (!(flags & HUD_CAMERAACTOR_NOPREDICTION))
+		{
+			x -= GetActorVelX(tid);
+			y -= GetActorVelY(tid);
+			z -= GetActorVelZ(tid);
+		}	
+		
+		HudSetCameraPosition(x, y, z);
+	}
+	
+	if (!(flags & HUD_CAMERAACTOR_NODIRECTION))
 		HudSetCameraAngles(GetActorAngle(tid), GetActorPitch(tid));
 }
 
-function void HudSetCameraActor(int tid)
+function void HudSetCameraActor(int tid, int offsetX, int offsetY, int offsetZ)
 {
-	HudSetCameraActorAdvanced(tid, 0);
+	HudSetCameraActorAdvanced(tid, offsetX, offsetY, offsetZ, 0);
 }
 
 function void HudSetPoint3D(int x, int y, int z)
@@ -99,14 +113,9 @@ function void HudSetPoint3D(int x, int y, int z)
 	RenderSt3D_Z = z;
 }
 
-function void HudSetPointActor(int tid)
+function void HudSetPointActor(int tid, int offsetX, int offsetY, int offsetZ)
 {
-	HudSetPoint3D(GetActorX(tid), GetActorY(tid), GetActorZ(tid));
-}
-
-function void HudSetPointActorOffset(int tid, int x, int y, int z)
-{
-	HudSetPoint3D(GetActorX(tid) + x, GetActorY(tid) + y, GetActorZ(tid) + z);
+	HudSetPoint3D(GetActorX(tid) + offsetX, GetActorY(tid) + offsetY, GetActorZ(tid) + offsetZ);
 }
 
 function void HudSet2DOffset(int x, int y)
