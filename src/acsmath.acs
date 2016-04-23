@@ -282,7 +282,7 @@ function int asin(int x)
 // fixed acos(fixed x)
 function int acos(int x)
 {
-	return FixedMul(2, atan(FixedSqrt(FixedDiv(1.0 - x, 1.0 + x))));
+	return 2 * atan(FixedSqrt(FixedDiv(1.0 - x, 1.0 + x)));
 }
 
 
