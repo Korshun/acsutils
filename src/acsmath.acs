@@ -127,6 +127,20 @@ function int iround(int x)
 	return round(x)>>16;
 }
 
+// By Monsterovich
+
+// fixed itof(int x)
+function int itof(int x)
+{
+	return x << 16;
+}
+
+// int ftoi(fixed x)
+function int ftoi(int x)
+{
+	return x >> 16;
+}
+
 
 // Numerical algorithms.
 
