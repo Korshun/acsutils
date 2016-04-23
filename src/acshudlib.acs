@@ -369,9 +369,14 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 			return;
 		}
 			
+		// I don't know what this factor means, but it fixes positioning bugs.
+		int yFactor = 1.6;
+		if (StatusBarShown())
+			yFactor = 1.9;
+
 		// Project point.
 		x = RenderSt3D_2DOffsetX + RenderSt_BaseWidth  / 2 + FixedMul(RenderSt_BaseWidth  / 2,          tan(-VectorAngle(_RenderSt_RotatedX, _RenderSt_RotatedY))      );
-		y = RenderSt3D_2DOffsetY + RenderSt_BaseHeight / 2 + FixedMul(RenderSt_BaseHeight / 2, FixedMul(tan(-VectorAngle(_RenderSt_RotatedX, _RenderSt_RotatedZ)), 1.6));
+		y = RenderSt3D_2DOffsetY + RenderSt_BaseHeight / 2 + FixedMul(RenderSt_BaseHeight / 2, FixedMul(tan(-VectorAngle(_RenderSt_RotatedX, _RenderSt_RotatedZ)), yFactor));
 		
 		if (RenderSt3D_AutoDistanceScale)
 		{
@@ -410,7 +415,10 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 	
 	int w = FixedMul(RenderSt_BaseWidth, iScaleX);
 	int h = FixedMul(RenderSt_BaseHeight, iScaleY);
-	SetHudSize(itrunc(w), itrunc(h), !RenderSt_ExcludeStatusBar);
+	int excludeStatusBar = RenderSt_ExcludeStatusBar;
+	if (RenderSt_Is3DPoint)
+		excludeStatusBar = true;
+	SetHudSize(itrunc(w), itrunc(h), !excludeStatusBar);
 	
 	x = trunc(FixedMul(x, iScaleX));
 	y = trunc(FixedMul(y, iScaleY));
