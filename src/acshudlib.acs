@@ -380,13 +380,13 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 		
 		if (RenderSt3D_AutoDistanceScale)
 		{
-			int dist = _RenderSt_RotatedX;
+			int distance = _RenderSt_RotatedX;
 			
-			if (dist < RenderSt3D_MinDist)
+			if (distance < RenderSt3D_MinDist)
 			{
 				if (RenderSt3D_MinDistAction == HUD_ACTION_CAP)
 				{
-					dist = RenderSt3D_MinDist;
+					distance = RenderSt3D_MinDist;
 				}
 				else if (RenderSt3D_MinDistAction == HUD_ACTION_HIDE)
 				{
@@ -394,11 +394,11 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 					return;
 				}
 			}
-			else if (dist > RenderSt3D_MaxDist)
+			else if (distance > RenderSt3D_MaxDist)
 			{
 				if (RenderSt3D_MaxDistAction == HUD_ACTION_CAP)
 				{
-					dist = RenderSt3D_MaxDist;
+					distance = RenderSt3D_MaxDist;
 				}
 				else if (RenderSt3D_MaxDistAction == HUD_ACTION_HIDE)
 				{
@@ -407,9 +407,9 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 				}
 			}
 			
-			dist /= CAMERA_BASE_DISTANCE;
-			iScaleX = FixedMul(iScaleX, dist);
-			iScaleY = FixedMul(iScaleY, dist);
+			distance /= CAMERA_BASE_DISTANCE;
+			iScaleX = FixedMul(iScaleX, distance);
+			iScaleY = FixedMul(iScaleY, distance);
 		}
 	}
 	
