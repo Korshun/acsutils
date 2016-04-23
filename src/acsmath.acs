@@ -278,6 +278,8 @@ function int asin(int x)
 	return atan(FixedDiv(x, FixedSqrt(1.0 - FixedMul(x, x))));
 }
 
+// ZDOOM 2.7.0 ONLY, uses FixedSqrt
+// fixed acos(fixed x)
 function int acos(int x)
 {
 	return FixedMul(2, atan(FixedSqrt(FixedDiv(1.0 - x, 1.0 + x))));
