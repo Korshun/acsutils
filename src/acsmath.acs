@@ -66,6 +66,12 @@ function int cmp(int a, int b)
 	return 0;
 }
 
+// By Monsterovich
+// num dist(num a, num b)
+function int dist(int a, int b)
+{
+	return abs(a - b);
+}
 
 // Rounding.
 
