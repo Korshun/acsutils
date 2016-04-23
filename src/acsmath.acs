@@ -295,14 +295,12 @@ function int atan(int x)
     return VectorAngle(1.0, x);
 }
 
-// ZDOOM 2.7.0 ONLY, uses FixedSqrt
 // fixed asin(fixed x)
 function int asin(int x)
 {
 	return atan(FixedDiv(x, zan_FixedSqrt(1.0 - FixedMul(x, x))));
 }
 
-// ZDOOM 2.7.0 ONLY, uses FixedSqrt
 // fixed acos(fixed x)
 function int acos(int x)
 {
