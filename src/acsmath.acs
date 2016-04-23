@@ -229,7 +229,7 @@ function int gcf(int a, int b)
 // angle AngleDistCCW(angle a, angle b)
 function int AngleDistCCW (int a, int b)
 {
- return abs(a - b);
+	return abs(a - b);
 }
 
 // angle AngleDistCW(angle a, angle b)
