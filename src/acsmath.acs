@@ -265,16 +265,16 @@ function int rad2deg(int radians)
 
 // By Monsterovich
 
-// angle AngleDistanceCCW(angle a, angle b)
-function int AngleDistanceCCW (int a, int b)
+// angle AngleDistCCW(angle a, angle b)
+function int AngleDistCCW (int a, int b)
 {
  return abs(a - b);
 }
 
-// angle AngleDistanceCW(angle a, angle b)
-function int AngleDistanceCW (int a, int b)
+// angle AngleDistCW(angle a, angle b)
+function int AngleDistCW (int a, int b)
 {
-	return 1.0 - angledistanceCCW(a, b);
+	return 1.0 - AngleDistCCW(a, b);
 }
 
 
