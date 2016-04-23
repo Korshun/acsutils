@@ -265,6 +265,12 @@ function int cosec(int x)
 	return FixedDiv(1.0, cos(x));
 }
 
+// fixed atan(fixed x)
+function int atan(int x)
+{
+    return VectorAngle(1.0, x);
+}
+
 
 // Vectors.
 
