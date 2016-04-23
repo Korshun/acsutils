@@ -1,0 +1,72 @@
+// By Monsterovich.
+function bool KeyUp(int key)
+{
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+	if ((~buttons & key) == key) { return true; }
+		return false;
+}
+
+function bool KeyUpAny(int key)
+{
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+	if (~buttons & key) { return true; }
+		return false;
+}
+
+function bool KeyDown(int key)
+{
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+	if ((buttons & key) == key) { return true; }
+		return false;
+}
+
+function bool KeyDownAny(int key)
+{
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+	if (buttons & key) { return true; }
+		return false;
+}
+
+function bool KeyPressed(int key)
+{
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & buttons;
+
+	if ((newbuttons & key) == key) { return true; }
+		return false;
+}
+
+function bool KeyPressedAny(int key)
+{
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & buttons;
+
+	if (newbuttons & key) { return true; }
+		return false;
+}
+
+function bool KeyReleased(int key)
+{
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & oldbuttons;
+
+	if ((newbuttons & key) == key) { return true; }
+		return false;
+}
+
+function bool KeyReleasedAny(int key)
+{
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & oldbuttons;
+
+	if (newbuttons & key) { return true; }
+		return false;
+}
