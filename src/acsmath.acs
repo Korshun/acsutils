@@ -243,6 +243,20 @@ function int rad2deg(int radians)
 	return angle2deg(rad2angle(radians));
 }
 
+// By Monsterovich
+
+// angle AngleDistanceCCW(angle a, angle b)
+function int AngleDistanceCCW (int a, int b)
+{
+ return abs(a - b);
+}
+
+// angle AngleDistanceCW(angle a, angle b)
+function int AngleDistanceCW (int a, int b)
+{
+	return 1.0 - angledistanceCCW(a, b);
+}
+
 
 // Trigonometry.
 
