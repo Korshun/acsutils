@@ -1,0 +1,422 @@
+#define HUD_STAYTIME_FOREVER -1
+
+#define HUD_BLENDSTYLE_NORMAL 0
+#define HUD_BLENDSTYLE_ADDITIVE 1
+
+#define HUD_TEXTORIGIN_CENTER 0
+#define HUD_TEXTORIGIN_LEFT 1
+#define HUD_TEXTORIGIN_RIGHT 2
+#define HUD_TEXTORIGIN_TOP 1
+#define HUD_TEXTORIGIN_BOTTOM 2
+
+int RenderSt_Is3DPoint = false;
+
+
+int RenderSt3D_CameraX = 0.0;
+int RenderSt3D_CameraY = 0.0;
+int RenderSt3D_CameraZ = 0.0;
+int RenderSt3D_CameraAngle = 0.0;
+int RenderSt3D_CameraPitch = 0.0;
+
+int RenderSt3D_X = 0.0;
+int RenderSt3D_Y = 0.0;
+int RenderSt3D_Z = 0.0;
+
+int RenderSt3D_2DOffsetX = 0.0;
+int RenderSt3D_2DOffsetY = 0.0;
+
+int RenderSt3D_AutoDistanceScale = true;
+
+int RenderSt_BaseWidth = 640.0;
+int RenderSt_BaseHeight = 480.0;
+int RenderSt_ExcludeStatusBar = false;
+
+int RenderSt_X = 0.0;
+int RenderSt_Y = 0.0;
+
+int RenderSt_IScaleX = 1.0;
+int RenderSt_IScaleY = 1.0;
+
+int RenderSt_ShowToEveryone = false;
+
+int RenderSt_AppearTime = 0.0;
+int RenderSt_StayTime = HUD_STAYTIME_FOREVER;
+int RenderSt_DisappearTime = 0.0;
+
+int RenderSt_BlendStyle = HUD_BLENDSTYLE_NORMAL;
+int RenderSt_Alpha = 1.0;
+
+int RenderSt_ShowIn3DView = true;
+int RenderSt_ShowOnFullAutomap = true;
+int RenderSt_ShowOnOverlayAutomap = true;
+
+int RenderSt_Layer = HUDMSG_LAYER_OVERHUD;
+
+int RenderSt_TextOriginX = HUD_TEXTORIGIN_CENTER;
+int RenderSt_TextOriginY = HUD_TEXTORIGIN_CENTER;
+int RenderSt_CenterText = false;
+int RenderSt_TextFont = "SMALLFONT";
+int RenderSt_TextColorIsString = false;
+int RenderSt_TextColor = CR_UNTRANSLATED;
+int RenderSt_TextTypeOn = false;
+int RenderSt_LogMessage = false;
+
+function void HudSetCameraPosition(int x, int y, int z)
+{
+	RenderSt3D_CameraX = x;
+	RenderSt3D_CameraY = y;
+	RenderSt3D_CameraZ = z;
+}
+
+function void HudSetCameraAngles(int angle, int pitch)
+{
+	RenderSt3D_CameraAngle = angle;
+	RenderSt3D_CameraPitch = pitch;
+}
+
+#define HUD_CAMERAACTOR_NOAUTOPOSITION 1
+#define HUD_CAMERAACTOR_NOAUTODIRECTION 2
+
+function void HudSetCameraActorAdvanced(int tid, int flags)
+{
+	if (!(flags & HUD_CAMERAACTOR_NOAUTOPOSITION))
+		HudSetCameraPosition(GetActorX(tid), GetActorY(tid), GetActorZ(tid) + 41.0);
+		
+	if (!(flags & HUD_CAMERAACTOR_NOAUTODIRECTION))
+		HudSetCameraAngles(GetActorAngle(tid), GetActorPitch(tid));
+}
+
+function void HudSetCameraActor(int tid)
+{
+	HudSetCameraActorAdvanced(tid, 0);
+}
+
+function void HudSetPoint3D(int x, int y, int z)
+{
+	RenderSt_Is3DPoint = true;
+	RenderSt3D_X = x;
+	RenderSt3D_Y = y;
+	RenderSt3D_Z = z;
+}
+
+function void HudSetPointActor(int tid)
+{
+	HudSetPoint3D(GetActorX(tid), GetActorY(tid), GetActorZ(tid));
+}
+
+function void HudSetPointActorOffset(int tid, int x, int y, int z)
+{
+	HudSetPoint3D(GetActorX(tid) + x, GetActorY(tid) + y, GetActorZ(tid) + z);
+}
+
+function void HudSet2DOffset(int x, int y)
+{
+	RenderSt3D_2DOffsetX = x;
+	RenderSt3D_2DOffsetY = y;
+}
+
+function void HudSetAutoDistanceScale(bool autoDistanceScale)
+{
+	RenderSt3D_AutoDistanceScale = autoDistanceScale;
+}
+
+function void HudSetVirtualSize(int width, int height)
+{
+	RenderSt_BaseWidth = width;
+	RenderSt_BaseHeight = height;
+}
+
+function void HudSetExcludeStatusBar(bool exclude)
+{
+	RenderSt_ExcludeStatusBar = exclude;
+}
+
+function void HudSetPoint(int x, int y)
+{
+	RenderSt_Is3DPoint = false;
+	RenderSt_X = x;
+	RenderSt_Y = y;
+}
+
+function void HudSetScaleXY(int scaleX, int scaleY)
+{
+	if (scaleX != 0)
+		RenderSt_IScaleX = FixedDiv(1.0, scaleX);
+	else
+		RenderSt_IScaleX = 0;
+	
+	if (scaleY != 0)
+		RenderSt_IScaleY = FixedDiv(1.0, scaleY);
+	else
+		RenderSt_IScaleY = 0;
+}
+
+function void HudSetScale(int scale)
+{
+	HudSetScaleXY(scale, scale);
+}
+
+function void HudSetInvScale(int invScale)
+{
+	RenderSt_IScaleX = invScale;
+	RenderSt_IScaleY = invScale;
+}
+
+function void HudSetInvScaleXY(int invScaleX, int invScaleY)
+{
+	RenderSt_IScaleX = invScaleX;
+	RenderSt_IScaleY = invScaleY;
+}
+
+function void HudSetShowToEveryone(bool showToEveryone)
+{
+	RenderSt_ShowToEveryone = showToEveryone;
+}
+
+function void HudSetAppearTime(int appearTime)
+{
+	RenderSt_AppearTime = appearTime;
+}
+
+function void HudSetStayTime(int stayTime)
+{
+	RenderSt_StayTime = stayTime;
+}
+
+function void HudSetDisappearTime(int disappearTime)
+{
+	RenderSt_DisappearTime = disappearTime;
+}
+
+function void HudSetBlendStyle(int style)
+{
+	RenderSt_BlendStyle = style;
+}
+
+function void HudSetAlpha(int alpha)
+{
+	RenderSt_Alpha = alpha;
+}
+
+function void HudSetShowIn3DView(bool show)
+{
+	RenderSt_ShowIn3DView = show;
+}
+
+function void HudSetShowOnFullAutomap(bool show)
+{
+	RenderSt_ShowOnFullAutomap = show;
+}
+
+function void HudSetShowOnOverlayAutomap(bool show)
+{
+	RenderSt_ShowOnOverlayAutomap = show;
+}
+
+function void HudSetLayer(int layer)
+{
+	RenderSt_Layer = layer;
+}
+
+function void HudSetFont(str font)
+{
+	RenderSt_TextFont = font;
+}
+
+function void HudSetTextColor(int textColor)
+{
+	RenderSt_TextColorIsString = false;
+	RenderSt_TextColor = textColor;
+}
+
+function void HudSetTextColorString(str textColor)
+{
+	RenderSt_TextColorIsString = true;
+	RenderSt_TextColor = textColor;
+}
+
+function void HudSetCenterText(bool centerText)
+{
+	RenderSt_CenterText = centerText;
+}
+
+function void HudSetTextOrigin(int originX, int originY)
+{
+	RenderSt_TextOriginX = originX;
+	RenderSt_TextOriginY = originY;
+}
+
+function void HudSetTextOriginX(int originX)
+{
+	RenderSt_TextOriginX = originX;
+}
+
+function void HudSetTextOriginY(int originY)
+{
+	RenderSt_TextOriginY = originY;
+}
+
+function void HudSetTextTypeOn(bool textTypeOn)
+{
+	RenderSt_TextTypeOn = textTypeOn;
+}
+
+function void HudSetLogMessage(bool logMessage)
+{
+	RenderSt_LogMessage = logMessage;
+}
+
+int _RenderSt_RotatedX;
+int _RenderSt_RotatedY;
+int _RenderSt_RotatedZ;
+
+// Rotate 3D point to view coordinate system.
+function void HudRotate3DPoint(void)
+{
+	// Translated point coordinates.
+	int x = RenderSt3D_X - RenderSt3D_CameraX;
+	int y = RenderSt3D_Y - RenderSt3D_CameraY;
+	int z = RenderSt3D_Z - RenderSt3D_CameraZ;
+
+	int rx, ry, rz;
+	int s, c;
+
+	// Rotate around Z axis.
+	s = sin(-RenderSt3D_CameraAngle);
+	c = cos(-RenderSt3D_CameraAngle);
+	rx = FixedMul(x, c) - FixedMul(y, s);
+	ry = FixedMul(x, s) + FixedMul(y, c);
+	x = rx; y = ry;
+
+	// Rotate around Y axis.
+	s = sin(RenderSt3D_CameraPitch);
+	c = cos(RenderSt3D_CameraPitch);
+	rx = FixedMul(x, c) - FixedMul(z, s);
+	rz = FixedMul(x, s) + FixedMul(z, c);
+	x = rx; z = rz;
+
+	_RenderSt_RotatedX = x;
+	_RenderSt_RotatedY = y;
+	_RenderSt_RotatedZ = z;
+}
+
+#define CAMERA_BASE_DISTANCE 128
+
+function void HudDrawHudMessage(int id, int type, str text, bool isText)
+{
+	if (RenderSt_IScaleX == 0 || RenderSt_IScaleY == 0)
+		return;
+
+	type |= RenderSt_Layer;
+	if (!RenderSt_ShowIn3DView)
+		type |= HUDMSG_NOTWITH3DVIEW;
+	if (!RenderSt_ShowOnFullAutomap)
+		type |= HUDMSG_NOTWITHFULLMAP;
+	if (!RenderSt_ShowOnOverlayAutomap)
+		type |= HUDMSG_NOTWITHOVERLAYMAP;
+		
+	if (RenderSt_Alpha != 1.0)
+	{
+		if (RenderSt_BlendStyle == HUD_BLENDSTYLE_ADDITIVE)
+			type |= HUDMSG_ADDBLEND;
+		else
+			type |= HUDMSG_ALPHA;
+	}
+	
+	int x = RenderSt_X;
+	int y = RenderSt_Y;
+	int iScaleX = RenderSt_IScaleX;
+	int iScaleY = RenderSt_IScaleY;
+	
+	if (RenderSt_Is3DPoint)
+	{
+		HudRotate3DPoint();
+		
+		// Check if point is behind the camera.
+		if (_RenderSt_RotatedX <= 0)
+		{
+			ClearHudMessage(id);
+			return;
+		}
+			
+		// Project point.
+		x = RenderSt3D_2DOffsetX + RenderSt_BaseWidth  / 2 + FixedMul(RenderSt_BaseWidth  / 2,          tan(-VectorAngle(_RenderSt_RotatedX, _RenderSt_RotatedY))      );
+		y = RenderSt3D_2DOffsetY + RenderSt_BaseHeight / 2 + FixedMul(RenderSt_BaseHeight / 2, FixedMul(tan(-VectorAngle(_RenderSt_RotatedX, _RenderSt_RotatedZ)), 1.6));
+		
+		if (RenderSt3D_AutoDistanceScale)
+		{
+			iScaleX = FixedMul(iScaleX, _RenderSt_RotatedX / CAMERA_BASE_DISTANCE);
+			iScaleY = FixedMul(iScaleY, _RenderSt_RotatedX / CAMERA_BASE_DISTANCE);
+		}
+	}
+	
+	int w = FixedMul(RenderSt_BaseWidth, iScaleX);
+	int h = FixedMul(RenderSt_BaseHeight, iScaleY);
+	SetHudSize(itrunc(w), itrunc(h), !RenderSt_ExcludeStatusBar);
+	
+	x = trunc(FixedMul(x, iScaleX));
+	y = trunc(FixedMul(y, iScaleY));
+	
+	if (RenderSt_TextOriginX == HUD_TEXTORIGIN_LEFT)
+		x += 0.1;
+	else if (RenderSt_TextOriginX == HUD_TEXTORIGIN_RIGHT)
+		x += 0.2;
+		
+	if (RenderSt_TextOriginY == HUD_TEXTORIGIN_TOP)
+		y += 0.1;
+	else if (RenderSt_TextOriginY == HUD_TEXTORIGIN_BOTTOM)
+		y += 0.2;
+		
+	if (RenderSt_CenterText)
+		x += 0.4;
+	
+	// BUG: this really simplifies the code, but the messages will only stay
+	// for 9 hours.
+	int stayTime = RenderSt_StayTime;
+	if (stayTime < 0)
+		stayTime = 32767.0;
+	
+	if (RenderSt_ShowToEveryone)
+	{
+		HudMessageBold(s:text;
+			type,
+			id,
+			RenderSt_TextColor,
+			x, y,
+			stayTime, RenderSt_AppearTime, RenderSt_DisappearTime,
+			RenderSt_Alpha
+		);
+	}
+	else
+	{
+		HudMessage(s:text;
+			type,
+			id,
+			RenderSt_TextColor,
+			x, y,
+			stayTime, RenderSt_AppearTime, RenderSt_DisappearTime,
+			RenderSt_Alpha
+		);
+	}
+}
+
+function void HudDrawText(int id, str text)
+{
+	int type = HUDMSG_FADEINOUT;
+	if (RenderSt_AppearTime > 0 && RenderSt_TextTypeOn)
+		type = HUDMSG_TYPEON;
+	
+	if (RenderSt_LogMessage)
+		type |= HUDMSG_LOG;
+	if (RenderSt_TextColorIsString)
+		type |= HUDMSG_COLORSTRING;
+
+	SetFont(RenderSt_TextFont);
+	HudDrawHudMessage(id, type, text, true);
+}
+
+function void HudDrawImage(int id, str image)
+{
+	SetFont(image);
+	HudDrawHudMessage(id, HUDMSG_FADEINOUT, "A", false);
+}

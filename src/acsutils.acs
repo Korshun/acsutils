@@ -11,3 +11,5 @@
 #include "acsinput.acs"
 #include "acsplayertid.acs"
 #include "acsunits.acs"
+
+#include "acshudlib.acs"
