@@ -307,6 +307,23 @@ function int acos(int x)
 	return 2 * atan(zan_FixedSqrt(FixedDiv(1.0 - x, 1.0 + x)));
 }
 
+//angle acot(fixed x)
+funtion fixed acot(fixed x)
+{
+ 	return 0.25-atan(x);
+}
+
+//angle asec(fixed x)
+function fixed asec(fixed x)
+{
+	return acos(FixedDiv(1, x));
+}
+
+//angle acosec(fixed x)
+function fixed acosec(fixed x)
+{
+	 return asin(FixedDiv(1, x));
+}
 
 // Vectors.
 
