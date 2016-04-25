@@ -168,7 +168,7 @@ function int PickRandomPlayer(void)
 	if (numPlayers == 0)
 		return -1;
 	
-	return Random(0, numPlayers - 1);
+	return _Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomSpectator(void)
@@ -181,7 +181,7 @@ function int PickRandomSpectator(void)
 	if (numPlayers == 0)
 		return -1;
 	
-	return Random(0, numPlayers - 1);
+	return _Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomClient(void)
@@ -194,7 +194,7 @@ function int PickRandomClient(void)
 	if (numPlayers == 0)
 		return -1;
 	
-	return Random(0, numPlayers - 1);
+	return _Players[Random(0, numPlayers - 1)];
 }
 
 function int ActorPlayerNumber(int tid)
