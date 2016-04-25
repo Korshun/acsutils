@@ -156,13 +156,14 @@ function int ClientCount(void)
 	return count;
 }
 
+int _Players[MAX_PLAYERS];
+
 function int PickRandomPlayer(void)
 {
-	int players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerInGame(i))
-			players[numPlayers++] = i;
+			_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
@@ -172,11 +173,10 @@ function int PickRandomPlayer(void)
 
 function int PickRandomSpectator(void)
 {
-	int players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsSpectator(i))
-			players[numPlayers++] = i;
+			_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
@@ -186,11 +186,10 @@ function int PickRandomSpectator(void)
 
 function int PickRandomClient(void)
 {
-	int players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsConnected(i))
-			players[numPlayers++] = i;
+			_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
