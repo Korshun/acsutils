@@ -241,3 +241,15 @@ function str StrToUpper(str s)
 		
 	return result;
 }
+
+function str StrCapitalize(str s)
+{
+	if (StrLen(s) == 0)
+		return "";
+
+	str result = StrParam(c:toupper(GetChar(s, 0)));
+	for (int i = 1; i < StrLen(s); i++)
+		result = StrParam(s:result, c:tolower(GetChar(s, i)));
+
+	return result;
+}
