@@ -13,6 +13,22 @@ function bool StrEquals(str a, str b)
     return StrCmp(a, b) == 0;
 }	
 
+// By Korshun.
+function bool StrEqualsAt(str s, int pos, str sub)
+{
+	int len = StrLen(sub);
+	if (pos + len > StrLen(s))
+		return false;
+	
+	for (int i = 0; i < len; i++)
+	{
+		if (GetChar(s, pos + i) != GetChar(sub, i))
+			return false;
+	}
+			
+	return true;
+}
+
 function bool StrFind(str a, str b)
 {
 	int pos, j;
