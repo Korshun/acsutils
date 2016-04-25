@@ -29,6 +29,18 @@ function bool StrEqualsAt(str s, int pos, str sub)
 	return true;
 }
 
+function bool StrStartsWith(str s, str sub)
+{
+	return StrEqualsAt(s, 0, sub);
+}
+
+function bool StrEndsWith(str s, str sub)
+{
+	if (StrLen(sub) > StrLen(s))
+		return false;
+	return StrEqualsAt(s, StrLen(sub) - StrLen(s), sub);
+}
+
 function bool StrFind(str a, str b)
 {
 	int pos, j;
