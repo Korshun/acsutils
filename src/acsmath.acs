@@ -308,19 +308,19 @@ function int acos(int x)
 }
 
 //angle acot(fixed x)
-funtion fixed acot(fixed x)
+function int acot(int x)
 {
- 	return 0.25-atan(x);
+ 	return 0.25 - atan(x);
 }
 
 //angle asec(fixed x)
-function fixed asec(fixed x)
+function int asec(int x)
 {
 	return acos(FixedDiv(1, x));
 }
 
 //angle acosec(fixed x)
-function fixed acosec(fixed x)
+function int acosec(int x)
 {
 	 return asin(FixedDiv(1, x));
 }
