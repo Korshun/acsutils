@@ -83,29 +83,25 @@ function int dist(int a, int b)
 // fixed trunc(fixed x)
 function int trunc(int x)
 {
-	return x & 0xffff0000;
+	return (x & 0xffff0000) + ((x < 0)<<16);
 }
 
 // fixed floor(fixed x)
 function int floor(int x)
 {
-	if (x < 0)
-		x++;
-	return trunc(x);
+	return x & 0xffff0000;
 }
 
 // fixed ceil(fixed x)
 function int ceil(int x)
 {
-	if (x > 0)
-		x++;
-	return trunc(x);
+	return (x & 0xffff0000) + 1.0;
 }
 
 // fixed round(fixed x)
 function int round(int x)
 {
-	return trunc(x + 0.5);
+	return (x + 0.5) & 0xffff0000;
 }
 
 // int itrunc(fixed x)
