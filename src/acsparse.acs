@@ -1,0 +1,191 @@
+#define PARSEINT_SUCCESS 0
+#define PARSEINT_OVERFLOW 1
+#define PARSEINT_BADFORMAT 1
+
+function void ParseInt(str s, int base)
+{
+	int result = 0;
+	int sgn = 1;
+	int i = 0;
+
+	if (GetChar(s, i) == '+')
+	{
+		i++;
+	}
+	else if (GetChar(s, i) == '-')
+	{
+		sgn = -1;
+		i++;
+	}
+	
+	if (base == 0)
+	{
+		if (StrEqualsAt(s, i, "0x"))
+		{
+			base = 16;
+			i += 2;
+		}
+		else if (StrEqualsAt(s, i, "0o"))
+		{
+			base = 8;
+			i += 2;
+		}
+		else if (StrEqualsAt(s, i, "0b"))
+		{
+			base = 2;
+			i += 2;
+		}
+		else
+		{
+			base = 10;
+		}
+	}
+	
+	for (; i < StrLen(s); i++)
+	{
+		int c = GetChar(s, i);
+		if (c < '0' || c > '0' + base)
+		{
+			r1 = PARSEINT_BADFORMAT;
+			return;
+		}
+		
+		if (INT_MAX / 10 < result)
+		{	
+			r1 = PARSEINT_OVERFLOW;
+			r2 = sgn;
+			return;
+		}
+		
+		result *= 10;
+		result += c - '0';
+	}
+	
+	r1 = PARSEINT_SUCCESS;
+	r2 = sgn * result;
+}
+
+function int atoi(str s)
+{
+	ParseInt(s, 0);
+	if (r1 == PARSEINT_SUCCESS)
+		return r2;
+	return 0;
+}
+
+#define PARSEFIXED_SUCCESS 0
+#define PARSEFIXED_OVERFLOW 1
+#define PARSEFIXED_BADFORMAT 2
+ 
+function void ParseFixed(str s, int base)
+{
+	int result;
+	int sgn = 1;
+	int i = 0;
+	
+	if (GetChar(s, i) == '+')
+	{
+		i++;
+	}
+	else if (GetChar(s, i) == '-')
+	{
+		sgn = -1;
+		i++;
+	}
+	
+	if (base == 0)
+	{
+		if (StrEqualsAt(s, i, "0x"))
+		{
+			base = 16;
+			i += 2;
+		}
+		else if (StrEqualsAt(s, i, "0o"))
+		{
+			base = 8;
+			i += 2;
+		}
+		else if (StrEqualsAt(s, i, "0b"))
+		{
+			base = 2;
+			i += 2;
+		}
+		else
+		{
+			base = 10;
+		}
+	}
+	
+	for (; i < StrLen(s); i++)
+	{
+		int c = GetChar(s, i);
+		if (c == '.')
+			break;
+			
+		if (c < '0' || c > '9')
+		{
+			r1 = PARSEFIXED_BADFORMAT;
+			return;
+		}
+			
+		result *= 10;
+		result += c - '0';
+		
+		if (result > SHORT_MAX)
+		{
+			r1 = PARSEFIXED_OVERFLOW;
+			r2 = sgn;
+			return;
+		}
+	}
+	
+	result <<= 16;
+		
+	if (i == StrLen(s))
+	{
+		r1 = PARSEFIXED_SUCCESS;
+		r2 = sgn * result;
+	}
+	
+	if (GetChar(s, i) != '.')
+	{
+		r1 = PARSEFIXED_BADFORMAT;
+		return;
+	}
+	
+	i++;
+	
+	if (i == StrLen(s))
+	{
+		r1 = PARSEFIXED_SUCCESS;
+		r2 = sgn * result;
+	}
+	
+	int digit = base;
+	for (; i < StrLen(s); i++)
+	{
+		c = GetChar(s, i);
+		if (c < '0' || c > '9')
+		{
+			r1 = PARSEFIXED_BADFORMAT;
+			return;
+		}
+		
+		printbold(d:c - '0', s:" ", f:65536 * (c - '0') / digit);
+		result += 65536 * (c - '0') / digit;
+		if (digit >= INT_MAX / base) // one billion
+			break;
+		digit *= base;
+	}
+	
+	r1 = PARSEINT_SUCCESS;
+	r2 = sgn * result;
+}
+
+function int atof(str s)
+{
+	ParseFixed(s, 0);
+	if (r1 == PARSEFIXED_SUCCESS)
+		return r2;
+	return 0;
+}
