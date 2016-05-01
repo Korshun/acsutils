@@ -215,3 +215,8 @@ function int ActorPlayerNumber(int tid)
 	Thing_ChangeTid(0, prevtid);
 	return result;
 }
+
+function int GetCVarFixed(str name)
+{
+	return atof(GetCVarString(name));
+}
