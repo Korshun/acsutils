@@ -220,3 +220,8 @@ function int GetCVarFixed(str name)
 {
 	return atof(GetCVarString(name));
 }
+
+function int GetCVarPercentage(str name)
+{
+	return FixedDiv(GetCVar(name)<<16, 100.0);
+}
