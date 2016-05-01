@@ -135,6 +135,12 @@ function void HudSetVirtualSize(int width, int height)
 	RenderSt_BaseHeight = height;
 }
 
+function void HudUseRealSize(void)
+{
+	RenderSt_BaseWidth = ScreenWidth()<<16;
+	RenderSt_BaseHeight = FixedDiv(RenderSt_BaseWidth, AspectRatio());
+}
+
 function void HudSetExcludeStatusBar(bool exclude)
 {
 	RenderSt_ExcludeStatusBar = exclude;
