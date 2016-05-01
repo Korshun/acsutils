@@ -309,6 +309,13 @@ function void HudRotate3DPoint(void)
 	_RenderSt_RotatedZ = z;
 }
 
+function int HudGetDistance(void)
+{
+	HudRotate3DPoint();
+	return _RenderSt_RotatedX;
+}
+
+
 #define CAMERA_BASE_DISTANCE 128
 
 function void HudDrawHudMessage(int id, int type, str text, bool isText)
