@@ -233,8 +233,7 @@ function int zan_FixedSqrt(int a)
 }
 
 // From commonFuncs.h by Ijon Tichy.
-// FIXME: does this work for fixeds?
-// int gcf(int a, int b)
+// num gcf(num a, num b)
 function int gcf(int a, int b)
 {
     int c;
