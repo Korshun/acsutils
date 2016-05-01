@@ -1,4 +1,16 @@
+#define HUD_STAYTIME_FOREVER -1
+
+#define HUD_BLENDSTYLE_NORMAL 0
+#define HUD_BLENDSTYLE_ADDITIVE 1
+
+#define HUD_TEXTORIGIN_CENTER 0
+#define HUD_TEXTORIGIN_LEFT 1
+#define HUD_TEXTORIGIN_RIGHT 2
+#define HUD_TEXTORIGIN_TOP 1
+#define HUD_TEXTORIGIN_BOTTOM 2
+
 int RenderSt_Is3DPoint = false;
+
 
 int RenderSt3D_CameraX = 0.0;
 int RenderSt3D_CameraY = 0.0;
@@ -15,16 +27,6 @@ int RenderSt3D_2DOffsetY = 0.0;
 
 int RenderSt3D_AutoDistanceScale = true;
 
-#define HUD_ACTION_PASS 0
-#define HUD_ACTION_HIDE 1
-#define HUD_ACTION_CAP 2
-
-int RenderSt3D_MinDist = 0.0;
-int RenderSt3D_MinDistAction = HUD_ACTION_CAP;
-
-int RenderSt3D_MaxDist = INT_MAX;
-int RenderSt3D_MaxDistAction = HUD_ACTION_CAP;
-
 int RenderSt_BaseWidth = 640.0;
 int RenderSt_BaseHeight = 480.0;
 int RenderSt_ExcludeStatusBar = false;
@@ -37,14 +39,9 @@ int RenderSt_IScaleY = 1.0;
 
 int RenderSt_ShowToEveryone = false;
 
-#define HUD_STAYTIME_FOREVER -1
-
 int RenderSt_AppearTime = 0.0;
 int RenderSt_StayTime = HUD_STAYTIME_FOREVER;
 int RenderSt_DisappearTime = 0.0;
-
-#define HUD_BLENDSTYLE_NORMAL 0
-#define HUD_BLENDSTYLE_ADDITIVE 1
 
 int RenderSt_BlendStyle = HUD_BLENDSTYLE_NORMAL;
 int RenderSt_Alpha = 1.0;
@@ -54,12 +51,6 @@ int RenderSt_ShowOnFullAutomap = true;
 int RenderSt_ShowOnOverlayAutomap = true;
 
 int RenderSt_Layer = HUDMSG_LAYER_OVERHUD;
-
-#define HUD_TEXTORIGIN_CENTER 0
-#define HUD_TEXTORIGIN_LEFT 1
-#define HUD_TEXTORIGIN_RIGHT 2
-#define HUD_TEXTORIGIN_TOP 1
-#define HUD_TEXTORIGIN_BOTTOM 2
 
 int RenderSt_TextOriginX = HUD_TEXTORIGIN_CENTER;
 int RenderSt_TextOriginY = HUD_TEXTORIGIN_CENTER;
@@ -136,18 +127,6 @@ function void HudSet2DOffset(int x, int y)
 function void HudSetAutoDistanceScale(bool autoDistanceScale)
 {
 	RenderSt3D_AutoDistanceScale = autoDistanceScale;
-}
-
-function void HudSetMinDistance(int distance, int action)
-{
-	RenderSt3D_MinDist = distance;
-	RenderSt3D_MinDistAction = action;
-}
-
-function void HudSetMaxDistance(int distance, int action)
-{
-	RenderSt3D_MaxDist = distance;
-	RenderSt3D_MaxDistAction = action;
 }
 
 function void HudSetVirtualSize(int width, int height)
@@ -380,36 +359,8 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 		
 		if (RenderSt3D_AutoDistanceScale)
 		{
-			int distance = _RenderSt_RotatedX;
-			
-			if (distance < RenderSt3D_MinDist)
-			{
-				if (RenderSt3D_MinDistAction == HUD_ACTION_CAP)
-				{
-					distance = RenderSt3D_MinDist;
-				}
-				else if (RenderSt3D_MinDistAction == HUD_ACTION_HIDE)
-				{
-					ClearHudMessage(id);
-					return;
-				}
-			}
-			else if (distance > RenderSt3D_MaxDist)
-			{
-				if (RenderSt3D_MaxDistAction == HUD_ACTION_CAP)
-				{
-					distance = RenderSt3D_MaxDist;
-				}
-				else if (RenderSt3D_MaxDistAction == HUD_ACTION_HIDE)
-				{
-					ClearHudMessage(id);
-					return;
-				}
-			}
-			
-			distance /= CAMERA_BASE_DISTANCE;
-			iScaleX = FixedMul(iScaleX, distance);
-			iScaleY = FixedMul(iScaleY, distance);
+			iScaleX = FixedMul(iScaleX, _RenderSt_RotatedX / CAMERA_BASE_DISTANCE);
+			iScaleY = FixedMul(iScaleY, _RenderSt_RotatedX / CAMERA_BASE_DISTANCE);
 		}
 	}
 	
