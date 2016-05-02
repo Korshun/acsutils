@@ -8,25 +8,122 @@ function str StrAdd(str a, str b)
 	return StrParam(s:a, s:b);
 }
 
+function str StrCut(str s, int start, int length)
+{
+	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, start + length));
+}
+
+function str StrCutRange(str s, int start, int end)
+{
+	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, end));
+}
+
+function bool StrEndsWith(str s, str what)
+{
+	int len1 = StrLen(s);
+	int len2 = StrLen(what);
+
+	if (len1 < len2)
+		return false;
+	return StrEqualsAt(s, len1 - len2, what);
+}
+
 function bool StrEquals(str a, str b)
 {
     return StrCmp(a, b) == 0;
 }	
 
-// By Korshun.
-function bool StrEqualsAt(str s, int pos, str sub)
+function bool StrEqualsAt(str s, int where, str what)
 {
-	int len = StrLen(sub);
-	if (pos + len > StrLen(s))
+	int len = StrLen(what);
+	if (where + len > StrLen(s))
 		return false;
 	
-	for (int i = 0; i < len; i++)
+	return StrEquals(StrMid(s, where, len), what);
+}
+
+function int StrFind(str s, str what)
+{
+	return StrFindFrom(s, what, 0);
+}
+
+function int StrFindFrom(str s, str what, int start)
+{
+	int len = StrLen(s) - StrLen(what);
+	for (int i = start; i <= len; i++)
 	{
-		if (GetChar(s, pos + i) != GetChar(sub, i))
-			return false;
+		if (StrEqualsAt(s, i, what))
+			return i;
 	}
+	
+	return -1;
+}
+
+function str StrInsert(str s, int where, str what)
+{
+	return StrParam(s:StrLeft(s, where), s:what, s:StrRightFrom(s, where));
+}
+
+function str StrMidRange(str s, int start, int end)
+{
+	return StrMid(s, start, end - start);
+}
+
+function str StrRemoveFirst(str s, str what)
+{
+	int pos = StrFind(s, what);
+	if(pos != -1)
+		return StrCut(s, pos, StrLen(what));
+	return s;
+}
+
+function str StrRemove(str s, str what)
+{
+	int len1 = StrLen(s);
+	int len2 = StrLen(what);
+	int start = 0;
+	int end = 0;
+	str result = "";
+
+	while (end < len1)
+	{
+		end = StrFindFrom(s, what, start);
+		if (end == -1)
+			end = len1;
 			
-	return true;
+		result = StrParam(s:result, s:StrMidRange(s, start, end));
+		start = end + len2;
+	}
+	
+	return result;
+}
+
+function str StrRightFrom(str s, int from)
+{
+	return StrRight(s, StrLen(s) - from);
+}
+
+function str StrReverse(str s)
+{
+	str tempstr = "";
+	for(int i = StrLen(s)-1; i >= 0; i--)
+		tempstr = StrParam(s:tempstr, c:GetChar(s, i));
+	return tempstr;
+}
+
+function void StrSplit(str s, str separator)
+{
+	int pos = StrFind(s, separator);
+	if (pos != -1)
+	{
+		r1 = StrLeft(s, pos);
+		r2 = StrRightFrom(s, pos + StrLen(separator));
+	}
+	else
+	{
+		r1 = s;
+		r2 = "";
+	}
 }
 
 function bool StrStartsWith(str s, str sub)
@@ -34,60 +131,22 @@ function bool StrStartsWith(str s, str sub)
 	return StrEqualsAt(s, 0, sub);
 }
 
-function bool StrEndsWith(str s, str sub)
+function str StrTimes(int s, int n)
 {
-	if (StrLen(sub) > StrLen(s))
-		return false;
-	return StrEqualsAt(s, StrLen(sub) - StrLen(s), sub);
+	int result = "";
+	for (int i = 0; i < n; i++)
+		result = StrAdd(result, s);
+	return result;
 }
 
-function bool StrFind(str a, str b)
-{
-	int pos, j;
-	for(int i = 0; i < (StrLen(a) - StrLen(b) + 1); i++)
-	{
-		j = 0;
-		while((j < StrLen(b))&&(GetChar(b, j) == GetChar(a, i+j)))
-			j++;
-		if(j == StrLen(b))
-			return i;
-	}
-	return -1;
-}
 
-function str StrSub(str a, str b)
-{
-	int pos = StrFind(a, b);
-	if(pos == -1)
-		return a;
-	return StrCut(a, pos, pos+StrLen(b)-1);
-}
-
-function str StrSlice(str s, int l, int r)
-{
-	if(r-l <= 0)
-		return s;
-	if(r-l)
-		return StrMid(s, l, StrLen(s)-r-1);
-		
-	return StrMid(s, l, StrLen(s)-r);
-}
-
-function str StrCut(str s, int l, int r)
-{
-	if(r-l <= 0)
-		return s;
-	if(r-l)
-		return StrParam(s:StrLeft(s, l), s:StrRight(s, StrLen(s)-r-1));
-		
-	return StrParam(s:StrLeft(s, l), s:StrRight(s, StrLen(s)-r));
-}
+// Color codes.
 
 function bool StrHasColorCodes(str s)
 {
 	for(int i = 0; i < StrLen(s); i++)
 	{
-		if(GetChar(s, i) == 28)
+		if (GetChar(s, i) == 28 || StrEqualsAt(s, i, "\c"))
 			return true;
 	}
 	return false;
@@ -103,14 +162,6 @@ function str StrStripColorCodes(str s)
 			tempstr = StrParam(s:tempstr, c:char);
 		else i++;
 	}
-	return tempstr;
-}
-
-function str StrReverse(str s)
-{
-	str tempstr = "";
-	for(int i = StrLen(s)-1; i >= 0; i--)
-		tempstr = StrParam(s:tempstr, c:GetChar(s, i));
 	return tempstr;
 }
 
