@@ -107,6 +107,19 @@ function str StrReplaceFirst(str s, str what, str with)
 	return StrReplaceFirstFrom(s, what, with, 0);
 }
 
+function str StrReplaceLastFrom(str s, str what, str with, int start)
+{
+	int pos = StrRFind(s, what);
+	if (pos != -1)
+		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
+	return s;
+}
+
+function str StrReplaceLast(str s, str what, str with)
+{
+	return StrReplaceLastFrom(s, what, with, StrLen(s) - 1);
+}
+
 function str StrReplace(str s, str what, str with)
 {
 	int len1 = StrLen(s);
@@ -129,6 +142,23 @@ function str StrReplace(str s, str what, str with)
 	}
 	
 	return result;
+}
+
+function int StrRFind(str s, str what)
+{
+	return StrRFindFrom(s, what, StrLen(s) - 1);
+}
+
+function int StrRFindFrom(str s, str what, int start)
+{
+	int len = StrLen(s) - StrLen(what);
+	for (int i = start; i >= 0; i--)
+	{
+		if (StrEqualsAt(s, i, what))
+			return i;
+	}
+	
+	return -1;
 }
 
 function str StrRightFrom(str s, int from)
