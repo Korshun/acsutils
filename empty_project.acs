@@ -1,10 +1,24 @@
 #library "myproject"
 
-// Script numbers.
+// ACSUtils script numbers.
 #define acsutils_enter 801
 #define acsutils_respawn 802
 #define acsutils_disconnect 803
 
+// Your project's script numbers.
+#define myproject_errorhandler 701
+
+// Tell ACSUtils which script to send errors to:
+#define ACSUTILS_ERROR_HANDLER myproject_errorhandler
+
+
 // Includes.
 #include "zcommon.acs"
 #include "acsutils.acs"
+
+// Your project's error handler
+script myproject_errorhandler (int type, int message)
+{
+	Log(s:"error: ", s:message);
+	printbold(s:"error: ", s:message);
+}
