@@ -19,10 +19,8 @@ function bool IsClient(void)
 	return ConsolePlayerNumber() >= 0;
 }
 
-function bool IsOpenGL(void)
-{
-	return GetCVar("vid_renderer");
-}
+
+// Inventory functions.
 
 function void SetInventory(str item, int amount)
 {
@@ -44,6 +42,22 @@ function void SetActorInventory(int tid, str item, int amount)
 	GiveActorInventory(tid, item, amount);
 }
 
+
+// CVar functions.
+
+function int GetCVarFixed(str name)
+{
+	return atof(GetCVarString(name));
+}
+
+function int GetCVarPercentage(str name)
+{
+	return (GetCVar(name)<<16) / 100;
+}
+
+
+// Screen info functions.
+
 function int ScreenWidth(void)
 {
 	return GetCVar("vid_defwidth");
@@ -64,73 +78,47 @@ function int StatusBarShown(void)
 	return GetCVar("screenblocks") <= 10;
 }
 
+function bool IsOpenGL(void)
+{
+	return GetCVar("vid_renderer");
+}
+
+
+// HudMessage functions
+
 function void ClearHudMessage(int id)
 {
 	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
 }
+
+
+// Player functions
 
 function str PlayerName(int num)
 {
 	return StrParam(n:(num+1));
 }
 
-function str ActivatorName(void)
+function bool PlayerIsConnected(int player)
 {
-	return StrParam(n:0);
+	return PlayerInGame(player) || PlayerIsSpectator(player);
 }
 
-function bool ActivatorIsPlayer(void)
-{
-	return PlayerNumber() >= 0;
-}
-
-function bool ActorIsAlive(int tid)
-{
-	return GetActorProperty(tid, APROP_HEALTH) > 0;
-}
-
-function bool ActivatorIsAlive(void)
-{
-	return ActorIsAlive(0);
-}
-
-function int ActorDistance(int tid1, int tid2)
-{
-	return length3d(GetActorX(tid2) - GetActorX(tid1),
-	                GetActorY(tid2) - GetActorY(tid1),
-	                GetActorZ(tid2) - GetActorZ(tid1));
-}
-
-function int ActorDistance2D(int tid1, int tid2)
-{
-	return length2d(GetActorX(tid2) - GetActorX(tid1),
-	                GetActorY(tid2) - GetActorY(tid1));
-}
-
-function int GetActorSpeed(int tid)
-{
-	return length3d(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
-}
-
-function int GetActorSpeed2D(int tid)
-{
-	return length2d(GetActorVelX(tid), GetActorVelY(tid));
-}
-
-function bool HasRoom(str classname, int x, int y, int z)
-{
-	int tid = UniqueTid();
-	if (!Spawn(classname, x, y, z, tid))
-		return false;
-	Thing_Remove(tid);
-	return true;
-}
 
 function int BotCount(void)
 {
 	int count = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsBot(i))
+			count++;
+	return count;
+}
+
+function int ClientCount(void)
+{
+	int count = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsConnected(i))
 			count++;
 	return count;
 }
@@ -144,21 +132,21 @@ function int SpectatorCount(void)
 	return count;
 }
 
-function bool PlayerIsConnected(int player)
-{
-	return PlayerInGame(player) || PlayerIsSpectator(player);
-}
-
-function int ClientCount(void)
-{
-	int count = 0;
-	for (int i = 0; i < MAX_PLAYERS; i++)
-		if (PlayerIsConnected(i))
-			count++;
-	return count;
-}
 
 int _Players[MAX_PLAYERS];
+
+function int PickRandomClient(void)
+{
+	int numPlayers = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsConnected(i))
+			_Players[numPlayers++] = i;
+	
+	if (numPlayers == 0)
+		return -1;
+	
+	return _Players[Random(0, numPlayers - 1)];
+}
 
 function int PickRandomPlayer(void)
 {
@@ -186,11 +174,11 @@ function int PickRandomSpectator(void)
 	return _Players[Random(0, numPlayers - 1)];
 }
 
-function int PickRandomClient(void)
+function int PickRandomBot(void)
 {
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
-		if (PlayerIsConnected(i))
+		if (PlayerIsBot(i))
 			_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
@@ -199,29 +187,122 @@ function int PickRandomClient(void)
 	return _Players[Random(0, numPlayers - 1)];
 }
 
-function int ActorPlayerNumber(int tid)
+
+// Advanced activator functions
+
+function void SwitchActivator(int tid)
 {
 	if (tid == 0)
-		return PlayerNumber();
+	{
+		r1 = 0;
+		r2 = 0;
+		return;
+	}
 
 	int prevtid = ActivatorTid();
 	int newtid = UniqueTid();
 	Thing_ChangeTid(0, newtid);
-	
-	SetActivator(tid);
+	setActivator(tid);
+	r1 = prevtid;
+	r2 = newtid;
+}
+
+function void RestoreActivator(int newtid, int prevtid)
+{
+	if (newtid != 0)
+	{
+		SetActivator(newtid);
+		Thing_ChangeTid(0, prevtid);
+	}
+}
+
+
+// Actor information functions
+
+function int ActorPlayerNumber(int tid)
+{
+	SwitchActivator(tid);
+	int a = r1;
+	int b = r2;
+
 	int result = PlayerNumber();
 	
-	SetActivator(newtid);
-	Thing_ChangeTid(0, prevtid);
+	RestoreActivator(a, b);
 	return result;
 }
 
-function int GetCVarFixed(str name)
+function bool ActivatorIsPlayer(void)
 {
-	return atof(GetCVarString(name));
+	return PlayerNumber() >= 0;
 }
 
-function int GetCVarPercentage(str name)
+function bool ActorIsPlayer(int tid)
 {
-	return FixedDiv(GetCVar(name)<<16, 100.0);
+	return ActorPlayerNumber(tid) >= 0;
 }
+
+function str ActivatorName(void)
+{
+	return StrParam(n:0);
+}
+
+function str ActorName(int tid)
+{
+	SwitchActivator(tid);
+	int a = r1;
+	int b = r2;
+	
+	str result = StrParam(n:0);
+	
+	RestoreActivator(a, b);
+	return result;
+}
+
+function bool IsAlive(void)
+{
+	return GetActorProperty(0, APROP_HEALTH) > 0;
+}
+
+function bool ActorIsAlive(int tid)
+{
+	return GetActorProperty(tid, APROP_HEALTH) > 0;
+}
+
+
+// Actor math functions.
+
+function int ActorDistance(int tid1, int tid2)
+{
+	return length3d(GetActorX(tid2) - GetActorX(tid1),
+	                GetActorY(tid2) - GetActorY(tid1),
+	                GetActorZ(tid2) - GetActorZ(tid1));
+}
+
+function int ActorDistance2D(int tid1, int tid2)
+{
+	return length2d(GetActorX(tid2) - GetActorX(tid1),
+	                GetActorY(tid2) - GetActorY(tid1));
+}
+
+function int GetActorSpeed(int tid)
+{
+	return length3d(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
+}
+
+function int GetActorSpeed2D(int tid)
+{
+	return length2d(GetActorVelX(tid), GetActorVelY(tid));
+}
+
+
+// Actor utility functions.
+
+function bool HasRoom(str classname, int x, int y, int z)
+{
+	int tid = UniqueTid();
+	if (!Spawn(classname, x, y, z, tid))
+		return false;
+	Thing_Remove(tid);
+	return true;
+}
+
