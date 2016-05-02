@@ -89,6 +89,19 @@ function str StrRemoveFirstFrom(str s, str what, int start)
 	return s;
 }
 
+function str StrRemoveLast(str s, str what)
+{
+	return StrRemoveLastFrom(s, what, StrLen(s) - 1);
+}
+
+function str StrRemoveLastFrom(int s, str what, int start)
+{
+	int pos = StrRFindFrom(s, what, start);
+	if (pos != -1)
+		return StrCut(s, pos, StrLen(what));
+	return s;
+}
+
 function str StrRemove(str s, str what)
 {
 	return StrReplace(s, what, "");
