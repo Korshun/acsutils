@@ -192,7 +192,7 @@ function int PickRandomBot(void)
 
 function void SwitchActivator(int tid)
 {
-	if (tid == 0)
+	if (tid == 0 || ActivatorTid() == tid)
 	{
 		r1 = 0;
 		r2 = 0;
