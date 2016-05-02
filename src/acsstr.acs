@@ -78,8 +78,13 @@ function str StrMidRange(str s, int start, int end)
 
 function str StrRemoveFirst(str s, str what)
 {
-	int pos = StrFind(s, what);
-	if(pos != -1)
+	return StrRemoveFirstFrom(s, what, 0);
+}
+
+function str StrRemoveFirstFrom(str s, str what, int start)
+{
+	int pos = StrFindFrom(s, what, start);
+	if (pos != -1)
 		return StrCut(s, pos, StrLen(what));
 	return s;
 }
