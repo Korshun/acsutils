@@ -91,19 +91,40 @@ function str StrRemoveFirstFrom(str s, str what, int start)
 
 function str StrRemove(str s, str what)
 {
+	return StrReplace(s, what, "");
+}
+
+function str StrReplaceFirstFrom(str s, str what, str with, int start)
+{
+	int pos = StrFind(s, what);
+	if (pos != -1)
+		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
+	return s;
+}
+
+function str StrReplaceFirst(str s, str what, str with)
+{
+	return StrReplaceFirstFrom(s, what, with, 0);
+}
+
+function str StrReplace(str s, str what, str with)
+{
 	int len1 = StrLen(s);
 	int len2 = StrLen(what);
 	int start = 0;
 	int end = 0;
 	str result = "";
 
-	while (end < len1)
+	while (true)
 	{
 		end = StrFindFrom(s, what, start);
 		if (end == -1)
-			end = len1;
-			
-		result = StrParam(s:result, s:StrMidRange(s, start, end));
+		{
+			result = StrParam(s:result, s:StrMidRange(s, start, end));
+			break;
+		}
+
+		result = StrParam(s:result, s:StrMidRange(s, start, end), s:with);
 		start = end + len2;
 	}
 	
