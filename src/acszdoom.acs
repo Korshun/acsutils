@@ -306,3 +306,24 @@ function bool HasRoom(str classname, int x, int y, int z)
 	return true;
 }
 
+function void LookAtPoint(int tid, int x, int y, int z)
+{
+	x -= GetActorX(tid);
+	y -= GetActorY(tid);
+	z -= GetActorZ(tid) + GetActorViewHeight(tid);
+
+	VectorToAngles(x, y, z);
+	int angle = r1;
+	int pitch = r2;
+
+	SetActorAngle(tid, angle);
+	SetActorPitch(tid, -pitch);
+}
+
+function void LookAt(int tid, int target)
+{
+	int x = GetActorX(target);
+	int y = GetActorY(target);
+	int z = GetActorZ(target) + GetActorViewHeight(target);
+	LookAtPoint(tid, x, y, z);
+}
