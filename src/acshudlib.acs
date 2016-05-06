@@ -60,6 +60,7 @@ int RenderSt_TextColorIsString = false;
 int RenderSt_TextColor = CR_UNTRANSLATED;
 int RenderSt_TextTypeOn = false;
 int RenderSt_LogMessage = false;
+int RenderSt_TextWordWrap = false;
 
 function void HudResetState(void)
 {
@@ -114,6 +115,7 @@ function void HudResetState(void)
 	RenderSt_TextColor = CR_UNTRANSLATED;
 	RenderSt_TextTypeOn = false;
 	RenderSt_LogMessage = false;
+	RenderSt_TextWordWrap = false;
 }
 
 #define HUD_STATESTACK_SIZE 2048
@@ -178,6 +180,7 @@ function void HudPushState(void)
 	HudStateStack[HudStateStackTop++] = RenderSt_TextColor;
 	HudStateStack[HudStateStackTop++] = RenderSt_TextTypeOn;
 	HudStateStack[HudStateStackTop++] = RenderSt_LogMessage;
+	HudStateStack[HudStateStackTop++] = RenderSt_TextWordWrap;
 	
 	if (HudStateStackTop >= HUD_STATESTACK_SIZE)
 		LimitError("HudPushState(): state stack overflow.");
@@ -191,6 +194,7 @@ function void HudPopState(void)
 		return;
 	}
 
+	RenderSt_TextWordWrap = HudStateStack[--HudStateStackTop];
 	RenderSt_LogMessage = HudStateStack[--HudStateStackTop];
 	RenderSt_TextTypeOn = HudStateStack[--HudStateStackTop];
 	RenderSt_TextColor = HudStateStack[--HudStateStackTop];
@@ -473,6 +477,11 @@ function void HudSetLogMessage(bool logMessage)
 	RenderSt_LogMessage = logMessage;
 }
 
+function void HudSetWordWrap(bool wordWrap)
+{
+	RenderSt_TextWordWrap = wordWrap;
+}
+
 int _RenderSt_RotatedX;
 int _RenderSt_RotatedY;
 int _RenderSt_RotatedZ;
@@ -632,6 +641,8 @@ function void HudDrawText(int id, str text)
 		type |= HUDMSG_LOG;
 	if (RenderSt_TextColorIsString)
 		type |= HUDMSG_COLORSTRING;
+	if (!RenderSt_TextWordWrap)
+		type |= HUDMSG_NOWRAP;
 
 	SetFont(RenderSt_TextFont);
 	HudDrawHudMessage(id, type, text, true);
