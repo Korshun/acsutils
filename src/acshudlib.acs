@@ -316,6 +316,12 @@ function void HudSetVirtualSize(int width, int height)
 	RenderSt_BaseHeight = height;
 }
 
+function void HudUseDefaultSize(void)
+{
+	RenderSt_BaseWidth = 640.0;
+	RenderSt_BaseHeight = 480.0;
+}
+
 function void HudUseRealSize(void)
 {
 	RenderSt_BaseWidth = ScreenWidth()<<16;
