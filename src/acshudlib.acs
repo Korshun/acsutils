@@ -61,6 +61,187 @@ int RenderSt_TextColor = CR_UNTRANSLATED;
 int RenderSt_TextTypeOn = false;
 int RenderSt_LogMessage = false;
 
+function void HudResetState(void)
+{
+	RenderSt_Is3DPoint = false;
+
+
+	RenderSt3D_CameraX = 0.0;
+	RenderSt3D_CameraY = 0.0;
+	RenderSt3D_CameraZ = 0.0;
+	RenderSt3D_CameraAngle = 0.0;
+	RenderSt3D_CameraPitch = 0.0;
+
+	RenderSt3D_X = 0.0;
+	RenderSt3D_Y = 0.0;
+	RenderSt3D_Z = 0.0;
+
+	RenderSt3D_2DOffsetX = 0.0;
+	RenderSt3D_2DOffsetY = 0.0;
+
+	RenderSt3D_AutoDistanceScale = true;
+
+	RenderSt_BaseWidth = 640.0;
+	RenderSt_BaseHeight = 480.0;
+	RenderSt_ExcludeStatusBar = false;
+
+	RenderSt_X = 0.0;
+	RenderSt_Y = 0.0;
+
+	RenderSt_IScaleX = 1.0;
+	RenderSt_IScaleY = 1.0;
+
+	RenderSt_ShowToEveryone = false;
+
+	RenderSt_AppearTime = 0.0;
+	RenderSt_StayTime = HUD_STAYTIME_FOREVER;
+	RenderSt_DisappearTime = 0.0;
+
+	RenderSt_BlendStyle = HUD_BLENDSTYLE_NORMAL;
+	RenderSt_Alpha = 1.0;
+
+	RenderSt_ShowIn3DView = true;
+	RenderSt_ShowOnFullAutomap = true;
+	RenderSt_ShowOnOverlayAutomap = true;
+
+	RenderSt_Layer = HUDMSG_LAYER_OVERHUD;
+
+	RenderSt_TextOriginX = HUD_TEXTORIGIN_CENTER;
+	RenderSt_TextOriginY = HUD_TEXTORIGIN_CENTER;
+	RenderSt_CenterText = false;
+	RenderSt_TextFont = "SMALLFONT";
+	RenderSt_TextColorIsString = false;
+	RenderSt_TextColor = CR_UNTRANSLATED;
+	RenderSt_TextTypeOn = false;
+	RenderSt_LogMessage = false;
+}
+
+#define HUD_STATESTACK_SIZE 2048
+int HudStateStack[HUD_STATESTACK_SIZE];
+int HudStateStackTop = 0;
+
+function void HudPushState(void)
+{
+	HudStateStack[HudStateStackTop++] = RenderSt_Is3DPoint;
+
+
+	HudStateStack[HudStateStackTop++] = RenderSt3D_CameraX;
+	HudStateStack[HudStateStackTop++] = RenderSt3D_CameraY;
+	HudStateStack[HudStateStackTop++] = RenderSt3D_CameraZ;
+	HudStateStack[HudStateStackTop++] = RenderSt3D_CameraAngle;
+	HudStateStack[HudStateStackTop++] = RenderSt3D_CameraPitch;
+
+	HudStateStack[HudStateStackTop++] = RenderSt3D_X;
+	HudStateStack[HudStateStackTop++] = RenderSt3D_Y;
+	HudStateStack[HudStateStackTop++] = RenderSt3D_Z;
+
+	HudStateStack[HudStateStackTop++] = RenderSt3D_2DOffsetX;
+	HudStateStack[HudStateStackTop++] = RenderSt3D_2DOffsetY;
+
+	HudStateStack[HudStateStackTop++] = RenderSt3D_AutoDistanceScale;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_BaseWidth;
+	HudStateStack[HudStateStackTop++] = RenderSt_BaseHeight;
+	HudStateStack[HudStateStackTop++] = RenderSt_ExcludeStatusBar;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_X;
+	HudStateStack[HudStateStackTop++] = RenderSt_Y;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_IScaleX;
+	HudStateStack[HudStateStackTop++] = RenderSt_IScaleY;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_ShowToEveryone;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_AppearTime;
+	HudStateStack[HudStateStackTop++] = RenderSt_StayTime;
+	HudStateStack[HudStateStackTop++] = RenderSt_DisappearTime;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_BlendStyle;
+	HudStateStack[HudStateStackTop++] = RenderSt_Alpha;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_ShowIn3DView;
+	HudStateStack[HudStateStackTop++] = RenderSt_ShowOnFullAutomap;
+	HudStateStack[HudStateStackTop++] = RenderSt_ShowOnOverlayAutomap;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_Layer;
+
+	HudStateStack[HudStateStackTop++] = RenderSt_TextOriginX;
+	HudStateStack[HudStateStackTop++] = RenderSt_TextOriginY;
+	HudStateStack[HudStateStackTop++] = RenderSt_CenterText;
+	HudStateStack[HudStateStackTop++] = RenderSt_TextFont;
+	HudStateStack[HudStateStackTop++] = RenderSt_TextColorIsString;
+	HudStateStack[HudStateStackTop++] = RenderSt_TextColor;
+	HudStateStack[HudStateStackTop++] = RenderSt_TextTypeOn;
+	HudStateStack[HudStateStackTop++] = RenderSt_LogMessage;
+	
+	if (HudStateStackTop >= HUD_STATESTACK_SIZE)
+		LimitError("HudPushState(): state stack overflow.");
+}
+
+function void HudPopState(void)
+{
+	if (HudStateStackTop == 0)
+	{
+		ProgramError("HudPopState() called with no saved state.");
+		return;
+	}
+
+	RenderSt_LogMessage = HudStateStack[HudStateStackTop--];
+	RenderSt_TextTypeOn = HudStateStack[HudStateStackTop--];
+	RenderSt_TextColor = HudStateStack[HudStateStackTop--];
+	RenderSt_TextColorIsString = HudStateStack[HudStateStackTop--];
+	RenderSt_TextFont = HudStateStack[HudStateStackTop--];
+	RenderSt_CenterText = HudStateStack[HudStateStackTop--];
+	RenderSt_TextOriginY = HudStateStack[HudStateStackTop--];
+	RenderSt_TextOriginX = HudStateStack[HudStateStackTop--];
+
+	RenderSt_Layer = HudStateStack[HudStateStackTop--];
+
+	RenderSt_ShowOnOverlayAutomap = HudStateStack[HudStateStackTop--];
+	RenderSt_ShowOnFullAutomap = HudStateStack[HudStateStackTop--];
+	RenderSt_ShowIn3DView = HudStateStack[HudStateStackTop--];
+
+	RenderSt_Alpha = HudStateStack[HudStateStackTop--];
+	RenderSt_BlendStyle = HudStateStack[HudStateStackTop--];
+
+	RenderSt_DisappearTime = HudStateStack[HudStateStackTop--];
+	RenderSt_StayTime = HudStateStack[HudStateStackTop--];
+	RenderSt_AppearTime = HudStateStack[HudStateStackTop--];
+
+	RenderSt_ShowToEveryone = HudStateStack[HudStateStackTop--];
+
+	RenderSt_IScaleY = HudStateStack[HudStateStackTop--];
+	RenderSt_IScaleX = HudStateStack[HudStateStackTop--];
+
+	RenderSt_Y = HudStateStack[HudStateStackTop--];
+	RenderSt_X = HudStateStack[HudStateStackTop--];
+
+	RenderSt_ExcludeStatusBar = HudStateStack[HudStateStackTop--];
+	RenderSt_BaseHeight = HudStateStack[HudStateStackTop--];
+	RenderSt_BaseWidth = HudStateStack[HudStateStackTop--];
+
+	RenderSt3D_AutoDistanceScale = HudStateStack[HudStateStackTop--];
+
+	RenderSt3D_2DOffsetY = HudStateStack[HudStateStackTop--];
+	RenderSt3D_2DOffsetX = HudStateStack[HudStateStackTop--];
+
+	RenderSt3D_Z = HudStateStack[HudStateStackTop--];
+	RenderSt3D_Y = HudStateStack[HudStateStackTop--];
+	RenderSt3D_X = HudStateStack[HudStateStackTop--];
+
+	RenderSt3D_CameraPitch = HudStateStack[HudStateStackTop--];
+	RenderSt3D_CameraAngle = HudStateStack[HudStateStackTop--];
+	RenderSt3D_CameraZ = HudStateStack[HudStateStackTop--];
+	RenderSt3D_CameraY = HudStateStack[HudStateStackTop--];
+	RenderSt3D_CameraX = HudStateStack[HudStateStackTop--];
+
+
+	RenderSt_Is3DPoint = HudStateStack[HudStateStackTop--];
+	
+	if (HudStateStackTop < 0)
+		ProgramError("HudPushState/HudPopState are bugged. Report this bug to the acsutils project.");
+}
+
 function void HudSetCameraPosition(int x, int y, int z)
 {
 	RenderSt3D_CameraX = x;
