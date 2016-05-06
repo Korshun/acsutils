@@ -274,7 +274,7 @@ function void HudSetCameraActorAdvanced(int tid, int offsetX, int offsetY, int o
 	{
 		int x = GetActorX(tid);
 		int y = GetActorY(tid);
-		int z = GetActorZ(tid) + 41.0;
+		int z = GetActorZ(tid) + GetActorViewHeight(tid);
 		
 		if (!(flags & HUD_CAMERAACTOR_NOPREDICTION))
 		{
