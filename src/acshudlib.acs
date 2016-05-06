@@ -186,57 +186,57 @@ function void HudPopState(void)
 		return;
 	}
 
-	RenderSt_LogMessage = HudStateStack[HudStateStackTop--];
-	RenderSt_TextTypeOn = HudStateStack[HudStateStackTop--];
-	RenderSt_TextColor = HudStateStack[HudStateStackTop--];
-	RenderSt_TextColorIsString = HudStateStack[HudStateStackTop--];
-	RenderSt_TextFont = HudStateStack[HudStateStackTop--];
-	RenderSt_CenterText = HudStateStack[HudStateStackTop--];
-	RenderSt_TextOriginY = HudStateStack[HudStateStackTop--];
-	RenderSt_TextOriginX = HudStateStack[HudStateStackTop--];
+	RenderSt_LogMessage = HudStateStack[--HudStateStackTop];
+	RenderSt_TextTypeOn = HudStateStack[--HudStateStackTop];
+	RenderSt_TextColor = HudStateStack[--HudStateStackTop];
+	RenderSt_TextColorIsString = HudStateStack[--HudStateStackTop];
+	RenderSt_TextFont = HudStateStack[--HudStateStackTop];
+	RenderSt_CenterText = HudStateStack[--HudStateStackTop];
+	RenderSt_TextOriginY = HudStateStack[--HudStateStackTop];
+	RenderSt_TextOriginX = HudStateStack[--HudStateStackTop];
 
-	RenderSt_Layer = HudStateStack[HudStateStackTop--];
+	RenderSt_Layer = HudStateStack[--HudStateStackTop];
 
-	RenderSt_ShowOnOverlayAutomap = HudStateStack[HudStateStackTop--];
-	RenderSt_ShowOnFullAutomap = HudStateStack[HudStateStackTop--];
-	RenderSt_ShowIn3DView = HudStateStack[HudStateStackTop--];
+	RenderSt_ShowOnOverlayAutomap = HudStateStack[--HudStateStackTop];
+	RenderSt_ShowOnFullAutomap = HudStateStack[--HudStateStackTop];
+	RenderSt_ShowIn3DView = HudStateStack[--HudStateStackTop];
 
-	RenderSt_Alpha = HudStateStack[HudStateStackTop--];
-	RenderSt_BlendStyle = HudStateStack[HudStateStackTop--];
+	RenderSt_Alpha = HudStateStack[--HudStateStackTop];
+	RenderSt_BlendStyle = HudStateStack[--HudStateStackTop];
 
-	RenderSt_DisappearTime = HudStateStack[HudStateStackTop--];
-	RenderSt_StayTime = HudStateStack[HudStateStackTop--];
-	RenderSt_AppearTime = HudStateStack[HudStateStackTop--];
+	RenderSt_DisappearTime = HudStateStack[--HudStateStackTop];
+	RenderSt_StayTime = HudStateStack[--HudStateStackTop];
+	RenderSt_AppearTime = HudStateStack[--HudStateStackTop];
 
-	RenderSt_ShowToEveryone = HudStateStack[HudStateStackTop--];
+	RenderSt_ShowToEveryone = HudStateStack[--HudStateStackTop];
 
-	RenderSt_IScaleY = HudStateStack[HudStateStackTop--];
-	RenderSt_IScaleX = HudStateStack[HudStateStackTop--];
+	RenderSt_IScaleY = HudStateStack[--HudStateStackTop];
+	RenderSt_IScaleX = HudStateStack[--HudStateStackTop];
 
-	RenderSt_Y = HudStateStack[HudStateStackTop--];
-	RenderSt_X = HudStateStack[HudStateStackTop--];
+	RenderSt_Y = HudStateStack[--HudStateStackTop];
+	RenderSt_X = HudStateStack[--HudStateStackTop];
 
-	RenderSt_ExcludeStatusBar = HudStateStack[HudStateStackTop--];
-	RenderSt_BaseHeight = HudStateStack[HudStateStackTop--];
-	RenderSt_BaseWidth = HudStateStack[HudStateStackTop--];
+	RenderSt_ExcludeStatusBar = HudStateStack[--HudStateStackTop];
+	RenderSt_BaseHeight = HudStateStack[--HudStateStackTop];
+	RenderSt_BaseWidth = HudStateStack[--HudStateStackTop];
 
-	RenderSt3D_AutoDistanceScale = HudStateStack[HudStateStackTop--];
+	RenderSt3D_AutoDistanceScale = HudStateStack[--HudStateStackTop];
 
-	RenderSt3D_2DOffsetY = HudStateStack[HudStateStackTop--];
-	RenderSt3D_2DOffsetX = HudStateStack[HudStateStackTop--];
+	RenderSt3D_2DOffsetY = HudStateStack[--HudStateStackTop];
+	RenderSt3D_2DOffsetX = HudStateStack[--HudStateStackTop];
 
-	RenderSt3D_Z = HudStateStack[HudStateStackTop--];
-	RenderSt3D_Y = HudStateStack[HudStateStackTop--];
-	RenderSt3D_X = HudStateStack[HudStateStackTop--];
+	RenderSt3D_Z = HudStateStack[--HudStateStackTop];
+	RenderSt3D_Y = HudStateStack[--HudStateStackTop];
+	RenderSt3D_X = HudStateStack[--HudStateStackTop];
 
-	RenderSt3D_CameraPitch = HudStateStack[HudStateStackTop--];
-	RenderSt3D_CameraAngle = HudStateStack[HudStateStackTop--];
-	RenderSt3D_CameraZ = HudStateStack[HudStateStackTop--];
-	RenderSt3D_CameraY = HudStateStack[HudStateStackTop--];
-	RenderSt3D_CameraX = HudStateStack[HudStateStackTop--];
+	RenderSt3D_CameraPitch = HudStateStack[--HudStateStackTop];
+	RenderSt3D_CameraAngle = HudStateStack[--HudStateStackTop];
+	RenderSt3D_CameraZ = HudStateStack[--HudStateStackTop];
+	RenderSt3D_CameraY = HudStateStack[--HudStateStackTop];
+	RenderSt3D_CameraX = HudStateStack[--HudStateStackTop];
 
 
-	RenderSt_Is3DPoint = HudStateStack[HudStateStackTop--];
+	RenderSt_Is3DPoint = HudStateStack[--HudStateStackTop];
 	
 	if (HudStateStackTop < 0)
 		ProgramError("HudPushState/HudPopState are bugged. Report this bug to the acsutils project.");
