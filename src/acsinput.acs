@@ -1,15 +1,8 @@
 // By Monsterovich.
 
-int _InputPlayer = -1;
-
-function void InputSetPlayer(int player)
-{
-	_InputPlayer = player;
-}
-
 function bool KeyUp(int key)
 {
-	int buttons = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
 
 	if ((~buttons & key) == key) { return true; }
 		return false;
@@ -17,15 +10,32 @@ function bool KeyUp(int key)
 
 function bool KeyUpAny(int key)
 {
-	int buttons = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
 
 	if (~buttons & key) { return true; }
 		return false;
 }
 
+function bool PlayerKeyUp(int player, int key)
+{
+	int buttons = GetPlayerInput(player, INPUT_BUTTONS);
+
+	if ((~buttons & key) == key) { return true; }
+		return false;
+}
+
+function bool PlayerKeyUpAny(int player, int key)
+{
+	int buttons = GetPlayerInput(player, INPUT_BUTTONS);
+
+	if (~buttons & key) { return true; }
+		return false;
+}
+
+
 function bool KeyDown(int key)
 {
-	int buttons = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
 
 	if ((buttons & key) == key) { return true; }
 		return false;
@@ -33,16 +43,33 @@ function bool KeyDown(int key)
 
 function bool KeyDownAny(int key)
 {
-	int buttons = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
+	int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
 
 	if (buttons & key) { return true; }
 		return false;
 }
 
+function bool PlayerKeyDown(int player, int key)
+{
+	int buttons = GetPlayerInput(player, INPUT_BUTTONS);
+
+	if ((buttons & key) == key) { return true; }
+		return false;
+}
+
+function bool PlayerKeyDownAny(int player, int key)
+{
+	int buttons = GetPlayerInput(player, INPUT_BUTTONS);
+
+	if (buttons & key) { return true; }
+		return false;
+}
+
+
 function bool KeyPressed(int key)
 {
-	int buttons     = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
-	int oldbuttons  = GetPlayerInput(_InputPlayer, INPUT_OLDBUTTONS);
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
 	int newbuttons  = (buttons ^ oldbuttons) & buttons;
 
 	if ((newbuttons & key) == key) { return true; }
@@ -51,18 +78,39 @@ function bool KeyPressed(int key)
 
 function bool KeyPressedAny(int key)
 {
-	int buttons     = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
-	int oldbuttons  = GetPlayerInput(_InputPlayer, INPUT_OLDBUTTONS);
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
 	int newbuttons  = (buttons ^ oldbuttons) & buttons;
 
 	if (newbuttons & key) { return true; }
 		return false;
 }
 
+function bool PlayerKeyPressed(int player, int key)
+{
+	int buttons     = GetPlayerInput(player, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(player, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & buttons;
+
+	if ((newbuttons & key) == key) { return true; }
+		return false;
+}
+
+function bool PlayerKeyPressedAny(int player, int key)
+{
+	int buttons     = GetPlayerInput(player, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(player, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & buttons;
+
+	if (newbuttons & key) { return true; }
+		return false;
+}
+
+
 function bool KeyReleased(int key)
 {
-	int buttons     = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
-	int oldbuttons  = GetPlayerInput(_InputPlayer, INPUT_OLDBUTTONS);
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
 	int newbuttons  = (buttons ^ oldbuttons) & oldbuttons;
 
 	if ((newbuttons & key) == key) { return true; }
@@ -71,8 +119,28 @@ function bool KeyReleased(int key)
 
 function bool KeyReleasedAny(int key)
 {
-	int buttons     = GetPlayerInput(_InputPlayer, INPUT_BUTTONS);
-	int oldbuttons  = GetPlayerInput(_InputPlayer, INPUT_OLDBUTTONS);
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & oldbuttons;
+
+	if (newbuttons & key) { return true; }
+		return false;
+}
+
+function bool PlayerKeyReleased(int player, int key)
+{
+	int buttons     = GetPlayerInput(player, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(player, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons) & oldbuttons;
+
+	if ((newbuttons & key) == key) { return true; }
+		return false;
+}
+
+function bool PlayerKeyReleasedAny(int player, int key)
+{
+	int buttons     = GetPlayerInput(player, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(player, INPUT_OLDBUTTONS);
 	int newbuttons  = (buttons ^ oldbuttons) & oldbuttons;
 
 	if (newbuttons & key) { return true; }
