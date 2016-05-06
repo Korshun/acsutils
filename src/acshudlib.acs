@@ -120,6 +120,11 @@ function void HudResetState(void)
 int HudStateStack[HUD_STATESTACK_SIZE];
 int HudStateStackTop = 0;
 
+function void HudClearStateStack(void)
+{
+	HudStateStackTop = 0;
+}
+
 function void HudPushState(void)
 {
 	HudStateStack[HudStateStackTop++] = RenderSt_Is3DPoint;
