@@ -1,21 +1,21 @@
 #library "myproject"
 
-// Tell NewTid what is the first tid it may use:
-#define TIDALLOCSTART 15000
-
-// Your project's script numbers.
+// Your project's scripts:
 #define myproject_errorhandler 701
 
-// Tell ACSUtils which script to send errors to:
+// ACSUtils settings:
+#define TIDALLOCSTART 15000
 #define ACSUTILS_ERROR_HANDLER myproject_errorhandler
 
-// Includes.
+// Includes:
 #include "zcommon.acs"
 #include "acsutils.acs"
 
-// Your project's error handler
+// Your project's error handler:
 script myproject_errorhandler (int type, int message)
 {
 	Log(s:"error: ", s:message);
 	printbold(s:"error: ", s:message);
 }
+
+// Your project's code follows.
