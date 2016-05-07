@@ -3,11 +3,6 @@
 // Tell NewTid what is the first tid it may use:
 #define TIDALLOCSTART 15000
 
-// ACSUtils script numbers.
-#define acsutils_enter 801
-#define acsutils_respawn 802
-#define acsutils_disconnect 803
-
 // Your project's script numbers.
 #define myproject_errorhandler 701
 
