@@ -190,7 +190,7 @@ function int PickRandomBot(void)
 
 // Advanced activator functions
 
-function void SwitchActivator(int tid)
+function void SwapActivator(int tid)
 {
 	if (tid == 0 || ActivatorTid() == tid)
 	{
@@ -221,7 +221,7 @@ function void RestoreActivator(int newtid, int prevtid)
 
 function int ActorPlayerNumber(int tid)
 {
-	SwitchActivator(tid);
+	SwapActivator(tid);
 	int a = r1;
 	int b = r2;
 
@@ -248,7 +248,7 @@ function str ActivatorName(void)
 
 function str ActorName(int tid)
 {
-	SwitchActivator(tid);
+	SwapActivator(tid);
 	int a = r1;
 	int b = r2;
 	
@@ -307,7 +307,7 @@ function bool HasRoom(str classname, int x, int y, int z)
 }
 
 function void LookAtPoint(int tid, int x, int y, int z)
-{
+{ 	
 	x -= GetActorX(tid);
 	y -= GetActorY(tid);
 	z -= GetActorZ(tid) + GetActorViewHeight(tid);
@@ -327,3 +327,5 @@ function void LookAt(int tid, int target)
 	int z = GetActorZ(target) + GetActorViewHeight(target);
 	LookAtPoint(tid, x, y, z);
 }
+
+
