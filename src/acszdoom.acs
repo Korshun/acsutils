@@ -200,18 +200,18 @@ function void SwapActivator(int tid)
 	}
 
 	int prevtid = ActivatorTid();
-	int newtid = UniqueTid();
-	Thing_ChangeTid(0, newtid);
+	int temptid = NewTid();
+	Thing_ChangeTid(0, temptid);
 	setActivator(tid);
 	r1 = prevtid;
-	r2 = newtid;
+	r2 = temptid;
 }
 
-function void RestoreActivator(int newtid, int prevtid)
+function void RestoreActivator(int prevtid, int temptid)
 {
-	if (newtid != 0)
+	if (temptid != 0)
 	{
-		SetActivator(newtid);
+		SetActivator(temptid);
 		Thing_ChangeTid(0, prevtid);
 	}
 }
@@ -299,7 +299,7 @@ function int GetActorCurrentSpeed2D(int tid)
 
 function bool HasRoom(str classname, int x, int y, int z)
 {
-	int tid = UniqueTid();
+	int tid = NewTid();
 	if (!Spawn(classname, x, y, z, tid))
 		return false;
 	Thing_Remove(tid);
