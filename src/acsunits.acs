@@ -1,41 +1,41 @@
 // Angles
 
-function int deg2angle(int degrees)
+function int deg2ang(int degrees)
 {
 	return FixedDiv(degrees, 360.0);
 }
 
-function int rad2angle(int radians)
+function int rad2ang(int radians)
 {
 	return FixedDiv(radians, PI * 2);
 }
 
-function int angle2deg(int angle)
+function int ang2deg(int angle)
 {
 	return FixedMul(angle, 360.0);
 }
 
-function int angle2rad(int angle)
+function int ang2rad(int angle)
 {
 	return FixedMul(angle, PI * 2);
 }
 
 function int deg2rad(int degrees)
 {
-	return angle2rad(deg2angle(degrees));
+	return ang2rad(deg2ang(degrees));
 }
 
 function int rad2deg(int radians)
 {
-	return angle2deg(rad2angle(radians));
+	return ang2deg(rad2ang(radians));
 }
 
-function int byteang2angle(int byteang)
+function int byte2ang(int byteang)
 {
 	return byteang * 256;
 }
 
-function int angle2byteang(int angle)
+function int ang2byte(int angle)
 {
 	return angle / 256;
 }
