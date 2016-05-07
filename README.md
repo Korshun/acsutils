@@ -1,3 +1,3 @@
-ACS Libraries for ZDoom scripting
+ACSUtils
 =================================
 http://acsutils.strangled.net/doku.php?id=start
