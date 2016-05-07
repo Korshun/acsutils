@@ -307,11 +307,6 @@ function void HudSetPoint3D(int x, int y, int z)
 	RenderSt3D_Z = z;
 }
 
-function void HudSetPointActor(int tid, int offsetX, int offsetY, int offsetZ)
-{
-	HudSetPoint3D(GetActorX(tid) + offsetX, GetActorY(tid) + offsetY, GetActorZ(tid) + offsetZ);
-}
-
 function void HudSet2DOffset(int x, int y)
 {
 	RenderSt3D_2DOffsetX = x;
