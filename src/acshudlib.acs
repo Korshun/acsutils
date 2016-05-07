@@ -553,7 +553,7 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 	if (RenderSt_Is3DPoint)
 	{
 		HudRotate3DPoint();
-		
+
 		// Check if point is behind the camera.
 		if (_RenderSt_RotatedX <= 0)
 		{
@@ -579,18 +579,7 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 	
 	int w = FixedMul(RenderSt_BaseWidth, iScaleX);
 	int h = FixedMul(RenderSt_BaseHeight, iScaleY);
-	int excludeStatusBar = RenderSt_ExcludeStatusBar;
-	
-	if (RenderSt_Is3DPoint)
-	{
-		excludeStatusBar = true;
-		if (RenderSt3D_AutoDistanceScale)
-		{
-			w = 640.0;
-			h = 480.0;
-		}
-	}
-	SetHudSize(itrunc(w), itrunc(h), !excludeStatusBar);
+	SetHudSize(itrunc(w), itrunc(h), !(RenderSt_Is3DPoint || RenderSt_ExcludeStatusBar));
 	
 	x = trunc(FixedMul(x, iScaleX));
 	y = trunc(FixedMul(y, iScaleY));
@@ -614,6 +603,7 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 	if (stayTime < 0)
 		stayTime = 32767.0;
 	
+	printbold(f:x, s:" ", f:y);
 	if (RenderSt_ShowToEveryone)
 	{
 		HudMessageBold(s:text;
