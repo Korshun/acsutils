@@ -603,7 +603,6 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 	if (stayTime < 0)
 		stayTime = 32767.0;
 	
-	printbold(f:x, s:" ", f:y);
 	if (RenderSt_ShowToEveryone)
 	{
 		HudMessageBold(s:text;
