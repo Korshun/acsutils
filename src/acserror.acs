@@ -4,15 +4,18 @@
 
 function void ProgramError(str message)
 {
-	ACS_ExecuteWithResult(ACSUTILS_ERROR_HANDLER, ACSERROR_PROGRAM, message);
+	if (ACSUTILS_ERROR_HANDLER != 0)
+		ACS_ExecuteWithResult(ACSUTILS_ERROR_HANDLER, ACSERROR_PROGRAM, message);
 }
 
 function void LimitError(str message)
 {
-	ACS_ExecuteWithResult(ACSUTILS_ERROR_HANDLER, ACSERROR_LIMIT, message);
+	if (ACSUTILS_ERROR_HANDLER != 0)
+		ACS_ExecuteWithResult(ACSUTILS_ERROR_HANDLER, ACSERROR_LIMIT, message);
 }
 
 function void MappingError(str message)
 {
-	ACS_ExecuteWithResult(ACSUTILS_ERROR_HANDLER, ACSERROR_MAPPING, message);
+	if (ACSUTILS_ERROR_HANDLER != 0)
+		ACS_ExecuteWithResult(ACSUTILS_ERROR_HANDLER, ACSERROR_MAPPING, message);
 }
