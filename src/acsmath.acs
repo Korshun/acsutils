@@ -229,6 +229,16 @@ function int gcf(int a, int b)
     return -1;
 }
 
+function int PercentInt(int a, int b)
+{
+	return iceil(FixedDiv(a<<16, b<<16) * 100);
+}
+
+function int PercentFixed(int a, int b)
+{
+	return iceil(FixedDiv(a, b) * 100);
+}
+
 // By Monsterovich
 
 // angle AngleDistCCW(angle a, angle b)
