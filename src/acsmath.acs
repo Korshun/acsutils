@@ -89,7 +89,7 @@ function int floor(int x)
 // fixed ceil(fixed x)
 function int ceil(int x)
 {
-	return (x & 0xffff0000) + 1.0;
+	return ((x - 1) & 0xffff0000) + 1.0;
 }
 
 // fixed round(fixed x)
@@ -113,7 +113,7 @@ function int ifloor(int x)
 // int iceil(fixed x)
 function int iceil(int x)
 {
-	return (x>>16) + 1;
+	return (x - 1 >> 16) + 1;
 }
 
 // int iround(fixed x)
