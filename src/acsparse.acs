@@ -112,9 +112,10 @@ function void ParseFixed(str s, int base)
 		}
 	}
 	
+	int c;
 	for (; i < StrLen(s); i++)
 	{
-		int c = GetChar(s, i);
+		c = GetChar(s, i);
 		if (c == '.')
 			break;
 			
