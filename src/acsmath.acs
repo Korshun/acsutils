@@ -229,6 +229,12 @@ function int gcf(int a, int b)
     return -1;
 }
 
+// fixed IntDiv(int a, int b)
+function int IntDiv(int a, int b)
+{
+	return FixedDiv(a<<16, b<<16);
+}
+
 function int PercentInt(int a, int b)
 {
 	return iceil(FixedDiv(a<<16, b<<16) * 100);
