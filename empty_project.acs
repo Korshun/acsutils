@@ -1,8 +1,5 @@
 #library "myproject"
 
-// Your project's scripts:
-#define myproject_errorhandler 701
-
 // ACSUtils settings:
 #define TIDALLOCSTART 15000
 
