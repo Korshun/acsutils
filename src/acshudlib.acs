@@ -1,13 +1,13 @@
-#define HUD_STAYTIME_FOREVER -1
+#libdefine HUD_STAYTIME_FOREVER -1
 
-#define HUD_BLENDSTYLE_NORMAL 0
-#define HUD_BLENDSTYLE_ADDITIVE 1
+#libdefine HUD_BLENDSTYLE_NORMAL 0
+#libdefine HUD_BLENDSTYLE_ADDITIVE 1
 
-#define HUD_TEXTORIGIN_CENTER 0
-#define HUD_TEXTORIGIN_LEFT 1
-#define HUD_TEXTORIGIN_RIGHT 2
-#define HUD_TEXTORIGIN_TOP 1
-#define HUD_TEXTORIGIN_BOTTOM 2
+#libdefine HUD_TEXTORIGIN_CENTER 0
+#libdefine HUD_TEXTORIGIN_LEFT 1
+#libdefine HUD_TEXTORIGIN_RIGHT 2
+#libdefine HUD_TEXTORIGIN_TOP 1
+#libdefine HUD_TEXTORIGIN_BOTTOM 2
 
 int RenderSt_Is3DPoint = false;
 
@@ -118,7 +118,7 @@ function void HudResetState(void)
 	RenderSt_TextWordWrap = false;
 }
 
-#define HUD_STATESTACK_SIZE 2048
+#libdefine HUD_STATESTACK_SIZE 2048
 int HudStateStack[HUD_STATESTACK_SIZE];
 int HudStateStackTop = 0;
 
@@ -264,10 +264,10 @@ function void HudSetCameraAngles(int angle, int pitch)
 	RenderSt3D_CameraPitch = pitch;
 }
 
-#define HUD_CAMERAACTOR_NOPOSITION 1
-#define HUD_CAMERAACTOR_NOPREDICTION 2
-#define HUD_CAMERAACTOR_NODIRECTION 4
-#define HUD_CAMERAACTOR_NOVIEWHEIGHT 8
+#libdefine HUD_CAMERAACTOR_NOPOSITION 1
+#libdefine HUD_CAMERAACTOR_NOPREDICTION 2
+#libdefine HUD_CAMERAACTOR_NODIRECTION 4
+#libdefine HUD_CAMERAACTOR_NOVIEWHEIGHT 8
 
 function void HudSetCameraActorAdvanced(int tid, int flags)
 {
@@ -522,7 +522,7 @@ function int HudGetDistance(void)
 }
 
 
-#define CAMERA_BASE_DISTANCE 128
+#libdefine CAMERA_BASE_DISTANCE 128
 
 function void HudDrawHudMessage(int id, int type, str text, bool isText)
 {

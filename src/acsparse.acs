@@ -1,6 +1,6 @@
-#define PARSENUMBER_SUCCESS 0
-#define PARSENUMBER_OVERFLOW 1
-#define PARSENUMBER_BADFORMAT 1
+#libdefine PARSENUMBER_SUCCESS 0
+#libdefine PARSENUMBER_OVERFLOW 1
+#libdefine PARSENUMBER_BADFORMAT 1
 
 function void ParseInt(str s, int base)
 {

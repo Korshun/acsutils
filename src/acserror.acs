@@ -1,6 +1,6 @@
-#define ACSERROR_PROGRAM 0
-#define ACSERROR_MAPPING 1
-#define ACSERROR_LIMIT 2
+#libdefine ACSERROR_PROGRAM 0
+#libdefine ACSERROR_MAPPING 1
+#libdefine ACSERROR_LIMIT 2
 
 function void ProgramError(str message)
 {

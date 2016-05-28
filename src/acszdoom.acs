@@ -1,4 +1,4 @@
-#define MAX_PLAYERS 64
+#libdefine MAX_PLAYERS 64
 
 int _CachedIsZandronum = -1;
 function bool IsZandronum(void)
