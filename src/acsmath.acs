@@ -235,15 +235,6 @@ function int IntDiv(int a, int b)
 	return FixedDiv(a<<16, b<<16);
 }
 
-function int PercentInt(int a, int b)
-{
-	return iceil(FixedDiv(a<<16, b<<16) * 100);
-}
-
-function int PercentFixed(int a, int b)
-{
-	return iceil(FixedDiv(a, b) * 100);
-}
 
 // By Monsterovich
 
