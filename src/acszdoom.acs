@@ -44,14 +44,20 @@ function void TakeAllActorInventory(int tid, str item)
 
 function void SetInventory(str item, int amount)
 {
-	TakeInventory(item, INT_MAX);
-	GiveInventory(item, amount);
+	int diff = amount - CheckInventory(item);
+	if (diff > 0)
+		GiveInventory(item, diff);
+	else if (diff < 0)
+		TakeInventory(item, -diff);
 }
 
 function void SetActorInventory(int tid, str item, int amount)
 {
-	TakeActorInventory(tid, item, INT_MAX);
-	GiveActorInventory(tid, item, amount);
+	int diff = amount - CheckActorInventory(tid, item);
+	if (diff > 0)
+		GiveActorInventory(tid, item, diff);
+	else if (diff < 0)
+		TakeActorInventory(tid, item, -diff);
 }
 
 function void ToggleInventory(str item)
