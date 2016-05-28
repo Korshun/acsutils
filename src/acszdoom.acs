@@ -22,12 +22,12 @@ function bool IsClient(void)
 
 // Inventory functions.
 
-function void GiveAllInventory(str item)
+function void GiveMaxInventory(str item)
 {
 	GiveInventory(item, INT_MAX);
 }
 
-function void GiveAllActorInventory(int tid, str item)
+function void GiveMaxActorInventory(int tid, str item)
 {
 	GiveActorInventory(tid, item, INT_MAX);
 }
