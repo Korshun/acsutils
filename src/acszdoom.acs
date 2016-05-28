@@ -63,6 +63,12 @@ function void SetActorInventory(int tid, str item, int amount)
 }
 
 
+// Internationalization.
+function str lang(str s)
+{
+	return StrParam(l:s);
+}
+
 // CVar functions.
 
 function int GetCVarFixed(str name)
