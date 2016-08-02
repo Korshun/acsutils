@@ -8,6 +8,21 @@ function str StrAdd(str a, str b)
 	return StrParam(s:a, s:b);
 }
 
+function str StrAddInt(str a, int b)
+{
+	return StrParam(s:a, d:b);
+}
+
+function str StrAddChar(str a, int b)
+{
+	return StrParam(s:a, c:b);
+}
+
+function str StrAddFixed(str a, int b)
+{
+	return StrParam(s:a, f:b);
+}
+
 function str StrCut(str s, int start, int length)
 {
 	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, start + length));
