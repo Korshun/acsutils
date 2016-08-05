@@ -168,7 +168,6 @@ function void ParseFixed(str s, int base)
 			return;
 		}
 		
-		printbold(d:c - '0', s:" ", f:65536 * (c - '0') / digit);
 		result += 65536 * (c - '0') / digit;
 		if (digit >= INT_MAX / base) // one billion
 			break;
