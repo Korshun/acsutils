@@ -235,6 +235,19 @@ function int IntDiv(int a, int b)
 	return FixedDiv(a<<16, b<<16);
 }
 
+// num npo2(num x)
+function int npo2(int v)
+{
+	v--;
+	v |= v >> 1;
+	v |= v >> 2;
+	v |= v >> 4;
+	v |= v >> 8;
+	v |= v >> 16;
+	v++;
+	return v;
+}
+
 
 // By Monsterovich
 
