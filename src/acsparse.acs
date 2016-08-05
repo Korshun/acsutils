@@ -142,6 +142,7 @@ function void ParseFixed(str s, int base)
 	{
 		r1 = PARSENUMBER_SUCCESS;
 		r2 = sgn * result;
+		return;
 	}
 	
 	if (GetChar(s, i) != '.')
