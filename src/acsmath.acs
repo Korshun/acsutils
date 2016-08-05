@@ -35,8 +35,8 @@ function int clamp(int x, int a, int b)
 	return x;
 }	
 
-// int sign(num x)
-function int sign(int x)
+// int sgn(num x)
+function int sgn(int x)
 {
 	if (x > 0)
 		return 1;
