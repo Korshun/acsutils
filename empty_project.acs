@@ -1,4 +1,4 @@
-#library "myproject"
+#library "project"
 
 // ACSUtils settings:
 #define TIDALLOCSTART 15000
