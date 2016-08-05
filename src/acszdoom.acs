@@ -283,7 +283,7 @@ function str ActivatorName(void)
 	return StrParam(n:0);
 }
 
-function str ActorName(int tid)
+function str GetActorName(int tid)
 {
 	SwapActivator(tid);
 	int a = r1;
