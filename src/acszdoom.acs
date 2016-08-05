@@ -14,6 +14,11 @@ function bool IsZandronum(void)
 	return _CachedIsZandronum;
 }
 
+function bool IsServer(void)
+{
+	return ConsolePlayerNumber() < 0 || IsMultiplayer();
+}
+
 function bool IsClient(void)
 {
 	return ConsolePlayerNumber() >= 0;
