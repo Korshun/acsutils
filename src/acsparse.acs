@@ -41,6 +41,13 @@ function void ParseInt(str s, int base)
 		}
 	}
 	
+	// Empty number like "" or "-0x"
+	if (i == StrLen(s))
+	{
+		r1 = PARSENUMBER_BADFORMAT;
+		return;
+	}
+	
 	for (; i < StrLen(s); i++)
 	{
 		int c = GetChar(s, i);
@@ -110,6 +117,13 @@ function void ParseFixed(str s, int base)
 		{
 			base = 10;
 		}
+	}
+	
+	// Empty number like "" or "-0x"
+	if (i == StrLen(s))
+	{
+		r1 = PARSENUMBER_BADFORMAT;
+		return;
 	}
 	
 	int c;
