@@ -15,7 +15,7 @@ function bool IsZandronum(void)
 
 function bool IsServer(void)
 {
-	return ConsolePlayerNumber() < 0 || IsMultiplayer();
+	return ConsolePlayerNumber() < 0 || !IsMultiplayer();
 }
 
 function bool IsClient(void)
