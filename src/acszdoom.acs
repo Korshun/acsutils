@@ -1,17 +1,16 @@
 #libdefine MAX_PLAYERS 64
 
-int _CachedIsZandronum = -1;
 function bool IsZandronum(void)
 {
-	if (_CachedIsZandronum != -1)
-		return _CachedIsZandronum;
+	if (ACSUtils[ACSUTILS_CachedIsZandronum] != -1)
+		return ACSUtils[ACSUTILS_CachedIsZandronum];
 		
     SetDBEntry("acsutils", "isZandronum", true);
 	
 	// ZDoom has no GetDBEntry, so it will return 0.
 	// Zandronum will return 1 because the value has been set to 1.
-    _CachedIsZandronum = GetDBEntry("acsutils", "isZandronum");
-	return _CachedIsZandronum;
+    ACSUtils[ACSUTILS_CachedIsZandronum] = GetDBEntry("acsutils", "isZandronum");
+	return ACSUtils[ACSUTILS_CachedIsZandronum];
 }
 
 function bool IsServer(void)

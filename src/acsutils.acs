@@ -1,5 +1,9 @@
 #nocompact
 #include "acsretval.acs"
+#include "acshudlibdef.acs"
+
+#include "acsglobals.acs"
+
 #include "acserror.acs"
 #include "acsmath.acs"
 #include "acsctype.acs"
