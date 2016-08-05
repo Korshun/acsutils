@@ -117,7 +117,7 @@ function int StatusBarShown(void)
 
 function bool IsOpenGL(void)
 {
-	return GetCVar("vid_renderer");
+	return GetCVar("vid_renderer") && !GetCVar("gl_nogl");
 }
 
 
