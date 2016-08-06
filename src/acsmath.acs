@@ -71,6 +71,13 @@ function int cmp(int a, int b)
 	return 0;
 }
 
+function int mod(int a, int b)
+{
+	int result = a % b;
+	result += (result < 0) * (b - result);
+	return result;
+}
+
 
 // Rounding.
 
