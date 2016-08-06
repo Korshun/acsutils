@@ -50,20 +50,33 @@
 #define ACSUTILS_R_TextOriginX 30
 #define ACSUTILS_R_TextOriginY 31
 #define ACSUTILS_R_CenterText 32
-#define ACSUTILS_R_TextFont 33
-#define ACSUTILS_R_TextColorIsString 34
-#define ACSUTILS_R_TextColor 35
-#define ACSUTILS_R_TextTypeOn 36
-#define ACSUTILS_R_LogMessage 37
-#define ACSUTILS_R_TextWordWrap 38
+#define ACSUTILS_R_TextColorIsString 33
+#define ACSUTILS_R_TextColor 34
+#define ACSUTILS_R_TextTypeOn 35
+#define ACSUTILS_R_LogMessage 36
+#define ACSUTILS_R_TextWordWrap 37
 
-#define ACSUTILS_HudStateStackTop 39
+#define ACSUTILS_HudStateStackTop 38
 
-#define ACSUTILS_R_RotatedX 41
-#define ACSUTILS_R_RotatedY 42
-#define ACSUTILS_R_RotatedZ 43
+#define ACSUTILS_R_RotatedX 39
+#define ACSUTILS_R_RotatedY 40
+#define ACSUTILS_R_RotatedZ 41
 
-#define ACSUTILS_NUM_GLOBALS 44
+#define ACSUTILS_CursorX 42
+#define ACSUTILS_CursorY 43
+
+#define ACSUtils_CursorDeltaX 44
+#define ACSUtils_CursorDeltaY 45
+
+#define ACSUtils_CursorSpeedX 46
+#define ACSUtils_CursorSpeedY 47
+
+#define ACSUtils_CursorAreaWidth 48
+#define ACSUtils_CursorAreaHeight 49
+
+#define ACSUtils_CursorWrap 50
+
+#define ACSUTILS_NUM_GLOBALS 51
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 {
@@ -114,7 +127,6 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 	HUD_TEXTORIGIN_CENTER, // R_TextOriginX
 	HUD_TEXTORIGIN_CENTER, // R_TextOriginY
 	false, // R_CenterText
-	"SMALLFONT", // R_TextFont
 	false, // R_TextColorIsString
 	CR_UNTRANSLATED, // R_TextColor
 	false, // R_TextTypeOn
@@ -126,4 +138,27 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 	0, // R_RotatedX
     0, // R_RotatedY
     0, // R_RotatedZ
+	
+	320.0, // CursorX
+	240.0, // CursorY
+	
+	0, // CursorDeltaX
+	0, // CursorDeltaY
+
+	1.0, // CursorSpeedX
+	1.0, // CursorSpeedY
+
+	640.0, // CursorAreaWidth
+	480.0, // CursorAreaHeight
+
+	false //CursorWrap
+};
+
+
+#define ACSUTILSSTRING_R_TextFont 0
+#define ACSUTILS_NUM_GLOBAL_STRINGS 1
+
+str ACSUtilsStrings[ACSUTILS_NUM_GLOBAL_STRINGS] = 
+{
+	"SMALLFONT", // R_TextFont
 };

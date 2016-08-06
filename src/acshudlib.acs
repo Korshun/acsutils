@@ -47,7 +47,7 @@ function void HudResetState(void)
 	ACSUtils[ACSUTILS_R_TextOriginX] = HUD_TEXTORIGIN_CENTER;
 	ACSUtils[ACSUTILS_R_TextOriginY] = HUD_TEXTORIGIN_CENTER;
 	ACSUtils[ACSUTILS_R_CenterText] = false;
-	ACSUtils[ACSUTILS_R_TextFont] = "SMALLFONT";
+	ACSUtilsStrings[ACSUTILSSTRING_R_TextFont] = "SMALLFONT";
 	ACSUtils[ACSUTILS_R_TextColorIsString] = false;
 	ACSUtils[ACSUTILS_R_TextColor] = CR_UNTRANSLATED;
 	ACSUtils[ACSUTILS_R_TextTypeOn] = false;
@@ -111,7 +111,7 @@ function void HudPushState(void)
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_TextOriginX];
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_TextOriginY];
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_CenterText];
-	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_TextFont];
+	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtilsStrings[ACSUTILSSTRING_R_TextFont];
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_TextColorIsString];
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_TextColor];
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_TextTypeOn];
@@ -135,7 +135,7 @@ function void HudPopState(void)
 	ACSUtils[ACSUTILS_R_TextTypeOn] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 	ACSUtils[ACSUTILS_R_TextColor] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 	ACSUtils[ACSUTILS_R_TextColorIsString] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
-	ACSUtils[ACSUTILS_R_TextFont] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
+	ACSUtilsStrings[ACSUTILSSTRING_R_TextFont] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 	ACSUtils[ACSUTILS_R_CenterText] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 	ACSUtils[ACSUTILS_R_TextOriginY] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 	ACSUtils[ACSUTILS_R_TextOriginX] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
@@ -366,7 +366,7 @@ function void HudSetLayer(int layer)
 
 function void HudSetFont(str font)
 {
-	ACSUtils[ACSUTILS_R_TextFont] = font;
+	ACSUtilsStrings[ACSUTILSSTRING_R_TextFont] = font;
 }
 
 function void HudSetTextColor(int textColor)
@@ -576,7 +576,7 @@ function void HudDrawText(int id, str text)
 	if (!ACSUtils[ACSUTILS_R_TextWordWrap])
 		type |= HUDMSG_NOWRAP;
 
-	SetFont(ACSUtils[ACSUTILS_R_TextFont]);
+	SetFont(ACSUtilsStrings[ACSUTILSSTRING_R_TextFont]);
 	HudDrawHudMessage(id, type, text, true);
 }
 
