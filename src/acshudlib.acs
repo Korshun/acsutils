@@ -55,7 +55,7 @@ function void HudResetState(void)
 	ACSUtils[ACSUTILS_R_TextWordWrap] = false;
 }
 
-int HudStateStack[ACSUTILS_ACSUTILS_HUDLIB_STACKSIZE];
+int HudStateStack[ACSUTILS_HUDLIB_STACKSIZE];
 //int ACSUtils[ACSUTILS_HudStateStackTop];
 
 function void HudClearStateStack(void)
