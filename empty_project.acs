@@ -1,6 +1,7 @@
 #library "project"
 
 // ACSUtils settings:
+#define ACSUTILS_HUDLIB_STACKSIZE 2048
 #define TIDALLOCSTART 15000
 
 // Includes:
