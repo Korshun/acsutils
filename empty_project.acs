@@ -2,7 +2,6 @@
 
 // ACSUtils settings:
 #define ACSUTILS_HUDLIB_SAVEDSTATES 16
-#define ACSUTILS_SCRIPT1 801
 #define TIDALLOCSTART 15000
 
 // Includes:

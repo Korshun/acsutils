@@ -129,11 +129,7 @@ function bool IsOpenGL(void)
 		return true; // OpenGL generally has less limitations.
 	}
 
-	if (ACSUtils[ACSUTILS_CachedIsOpenGL] != -1)
-		return ACSUtils[ACSUTILS_CachedIsOpenGL];
-		
-	ACSUtils[ACSUTILS_CachedIsOpenGL] = GetCVar("vid_renderer") == 1 && GetCVar("gl_nogl") == 0;
-	return ACSUtils[ACSUTILS_CachedIsOpenGL];
+	return GetCVar("vid_renderer") == 1 && GetCVar("gl_nogl") == 0;
 }
 
 
