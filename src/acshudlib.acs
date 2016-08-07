@@ -425,6 +425,11 @@ function void HudSetWordWrap(bool wordWrap)
 //int ACSUtils[ACSUTILS_R_RotatedY];
 //int ACSUtils[ACSUTILS_R_RotatedZ];
 
+function bool _HudUseSoftwareProjection(void)
+{
+	return !IsOpenGL();
+}
+
 // Rotate 3D point to view coordinate system.
 function void HudRotate3DPoint(void)
 {
@@ -444,11 +449,14 @@ function void HudRotate3DPoint(void)
 	x = rx; y = ry;
 
 	// Rotate around Y axis.
-	s = sin(ACSUtils[ACSUTILS_R3D_CameraPitch]);
-	c = cos(ACSUtils[ACSUTILS_R3D_CameraPitch]);
-	rx = FixedMul(x, c) - FixedMul(z, s);
-	rz = FixedMul(x, s) + FixedMul(z, c);
-	x = rx; z = rz;
+	if (!_HudUseSoftwareProjection())
+	{
+		s = sin(ACSUtils[ACSUTILS_R3D_CameraPitch]);
+		c = cos(ACSUtils[ACSUTILS_R3D_CameraPitch]);
+		rx = FixedMul(x, c) - FixedMul(z, s);
+		rz = FixedMul(x, s) + FixedMul(z, c);
+		x = rx; z = rz;
+	}
 
 	ACSUtils[ACSUTILS_R_RotatedX] = x;
 	ACSUtils[ACSUTILS_R_RotatedY] = y;
@@ -506,9 +514,20 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 		if (StatusBarShown())
 			yFactor = 1.9;
 
+		// Half heights.
+		int hw = ACSUtils[ACSUTILS_R_BaseWidth]>>1;
+		int hh = ACSUtils[ACSUTILS_R_BaseHeight]>>1;		
+
 		// Project point.
-		x = ACSUtils[ACSUTILS_R3D_2DOffsetX] + ACSUtils[ACSUTILS_R_BaseWidth]  / 2 + FixedMul(ACSUtils[ACSUTILS_R_BaseWidth]  / 2,          tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedY]))      );
-		y = ACSUtils[ACSUTILS_R3D_2DOffsetY] + ACSUtils[ACSUTILS_R_BaseHeight] / 2 + FixedMul(ACSUtils[ACSUTILS_R_BaseHeight] / 2, FixedMul(tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedZ])), yFactor));
+		x = tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedY]));
+		y = tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedZ]));
+		
+		if (_HudUseSoftwareProjection())
+			y += tan(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
+		
+		// Postprocess projected point.
+		x += ACSUtils[ACSUTILS_R3D_2DOffsetX] + hw + FixedMul(hw, x);
+		y += ACSUtils[ACSUTILS_R3D_2DOffsetY] + hh + FixedMul(FixedMul(hh, yFactor), y);
 		
 		if (ACSUtils[ACSUTILS_R3D_AutoDistanceScale])
 		{
