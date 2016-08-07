@@ -123,6 +123,12 @@ function int StatusBarShown(void)
 
 function bool IsOpenGL(void)
 {
+	if (!IsClient())
+	{
+		ProgramError("IsOpenGL() used serverside. Assuming OpenGL renderer.");
+		return true; // OpenGL generally has less limitations.
+	}
+
 	if (ACSUtils[ACSUTILS_CachedIsOpenGL] != -1)
 		return ACSUtils[ACSUTILS_CachedIsOpenGL];
 		
