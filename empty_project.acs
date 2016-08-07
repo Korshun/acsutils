@@ -1,7 +1,7 @@
 #library "project"
 
 // ACSUtils settings:
-#define ACSUTILS_HUD_MAXSAVEDSTATES 16
+#define ACSUTILS_HUDLIB_SAVEDSTATES 16
 #define ACSUTILS_SCRIPT1 801
 #define TIDALLOCSTART 15000
 
