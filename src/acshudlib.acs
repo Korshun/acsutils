@@ -1,4 +1,8 @@
 // When editing default values, also edit them in acsglobal.acs
+// When adding new properties, don't forget to edit ACSUTILS_HUDSTATE_SIZE.
+#define ACSUTILS_HUDSTATE_SIZE 38
+#define ACSUTILS_HUDLIB_STACKSIZE ACSUTILS_HUDSTATE_SIZE * ACSUTILS_HUDLIB_SAVEDSTATES
+
 function void HudResetState(void)
 {
 	ACSUtils[ACSUTILS_R_Is3DPoint] = false;
@@ -118,7 +122,7 @@ function void HudPushState(void)
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_LogMessage];
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_TextWordWrap];
 	
-	if (ACSUtils[ACSUTILS_HudStateStackTop] >= ACSUTILS_HUDLIB_STACKSIZE)
+	if (ACSUtils[ACSUTILS_HudStateStackTop] > ACSUTILS_HUDLIB_STACKSIZE)
 		LimitError("HudPushState(): state stack overflow.");
 }
 
