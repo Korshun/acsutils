@@ -15,7 +15,14 @@ function bool IsZandronum(void)
 
 function bool IsServer(void)
 {
-	return ConsolePlayerNumber() < 0 || !IsMultiplayer();
+	if (ConsolePlayerNumber() < 0)
+		return true;
+		
+	// Needs to be done like this to avoid crashing the script in ZDoom.
+	if (IsZandronum())
+		return !IsMultiplayer();
+	
+	return true;
 }
 
 function bool IsClient(void)
