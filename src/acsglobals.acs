@@ -78,7 +78,9 @@
 
 #define ACSUTILS_CachedIsOpenGL 51
 
-#define ACSUTILS_NUM_GLOBALS 52
+#define ACSUTILS_R3D_ProjectionMode 52
+
+#define ACSUTILS_NUM_GLOBALS 53
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 {
@@ -155,7 +157,9 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 
 	false, //CursorWrap
 	
-	-1 // CachedIsOpenGL
+	-1, // CachedIsOpenGL
+	
+	HUD_PROJECTION_AUTO // R3D_ProjectionMode
 };
 
 

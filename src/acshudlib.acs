@@ -1,6 +1,6 @@
 // When editing default values, also edit them in acsglobal.acs
 // When adding new properties, don't forget to edit ACSUTILS_HUDSTATE_SIZE.
-#define ACSUTILS_HUDSTATE_SIZE 38
+#define ACSUTILS_HUDSTATE_SIZE 39
 #define ACSUTILS_HUDLIB_STACKSIZE ACSUTILS_HUDSTATE_SIZE * ACSUTILS_HUDLIB_SAVEDSTATES
 
 function void HudResetState(void)
@@ -22,6 +22,7 @@ function void HudResetState(void)
 	ACSUtils[ACSUTILS_R3D_2DOffsetY] = 0.0;
 
 	ACSUtils[ACSUTILS_R3D_AutoDistanceScale] = true;
+	ACSUtils[ACSUTILS_R3D_ProjectionMode] = HUD_PROJECTION_AUTO;
 
 	ACSUtils[ACSUTILS_R_BaseWidth] = 640.0;
 	ACSUtils[ACSUTILS_R_BaseHeight] = 480.0;
@@ -86,6 +87,7 @@ function void HudPushState(void)
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R3D_2DOffsetY];
 
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R3D_AutoDistanceScale];
+	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R3D_ProjectionMode];
 
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_BaseWidth];
 	HudStateStack[ACSUtils[ACSUTILS_HudStateStackTop]++] = ACSUtils[ACSUTILS_R_BaseHeight];
@@ -169,6 +171,7 @@ function void HudPopState(void)
 	ACSUtils[ACSUTILS_R_BaseHeight] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 	ACSUtils[ACSUTILS_R_BaseWidth] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 
+	ACSUtils[ACSUTILS_R3D_ProjectionMode] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 	ACSUtils[ACSUTILS_R3D_AutoDistanceScale] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
 
 	ACSUtils[ACSUTILS_R3D_2DOffsetY] = HudStateStack[--ACSUtils[ACSUTILS_HudStateStackTop]];
