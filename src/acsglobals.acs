@@ -76,7 +76,9 @@
 
 #define ACSUtils_CursorWrap 50
 
-#define ACSUTILS_NUM_GLOBALS 51
+#define ACSUTILS_CachedIsOpenGL 51
+
+#define ACSUTILS_NUM_GLOBALS 52
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 {
@@ -151,7 +153,9 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 	640.0, // CursorAreaWidth
 	480.0, // CursorAreaHeight
 
-	false //CursorWrap
+	false, //CursorWrap
+	
+	-1 // CachedIsOpenGL
 };
 
 

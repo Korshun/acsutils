@@ -1,0 +1,5 @@
+script ACSUTILS_SCRIPT1 OPEN
+{
+	// Cache IsOpenGL result to ignore changes to vid_renderer and gl_nogl
+	IsOpenGL();
+}
