@@ -80,7 +80,7 @@ function void SetCursorArea(int width, int height)
 	ACSUtils[ACSUTILS_CursorAreaHeight] = height;
 }
 
-function void UpdateCursor()
+function void UpdateCursor(void)
 {
 	int sensitivity = GetCVarFixed("mouse_sensitivity");
 	int speedX = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedX], FixedMul(GetCVarFixed("m_yaw"), sensitivity));
