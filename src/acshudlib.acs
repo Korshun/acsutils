@@ -261,6 +261,11 @@ function void HudSetAutoDistanceScale(bool autoDistanceScale)
 	ACSUtils[ACSUTILS_R3D_AutoDistanceScale] = autoDistanceScale;
 }
 
+function void HudSetProjectionMode(int mode)
+{
+	ACSUtils[ACSUTILS_R3D_ProjectionMode] = mode;
+}
+
 function void HudSetVirtualSize(int width, int height)
 {
 	ACSUtils[ACSUTILS_R_BaseWidth] = width;
@@ -428,9 +433,12 @@ function void HudSetWordWrap(bool wordWrap)
 //int ACSUtils[ACSUTILS_R_RotatedY];
 //int ACSUtils[ACSUTILS_R_RotatedZ];
 
-function bool _HudUseSoftwareProjection(void)
+function bool _HudUseYShearingProjection(void)
 {
-	return !IsOpenGL();
+	if (ACSUtils[ACSUTILS_R3D_ProjectionMode] == HUD_PROJECTION_AUTO)
+		return !IsOpenGL();
+	
+	return ACSUtils[ACSUTILS_R3D_ProjectionMode] == HUD_PROJECTION_YSHEARING;
 }
 
 // Rotate 3D point to view coordinate system.
@@ -452,7 +460,7 @@ function void HudRotate3DPoint(void)
 	x = rx; y = ry;
 
 	// Rotate around Y axis.
-	if (!_HudUseSoftwareProjection())
+	if (!_HudUseYShearingProjection())
 	{
 		s = sin(ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		c = cos(ACSUtils[ACSUTILS_R3D_CameraPitch]);
@@ -525,7 +533,7 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 		x = tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedY]));
 		y = tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedZ]));
 		
-		if (_HudUseSoftwareProjection())
+		if (_HudUseYShearingProjection())
 			y += tan(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		
 		// Postprocess projected point.
