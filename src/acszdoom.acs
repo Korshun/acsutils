@@ -385,39 +385,21 @@ function void LookAt(int tid, int target)
 // Actor property shorthands with network optimization.
 // Idea from AOW.
 
-function int  GetHealth(void)         { return GetActorProperty(0, APROP_HEALTH); }
 function int  GetActorHealth(int tid) { return GetActorProperty(tid, APROP_HEALTH); } 
-function void SetHealth(int hp)
-{
-	if (GetActorProperty(0, APROP_HEALTH) != hp)
-		SetActorProperty(0, APROP_HEALTH, hp);
-}
 function void SetActorHealth(int tid, int hp)
 { 
 	if (GetActorProperty(tid, APROP_HEALTH) != hp)
 		SetActorProperty(tid, APROP_HEALTH, hp);
 }
 
-function int  GetSpawnHealth(void)         { return GetActorProperty(0, APROP_SPAWNHEALTH); }
 function int  GetActorSpawnHealth(int tid) { return GetActorProperty(tid, APROP_SPAWNHEALTH); }
-function void SetSpawnHealth (int shp) 
-{
-	if (GetActorProperty(0, APROP_SPAWNHEALTH) != shp)
-		SetActorProperty(0, APROP_SPAWNHEALTH, shp);
-}
 function void SetActorSpawnHealth(int tid, int shp)
 {
 	if (GetActorProperty(tid, APROP_SPAWNHEALTH) != shp)
 		SetActorProperty(tid, APROP_SPAWNHEALTH, shp);
 }
 
-function int GetSpeed(void)         { return GetActorProperty(0, APROP_SPEED); }
 function int GetActorSpeed(int tid) { return GetActorProperty(tid, APROP_SPEED); }
-function void SetSpeed(int value) 
-{
-	if (GetActorProperty(0, APROP_SPEED) != value)
-		SetActorProperty(0, APROP_SPEED, value);
-}
 function void SetActorSpeed (int tid, int value)
 {
 	if (GetActorProperty(tid, APROP_SPEED) != value)
