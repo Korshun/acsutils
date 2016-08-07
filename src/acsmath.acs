@@ -79,6 +79,14 @@ function int mod(int a, int b)
 	return result;
 }
 
+// any cond(bool x, any whentrue, any shenfalse)
+function int cond(bool x, int whentrue, int whenfalse)
+{
+	if (x)
+		return whentrue;
+	return whenfalse;
+}
+
 
 // Rounding.
 
