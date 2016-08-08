@@ -2,7 +2,7 @@
 // To reduce the amount of map variables ACSUtils use, all simple variables
 // have been put into an array.
 
-#define ACSUTILS_CachedIsZandronum 0
+#define ACSUTILS_CachedPort 0
 
 #define ACSUTILS_R_Is3DPoint 1
 
@@ -82,7 +82,7 @@
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 {
-	-1, // ACSUTILS_CachedIsZandronum 
+	-1, // ACSUTILS_CachedPort
 	
 	false, // R_Is3DPoint
 
