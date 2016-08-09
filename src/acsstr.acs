@@ -431,7 +431,7 @@ function bool StrIsAscii(str s)
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
 	{
-		str char = GetChar(s, i);
+		int char = GetChar(s, i);
 		if (char < ASCII_START || char > ASCII_END)
 			return false;
 	}
