@@ -82,9 +82,9 @@ function void SetCursorArea(int width, int height)
 
 function void UpdateCursor(void)
 {
-	int sensitivity = GetCVarFixed("mouse_sensitivity");
-	int speedX = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedX], FixedMul(GetCVarFixed("m_yaw"), sensitivity));
-	int speedY = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedY], FixedMul(GetCVarFixed("m_pitch"), sensitivity));
+	int sensitivity = a_GetCVarFixed("mouse_sensitivity");
+	int speedX = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedX], FixedMul(a_GetCVarFixed("m_yaw"), sensitivity));
+	int speedY = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedY], FixedMul(a_GetCVarFixed("m_pitch"), sensitivity));
 	
 	speedX = FixedMul(speedX * 2, ACSUtils[ACSUTILS_CursorAreaWidth]) / 64000;
 	speedY = FixedMul(speedY * 2, ACSUtils[ACSUTILS_CursorAreaHeight]) / 48000;
