@@ -88,7 +88,7 @@ function str lang(str s)
 
 // CVar functions.
 
-function int GetCVarFixed(str name)
+function int a_GetCVarFixed(str name)
 {
 	return atof(GetCVarString(name));
 }
