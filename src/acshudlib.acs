@@ -234,7 +234,7 @@ function void HudSetCameraActorAdvanced(int tid, int flags)
 	}
 	
 	if (!(flags & HUD_CAMERAACTOR_NODIRECTION))
-		HudSetCameraAngles(GetActorAngle(tid), GetActorPitch(tid));
+		HudSetCameraAngles(GetActorAngle(tid), -GetActorPitch(tid));
 }
 
 function void HudSetCameraActor(int tid)
@@ -462,8 +462,8 @@ function void HudRotate3DPoint(void)
 	// Rotate around Y axis.
 	if (!_HudUseYShearingProjection())
 	{
-		s = sin(ACSUtils[ACSUTILS_R3D_CameraPitch]);
-		c = cos(ACSUtils[ACSUTILS_R3D_CameraPitch]);
+		s = sin(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
+		c = cos(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		rx = FixedMul(x, c) - FixedMul(z, s);
 		rz = FixedMul(x, s) + FixedMul(z, c);
 		x = rx; z = rz;
@@ -534,7 +534,7 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 		y = tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedZ]));
 		
 		if (_HudUseYShearingProjection())
-			y += tan(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
+			y += tan(ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		
 		// Postprocess projected point.
 		x += ACSUtils[ACSUTILS_R3D_2DOffsetX] + hw + FixedMul(hw, x);
