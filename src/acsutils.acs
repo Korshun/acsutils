@@ -1,8 +1,6 @@
 #nocompact
 
-#libdefine ACSUTILS_VERSION_MAJOR 1
-#libdefine ACSUTILS_VERSION_MINOR 2
-#libdefine ACSUTILS_VERSION_PATCH 1
+#include "acsversion.acs"
 
 #include "acsretval.acs"
 #include "acshudlibdef.acs"
