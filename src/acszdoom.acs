@@ -401,3 +401,14 @@ function void SetActorSpeed (int tid, int value)
 	if (GetActorProperty(tid, APROP_SPEED) != value)
 		SetActorProperty(tid, APROP_SPEED, value);
 }
+
+
+// Mapping functions.
+
+// From ZDoom wiki.
+function int SyncSpeed(int newdistance, int syncdistance, int syncspd)
+{
+	int t = fixeddiv(syncdistance<<16, syncspd<<16);
+	int r = fixeddiv(newdistance<<16, t);
+	return r>>16;
+}
