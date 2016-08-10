@@ -298,6 +298,133 @@ function int AngleDistCW (int a, int b)
 }
 
 
+// Logarithms.
+
+// All logaritm functions written by TechnoDoomed1 unless stated otherwise
+
+// fixed log2(fixed x)
+function int log2 (int x) {
+    // We calculate the integral and decimal parts of the bit logarithm of x.
+    int integer_part = 0, decimal_part = 0;
+
+    // The integral part is how many times we can divide by 2 until we reach a number in the range [1, 2).
+    // If the number is on the range (0, 1) then we multiply by 2 until we reach a number in the range [1, 2).
+    while (x < 1.0) {
+        -- integer_part;
+        x *= 2;
+    }
+    while (x >= 2.0) {
+        ++ integer_part;
+        x /= 2;
+    }
+
+    // Then, we square the number each time to get the next relevant byte, until we reach max precision allowed.
+    // WHY? Because if 2^d = y, then (2^d)^2 = 2^(2d) = y^2, where d is the decimal part.
+    //-----------------------------------------------------------------------------------------------------------------
+    // Let's start with the fraction 1/2, and go downwards until we reach the max precision for a fixed-point number,
+    // which is 1 (since it occupies the right side of the byte, it really represents 2^-16).
+
+    int current_fraction = 0.5;
+
+    while (current_fraction > 1) {
+        x = FixedMul(x, x);
+        if (x >= 2.0) {
+            decimal_part += current_fraction;
+            x /= 2;
+        }
+
+        current_fraction /= 2;
+    }
+
+    // We can finally return the number as the integral part (shifted 16 bytes to the left, to be on the corresponding
+    // integral part of the fixed-point number) plus the decimal part, which is the sum of all the fractions of 2 that
+    // correspond to the solution of 2^d = y.
+
+    return (ifloor(integer_part) + decimal_part);
+}
+
+// fixed ilog2(int x)
+function int ilog2 (int x) {
+    // We calculate the integral and decimal parts of the bit logarithm of x.
+    int integer_part = 0, decimal_part = 0;
+
+    // The integral part is how many times we can divide by 2 until we reach a number lower than 2.
+    // We lose precision by not keeping the fractional part until that part fits perfectly in a fixed number variable.
+    while (x >= 32768) {
+        ++ integer_part;
+        x /= 2;
+    }
+
+    x <<= 16;
+
+    while (x >= 2.0) {
+        ++ integer_part;
+        x /= 2;
+    }
+
+    // Then, we square the number each time to get the next relevant byte, until we reach max precision allowed.
+    // WHY? Because if 2^d = y, then (2^d)^2 = 2^(2d) = y^2, where d is the decimal part.
+    //-----------------------------------------------------------------------------------------------------------------
+    // Let's start with the fraction 1/2, and go downwards until we reach the max precision for a fixed-point number,
+    // which is 1 (since it occupies the right side of the byte, it really represents 2^-16).
+
+    int current_fraction = 0.5;
+
+    while (current_fraction > 1) {
+        x = FixedMul(x, x);
+        if (x >= 2.0) {
+            decimal_part += current_fraction;
+            x /= 2;
+        }
+
+        current_fraction /= 2;
+    }
+
+    // We can finally return the number as the integral part (shifted 16 bytes to the left, to be on the corresponding
+    // integral part of the fixed-point number) plus the decimal part, which is the sum of all the fractions of 2 that
+    // correspond to the solution of 2^d = y.
+
+    return ((integer_part << 16) + decimal_part);
+}
+
+
+// fixed ln(fixed x)
+function int ln (int x) {
+    // This calculates the natural logarithm of a number using the property that:   ln(x) = log_2(x) / log_2(e)
+    // This is done because calculating the log_2 of a number is far easier, specially with fixed-point arithmetics. 
+
+    return FixedDiv(log2(x), log2(MATH_E));
+}
+
+// By Korshun.
+// fixed iln(int x)
+function int iln (int x) {
+	return FixedDiv(ilog2(x), log2(MATH_E));
+}
+
+// fixed logb(fixed x, fixed base)
+function int logb (int x, int base) {
+    // This calculates the logarithm in any base > 1.0, by using the property that:   log_b(x) = log_2(x) / log_2(b)
+    // Otherwise, returns 0.
+
+    if (base > 1.0)
+        return FixedDiv(log2(x), log2(base));
+   
+    return 0;
+}
+
+// By Korshun.
+// fixed ilogb(int x, fixed base)
+function int ilogb (int x, int base) {
+    // This calculates the logarithm in any base > 1.0, by using the property that:   log_b(x) = log_2(x) / log_2(b)
+    // Otherwise, returns 0.
+
+    if (base > 1.0)
+        return FixedDiv(ilog2(x), log2(base));
+   
+    return 0;
+}
+
 // Trigonometry.
 
 // fixed tan(angle x)
