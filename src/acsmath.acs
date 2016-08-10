@@ -245,10 +245,28 @@ function int gcf(int a, int b)
     return -1;
 }
 
+// By TechnoDoomed1
 // fixed IntDiv(int a, int b)
-function int IntDiv(int a, int b)
-{
-	return FixedDiv(a<<16, b<<16);
+function int IntDiv (int a, int b) {
+    int quotient = 0, current_fraction = 1.0;
+
+    // Only works when the ratio is less than 32767 = 2^15 - 1.
+    // Otherwise return 0.
+
+    if ((abs(a) / abs(b)) > 32767) {
+        return 0;
+    }
+
+    // Performs the same algorithm as hand division, but working with powers of 2 instead of 10.
+    // This is done until we reach the maximum allowed precision, which is 1 (=2^-16 in fixed point).
+
+    while (current_fraction > 1) {
+        quotient += (a / b) * current_fraction;
+        a = (a % b) * 2;
+        current_fraction /= 2;
+    }
+
+    return quotient;
 }
 
 // num npo2(num x)
