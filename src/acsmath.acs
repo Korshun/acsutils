@@ -340,7 +340,7 @@ function int log2 (int x) {
     // integral part of the fixed-point number) plus the decimal part, which is the sum of all the fractions of 2 that
     // correspond to the solution of 2^d = y.
 
-    return (ifloor(integer_part) + decimal_part);
+    return ((integer_part << 16) + decimal_part);
 }
 
 // fixed ilog2(int x)
