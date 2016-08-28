@@ -455,6 +455,23 @@ function void SetActorSpeed (int tid, int value)
 		SetActorProperty(tid, APROP_SPEED, value);
 }
 
+// ChangeFlag
+
+function str _ChangeFlagName(str flag, bool value)
+{
+	return StrParam(s:"ACSUtils_CF_", s:flag, s:"_", d:!!value);
+}
+
+function void ChangeFlag(str flag, bool value)
+{
+	GiveInventory(_ChangeFlagName(flag, value), 1);
+}
+
+function void ChangeActorFlag(int tid, str flag, bool value)
+{
+	GiveActorInventory(tid, _ChangeFlagName(flag, value), 1);
+}
+
 
 // Mapping functions.
 
