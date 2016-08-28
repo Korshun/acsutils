@@ -189,6 +189,10 @@ function void ClearHudMessage(int id)
 	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
 }
 
+function void ClearHudMessageBold(int id)
+{
+	HudMessageBold(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
+}
 
 // Player functions
 
