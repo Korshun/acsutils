@@ -87,7 +87,7 @@ function void UpdateCursor(void)
 	int speedY = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedY], FixedMul(a_GetCVarFixed("m_pitch"), sensitivity));
 	
 	speedX = FixedMul(speedX * 2, ACSUtils[ACSUTILS_CursorAreaWidth]) / 64000;
-	speedY = FixedMul(speedY * 2, ACSUtils[ACSUTILS_CursorAreaHeight]) / 48000;
+	speedY = FixedMul(speedY * 2, ACSUtils[ACSUTILS_CursorAreaHeight]) / 32000;
 
 	int dx = -GetPlayerInput(ConsolePlayerNumber(), INPUT_YAW)   * speedX;
     int dy = -GetPlayerInput(ConsolePlayerNumber(), INPUT_PITCH) * speedY;
