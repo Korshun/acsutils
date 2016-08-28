@@ -18,4 +18,5 @@
 #include "acsparse.acs"
 #include "acstid.acs"
 #include "acscursor.acs"
+#include "acsinfo.acs"
 #include "acshudlib.acs"

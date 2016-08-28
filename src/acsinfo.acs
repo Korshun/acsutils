@@ -1,0 +1,89 @@
+#libdefine PORT_ZDOOM 1
+#libdefine PORT_GZDOOM 2
+#libdefine PORT_ZANDRONUM 3
+
+// Port identification methods copied from ACS-X
+function int IdentifySourcePort(void)
+{
+	if (ACSUtils[ACSUTILS_CachedPort] != -1)
+		return ACSUtils[ACSUTILS_CachedPort];
+
+	if (GetPlayerAccountName(0) != 0)
+	{
+		// GetPlayerAccountName returns a string (possibly empty) in Zandronum
+		// but 0 in GZDoom.
+		ACSUtils[ACSUTILS_CachedPort] = PORT_ZANDRONUM;
+		return ACSUtils[ACSUTILS_CachedPort];
+	}
+	
+	int tid = NewTid();
+	if (SpawnForced("DynamicLight", 0, 0, 0, tid))
+	{
+		// DynamicLight is a built-in actor in GZDoom.
+		Thing_Remove(tid);
+		ACSUtils[ACSUTILS_CachedPort] = PORT_GZDOOM;
+		return ACSUtils[ACSUTILS_CachedPort];
+	}
+	
+	ACSUtils[ACSUTILS_CachedPort] = PORT_ZDOOM;
+	return ACSUtils[ACSUTILS_CachedPort];
+}
+
+function str GetPortName(void)
+{
+	int port = IdentifySourcePort();
+	switch (port)
+	{
+	case PORT_ZDOOM:
+		return "ZDoom";
+	case PORT_GZDOOM:
+		return "GZDoom";
+	case PORT_ZANDRONUM:
+		return "Zandronum";
+	}
+
+	return StrParam(s:"IdentifySourcePort() returned ", d:port);
+}
+
+function bool IsZandronum(void)
+{
+	return IdentifySourcePort() == PORT_ZANDRONUM;
+}
+
+function bool IsGZDoom(void)
+{
+	int port = IdentifySourcePort();
+	return port == PORT_GZDOOM || port == PORT_ZANDRONUM;
+}
+
+function bool IsServer(void)
+{
+	if (ConsolePlayerNumber() < 0)
+		return true;
+		
+	// Needs to be done like this to avoid crashing the script in ZDoom.
+	if (IsZandronum())
+		return !IsMultiplayer();
+	
+	return true;
+}
+
+function bool IsClient(void)
+{
+	return ConsolePlayerNumber() >= 0;
+}
+
+function bool IsOpenGL(void)
+{
+	if (!IsClient())
+	{
+		ProgramError("IsOpenGL() used serverside. Assuming OpenGL renderer.");
+		return true; // OpenGL generally has less limitations.
+	}
+	
+	// Correctly identifies ZDoom with a config file from GZDoom with vid_renderer = 1.
+	if (IsGZDoom())
+		return GetCVar("vid_renderer") == 1 && GetCVar("gl_nogl") == 0;
+	
+	return false;
+}
