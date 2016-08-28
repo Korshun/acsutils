@@ -6,6 +6,8 @@
 #libdefine PI 3.1415926535897932384626433832795
 #libdefine SQRT_2 1.41421356237
 #libdefine MATH_E 2.7182818284590452353602874713526624977572470937
+#libdefine LOG2_E 1.44269504089
+#libdefine LOG2_10 3.32192809489
 
 // Generic functions.
 
@@ -393,25 +395,25 @@ function int ln (int x) {
     // This calculates the natural logarithm of a number using the property that:   ln(x) = log_2(x) / log_2(e)
     // This is done because calculating the log_2 of a number is far easier, specially with fixed-point arithmetics. 
 
-    return FixedDiv(log2(x), log2(MATH_E));
+    return FixedDiv(log2(x), LOG2_E);
 }
 
 // By Korshun.
 // fixed iln(int x)
 function int iln (int x) {
-	return FixedDiv(ilog2(x), log2(MATH_E));
+	return FixedDiv(ilog2(x), LOG2_E);
 }
 
 // By Korshun.
 // fixed log10(int x)
 function int log10 (int x) {
-	return FixedDiv(log2(x), log2(10.0));
+	return FixedDiv(log2(x), LOG2_10);
 }
 
 // By Korshun.
 // fixed ilog10(int x)
 function int ilog10 (int x) {
-	return FixedDiv(ilog2(x), log2(10.0));
+	return FixedDiv(ilog2(x), LOG2_10);
 }
 
 // fixed logb(fixed x, fixed base)
