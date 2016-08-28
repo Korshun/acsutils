@@ -457,6 +457,8 @@ function void SetActorSpeed (int tid, int value)
 
 // ChangeFlag
 
+// Implementation from ACS-X.
+
 function str _ChangeFlagName(str flag, bool value)
 {
 	return StrParam(s:"ACSUtils_CF_", s:flag, s:"_", d:!!value);
