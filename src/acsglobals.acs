@@ -65,8 +65,8 @@
 #define ACSUTILS_CursorX 42
 #define ACSUTILS_CursorY 43
 
-#define ACSUtils_CursorDeltaX 44
-#define ACSUtils_CursorDeltaY 45
+#define ACSUTILS_CursorMotionX 44
+#define ACSUTILS_CursorMotionY 45
 
 #define ACSUtils_CursorSpeedX 46
 #define ACSUtils_CursorSpeedY 47
@@ -74,11 +74,15 @@
 #define ACSUtils_CursorAreaWidth 48
 #define ACSUtils_CursorAreaHeight 49
 
-#define ACSUtils_CursorWrap 50
+#define ACSUtils_CursorWrapX 50
+#define ACSUtils_CursorWrapY 51
 
-#define ACSUTILS_R3D_ProjectionMode 51
+#define ACSUTILS_R3D_ProjectionMode 52
 
-#define ACSUTILS_NUM_GLOBALS 52
+#define ACSUtils_CursorPrevX 53
+#define ACSUtils_CursorPrevY 54
+
+#define ACSUTILS_NUM_GLOBALS 55
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 {
@@ -144,8 +148,8 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 	320.0, // CursorX
 	240.0, // CursorY
 	
-	0, // CursorDeltaX
-	0, // CursorDeltaY
+	0, // CursorMotionX
+	0, // CursorMotionY
 
 	1.0, // CursorSpeedX
 	1.0, // CursorSpeedY
@@ -153,9 +157,13 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 	640.0, // CursorAreaWidth
 	480.0, // CursorAreaHeight
 
-	false, //CursorWrap
+	false, // CursorWrapX
+	false, // CursorWrapY
 	
-	HUD_PROJECTION_AUTO // R3D_ProjectionMode
+	HUD_PROJECTION_AUTO, // R3D_ProjectionMode
+	
+	320.0, // CursorPrevX
+	240.0 // CursorPrevY
 };
 
 
