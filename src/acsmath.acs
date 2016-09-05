@@ -284,6 +284,13 @@ function int npo2(int v)
 	return v;
 }
 
+// any, any swap(any a, any b)
+function void swap(int a, int b)
+{
+	r1 = b;
+	r2 = a;
+}
+
 
 // By Monsterovich
 
