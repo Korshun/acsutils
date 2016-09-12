@@ -75,7 +75,7 @@ function void ParseInt(str s, int base)
 function int atoi(str s)
 {
 	ParseInt(s, 0);
-	if (r1 == PARSENUMBER_SUCCESS)
+	if (r1 == PARSENUMBER_SUCCESS || r1 == PARSENUMBER_OVERFLOW)
 		return r2;
 	return 0;
 }
@@ -196,7 +196,7 @@ function void ParseFixed(str s, int base)
 function int atof(str s)
 {
 	ParseFixed(s, 0);
-	if (r1 == PARSENUMBER_SUCCESS)
+	if (r1 == PARSENUMBER_SUCCESS || r1 == PARSENUMBER_OVERFLOW)
 		return r2;
 	return 0;
 }
