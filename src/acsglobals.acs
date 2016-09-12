@@ -82,7 +82,7 @@
 #define ACSUtils_CursorPrevX 53
 #define ACSUtils_CursorPrevY 54
 
-#define ACSUTILS_NUM_GLOBALS 55
+#define ACSUTILS_NUM_GLOBALS 512
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 {
