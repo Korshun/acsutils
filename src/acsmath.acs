@@ -148,12 +148,6 @@ function int itof(int x)
 	return x << 16;
 }
 
-// int ftoi(fixed x)
-function int ftoi(int x)
-{
-	return x >> 16;
-}
-
 
 // Numerical algorithms.
 
