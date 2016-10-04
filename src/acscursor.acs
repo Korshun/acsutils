@@ -74,17 +74,32 @@ function void EnableCursorWrapY(bool enable)
 	ACSUtils[ACSUTILS_CursorWrapY] = enable;
 }
 
-function void _ClampCursor(void)
+function void ACSUtils_ClampCursor(void)
 {
+	int width = ACSUtils[ACSUTILS_CursorAreaWidth];
+	int height = ACSUtils[ACSUTILS_CursorAreaHeight];
+	
+	int borderX = HudBorderXFor(width);
+	int borderY = HudBorderYFor(height);
+	
+	ACSUtils[ACSUTILS_CursorX] += borderX;
+	ACSUtils[ACSUTILS_CursorY] += borderY;
+	
+	width +=  borderX * 2;
+	height += borderY * 2;
+
 	if (ACSUtils[ACSUTILS_CursorWrapX])
-		ACSUtils[ACSUTILS_CursorX] = mod(ACSUtils[ACSUTILS_CursorX], ACSUtils[ACSUTILS_CursorAreaWidth]);
+		ACSUtils[ACSUTILS_CursorX] = mod(ACSUtils[ACSUTILS_CursorX], width);
 	else
-		ACSUtils[ACSUTILS_CursorX] = clamp(ACSUtils[ACSUTILS_CursorX], 0, ACSUtils[ACSUTILS_CursorAreaWidth]);
+		ACSUtils[ACSUTILS_CursorX] = clamp(ACSUtils[ACSUTILS_CursorX], 0, width);
 	
 	if (ACSUtils[ACSUTILS_CursorWrapY])
-		ACSUtils[ACSUTILS_CursorY] = mod(ACSUtils[ACSUTILS_CursorY], ACSUtils[ACSUTILS_CursorAreaHeight]);
+		ACSUtils[ACSUTILS_CursorY] = mod(ACSUtils[ACSUTILS_CursorY], height);
 	else
-		ACSUtils[ACSUTILS_CursorY] = clamp(ACSUtils[ACSUTILS_CursorY], 0, ACSUtils[ACSUTILS_CursorAreaHeight]);
+		ACSUtils[ACSUTILS_CursorY] = clamp(ACSUtils[ACSUTILS_CursorY], 0, height);
+		
+	ACSUtils[ACSUTILS_CursorX] -= borderX;
+	ACSUtils[ACSUTILS_CursorY] -= borderY;
 }
 
 function void SetCursorArea(int width, int height)
@@ -127,5 +142,5 @@ function void UpdateCursor(void)
 	ACSUtils[ACSUTILS_CursorMotionY] = dy;
 	ACSUtils[ACSUTILS_CursorX] += dx;
 	ACSUtils[ACSUTILS_CursorY] += dy;
-	_ClampCursor();
+	ACSUtils_ClampCursor();
 }
