@@ -284,6 +284,36 @@ function void HudUseRealSize(void)
 	ACSUtils[ACSUTILS_R_BaseHeight] = ScreenHeight()<<16;
 }
 
+function int HudBorderX(void)
+{
+	return HudBorderXFor(ACSUtils[ACSUTILS_R_BaseWidth]);
+}
+
+function int HudBorderY(void)
+{
+	return HudBorderXFor(ACSUtils[ACSUTILS_R_BaseHeight]);
+}
+
+function int HudLeft(void)
+{
+	return HudLeftFor(ACSUtils[ACSUTILS_R_BaseWidth]);
+}
+
+function int HudRight(void)
+{
+	return HudRightFor(ACSUtils[ACSUTILS_R_BaseWidth]);
+}
+
+function int HudTop(void)
+{
+	return HudTopFor(ACSUtils[ACSUTILS_R_BaseHeight]);
+}
+
+function int HudBottom(void)
+{
+	return HudBottomFor(ACSUtils[ACSUTILS_R_BaseHeight]);
+}
+
 function void HudSetExcludeStatusBar(bool exclude)
 {
 	ACSUtils[ACSUTILS_R_ExcludeStatusBar] = exclude;

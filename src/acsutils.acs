@@ -19,4 +19,5 @@
 #include "acstid.acs"
 #include "acscursor.acs"
 #include "acsinfo.acs"
+#include "acswidescreen.acs"
 #include "acshudlib.acs"

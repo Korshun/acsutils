@@ -1,0 +1,101 @@
+// Most of this file is written by carlcyber and bagheadspidey.
+// See http://forum.zdoom.org/viewtopic.php?f=3&t=35383
+// Interface 
+
+#define ASPECT_4_3 (4.0 / 3)
+#define ASPECT_16_9 (16.0 / 9)
+#define ASPECT_16_10 (16.0 / 10)
+#define ASPECT_17_10 (17.0 / 10)
+#define ASPECT_5_4 (5.0 / 4)
+
+function int GetAspectRatio(void)
+{
+	int noWideScreen = GetCVar("vid_nowidescreen");
+	int tft = GetCVar("vid_tft");
+
+	if (noWideScreen)
+	{
+		if (tft && GetScreenHeight() * 5 / 4 == GetScreenWidth())
+		{
+			return ASPECT_5_4;
+		}
+		return ASPECT_4_3;
+	}
+
+	// If the size is approximately 16:9, consider it so.
+	if (Abs(GetScreenHeight() * 16 / 9 - GetScreenWidth()) < 10)
+	{
+		return ASPECT_16_9;
+	}
+	// Consider 17:10 as well.
+	if (Abs(GetScreenHeight() * 17 / 10 - GetScreenWidth()) < 10)
+	{
+		return ASPECT_17_10;
+	}
+	// 16:10 has more variance in the pixel dimensions. Grr.
+	if (Abs(GetScreenHeight() * 16 / 10 - GetScreenWidth()) < 60)
+	{
+		// 320x200 and 640x400 are always 4:3, not 16:10
+		if ((GetScreenWidth() == 320 && GetScreenHeight() == 200) || (GetScreenWidth() == 640 && GetScreenHeight() == 400))
+		{
+			return ASPECT_4_3;
+		}
+		return ASPECT_16_10;
+	}
+	// Unless vid_tft is set, 1280x1024 is 4:3, not 5:4.
+	if (tft && GetScreenHeight() * 5 / 4 == GetScreenWidth())
+	{
+		return ASPECT_5_4;
+	}
+	// Assume anything else is 4:3. (Which is probably wrong these days...)
+	return ASPECT_4_3;
+}
+
+/*
+ * Gets the borders of the specified HUD size.
+ * [NOTE]:
+ *     1. The HUD borders are written in HudLeft, HudRight, HudTop, and HudBottom variables.
+ *     2. Status bar and small screen blocks (screenblocks < 11) are not supported.
+ * [Credit]
+ *    Original HUD edge positioning functions by bagheadspidey
+ */
+
+function int HudBorderXFor(int width)
+{
+	int ar = GetAspectRatio();
+	switch (ar)
+	{
+		case ASPECT_4_3: return 0;
+		case ASPECT_16_9: return width / 6;
+		case ASPECT_16_10: return width / 10;
+		case ASPECT_17_10: return width / 80;
+	}
+	return 0;
+}
+
+function int HudBorderYFor(int height)
+{
+	if (GetAspectRatio() == ASPECT_5_4)
+		return height / 30;
+	return 0;
+}
+
+function int HudLeftFor(int width)
+{
+	return -HudBorderXFor(width);
+}
+
+function int HudRightFor(int width)
+{
+	return width + HudBorderXFor(width);
+}
+
+function int HudTopFor(int height)
+{
+	return -HudBorderYFor(height);
+}
+
+function int HudBottomFor(int height)
+{
+	return height + HudBorderYFor(height);
+}
