@@ -463,7 +463,7 @@ function void HudSetWordWrap(bool wordWrap)
 //int ACSUtils[ACSUTILS_R_RotatedY];
 //int ACSUtils[ACSUTILS_R_RotatedZ];
 
-function bool _HudUseYShearingProjection(void)
+function bool ACSUtils_HudUseYShearingProjection(void)
 {
 	if (ACSUtils[ACSUTILS_R3D_ProjectionMode] == HUD_PROJECTION_AUTO)
 		return !IsOpenGL();
@@ -472,7 +472,7 @@ function bool _HudUseYShearingProjection(void)
 }
 
 // Rotate 3D point to view coordinate system.
-function void HudRotate3DPoint(void)
+function void ACSUtils_HudRotate3DPoint(void)
 {
 	// Translated point coordinates.
 	int x = ACSUtils[ACSUTILS_R3D_X] - ACSUtils[ACSUTILS_R3D_CameraX];
@@ -490,7 +490,7 @@ function void HudRotate3DPoint(void)
 	x = rx; y = ry;
 
 	// Rotate around Y axis.
-	if (!_HudUseYShearingProjection())
+	if (!ACSUtils_HudUseYShearingProjection())
 	{
 		s = sin(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		c = cos(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
@@ -506,14 +506,14 @@ function void HudRotate3DPoint(void)
 
 function int HudGetDistance(void)
 {
-	HudRotate3DPoint();
+	ACSUtils_HudRotate3DPoint();
 	return ACSUtils[ACSUTILS_R_RotatedX];
 }
 
 
 #libdefine CAMERA_BASE_DISTANCE 128
 
-function void HudDrawHudMessage(int id, int type, str text, bool isText)
+function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText)
 {
 	if (ACSUtils[ACSUTILS_R_IScaleX] == 0 || ACSUtils[ACSUTILS_R_IScaleY] == 0)
 		return;
@@ -541,7 +541,7 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 	
 	if (ACSUtils[ACSUTILS_R_Is3DPoint])
 	{
-		HudRotate3DPoint();
+		ACSUtils_HudRotate3DPoint();
 
 		// Check if point is behind the camera.
 		if (ACSUtils[ACSUTILS_R_RotatedX] <= 0)
@@ -563,7 +563,7 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 		x = -FixedDiv(ACSUtils[ACSUTILS_R_RotatedY], ACSUtils[ACSUTILS_R_RotatedX]);
 		y = -FixedDiv(ACSUtils[ACSUTILS_R_RotatedZ], ACSUtils[ACSUTILS_R_RotatedX]);
 		
-		if (_HudUseYShearingProjection())
+		if (ACSUtils_HudUseYShearingProjection())
 			y += tan(ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		
 		// Postprocess projected point.
@@ -641,11 +641,11 @@ function void HudDrawText(int id, str text)
 		type |= HUDMSG_NOWRAP;
 
 	SetFont(ACSUtilsStrings[ACSUTILSSTRING_R_TextFont]);
-	HudDrawHudMessage(id, type, text, true);
+	ACSUtils_HudDrawHudMessage(id, type, text, true);
 }
 
 function void HudDrawImage(int id, str image)
 {
 	SetFont(image);
-	HudDrawHudMessage(id, HUDMSG_FADEINOUT, "A", false);
+	ACSUtils_HudDrawHudMessage(id, HUDMSG_FADEINOUT, "A", false);
 }
