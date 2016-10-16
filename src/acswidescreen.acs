@@ -10,6 +10,12 @@
 
 function int GetAspectRatio(void)
 {
+	if (!IsClient())
+	{
+		ProgramError("GetAspectRatio() called serverside. Assuming 4:3.");
+		return ASPECT_4_3;
+	}
+	
 	int noWideScreen = GetCVar("vid_nowidescreen");
 	int tft = GetCVar("vid_tft");
 
