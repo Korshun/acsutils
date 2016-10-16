@@ -560,8 +560,8 @@ function void HudDrawHudMessage(int id, int type, str text, bool isText)
 		int hh = ACSUtils[ACSUTILS_R_BaseHeight]>>1;		
 
 		// Project point.
-		x = tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedY]));
-		y = tan(-VectorAngle(ACSUtils[ACSUTILS_R_RotatedX], ACSUtils[ACSUTILS_R_RotatedZ]));
+		x = -FixedDiv(ACSUtils[ACSUTILS_R_RotatedY], ACSUtils[ACSUTILS_R_RotatedX]);
+		y = -FixedDiv(ACSUtils[ACSUTILS_R_RotatedZ], ACSUtils[ACSUTILS_R_RotatedX]);
 		
 		if (_HudUseYShearingProjection())
 			y += tan(ACSUtils[ACSUTILS_R3D_CameraPitch]);
