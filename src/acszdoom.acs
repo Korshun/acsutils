@@ -70,21 +70,6 @@ function int GetCVarPercentage(str name)
 
 // Screen info functions.
 
-function int ScreenWidth(void)
-{
-	return GetCVar("vid_defwidth");
-}
-
-function int ScreenHeight(void)
-{
-	return GetCVar("vid_defheight");
-}
-
-function int AspectRatio(void)
-{
-	return FixedDiv(ScreenWidth() * 1.0, ScreenHeight() * 1.0);
-}
-
 function int StatusBarShown(void)
 {
 	return GetCVar("screenblocks") <= 10;
