@@ -280,8 +280,8 @@ function void HudUseDefaultSize(void)
 
 function void HudUseRealSize(void)
 {
-	ACSUtils[ACSUTILS_R_BaseWidth] = ScreenWidth()<<16;
-	ACSUtils[ACSUTILS_R_BaseHeight] = ScreenHeight()<<16;
+	ACSUtils[ACSUTILS_R_BaseWidth] = GetScreenWidth()<<16;
+	ACSUtils[ACSUTILS_R_BaseHeight] = GetScreenHeight()<<16;
 }
 
 function int HudBorderX(void)
