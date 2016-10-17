@@ -82,6 +82,8 @@
 #define ACSUtils_CursorPrevX 53
 #define ACSUtils_CursorPrevY 54
 
+#define ACSUtils_CachedIsZandronum212 55
+
 #define ACSUTILS_NUM_GLOBALS 512
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
@@ -163,7 +165,9 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 	HUD_PROJECTION_AUTO, // R3D_ProjectionMode
 	
 	320.0, // CursorPrevX
-	240.0 // CursorPrevY
+	240.0, // CursorPrevY
+	
+	-1 // CachedIsZandronum212
 };
 
 

@@ -56,6 +56,20 @@ function bool IsGZDoom(void)
 	return port == PORT_GZDOOM || port == PORT_ZANDRONUM;
 }
 
+script "ACSUtils_SupportsNamedScripts" (void)
+{
+	SetResultValue(true);
+}
+
+function bool IsZandronum212(void)
+{
+	if (ACSUtils[ACSUtils_CachedIsZandronum212] != -1)
+		return ACSUtils[ACSUtils_CachedIsZandronum212];
+		
+	ACSUtils[ACSUtils_CachedIsZandronum212] = IsZandronum() && !ACS_NamedExecuteWithResult("ACSUtils_SupportsNamedScripts");
+	return ACSUtils[ACSUtils_CachedIsZandronum212];
+}
+
 function bool IsServer(void)
 {
 	if (ConsolePlayerNumber() < 0)
