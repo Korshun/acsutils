@@ -21,3 +21,4 @@
 #include "acsinfo.acs"
 #include "acswidescreen.acs"
 #include "acshudlib.acs"
+#include "acssendstring.acs"

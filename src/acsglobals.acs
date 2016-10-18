@@ -84,6 +84,14 @@
 
 #define ACSUtils_CachedIsZandronum212 55
 
+#define ACSUtils_SendStringSingleplayer 56
+#define ACSUtils_ReceivedString 57
+#define ACSUtils_SendStringFinished 58
+
+#define ACSUtils_SendStringIsServer 59
+#define ACSUtils_SendStringReceiver 60
+#define ACSUtils_SendStringReceiverIsNamed 61
+
 #define ACSUTILS_NUM_GLOBALS 512
 
 int ACSUtils[ACSUTILS_NUM_GLOBALS] =
@@ -167,7 +175,16 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 	320.0, // CursorPrevX
 	240.0, // CursorPrevY
 	
-	-1 // CachedIsZandronum212
+	-1, // CachedIsZandronum212
+	
+	false, // SendStringSingleplayer
+	0, // ReceivedString
+	true, // SendStringFinished
+
+	false, // SendStringIsServer
+	0, // SendStringReceiver
+	false, // SendStringReceiverIsNamed
+
 };
 
 
