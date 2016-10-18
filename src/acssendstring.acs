@@ -24,7 +24,7 @@ function void ACSUtils_SendString(bool named, int scriptid, str s)
 	
 	ACSUtils[ACSUTILS_SendStringIsServer] = true;
 	ACSUtils[ACSUTILS_SendStringReceiver] = scriptid;
-	ACSUtils[ACSUTILS_SendStringReceiverIsNamed] = named;
+	ACSUtils[ACSUTILS_SendStringIsNamed] = named;
 
 	if (IsZandronum212())
 	{
@@ -142,7 +142,7 @@ function bool ReceiveString(int a, int b, int c, int d)
 		ACSUtils[ACSUTILS_SendStringIsServer] = false;
 	
 		str receiver;
-		if (ACSUtils[ACSUTILS_SendStringReceiverIsNamed])
+		if (ACSUtils[ACSUTILS_SendStringIsNamed])
 			receiver = StrParam(s:"\"", s:ACSUtils[ACSUTILS_SendStringReceiver], s:"\"");
 		else
 			receiver = StrParam(d:ACSUtils[ACSUTILS_SendStringReceiver]);

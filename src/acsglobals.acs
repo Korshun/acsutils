@@ -90,7 +90,7 @@
 
 #define ACSUtils_SendStringIsServer 59
 #define ACSUtils_SendStringReceiver 60
-#define ACSUtils_SendStringReceiverIsNamed 61
+#define ACSUtils_SendStringIsNamed 61
 
 #define ACSUTILS_NUM_GLOBALS 512
 
@@ -183,7 +183,7 @@ int ACSUtils[ACSUTILS_NUM_GLOBALS] =
 
 	false, // SendStringIsServer
 	0, // SendStringReceiver
-	false, // SendStringReceiverIsNamed
+	false, // SendStringIsNamed
 
 };
 
