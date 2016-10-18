@@ -32,7 +32,7 @@ function void ACSUtils_SendString(bool named, int scriptid, str s)
 		// Use >= instead of > to send 0 even if the string size is a multiple of 12.
 		for (i = StrLen(s) / 12; i >= 0; i--)
 		{
-			int index = i * 12;
+			index = i * 12;
 			a = PackBytes
 			(
 				GetChar(s, index), 

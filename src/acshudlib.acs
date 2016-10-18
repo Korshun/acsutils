@@ -463,7 +463,7 @@ function void HudSetWordWrap(bool wordWrap)
 //int ACSUtils[ACSUTILS_R_RotatedY];
 //int ACSUtils[ACSUTILS_R_RotatedZ];
 
-function bool ACSUtils_HudUseYShearingProjection(void)
+function bool ACSUtils_IsYShearing(void)
 {
 	if (ACSUtils[ACSUTILS_R3D_ProjectionMode] == HUD_PROJECTION_AUTO)
 		return !IsOpenGL();
@@ -490,7 +490,7 @@ function void ACSUtils_HudRotate3DPoint(void)
 	x = rx; y = ry;
 
 	// Rotate around Y axis.
-	if (!ACSUtils_HudUseYShearingProjection())
+	if (!ACSUtils_IsYShearing())
 	{
 		s = sin(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		c = cos(-ACSUtils[ACSUTILS_R3D_CameraPitch]);
@@ -563,7 +563,7 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 		x = -FixedDiv(ACSUtils[ACSUTILS_R_RotatedY], ACSUtils[ACSUTILS_R_RotatedX]);
 		y = -FixedDiv(ACSUtils[ACSUTILS_R_RotatedZ], ACSUtils[ACSUTILS_R_RotatedX]);
 		
-		if (ACSUtils_HudUseYShearingProjection())
+		if (ACSUtils_IsYShearing())
 			y += tan(ACSUtils[ACSUTILS_R3D_CameraPitch]);
 		
 		// Postprocess projected point.
