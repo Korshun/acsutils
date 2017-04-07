@@ -76,9 +76,15 @@ function int cmp(int a, int b)
 // num mod(num a, num b)
 function int mod(int a, int b)
 {
-	int result = a % b;
-	result += (result < 0) * (b - result);
-	return result;
+	if (a < 0)
+	{
+		int rem = a % b;
+		if (rem != 0)
+			return b + (a % b);
+		return 0;
+	}
+	
+	return a % b;
 }
 
 // any cond(bool x, any whentrue, any shenfalse)
