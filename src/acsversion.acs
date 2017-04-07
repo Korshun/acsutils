@@ -1,6 +1,6 @@
 #libdefine ACSUTILS_VERSION_MAJOR 1
 #libdefine ACSUTILS_VERSION_MINOR 5
-#libdefine ACSUTILS_VERSION_PATCH 0
+#libdefine ACSUTILS_VERSION_PATCH 1
 
 function str ACSUtilsVersion(void)
 {
