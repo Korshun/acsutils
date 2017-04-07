@@ -59,7 +59,10 @@ function str lang(str s)
 
 function int a_GetCVarFixed(str name)
 {
-	return atof(GetCVarString(name));
+	str value = GetCVarString(name);
+	if (value != 0)
+		return atof(GetCVarString(name));
+	return 0.0;
 }
 
 function int GetCVarPercentage(str name)
