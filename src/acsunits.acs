@@ -30,16 +30,6 @@ function int rad2deg(int radians)
 	return ang2deg(rad2ang(radians));
 }
 
-function int byte2ang(int byteang)
-{
-	return byteang * 256;
-}
-
-function int ang2byte(int angle)
-{
-	return angle / 256;
-}
-
 
 // Gravity
 

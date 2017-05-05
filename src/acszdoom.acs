@@ -12,16 +12,6 @@ function void GiveMaxActorInventory(int tid, str item)
 	GiveActorInventory(tid, item, INT_MAX);
 }
 
-function void TakeAllInventory(str item)
-{
-	TakeInventory(item, INT_MAX);
-}
-
-function void TakeAllActorInventory(int tid, str item)
-{
-	TakeActorInventory(tid, item, INT_MAX);
-}
-
 function void SetInventory(str item, int amount)
 {
 	int diff = amount - CheckInventory(item);
@@ -48,12 +38,6 @@ function void ToggleInventory(str item)
 		SetInventory(item, 1);
 }
 
-
-// Internationalization.
-function str lang(str s)
-{
-	return StrParam(l:s);
-}
 
 // CVar functions.
 

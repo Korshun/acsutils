@@ -146,14 +146,6 @@ function int iround(int x)
 	return x + 0.5 >> 16;
 }
 
-// By Monsterovich
-
-// fixed itof(int x)
-function int itof(int x)
-{
-	return x << 16;
-}
-
 
 // Numerical algorithms.
 
@@ -289,21 +281,6 @@ function void swap(int a, int b)
 {
 	r1 = b;
 	r2 = a;
-}
-
-
-// By Monsterovich
-
-// angle AngleDistCCW(angle a, angle b)
-function int AngleDistCCW (int a, int b)
-{
-	return abs(a - b);
-}
-
-// angle AngleDistCW(angle a, angle b)
-function int AngleDistCW (int a, int b)
-{
-	return 1.0 - AngleDistCCW(a, b);
 }
 
 
