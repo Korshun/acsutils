@@ -525,15 +525,12 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 		type |= HUDMSG_NOTWITHFULLMAP;
 	if (!ACSUtils[ACSUTILS_R_ShowOnOverlayAutomap])
 		type |= HUDMSG_NOTWITHOVERLAYMAP;
-		
-	if (ACSUtils[ACSUTILS_R_Alpha] != 1.0)
-	{
-		if (ACSUtils[ACSUTILS_R_BlendStyle] == HUD_BLENDSTYLE_ADDITIVE)
-			type |= HUDMSG_ADDBLEND;
-		else
-			type |= HUDMSG_ALPHA;
-	}
 	
+	if (ACSUtils[ACSUTILS_R_BlendStyle] == HUD_BLENDSTYLE_ADDITIVE)
+		type |= HUDMSG_ADDBLEND;
+	else if (ACSUtils[ACSUTILS_R_Alpha] != 1.0)
+		type |= HUDMSG_ALPHA;
+
 	int x = ACSUtils[ACSUTILS_R_X];
 	int y = ACSUtils[ACSUTILS_R_Y];
 	int iScaleX = ACSUtils[ACSUTILS_R_IScaleX];
