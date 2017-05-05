@@ -36,6 +36,9 @@ def main():
 	
 	for flag in flags:
 		out.write(template.format(flag=flag))
+		if '.' in flag:
+			flag = flag.split('.')[1]
+			out.write(template.format(flag=flag))
 		
 if __name__ == '__main__':
 	main()
