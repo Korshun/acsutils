@@ -2,11 +2,11 @@
 // See http://forum.zdoom.org/viewtopic.php?f=3&t=35383
 // Interface 
 
-#define ASPECT_4_3 (4.0 / 3)
-#define ASPECT_5_4 1.25
-#define ASPECT_16_9 (16.0 / 9)
-#define ASPECT_16_10 1.6
-#define ASPECT_17_10 1.7
+#libdefine ASPECT_4_3 (4.0 / 3)
+#libdefine ASPECT_5_4 1.25
+#libdefine ASPECT_16_9 (16.0 / 9)
+#libdefine ASPECT_16_10 1.6
+#libdefine ASPECT_17_10 1.7
 
 function int GetAspectRatio(void)
 {
