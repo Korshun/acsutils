@@ -86,7 +86,7 @@ function bool StrIsEmpty(str s)
 	return false;
 }
 
-function str StrMidRange(str s, int start, int end)
+function str StrSlice(str s, int start, int end)
 {
 	return StrMid(s, start, end - start);
 }
@@ -161,11 +161,11 @@ function str StrReplace(str s, str what, str with)
 		end = StrFindFrom(s, what, start);
 		if (end == -1)
 		{
-			result = StrParam(s:result, s:StrMidRange(s, start, end));
+			result = StrParam(s:result, s:StrSlice(s, start, end));
 			break;
 		}
 
-		result = StrParam(s:result, s:StrMidRange(s, start, end), s:with);
+		result = StrParam(s:result, s:StrSlice(s, start, end), s:with);
 		start = end + len2;
 	}
 	
@@ -222,7 +222,7 @@ function bool StrStartsWith(str s, str sub)
 	return StrEqualsAt(s, 0, sub);
 }
 
-function str StrTimes(int s, int n)
+function str StrRepeat(int s, int n)
 {
 	int result = "";
 	for (int i = 0; i < n; i++)
@@ -279,7 +279,7 @@ function int SkipColorCodeAt(str s, int i)
 	
 function str GetColorCodeAt(str s, int i)
 {
-	return StrMidRange(s, i, SkipColorCodeAt(s, i));
+	return StrSlice(s, i, SkipColorCodeAt(s, i));
 }
 	
 function bool HasColorCodes(str s)

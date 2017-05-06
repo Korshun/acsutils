@@ -267,12 +267,12 @@ function int ActorDistance2D(int tid1, int tid2)
 	                GetActorY(tid2) - GetActorY(tid1));
 }
 
-function int GetActorCurrentSpeed(int tid)
+function int GetActorVelocity(int tid)
 {
 	return length3d(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
 }
 
-function int GetActorCurrentSpeed2D(int tid)
+function int GetActorVelocityXY(int tid)
 {
 	return length2d(GetActorVelX(tid), GetActorVelY(tid));
 }
@@ -280,7 +280,7 @@ function int GetActorCurrentSpeed2D(int tid)
 
 // Actor utility functions.
 
-function bool HasRoom(str classname, int x, int y, int z)
+function bool HasRoomFor(str classname, int x, int y, int z)
 {
 	int tid = NewTid();
 	if (!Spawn(classname, x, y, z, tid))
