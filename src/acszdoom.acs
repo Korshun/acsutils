@@ -52,7 +52,7 @@ function int a_GetCVarFixed(str name)
 
 // Screen info functions.
 
-function int StatusBarShown(void)
+function int StatusBarVisible(void)
 {
 	return GetCVar("screenblocks") <= 10;
 }

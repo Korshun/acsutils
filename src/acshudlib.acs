@@ -549,7 +549,7 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 			
 		// I don't know what this factor means, but it fixes positioning bugs.
 		int yFactor = 1.6;
-		if (StatusBarShown())
+		if (StatusBarVisible())
 			yFactor = 1.9;
 
 		// Half heights.
