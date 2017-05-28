@@ -49,11 +49,6 @@ function int a_GetCVarFixed(str name)
 	return 0.0;
 }
 
-function int GetCVarPercentage(str name)
-{
-	return (GetCVar(name)<<16) / 100;
-}
-
 
 // Screen info functions.
 
