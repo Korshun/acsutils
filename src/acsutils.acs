@@ -16,6 +16,7 @@
 #include "acsinput.acs"
 #include "acsunits.acs"
 #include "acsparse.acs"
+#include "acsplayer.acs"
 #include "acstid.acs"
 #include "acscursor.acs"
 #include "acsinfo.acs"
