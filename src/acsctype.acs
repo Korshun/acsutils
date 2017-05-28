@@ -226,3 +226,149 @@ function int tolower(int c)
 		return c + ASCII_LETTERS_OFFSET;
 	return c;
 }
+
+
+// String versions
+function str StrIsAlNum(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isalnum(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsAlpha(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isalpha(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsBlank(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isblank(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsCntrl(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!iscntrl(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsDigit(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isdigit(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsGraph(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isgraph(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsLower(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!islower(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsPrint(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isprint(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsSpace(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isspace(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsUpper(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isupper(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function str StrIsXDigit(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		if (!isxdigit(GetChar(s, i)))
+			return false;
+			
+	return true;
+}
+
+function bool StrIsAscii(str s)
+{
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+	{
+		int char = GetChar(s, i);
+		if (char < ASCII_START || char > ASCII_END)
+			return false;
+	}
+	return true;
+}
+
+// Case conversion.
+
+function str StrToLower(str s)
+{
+	str result = "";
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		result = StrParam(s:result, c:tolower(GetChar(s, i)));
+		
+	return result;
+}
+
+function str StrToUpper(str s)
+{
+	str result = "";
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		result = StrParam(s:result, c:toupper(GetChar(s, i)));
+		
+	return result;
+}
