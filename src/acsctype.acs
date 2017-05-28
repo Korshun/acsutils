@@ -1,18 +1,18 @@
-#define CHARFLAG_ISALNUM 1
-#define CHARFLAG_ISALPHA 2
-#define CHARFLAG_ISBLANK 4
-#define CHARFLAG_ISCNTRL 8
-#define CHARFLAG_ISDIGIT 16
-#define CHARFLAG_ISGRAPH 32
-#define CHARFLAG_ISLOWER 64
-#define CHARFLAG_ISPRINT 128
-#define CHARFLAG_ISPUNCT 256
-#define CHARFLAG_ISSPACE 512
-#define CHARFLAG_ISUPPER 1024
-#define CHARFLAG_ISXDIGIT 2048
+#define ACSUTILS_ISALNUM 1
+#define ACSUTILS_ISALPHA 2
+#define ACSUTILS_ISBLANK 4
+#define ACSUTILS_ISCNTRL 8
+#define ACSUTILS_ISDIGIT 16
+#define ACSUTILS_ISGRAPH 32
+#define ACSUTILS_ISLOWER 64
+#define ACSUTILS_ISPRINT 128
+#define ACSUTILS_ISPUNCT 256
+#define ACSUTILS_ISSPACE 512
+#define ACSUTILS_ISUPPER 1024
+#define ACSUTILS_ISXDIGIT 2048
 
 
-int AsciiTypes[128] =
+int ACSUtils_AsciiTypes[128] =
 {
 	8,
 	8,
@@ -146,62 +146,62 @@ int AsciiTypes[128] =
 
 function bool isalnum(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISALNUM;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISALNUM;
 }
 
 function bool isalpha(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISALPHA;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISALPHA;
 }
 
 function bool isblank(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISBLANK;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISBLANK;
 }
 
 function bool iscntrl(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISCNTRL;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISCNTRL;
 }
 
 function bool isdigit(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISDIGIT;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISDIGIT;
 }
 
 function bool isgraph(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISGRAPH;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISGRAPH;
 }
 
 function bool islower(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISLOWER;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISLOWER;
 }
 
 function bool isprint(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISPRINT;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISPRINT;
 }
 
 function bool ispunct(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISPUNCT;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISPUNCT;
 }
 
 function bool isspace(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISSPACE;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISSPACE;
 }
 
 function bool isupper(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISUPPER;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISUPPER;
 }
 
 function bool isxdigit(int c)
 {
-	return AsciiTypes[c] & CHARFLAG_ISXDIGIT;
+	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISXDIGIT;
 }
 
 #define ASCII_START 0
