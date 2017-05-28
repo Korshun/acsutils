@@ -181,7 +181,7 @@ function int GetActorVelocityXY(int tid)
 
 function bool HasRoomFor(str classname, int x, int y, int z)
 {
-	int tid = NewTid();
+	int tid = UniqueTid();
 	if (!Spawn(classname, x, y, z, tid))
 		return false;
 	Thing_Remove(tid);

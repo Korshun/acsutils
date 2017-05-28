@@ -16,7 +16,7 @@ function int IdentifySourcePort(void)
 		return ACSUtils[ACSUTILS_CachedPort];
 	}
 	
-	int tid = NewTid();
+	int tid = UniqueTid();
 	if (SpawnForced("DynamicLight", 0, 0, 0, tid))
 	{
 		// DynamicLight is a built-in actor in GZDoom.
