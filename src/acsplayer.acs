@@ -37,19 +37,19 @@ function int SpectatorCount(void)
 }
 
 
-int _Players[MAX_PLAYERS];
+int ACSUtils_Players[MAX_PLAYERS];
 
 function int PickRandomClient(void)
 {
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsConnected(i))
-			_Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return _Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomPlayer(void)
@@ -57,12 +57,12 @@ function int PickRandomPlayer(void)
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerInGame(i))
-			_Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return _Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomSpectator(void)
@@ -70,12 +70,12 @@ function int PickRandomSpectator(void)
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsSpectator(i))
-			_Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return _Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomBot(void)
@@ -83,10 +83,10 @@ function int PickRandomBot(void)
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsBot(i))
-			_Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return _Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
