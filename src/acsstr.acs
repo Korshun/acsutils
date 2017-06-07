@@ -289,8 +289,6 @@ function bool HasColorCodes(str s)
 	{
 		if (GetChar(s, i) == 28)
 			i += 1;
-		else if (StrEqualsAt(s, i, "\c"))
-			i += 2;
 		else
 			continue;
 			
