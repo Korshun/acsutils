@@ -248,10 +248,6 @@ function int SkipColorCodeAt(str s, int i)
 	{
 		i++;
 	}
-	else if (StrEqualsAt(s, i, "\c"))
-	{
-		i += 2;
-	}
 	else
 	{
 		return i;
