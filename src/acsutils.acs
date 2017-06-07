@@ -52,26 +52,3 @@ ACSUtils uses code from ACS-X:
 */
 
 #nocompact
-
-#include "acsversion.acs"
-
-#include "acsretval.acs"
-#include "acshudlibdef.acs"
-
-#include "acsglobals.acs"
-
-#include "acserror.acs"
-#include "acsmath.acs"
-#include "acsctype.acs"
-#include "acsstr.acs"
-#include "acszdoom.acs"
-#include "acspack.acs"
-#include "acsinput.acs"
-#include "acsunits.acs"
-#include "acsparse.acs"
-#include "acsplayer.acs"
-#include "acstid.acs"
-#include "acscursor.acs"
-#include "acsinfo.acs"
-#include "acswidescreen.acs"
-#include "acshudlib.acs"

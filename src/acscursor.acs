@@ -1,105 +1,124 @@
+@fixed CursorX = 320.0;
+@fixed CursorY = 240.0;
+
+@fixed CursorPrevX = 320.0;
+@fixed CursorPrevY = 240.0;
+
+@fixed CursorMotionX = 0;
+@fixed CursorMotionY = 0;
+
+@fixed CursorSpeedX = 1.0;
+@fixed CursorSpeedY = 1.0;
+
+@fixed CursorAreaWidth = 640.0;
+@fixed CursorAreaHeight = 480.0;
+
+@bool CursorWrapX = false;
+@bool CursorWrapY = false;
+	
+
 function int CursorX(void)
 {
-	return ACSUtils[ACSUTILS_CursorX];
+	return $CursorX;
 }
 
 function int CursorY(void)
 {
-	return ACSUtils[ACSUTILS_CursorY];
+	return $CursorY;
 }
 
 function int CursorDeltaX(void)
 {
-	if (ACSUtils[ACSUTILS_CursorWrapX])
+	if ($CursorWrapX)
 		return CursorMotionX();
-	return ACSUtils[ACSUTILS_CursorX] - ACSUtils[ACSUTILS_CursorPrevX];
+	return $CursorX - $CursorPrevX;
 }
 function int CursorDeltaY(void)
 {
-	if (ACSUtils[ACSUTILS_CursorWrapY])
+	if ($CursorWrapY)
 		return CursorMotionY();
-	return ACSUtils[ACSUTILS_CursorY] - ACSUtils[ACSUTILS_CursorPrevY];
+	return $CursorY - $CursorPrevY;
 }
 
 function int CursorMotionX(void)
 {
-	return ACSUtils[ACSUTILS_CursorMotionX];
+	return $CursorMotionX;
 }
 
 function int CursorMotionY(void)
 {
-	return ACSUtils[ACSUTILS_CursorMotionY];
+	return $CursorMotionY;
 }
 
 function void SetCursorSpeed(int speed)
 {
-	ACSUtils[ACSUTILS_CursorSpeedX] = speed;
-	ACSUtils[ACSUTILS_CursorSpeedY] = speed;
+	$CursorSpeedX = speed;
+	$CursorSpeedY = speed;
 }
 
 function void SetCursorSpeedX(int speed)
 {
-	ACSUtils[ACSUTILS_CursorSpeedX] = speed;
+	$CursorSpeedX = speed;
 }
 
 function void SetCursorSpeedY(int speed)
 {
-	ACSUtils[ACSUTILS_CursorSpeedY] = speed;
+	$CursorSpeedY = speed;
 }
 
 function void SetCursorPosition(int x, int y)
 {
-	ACSUtils[ACSUTILS_CursorX] = x;
-	ACSUtils[ACSUTILS_CursorY] = y;
+	$CursorX = x;
+	$CursorY = y;
 }
 
 function void CenterCursor(void)
 {
-	SetCursorPosition(ACSUtils[ACSUTILS_CursorAreaWidth] / 2, ACSUtils[ACSUTILS_CursorAreaHeight] / 2);
+	SetCursorPosition($CursorAreaWidth / 2, $CursorAreaHeight / 2);
 }
 
 function void EnableCursorWrap(bool enable)
 {
-	ACSUtils[ACSUTILS_CursorWrapX] = enable;
-	ACSUtils[ACSUTILS_CursorWrapY] = enable;
+	$CursorWrapX = enable;
+	$CursorWrapY = enable;
 }
 
 function void EnableCursorWrapX(bool enable)
 {
-	ACSUtils[ACSUTILS_CursorWrapX] = enable;
+	$CursorWrapX = enable;
 }
 
 function void EnableCursorWrapY(bool enable)
 {
-	ACSUtils[ACSUTILS_CursorWrapY] = enable;
+	$CursorWrapY = enable;
 }
 
 function void ACSUtils_ClampCursor(void)
 {
-	int width = ACSUtils[ACSUTILS_CursorAreaWidth];
-	int height = ACSUtils[ACSUTILS_CursorAreaHeight];
+	int width = $CursorAreaWidth;
+	int height = $CursorAreaHeight;
 	
 	int borderX = HudBorderXFor(width);
 	int borderY = HudBorderYFor(height);
 	
-	ACSUtils[ACSUTILS_CursorX] += borderX;
-	ACSUtils[ACSUTILS_CursorY] += borderY;
+	$CursorX += borderX;
+	$CursorY += borderY;
 	
 	width +=  borderX * 2;
 	height += borderY * 2;
 
-	if (ACSUtils[ACSUTILS_CursorWrapX])
-		ACSUtils[ACSUTILS_CursorX] = mod(ACSUtils[ACSUTILS_CursorX], width);
+	if ($CursorWrapX)
+		$CursorX = mod($CursorX, width);
 	else
-		ACSUtils[ACSUTILS_CursorX] = clamp(ACSUtils[ACSUTILS_CursorX], 0, width);
+		$CursorX = clamp($CursorX, 0, width);
 	
-	if (ACSUtils[ACSUTILS_CursorWrapY])
-		ACSUtils[ACSUTILS_CursorY] = mod(ACSUtils[ACSUTILS_CursorY], height);
+	if ($CursorWrapY)
+		$CursorY = mod($CursorY, height);
 	else
-		ACSUtils[ACSUTILS_CursorY] = clamp(ACSUtils[ACSUTILS_CursorY], 0, height);
+		$CursorY = clamp($CursorY, 0, height);
 		
-	ACSUtils[ACSUTILS_CursorX] -= borderX;
-	ACSUtils[ACSUTILS_CursorY] -= borderY;
+	$CursorX -= borderX;
+	$CursorY -= borderY;
 }
 
 function void SetCursorArea(int width, int height)
@@ -109,28 +128,28 @@ function void SetCursorArea(int width, int height)
 	if (height <= 0)
 		ProgramError(StrParam(s:"Cursor area height set to ", d:height));
 	
-	ACSUtils[ACSUTILS_CursorX] = FixedMul(ACSUtils[ACSUTILS_CursorX], FixedDiv(width, ACSUtils[ACSUTILS_CursorAreaWidth]));
-	ACSUtils[ACSUTILS_CursorY] = FixedMul(ACSUtils[ACSUTILS_CursorY], FixedDiv(height, ACSUtils[ACSUTILS_CursorAreaHeight]));
-	ACSUtils[ACSUTILS_CursorPrevX] = FixedMul(ACSUtils[ACSUTILS_CursorPrevX], FixedDiv(width, ACSUtils[ACSUTILS_CursorAreaWidth]));
-	ACSUtils[ACSUTILS_CursorPrevY] = FixedMul(ACSUtils[ACSUTILS_CursorPrevY], FixedDiv(height, ACSUtils[ACSUTILS_CursorAreaHeight]));
-	ACSUtils[ACSUTILS_CursorMotionX] = FixedMul(ACSUtils[ACSUTILS_CursorMotionX], FixedDiv(width, ACSUtils[ACSUTILS_CursorAreaWidth]));
-	ACSUtils[ACSUTILS_CursorMotionY] = FixedMul(ACSUtils[ACSUTILS_CursorMotionY], FixedDiv(height, ACSUtils[ACSUTILS_CursorAreaHeight]));
+	$CursorX = FixedMul($CursorX, FixedDiv(width, $CursorAreaWidth));
+	$CursorY = FixedMul($CursorY, FixedDiv(height, $CursorAreaHeight));
+	$CursorPrevX = FixedMul($CursorPrevX, FixedDiv(width, $CursorAreaWidth));
+	$CursorPrevY = FixedMul($CursorPrevY, FixedDiv(height, $CursorAreaHeight));
+	$CursorMotionX = FixedMul($CursorMotionX, FixedDiv(width, $CursorAreaWidth));
+	$CursorMotionY = FixedMul($CursorMotionY, FixedDiv(height, $CursorAreaHeight));
 
-	ACSUtils[ACSUTILS_CursorAreaWidth] = width;
-	ACSUtils[ACSUTILS_CursorAreaHeight] = height;
+	$CursorAreaWidth = width;
+	$CursorAreaHeight = height;
 }
 
 function void UpdateCursor(void)
 {
-	ACSUtils[ACSUTILS_CursorPrevX] = ACSUtils[ACSUTILS_CursorX];
-	ACSUtils[ACSUTILS_CursorPrevY] = ACSUtils[ACSUTILS_CursorY];
+	$CursorPrevX = $CursorX;
+	$CursorPrevY = $CursorY;
 
 	int sensitivity = a_GetCVarFixed("mouse_sensitivity");
-	int speedX = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedX], FixedMul(a_GetCVarFixed("m_yaw"), sensitivity));
-	int speedY = FixedDiv(ACSUtils[ACSUTILS_CursorSpeedY], FixedMul(a_GetCVarFixed("m_pitch"), sensitivity));
+	int speedX = FixedDiv($CursorSpeedX, FixedMul(a_GetCVarFixed("m_yaw"), sensitivity));
+	int speedY = FixedDiv($CursorSpeedY, FixedMul(a_GetCVarFixed("m_pitch"), sensitivity));
 	
-	speedX = FixedMul(speedX * 2, ACSUtils[ACSUTILS_CursorAreaWidth]) / 64000;
-	speedY = FixedMul(speedY * 2, ACSUtils[ACSUTILS_CursorAreaHeight]) / 32000;
+	speedX = FixedMul(speedX * 2, $CursorAreaWidth) / 64000;
+	speedY = FixedMul(speedY * 2, $CursorAreaHeight) / 32000;
 
 	int dx = -GetPlayerInput(ConsolePlayerNumber(), INPUT_YAW)   * speedX;
     int dy = -GetPlayerInput(ConsolePlayerNumber(), INPUT_PITCH) * speedY;
@@ -138,9 +157,9 @@ function void UpdateCursor(void)
 	if (GetCVar("invertmouse"))
         dy = -dy;
 		
-	ACSUtils[ACSUTILS_CursorMotionX] = dx;
-	ACSUtils[ACSUTILS_CursorMotionY] = dy;
-	ACSUtils[ACSUTILS_CursorX] += dx;
-	ACSUtils[ACSUTILS_CursorY] += dy;
+	$CursorMotionX = dx;
+	$CursorMotionY = dy;
+	$CursorX += dx;
+	$CursorY += dy;
 	ACSUtils_ClampCursor();
 }

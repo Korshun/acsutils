@@ -2,18 +2,21 @@
 #libdefine PORT_GZDOOM 2
 #libdefine PORT_ZANDRONUM 3
 
+@int CachedPort = -1;
+@int CachedIsZandronum212 = -1;
+
 // Port identification methods copied from ACS-X
 function int IdentifySourcePort(void)
 {
-	if (ACSUtils[ACSUTILS_CachedPort] != -1)
-		return ACSUtils[ACSUTILS_CachedPort];
+	if ($CachedPort != -1)
+		return $CachedPort;
 
 	if (GetPlayerAccountName(0) != 0)
 	{
 		// GetPlayerAccountName returns a string (possibly empty) in Zandronum
 		// but 0 in GZDoom.
-		ACSUtils[ACSUTILS_CachedPort] = PORT_ZANDRONUM;
-		return ACSUtils[ACSUTILS_CachedPort];
+		$CachedPort = PORT_ZANDRONUM;
+		return $CachedPort;
 	}
 	
 	int tid = UniqueTid();
@@ -21,12 +24,12 @@ function int IdentifySourcePort(void)
 	{
 		// DynamicLight is a built-in actor in GZDoom.
 		Thing_Remove(tid);
-		ACSUtils[ACSUTILS_CachedPort] = PORT_GZDOOM;
-		return ACSUtils[ACSUTILS_CachedPort];
+		$CachedPort = PORT_GZDOOM;
+		return $CachedPort;
 	}
 	
-	ACSUtils[ACSUTILS_CachedPort] = PORT_ZDOOM;
-	return ACSUtils[ACSUTILS_CachedPort];
+	$CachedPort = PORT_ZDOOM;
+	return $CachedPort;
 }
 
 function str GetPortName(void)
@@ -63,11 +66,11 @@ script "ACSUtils_SupportsNamedScripts" (void)
 
 function bool IsZandronum212(void)
 {
-	if (ACSUtils[ACSUtils_CachedIsZandronum212] != -1)
-		return ACSUtils[ACSUtils_CachedIsZandronum212];
+	if ($CachedIsZandronum212 != -1)
+		return $CachedIsZandronum212;
 		
-	ACSUtils[ACSUtils_CachedIsZandronum212] = IsZandronum() && !ACS_NamedExecuteWithResult("ACSUtils_SupportsNamedScripts");
-	return ACSUtils[ACSUtils_CachedIsZandronum212];
+	$CachedIsZandronum212 = IsZandronum() && !ACS_NamedExecuteWithResult("ACSUtils_SupportsNamedScripts");
+	return $CachedIsZandronum212;
 }
 
 function bool IsServer(void)
