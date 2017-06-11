@@ -1,7 +1,7 @@
 // By FusedQyou
-function bool keyBound (str key)
+function bool KeyBound (str key)
 {
-	return StrEquals(StrParam(k:key), StrParam(s:"??? (", s:key, s:")"));
+	return !StrEquals(StrParam(k:key), StrParam(s:"??? (", s:key, s:")"));
 }
 
 // By Monsterovich.
