@@ -13,6 +13,7 @@ function int GetPlayerTeam(int player)
 	return GetPlayerInfo(player, PLAYERINFO_TEAM);
 }
 
+// ConsolePlayer stuff
 function bool ConsolePlayerInGame(void)
 {
 	return PlayerInGame(ConsolePlayerNumber());
@@ -28,10 +29,6 @@ function int ConsolePlayerTeam(void)
 	return GetPlayerTeam(ConsolePlayerNumber());
 }
 
-function bool PlayerIsConnected(int player)
-{
-	return PlayerInGame(player) || PlayerIsSpectator(player);
-}
 
 function bool SetActivatorToPlayer2(int player)
 {
@@ -44,10 +41,22 @@ function bool SetActivatorToPlayer2(int player)
 	return SetActivator(0, AAPTR_PLAYER1<<player);
 }
 
+
+// PlayerIsBot is native
+
+function bool PlayerIsConnected(int player)
+{
+	return PlayerInGame(player) || PlayerIsSpectator(player);
+}
+
 function bool PlayerIsDeadSpectator(int player)
 {
 	return PlayerIsSpectator(player) == 2;
 }
+
+// PlayerInGame is native
+
+// PlayerIsSpectator is native
 
 
 function int BotCount(void)
@@ -68,15 +77,6 @@ function int ClientCount(void)
 	return count;
 }
 
-function int SpectatorCount(void)
-{
-	int count = 0;
-	for (int i = 0; i < MAX_PLAYERS; i++)
-		if (PlayerIsSpectator(i))
-			count++;
-	return count;
-}
-
 function int DeadSpectatorCount(void)
 {
 	int count = 0;
@@ -86,14 +86,51 @@ function int DeadSpectatorCount(void)
 	return count;
 }
 
+// PlayerCount is native
+
+function int SpectatorCount(void)
+{
+	int count = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsSpectator(i))
+			count++;
+	return count;
+}
+
 
 int ACSUtils_Players[MAX_PLAYERS];
+
+function int PickRandomBot(void)
+{
+	int numPlayers = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsBot(i))
+			ACSUtils_Players[numPlayers++] = i;
+	
+	if (numPlayers == 0)
+		return -1;
+	
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
+}
 
 function int PickRandomClient(void)
 {
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsConnected(i))
+			ACSUtils_Players[numPlayers++] = i;
+	
+	if (numPlayers == 0)
+		return -1;
+	
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
+}
+
+function int PickRandomDeadSpectator(void)
+{
+	int numPlayers = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsDeadSpectator(i))
 			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
@@ -120,32 +157,6 @@ function int PickRandomSpectator(void)
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsSpectator(i))
-			ACSUtils_Players[numPlayers++] = i;
-	
-	if (numPlayers == 0)
-		return -1;
-	
-	return ACSUtils_Players[Random(0, numPlayers - 1)];
-}
-
-function int PickRandomBot(void)
-{
-	int numPlayers = 0;
-	for (int i = 0; i < MAX_PLAYERS; i++)
-		if (PlayerIsBot(i))
-			ACSUtils_Players[numPlayers++] = i;
-	
-	if (numPlayers == 0)
-		return -1;
-	
-	return ACSUtils_Players[Random(0, numPlayers - 1)];
-}
-
-function int PickRandomDeadSpectator(void)
-{
-	int numPlayers = 0;
-	for (int i = 0; i < MAX_PLAYERS; i++)
-		if (PlayerIsDeadSpectator(i))
 			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
