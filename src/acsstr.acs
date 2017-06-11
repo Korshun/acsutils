@@ -244,7 +244,7 @@ function bool IsColorCodeChar(int c)
 
 function int SkipColorCodeAt(str s, int i)
 {
-	if (GetChar(s, i) == 28)
+	if (GetChar(s, i) == COLORCODE)
 	{
 		i++;
 	}
@@ -283,7 +283,7 @@ function bool HasColorCodes(str s)
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
 	{
-		if (GetChar(s, i) == 28)
+		if (GetChar(s, i) == COLORCODE)
 			i += 1;
 		else
 			continue;
