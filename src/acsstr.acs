@@ -217,7 +217,7 @@ function bool StrStartsWith(str s, str sub)
 	return StrEqualsAt(s, 0, sub);
 }
 
-function str StrRepeat(int s, int n)
+function str StrRepeat(str s, int n)
 {
 	int result = "";
 	for (int i = 0; i < n; i++)
