@@ -29,6 +29,11 @@ function int ConsolePlayerTeam(void)
 	return GetPlayerTeam(ConsolePlayerNumber());
 }
 
+function bool SetActivatorToConsolePlayer(void)
+{
+	return SetActivatorToPlayer2(ConsolePlayerNumber());
+}
+
 
 function bool SetActivatorToPlayer2(int player)
 {
