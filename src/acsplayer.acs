@@ -13,6 +13,17 @@ function bool PlayerIsConnected(int player)
 	return PlayerInGame(player) || PlayerIsSpectator(player);
 }
 
+function bool SetActivatorToPlayer2(int player)
+{
+	if (SetActviatorToPlayer(player))
+		return true;
+		
+	if (player >= 0 && player < 8)
+		return false;
+		
+	return SetActivator(0, AAPTR_PLAYER1<<player);
+}
+
 
 function int BotCount(void)
 {
