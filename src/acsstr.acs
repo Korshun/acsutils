@@ -1,8 +1,3 @@
-#define ASCII_LETTERS_BIG_START 	65 	// A
-#define ASCII_LETTERS_BIG_END		90 	// Z
-#define ASCII_LETTERS_SMALL_START	97 	// a
-#define ASCII_LETTERS_SMALL_END		122 	// z
-
 function str StrAdd(str a, str b)
 {
 	return StrParam(s:a, s:b);
