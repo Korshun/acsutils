@@ -1,3 +1,9 @@
+// By FusedQyou
+function bool keyBound (str key)
+{
+	return StrEquals(StrParam(k:key), StrParam(s:"??? (", s:key, s:")"));
+}
+
 // By Monsterovich.
 
 function bool KeyUp(int key)
