@@ -1,7 +1,11 @@
 #libdefine INT_MAX 0x7fffffff
 #libdefine INT_MIN 0x80000000
+#libdefine USHORT_MAX 65535
 #libdefine SHORT_MAX 32767
 #libdefine SHORT_MIN -32768
+#libdefine UBYTE_MAX 255
+#libdefine SBYTE_MAX 127
+#libdefine SBYTE_MIN -128
 
 #libdefine PI  3.1415926535897932384626433832795
 #libdefine TAU 6.2831853071795864769252867665590
