@@ -275,6 +275,12 @@ function str StrEscape(str s)
 	return result;
 }
 
+function str StrRepr(str s)
+{
+	return StrParam(c:'"', s:StrEscape(s), c:'"');
+}
+
+
 // Color codes.
 
 function bool IsColorCodeChar(int c)
