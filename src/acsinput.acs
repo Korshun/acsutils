@@ -152,3 +152,44 @@ function bool PlayerKeyReleasedAny(int player, int key)
 	if (newbuttons & key) { return true; }
 		return false;
 }
+
+
+function bool KeyToggled(int key)
+{
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons);
+
+	if ((newbuttons & key) == key) { return true; }
+		return false;
+}
+
+function bool KeyToggledAny(int key)
+{
+	int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons);
+
+	if (newbuttons & key) { return true; }
+		return false;
+}
+
+function bool PlayerKeyToggled(int player, int key)
+{
+	int buttons     = GetPlayerInput(player, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(player, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons);
+
+	if ((newbuttons & key) == key) { return true; }
+		return false;
+}
+
+function bool PlayerKeyToggledAny(int player, int key)
+{
+	int buttons     = GetPlayerInput(player, INPUT_BUTTONS);
+	int oldbuttons  = GetPlayerInput(player, INPUT_OLDBUTTONS);
+	int newbuttons  = (buttons ^ oldbuttons);
+
+	if (newbuttons & key) { return true; }
+		return false;
+}
