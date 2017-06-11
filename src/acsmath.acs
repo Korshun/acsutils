@@ -303,8 +303,8 @@ function void swap(int a, int b)
 	r2 = a;
 }
 
-// bool getbit(int x, int n)
-function bool getbit(int x, int n)
+// int getbit(int x, int n)
+function int getbit(int x, int n)
 {
 	return x & (1 << n);
 }
