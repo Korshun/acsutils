@@ -1,5 +1,6 @@
 #libdefine MAX_PLAYERS 64
 #libdefine MAX_PLAYERS_ZDOOM 8
+#libdefine TEAM_NONE 255
 
 // Inventory functions.
 
