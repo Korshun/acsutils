@@ -115,19 +115,19 @@ function int trunc(int x)
 }
 
 // fixed floor(fixed x)
-/* ZDOOM DEFINES ITS OWN VERSION OF floor THAT SILENTLY RETURNS 0 IN ZANDRONUM, PLEASE REMOVE floor FROM zspecial.acs */ function int floor(int x)
+/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */ function int floor(int x)
 {
 	return x & 0xffff0000;
 }
 
 // fixed ceil(fixed x)
-/* ZDOOM DEFINES ITS OWN VERSION OF ceil THAT SILENTLY RETURNS 0 IN ZANDRONUM, PLEASE REMOVE ceil FROM zspecial.acs */ function int ceil(int x)
+/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */function int ceil(int x)
 {
 	return ((x - 1) & 0xffff0000) + 1.0;
 }
 
 // fixed round(fixed x)
-/* ZDOOM DEFINES ITS OWN VERSION OF round THAT SILENTLY RETURNS 0 IN ZANDRONUM, PLEASE REMOVE round FROM zspecial.acs */ function int round(int x)
+/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */ function int round(int x)
 {
 	return (x + 0.5) & 0xffff0000;
 }
