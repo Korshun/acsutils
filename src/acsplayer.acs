@@ -13,6 +13,21 @@ function int GetPlayerTeam(int player)
 	return GetPlayerInfo(player, PLAYERINFO_TEAM);
 }
 
+function bool ConsolePlayerInGame(void)
+{
+	return PlayerInGame(ConsolePlayerNumber());
+}
+
+function str ConsolePlayerName(void)
+{
+	return PlayerName(ConsolePlayerNumber());
+}
+
+function int ConsolePlayerTeam(void)
+{
+	return GetPlayerTeam(ConsolePlayerNumber());
+}
+
 function bool PlayerIsConnected(int player)
 {
 	return PlayerInGame(player) || PlayerIsSpectator(player);
