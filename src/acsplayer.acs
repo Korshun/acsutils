@@ -15,7 +15,7 @@ function bool PlayerIsConnected(int player)
 
 function bool SetActivatorToPlayer2(int player)
 {
-	if (SetActviatorToPlayer(player))
+	if (SetActivatorToPlayer(player))
 		return true;
 		
 	if (player >= 0 && player < 8)
