@@ -80,7 +80,7 @@ function bool IsServer(void)
 		
 	// Needs to be done like this to avoid crashing the script in ZDoom.
 	if (IsZandronum())
-		return !IsMultiplayer();
+		return !IsNetworkGame();
 	
 	return true;
 }
