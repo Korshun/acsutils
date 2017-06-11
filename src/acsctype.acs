@@ -1,4 +1,4 @@
-#libdefine COLORCODE 20
+#libdefine COLORCODE 28
 
 #define ACSUTILS_ISALNUM 1
 #define ACSUTILS_ISALPHA 2
