@@ -103,6 +103,11 @@ function int cond(bool x, int whentrue, int whenfalse)
 
 // Rounding.
 
+function int frac(int x)
+{
+	return x - trunc(x);
+}
+
 // fixed trunc(fixed x)
 function int trunc(int x)
 {
