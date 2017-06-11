@@ -270,6 +270,14 @@ function void HudSetCameraAngles(int angle, int pitch)
 	$R3D_CameraPitch = pitch;
 }
 
+function void HudSetCameraVector(int x, int y, int z)
+{
+	VectorToAngles(x, y, z);
+	$R3D_CameraAngle = r1;
+	$R3D_CameraPitch = r2;
+}
+
+
 #libdefine HUD_CAMERAACTOR_NOPOSITION 1
 #libdefine HUD_CAMERAACTOR_NOPREDICTION 2
 #libdefine HUD_CAMERAACTOR_NODIRECTION 4
