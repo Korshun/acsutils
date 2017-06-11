@@ -145,7 +145,7 @@ def main():
 	out.write('};\n\n')
 	
 	# write string vars array
-	out.write('int ACSUtils_Strings[%d] = {\n' % len(strs))
+	out.write('str ACSUtils_Strings[%d] = {\n' % len(strs))
 	for var in strs:
 		if var.type == 'str':
 			out.write('\t%s, // %s\n' % (var.value, var.name))
