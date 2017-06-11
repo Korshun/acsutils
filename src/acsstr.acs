@@ -43,6 +43,11 @@ function bool StrEquals(str a, str b)
     return StrCmp(a, b) == 0;
 }	
 
+function bool StrIEquals(str a, str b)
+{
+	return StrICmp(a, b) == 0;
+}
+
 function bool StrEqualsAt(str s, int where, str what)
 {
 	int len = StrLen(what);
