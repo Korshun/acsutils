@@ -225,6 +225,55 @@ function str StrRepeat(str s, int n)
 	return result;
 }
 
+function str StrEscape(str s)
+{
+	str result = "";
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+	{
+		int c = GetChar(s, i);
+		switch (c)
+		{
+		case '\a':
+			result = StrParam(s:result, s:"\\a");
+			break;
+		case '\b':
+			result = StrParam(s:result, s:"\\b");
+			break;
+		case COLORCODE: // '\c' is not supported by ACC
+			result = StrParam(s:result, s:"\\c");
+			break;
+		case '\f':
+			result = StrParam(s:result, s:"\\f");
+			break;
+		case '\n':
+			result = StrParam(s:result, s:"\\n");
+			break;
+		case '\r':
+			result = StrParam(s:result, s:"\\r");
+			break;
+		case '\t':
+			result = StrParam(s:result, s:"\\t");
+			break;
+		case '\v':
+			result = StrParam(s:result, s:"\\v");
+			break;
+		case '\\':
+			result = StrParam(s:result, s:"\\\\");
+			break;
+		case '\'':
+			result = StrParam(s:result, s:"'");
+			break;
+		case '"':
+			result = StrParam(s:result, s:"\"");
+			break;
+		default:
+			result = StrParam(s:result, c:c);
+			break;
+		}
+	}
+	return result;
+}
 
 // Color codes.
 
