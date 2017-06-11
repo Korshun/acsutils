@@ -332,6 +332,12 @@ function int tglbit(int p, int n)
 	return p ^ (1 << n);
 }
 
+function bool randbool(void)
+{
+	return Random(false, true);
+}
+
+
 // Logarithms.
 
 // All logaritm functions written by TechnoDoomed1 unless stated otherwise
