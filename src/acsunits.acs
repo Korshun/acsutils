@@ -7,7 +7,7 @@ function int deg2ang(int degrees)
 
 function int rad2ang(int radians)
 {
-	return FixedDiv(radians, PI * 2);
+	return FixedDiv(radians, TAU);
 }
 
 function int ang2deg(int angle)
@@ -17,7 +17,7 @@ function int ang2deg(int angle)
 
 function int ang2rad(int angle)
 {
-	return FixedMul(angle, PI * 2);
+	return FixedMul(angle, TAU);
 }
 
 function int deg2rad(int degrees)
