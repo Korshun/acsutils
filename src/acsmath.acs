@@ -309,6 +309,24 @@ function bool isset(int x, int n)
 	return x & (1 << n);
 }
 
+// int clrbit(int x, int n)
+function int clrbit(int p, int n)
+{
+	return p & ~(1 << n);
+}
+
+// int setbit(int x, int n)
+function int setbit(int p, int n)
+{
+	return p | ~(1 << n);
+}
+
+// int tglbit (int x, int n)
+function int tglbit(int p, int n)
+{
+	return p ^ (1 << n);
+}
+
 // Logarithms.
 
 // All logaritm functions written by TechnoDoomed1 unless stated otherwise
