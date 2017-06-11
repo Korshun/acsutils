@@ -661,7 +661,7 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 	// for 9 hours.
 	int stayTime = $R_StayTime;
 	if (stayTime < 0)
-		stayTime = 32767.0;
+		stayTime = INT_MAX;
 	
 	if ($R_ShowToEveryone)
 	{
