@@ -40,6 +40,14 @@ function void ToggleInventory(str item)
 		SetInventory(item, 1);
 }
 
+function void ToggleActorInventory(int tid, str item)
+{
+	if (CheckActorInventory(tid, item) > 0)
+		SetActorInventory(tid, item, 0);
+	else
+		SetActorInventory(tid, item, 1);
+}
+
 
 // CVar functions.
 
