@@ -208,30 +208,6 @@ function void LookAt(int tid, int target)
 }
 
 
-// Actor property shorthands with network optimization.
-// Idea from AOW.
-
-function int  GetActorHealth(int tid) { return GetActorProperty(tid, APROP_HEALTH); } 
-function void SetActorHealth(int tid, int hp)
-{ 
-	if (GetActorProperty(tid, APROP_HEALTH) != hp)
-		SetActorProperty(tid, APROP_HEALTH, hp);
-}
-
-function int  GetActorSpawnHealth(int tid) { return GetActorProperty(tid, APROP_SPAWNHEALTH); }
-function void SetActorSpawnHealth(int tid, int shp)
-{
-	if (GetActorProperty(tid, APROP_SPAWNHEALTH) != shp)
-		SetActorProperty(tid, APROP_SPAWNHEALTH, shp);
-}
-
-function int GetActorSpeed(int tid) { return GetActorProperty(tid, APROP_SPEED); }
-function void SetActorSpeed (int tid, int value)
-{
-	if (GetActorProperty(tid, APROP_SPEED) != value)
-		SetActorProperty(tid, APROP_SPEED, value);
-}
-
 // ChangeFlag
 
 // Implementation from ACS-X.

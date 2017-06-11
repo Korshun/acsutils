@@ -16,6 +16,7 @@ files = [
 	"acsinput.acs",
 	"acsunits.acs",
 	"acsparse.acs",
+	"acsaprop.acs",
 	"acsplayer.acs",
 	"acstid.acs",
 	"acscursor.acs",

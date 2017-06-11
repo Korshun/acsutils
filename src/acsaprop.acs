@@ -1,0 +1,318 @@
+// Actor property shorthands with network optimization.
+// Idea from AOW.
+
+
+/*
+int Accuracy
+fixed Alpha
+bool Ambush
+fixed AttackZOffset
+bool ChaseGoal
+int Damage
+fixed DamageFactor
+fixed DamageMultiplier
+str DamageType
+bool Dormant
+bool Dropped
+fixed Friction
+bool Friendly
+bool Frightened
+fixed Gravity
+int Health
+bool Invulnerable
+fixed JumpZ
+int Mass
+int MasterTID
+fixed MaxDropOffHeight
+fixed MaxStepHeight
+fixed MeleeRange
+bool NoTrigger
+bool NoTarget
+fixed Radius
+int ReactionTime
+int RenderStyle
+fixed ScaleX
+fixed ScaleY
+int Score
+int SpawnHealth
+fixed Speed
+int Stamina
+int StencilColor
+int TargetTID
+int TracerTID
+fixed ViewHeight
+int Waterlevel
+*/
+
+function int GetActorAccuracy(int tid) { return GetActorProperty(tid, APROP_Accuracy); }
+function void SetActorAccuracy(int tid, int Accuracy)
+{
+	if (GetActorProperty(tid, APROP_Accuracy) != Accuracy)
+		SetActorProperty(tid, APROP_Accuracy, Accuracy);
+}
+
+function int GetActorAlpha(int tid) { return GetActorProperty(tid, APROP_Alpha); }
+function void SetActorAlpha(int tid, int Alpha)
+{
+	if (GetActorProperty(tid, APROP_Alpha) != Alpha)
+		SetActorProperty(tid, APROP_Alpha, Alpha);
+}
+
+function bool GetActorAmbush(int tid) { return GetActorProperty(tid, APROP_Ambush); }
+function void SetActorAmbush(int tid, bool Ambush)
+{
+	if (GetActorProperty(tid, APROP_Ambush) != Ambush)
+		SetActorProperty(tid, APROP_Ambush, Ambush);
+}
+
+function int GetActorAttackZOffset(int tid) { return GetActorProperty(tid, APROP_AttackZOffset); }
+function void SetActorAttackZOffset(int tid, int AttackZOffset)
+{
+	if (GetActorProperty(tid, APROP_AttackZOffset) != AttackZOffset)
+		SetActorProperty(tid, APROP_AttackZOffset, AttackZOffset);
+}
+
+function bool GetActorChaseGoal(int tid) { return GetActorProperty(tid, APROP_ChaseGoal); }
+function void SetActorChaseGoal(int tid, bool ChaseGoal)
+{
+	if (GetActorProperty(tid, APROP_ChaseGoal) != ChaseGoal)
+		SetActorProperty(tid, APROP_ChaseGoal, ChaseGoal);
+}
+
+function int GetActorDamage(int tid) { return GetActorProperty(tid, APROP_Damage); }
+function void SetActorDamage(int tid, int Damage)
+{
+	if (GetActorProperty(tid, APROP_Damage) != Damage)
+		SetActorProperty(tid, APROP_Damage, Damage);
+}
+
+function int GetActorDamageFactor(int tid) { return GetActorProperty(tid, APROP_DamageFactor); }
+function void SetActorDamageFactor(int tid, int DamageFactor)
+{
+	if (GetActorProperty(tid, APROP_DamageFactor) != DamageFactor)
+		SetActorProperty(tid, APROP_DamageFactor, DamageFactor);
+}
+
+function int GetActorDamageMultiplier(int tid) { return GetActorProperty(tid, APROP_DamageMultiplier); }
+function void SetActorDamageMultiplier(int tid, int DamageMultiplier)
+{
+	if (GetActorProperty(tid, APROP_DamageMultiplier) != DamageMultiplier)
+		SetActorProperty(tid, APROP_DamageMultiplier, DamageMultiplier);
+}
+
+function str GetActorDamageType(int tid) { return GetActorProperty(tid, APROP_DamageType); }
+function void SetActorDamageType(int tid, str DamageType)
+{
+	if (GetActorProperty(tid, APROP_DamageType) != DamageType)
+		SetActorProperty(tid, APROP_DamageType, DamageType);
+}
+
+function bool GetActorDormant(int tid) { return GetActorProperty(tid, APROP_Dormant); }
+function void SetActorDormant(int tid, bool Dormant)
+{
+	if (GetActorProperty(tid, APROP_Dormant) != Dormant)
+		SetActorProperty(tid, APROP_Dormant, Dormant);
+}
+
+function bool GetActorDropped(int tid) { return GetActorProperty(tid, APROP_Dropped); }
+function void SetActorDropped(int tid, bool Dropped)
+{
+	if (GetActorProperty(tid, APROP_Dropped) != Dropped)
+		SetActorProperty(tid, APROP_Dropped, Dropped);
+}
+
+function int GetActorFriction(int tid) { return GetActorProperty(tid, APROP_Friction); }
+function void SetActorFriction(int tid, int Friction)
+{
+	if (GetActorProperty(tid, APROP_Friction) != Friction)
+		SetActorProperty(tid, APROP_Friction, Friction);
+}
+
+function bool GetActorFriendly(int tid) { return GetActorProperty(tid, APROP_Friendly); }
+function void SetActorFriendly(int tid, bool Friendly)
+{
+	if (GetActorProperty(tid, APROP_Friendly) != Friendly)
+		SetActorProperty(tid, APROP_Friendly, Friendly);
+}
+
+function bool GetActorFrightened(int tid) { return GetActorProperty(tid, APROP_Frightened); }
+function void SetActorFrightened(int tid, bool Frightened)
+{
+	if (GetActorProperty(tid, APROP_Frightened) != Frightened)
+		SetActorProperty(tid, APROP_Frightened, Frightened);
+}
+
+function int GetActorGravity(int tid) { return GetActorProperty(tid, APROP_Gravity); }
+function void SetActorGravity(int tid, int Gravity)
+{
+	if (GetActorProperty(tid, APROP_Gravity) != Gravity)
+		SetActorProperty(tid, APROP_Gravity, Gravity);
+}
+
+function int GetActorHealth(int tid) { return GetActorProperty(tid, APROP_Health); }
+function void SetActorHealth(int tid, int Health)
+{
+	if (GetActorProperty(tid, APROP_Health) != Health)
+		SetActorProperty(tid, APROP_Health, Health);
+}
+
+function bool GetActorInvulnerable(int tid) { return GetActorProperty(tid, APROP_Invulnerable); }
+function void SetActorInvulnerable(int tid, bool Invulnerable)
+{
+	if (GetActorProperty(tid, APROP_Invulnerable) != Invulnerable)
+		SetActorProperty(tid, APROP_Invulnerable, Invulnerable);
+}
+
+function int GetActorJumpZ(int tid) { return GetActorProperty(tid, APROP_JumpZ); }
+function void SetActorJumpZ(int tid, int JumpZ)
+{
+	if (GetActorProperty(tid, APROP_JumpZ) != JumpZ)
+		SetActorProperty(tid, APROP_JumpZ, JumpZ);
+}
+
+function int GetActorMass(int tid) { return GetActorProperty(tid, APROP_Mass); }
+function void SetActorMass(int tid, int Mass)
+{
+	if (GetActorProperty(tid, APROP_Mass) != Mass)
+		SetActorProperty(tid, APROP_Mass, Mass);
+}
+
+function int GetActorMasterTID(int tid) { return GetActorProperty(tid, APROP_MasterTID); }
+function void SetActorMasterTID(int tid, int MasterTID)
+{
+	if (GetActorProperty(tid, APROP_MasterTID) != MasterTID)
+		SetActorProperty(tid, APROP_MasterTID, MasterTID);
+}
+
+function int GetActorMaxDropOffHeight(int tid) { return GetActorProperty(tid, APROP_MaxDropOffHeight); }
+function void SetActorMaxDropOffHeight(int tid, int MaxDropOffHeight)
+{
+	if (GetActorProperty(tid, APROP_MaxDropOffHeight) != MaxDropOffHeight)
+		SetActorProperty(tid, APROP_MaxDropOffHeight, MaxDropOffHeight);
+}
+
+function int GetActorMaxStepHeight(int tid) { return GetActorProperty(tid, APROP_MaxStepHeight); }
+function void SetActorMaxStepHeight(int tid, int MaxStepHeight)
+{
+	if (GetActorProperty(tid, APROP_MaxStepHeight) != MaxStepHeight)
+		SetActorProperty(tid, APROP_MaxStepHeight, MaxStepHeight);
+}
+
+function int GetActorMeleeRange(int tid) { return GetActorProperty(tid, APROP_MeleeRange); }
+function void SetActorMeleeRange(int tid, int MeleeRange)
+{
+	if (GetActorProperty(tid, APROP_MeleeRange) != MeleeRange)
+		SetActorProperty(tid, APROP_MeleeRange, MeleeRange);
+}
+
+function bool GetActorNoTrigger(int tid) { return GetActorProperty(tid, APROP_NoTrigger); }
+function void SetActorNoTrigger(int tid, bool NoTrigger)
+{
+	if (GetActorProperty(tid, APROP_NoTrigger) != NoTrigger)
+		SetActorProperty(tid, APROP_NoTrigger, NoTrigger);
+}
+
+function bool GetActorNoTarget(int tid) { return GetActorProperty(tid, APROP_NoTarget); }
+function void SetActorNoTarget(int tid, bool NoTarget)
+{
+	if (GetActorProperty(tid, APROP_NoTarget) != NoTarget)
+		SetActorProperty(tid, APROP_NoTarget, NoTarget);
+}
+
+function int GetActorRadius(int tid) { return GetActorProperty(tid, APROP_Radius); }
+function void SetActorRadius(int tid, int Radius)
+{
+	if (GetActorProperty(tid, APROP_Radius) != Radius)
+		SetActorProperty(tid, APROP_Radius, Radius);
+}
+
+function int GetActorReactionTime(int tid) { return GetActorProperty(tid, APROP_ReactionTime); }
+function void SetActorReactionTime(int tid, int ReactionTime)
+{
+	if (GetActorProperty(tid, APROP_ReactionTime) != ReactionTime)
+		SetActorProperty(tid, APROP_ReactionTime, ReactionTime);
+}
+
+function int GetActorRenderStyle(int tid) { return GetActorProperty(tid, APROP_RenderStyle); }
+function void SetActorRenderStyle(int tid, int RenderStyle)
+{
+	if (GetActorProperty(tid, APROP_RenderStyle) != RenderStyle)
+		SetActorProperty(tid, APROP_RenderStyle, RenderStyle);
+}
+
+function int GetActorScaleX(int tid) { return GetActorProperty(tid, APROP_ScaleX); }
+function void SetActorScaleX(int tid, int ScaleX)
+{
+	if (GetActorProperty(tid, APROP_ScaleX) != ScaleX)
+		SetActorProperty(tid, APROP_ScaleX, ScaleX);
+}
+
+function int GetActorScaleY(int tid) { return GetActorProperty(tid, APROP_ScaleY); }
+function void SetActorScaleY(int tid, int ScaleY)
+{
+	if (GetActorProperty(tid, APROP_ScaleY) != ScaleY)
+		SetActorProperty(tid, APROP_ScaleY, ScaleY);
+}
+
+function int GetActorScore(int tid) { return GetActorProperty(tid, APROP_Score); }
+function void SetActorScore(int tid, int Score)
+{
+	if (GetActorProperty(tid, APROP_Score) != Score)
+		SetActorProperty(tid, APROP_Score, Score);
+}
+
+function int GetActorSpawnHealth(int tid) { return GetActorProperty(tid, APROP_SpawnHealth); }
+function void SetActorSpawnHealth(int tid, int SpawnHealth)
+{
+	if (GetActorProperty(tid, APROP_SpawnHealth) != SpawnHealth)
+		SetActorProperty(tid, APROP_SpawnHealth, SpawnHealth);
+}
+
+function int GetActorSpeed(int tid) { return GetActorProperty(tid, APROP_Speed); }
+function void SetActorSpeed(int tid, int Speed)
+{
+	if (GetActorProperty(tid, APROP_Speed) != Speed)
+		SetActorProperty(tid, APROP_Speed, Speed);
+}
+
+function int GetActorStamina(int tid) { return GetActorProperty(tid, APROP_Stamina); }
+function void SetActorStamina(int tid, int Stamina)
+{
+	if (GetActorProperty(tid, APROP_Stamina) != Stamina)
+		SetActorProperty(tid, APROP_Stamina, Stamina);
+}
+
+function int GetActorStencilColor(int tid) { return GetActorProperty(tid, APROP_StencilColor); }
+function void SetActorStencilColor(int tid, int StencilColor)
+{
+	if (GetActorProperty(tid, APROP_StencilColor) != StencilColor)
+		SetActorProperty(tid, APROP_StencilColor, StencilColor);
+}
+
+function int GetActorTargetTID(int tid) { return GetActorProperty(tid, APROP_TargetTID); }
+function void SetActorTargetTID(int tid, int TargetTID)
+{
+	if (GetActorProperty(tid, APROP_TargetTID) != TargetTID)
+		SetActorProperty(tid, APROP_TargetTID, TargetTID);
+}
+
+function int GetActorTracerTID(int tid) { return GetActorProperty(tid, APROP_TracerTID); }
+function void SetActorTracerTID(int tid, int TracerTID)
+{
+	if (GetActorProperty(tid, APROP_TracerTID) != TracerTID)
+		SetActorProperty(tid, APROP_TracerTID, TracerTID);
+}
+
+// GetActorViewHeight is native
+function void SetActorViewHeight(int tid, int ViewHeight)
+{
+	if (GetActorProperty(tid, APROP_ViewHeight) != ViewHeight)
+		SetActorProperty(tid, APROP_ViewHeight, ViewHeight);
+}
+
+function int GetActorWaterlevel(int tid) { return GetActorProperty(tid, APROP_Waterlevel); }
+function void SetActorWaterlevel(int tid, int Waterlevel)
+{
+	if (GetActorProperty(tid, APROP_Waterlevel) != Waterlevel)
+		SetActorProperty(tid, APROP_Waterlevel, Waterlevel);
+}
