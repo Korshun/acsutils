@@ -138,3 +138,16 @@ function int PickRandomDeadSpectator(void)
 	
 	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
+
+function int PickRandomTeamPlayer(int team)
+{
+	int numPlayers = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (GetPlayerTeam(i) == team)
+			ACSUtils_Players[numPlayers++] = i;
+	
+	if (numPlayers == 0)
+		return -1;
+	
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
+}
