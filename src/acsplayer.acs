@@ -24,6 +24,11 @@ function bool SetActivatorToPlayer2(int player)
 	return SetActivator(0, AAPTR_PLAYER1<<player);
 }
 
+function bool PlayerIsDeadSpectator(int player)
+{
+	return PlayerIsSpectator(player) == 2;
+}
+
 
 function int BotCount(void)
 {
@@ -48,6 +53,15 @@ function int SpectatorCount(void)
 	int count = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsSpectator(i))
+			count++;
+	return count;
+}
+
+function int DeadSpectatorCount(void)
+{
+	int count = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsDeadSpectator(i))
 			count++;
 	return count;
 }
@@ -99,6 +113,19 @@ function int PickRandomBot(void)
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsBot(i))
+			ACSUtils_Players[numPlayers++] = i;
+	
+	if (numPlayers == 0)
+		return -1;
+	
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
+}
+
+function int PickRandomDeadSpectator(void)
+{
+	int numPlayers = 0;
+	for (int i = 0; i < MAX_PLAYERS; i++)
+		if (PlayerIsDeadSpectator(i))
 			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
