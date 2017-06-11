@@ -8,6 +8,11 @@ function str PlayerName(int num)
 	return StrParam(n:(num+1));
 }
 
+function int GetPlayerTeam(int player)
+{
+	return GetPlayerInfo(player, PLAYERINFO_TEAM);
+}
+
 function bool PlayerIsConnected(int player)
 {
 	return PlayerInGame(player) || PlayerIsSpectator(player);
