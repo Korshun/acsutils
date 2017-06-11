@@ -51,6 +51,14 @@ function int a_GetCVarFixed(str name)
 	return 0.0;
 }
 
+function int a_GetUserCVarFixed(int player, str name)
+{
+	str value = GetUserCVarString(player, name);
+	if (value != 0)
+		return atof(GetUserCVarString(player, name));
+	return 0.0;
+}
+
 
 // Screen info functions.
 
