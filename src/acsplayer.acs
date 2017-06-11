@@ -1,3 +1,8 @@
+function bool IsPlayer(void)
+{
+	return PlayerNumber() >= 0;
+}
+
 function str PlayerName(int num)
 {
 	return StrParam(n:(num+1));

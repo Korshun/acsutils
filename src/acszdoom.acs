@@ -113,11 +113,6 @@ function int ActorPlayerNumber(int tid)
 	return result;
 }
 
-function bool IsPlayer(void)
-{
-	return PlayerNumber() >= 0;
-}
-
 function bool ActorIsPlayer(int tid)
 {
 	return ActorPlayerNumber(tid) >= 0;
