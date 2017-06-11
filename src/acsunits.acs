@@ -22,12 +22,12 @@ function int ang2rad(int angle)
 
 function int deg2rad(int degrees)
 {
-	return ang2rad(deg2ang(degrees));
+	return FixedDiv(degrees, 57.29577951308232);
 }
 
 function int rad2deg(int radians)
 {
-	return ang2deg(rad2ang(radians));
+	return FixedMul(radians, 57.29577951308232);
 }
 
 
