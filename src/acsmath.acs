@@ -103,7 +103,7 @@ function int cond(bool x, int whentrue, int whenfalse)
 
 // Rounding.
 
-function int frac(int x)
+function int fract(int x)
 {
 	return x - trunc(x);
 }
