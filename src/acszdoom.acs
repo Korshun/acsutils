@@ -51,7 +51,7 @@ function void ToggleActorInventory(int tid, str item)
 
 // CVar functions.
 
-function int a_GetCVarFixed(str name)
+function int GetCVarFixed(str name)
 {
 	str value = GetCVarString(name);
 	if (value != 0)
@@ -184,7 +184,7 @@ function int GetActorVelocity(int tid)
 	return length3d(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
 }
 
-function int GetActorVelocityXY(int tid)
+function int GetActorXYVelocity(int tid)
 {
 	return length2d(GetActorVelX(tid), GetActorVelY(tid));
 }
