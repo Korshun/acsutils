@@ -190,49 +190,6 @@ function int lerp(int a, int b, int alpha)
 	return FixedMul(a, 1.0 - alpha) + FixedMul(b, alpha);
 }
 
-// From ZDoom wiki.
-// int zan_Sqrt(int number)
-function int zan_Sqrt(int number)
-{
-	if(number <= 3) { return number > 0; }
-
-	int oldAns = number >> 1,                     // initial guess
-	    newAns = (oldAns + number / oldAns) >> 1; // first iteration
-
-	// main iterative method
-	while(newAns < oldAns)
-	{
-		oldAns = newAns;
-		newAns = (oldAns + number / oldAns) >> 1;
-	}
-
-	return oldAns;
-}
-
-#libdefine FIXEDSQRT_EPS 0x1e6
-
-// By Monsterovich.
-// fixed zan_FixedSqrt(fixed number)
-function int zan_FixedSqrt(int a)
-{
-	int x = 0;
-	int y = a;
-	int val = 0;
-
-	// x & y shouldn't be zero
-	while ((x != 0 || y != 0) && y - x > FIXEDSQRT_EPS) 
-	{
-		val = FixedDiv(x + y, 2.0);
-
-        if (FixedMul(val, val) >= a)
-			y = val; 
-		else 
-			x = val;
-	}
-
-	return val;
-}
-
 // From commonFuncs.h by Ijon Tichy.
 // num gcf(num a, num b)
 function int gcf(int a, int b)
