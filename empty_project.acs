@@ -1,17 +1,4 @@
 #library "project"
 
-// ACSUtils settings:
-#define TIDALLOCSTART 15000
-
-// Includes:
 #include "zcommon.acs"
 #include "acsutils.acs"
-
-// Your project's error handler:
-function void ACSUtilsErrorHandler(int type, int message)
-{
-	Log(s:"error: ", s:message);
-	printbold(s:"error: ", s:message);
-}
-
-// Your project's code follows.
