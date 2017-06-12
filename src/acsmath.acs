@@ -296,7 +296,7 @@ function int bitlog2(int value)
     value |= value >> 4;
     value |= value >> 8;
     value |= value >> 16;
-    return ACSUtils_bitlog2table[(value*0x07C4ACDD) >> 27];
+    return bitlog2table[(value*0x07C4ACDD) >> 27];
 }
 
 
