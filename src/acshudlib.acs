@@ -1,5 +1,5 @@
-// When editing default values, also edit them in acsglobal.acs
 // When adding new properties, don't forget to edit ACSUTILS_HUDSTATE_SIZE.
+#define ACSUTILS_HUDLIB_SAVEDSTATES 16
 #define ACSUTILS_HUDSTATE_SIZE 39
 #define ACSUTILS_HUDLIB_STACKSIZE ACSUTILS_HUDSTATE_SIZE * ACSUTILS_HUDLIB_SAVEDSTATES
 
