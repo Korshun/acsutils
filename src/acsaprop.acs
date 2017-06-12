@@ -18,6 +18,7 @@ bool Friendly
 bool Frightened
 fixed Gravity
 int Health
+fixed Height
 bool Invulnerable
 fixed JumpZ
 int Mass
@@ -41,11 +42,11 @@ int TargetTID
 int TracerTID
 fixed ViewHeight
 int Waterlevel
-
 str DamageType
 str Nametag
 str Species
 str ActiveSound
+str AttackSound
 str DeathSound
 str PainSound
 str SeeSound
@@ -154,6 +155,13 @@ function void SetActorHealth(int tid, int Health)
 {
 	if (GetActorProperty(tid, APROP_Health) != Health)
 		SetActorProperty(tid, APROP_Health, Health);
+}
+
+function int GetActorHeight(int tid) { return GetActorProperty(tid, APROP_Height); }
+function void SetActorHeight(int tid, int Height)
+{
+	if (GetActorProperty(tid, APROP_Height) != Height)
+		SetActorProperty(tid, APROP_Height, Height);
 }
 
 function bool GetActorInvulnerable(int tid) { return GetActorProperty(tid, APROP_Invulnerable); }
@@ -345,6 +353,14 @@ function void SetActorActiveSound(int tid, str ActiveSound)
 	if (!StrEquals(GetActorProperty(tid, APROP_ActiveSound), ActiveSound))
 		SetActorProperty(tid, APROP_ActiveSound, ActiveSound);
 }
+
+function str GetActorAttackSound(int tid) { return GetActorProperty(tid, APROP_AttackSound); }
+function void SetActorAttackSound(int tid, str AttackSound)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_AttackSound), AttackSound))
+		SetActorProperty(tid, APROP_AttackSound, AttackSound);
+}
+
 
 function str GetActorDeathSound(int tid) { return GetActorProperty(tid, APROP_DeathSound); }
 function void SetActorDeathSound(int tid, str DeathSound)
