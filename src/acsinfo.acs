@@ -3,8 +3,6 @@
 #libdefine PORT_ZANDRONUM 3
 
 @int CachedPort = -1;
-@int CachedIsZandronum212 = -1;
-@int CachedNamedScriptsSupported = -1;
 
 // Port identification methods copied from ACS-X
 function int IdentifySourcePort(void)
@@ -58,29 +56,6 @@ function bool IsGZDoom(void)
 {
 	int port = IdentifySourcePort();
 	return port == PORT_GZDOOM || port == PORT_ZANDRONUM;
-}
-
-script "ACSUtils_SupportsNamedScripts" (void)
-{
-	SetResultValue(true);
-}
-
-function bool NamedScriptsSupported(void)
-{
-	if ($CachedNamedScriptsSupported != -1)
-		return $CachedNamedScriptsSupported;
-		
-	$CachedNamedScriptsSupported = ACS_NamedExecuteWithResult("ACSUtils_SupportsNamedScripts");
-	return $CachedNamedScriptsSupported;
-}
-
-function bool IsZandronum212(void)
-{
-	if ($CachedIsZandronum212 != -1)
-		return $CachedIsZandronum212;
-		
-	$CachedIsZandronum212 = IsZandronum() && !NamedScriptsSupported();
-	return $CachedIsZandronum212;
 }
 
 function bool IsServer(void)
