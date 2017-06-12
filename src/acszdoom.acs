@@ -14,6 +14,16 @@ function void GiveMaxActorInventory(int tid, str item)
 	GiveActorInventory(tid, item, INT_MAX);
 }
 
+function void TakeMaxInventory(str item)
+{
+	TakeInventory(item, INT_MAX);
+}
+
+function void TakeMaxActorInventory(int tid, str item)
+{
+	TakeActorInventory(tid, item, INT_MAX);
+}
+
 function void SetInventory(str item, int amount)
 {
 	int diff = amount - CheckInventory(item);
