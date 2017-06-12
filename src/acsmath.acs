@@ -577,28 +577,22 @@ function void VectorToAngles(int x, int y, int z)
 	r2 = VectorAngle(xy, z);
 }
 
-// From ZDoom wiki. Modified to work on coordinates instead of actors.
-// fixed length3d(fixed x, fixed y, fixed z)
-function int length3d(int x, int y, int z)
-{
-	 int len;
-
-	 int ang = vectorangle(x,y);
-	 if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
-	 else len = fixeddiv(x, cos(ang));
-
-	 ang = vectorangle(len, z);
-	 if(((ang+0.125)%0.5) > 0.25) return fixeddiv(z, sin(ang));
-	 return fixeddiv(len, cos(ang));
-}
-
-// The function above simplified for 2D.
 // fixed length2d(fixed x, fixed y)
 function int length2d(int x, int y)
 {
-	 int ang = vectorangle(x,y);
-	 if(((ang+0.125)%0.5) > 0.25) return fixeddiv(y, sin(ang));
-	 return fixeddiv(x, cos(ang));
+	 return VectorLength(x, y);
+}
+
+// fixed VectorLength3D(fixed x, fixed y, fixed z)
+function int VectorLength3D(int x, int y, int z)
+{
+	 return VectorLength(VectorLength(x, y), z);
+}
+
+// fixed length3d(fixed x, fixed y, fixed z)
+function int length3d(int x, int y, int z)
+{
+	return VectorLength(VectorLength(x, y), z);
 }
 
 // fixed length2d2(int x, int y)
