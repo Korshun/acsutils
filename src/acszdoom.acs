@@ -59,7 +59,7 @@ function int a_GetCVarFixed(str name)
 	return 0.0;
 }
 
-function int GetUserCVarFixed(int player, str name)
+function int a_GetUserCVarFixed(int player, str name)
 {
 	str value = GetUserCVarString(player, name);
 	if (value != 0)
