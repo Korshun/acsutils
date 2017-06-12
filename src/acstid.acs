@@ -1,0 +1,11 @@
+// TIDALLOCSTART is defined by the user.
+
+function int NewTid(void)
+{
+	int tid = UniqueTid(TIDALLOCSTART, SHORT_MAX - TIDALLOCSTART);
+	if (tid != 0)
+		return tid;
+		
+	// No Zandronum-safe tid found, give up and use an unsafe tid.
+	return UniqueTid(TIDALLOCSTART);
+}
