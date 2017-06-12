@@ -165,7 +165,7 @@ function str GetActorName(int tid)
 
 function bool IsAlive(void)
 {
-	return GetActorProperty(0, APROP_HEALTH) > 0 && ConsolePlayerInGame();
+	return GetActorProperty(0, APROP_HEALTH) > 0 && PlayerInGame(PlayerNumber());
 }
 
 function bool ActorIsAlive(int tid)
