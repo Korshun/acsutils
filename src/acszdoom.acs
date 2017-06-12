@@ -129,16 +129,15 @@ function void RestoreActivator(int prevtid, int temptid)
 
 // Actor information functions
 
+script "ACSUtils_ActorPlayerNumber" (int tid)
+{
+	SetActivator(tid);
+	SetResultValue(PlayerNumber());
+}
+
 function int ActorPlayerNumber(int tid)
 {
-	SwapActivator(tid);
-	int a = r1;
-	int b = r2;
-
-	int result = PlayerNumber();
-	
-	RestoreActivator(a, b);
-	return result;
+	return ACS_NamedExecuteWithResult("ACSUtils_ActorPlayerNumber", tid);
 }
 
 function bool ActorIsPlayer(int tid)
@@ -151,16 +150,15 @@ function str ActivatorName(void)
 	return StrParam(n:0);
 }
 
+script "ACSUtils_GetActorName" (int tid)
+{
+	SetActivator(tid);
+	SetResultValue(StrParam(n:0));
+}
+
 function str GetActorName(int tid)
 {
-	SwapActivator(tid);
-	int a = r1;
-	int b = r2;
-	
-	str result = StrParam(n:0);
-	
-	RestoreActivator(a, b);
-	return result;
+	return ACS_NamedExecuteWithResult("ACSUtils_GetActorName", tid);
 }
 
 function bool IsAlive(void)
