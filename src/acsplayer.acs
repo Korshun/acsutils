@@ -13,6 +13,12 @@ function int GetPlayerTeam(int player)
 	return GetPlayerInfo(player, PLAYERINFO_TEAM);
 }
 
+function int TeamPlayerCount(int team)
+{
+	return GetTeamProperty(team, TPROP_NumPlayers);
+}
+
+
 // ConsolePlayer stuff
 function bool ConsolePlayerInGame(void)
 {
