@@ -2,23 +2,50 @@
 #libdefine PARSENUMBER_OVERFLOW 1
 #libdefine PARSENUMBER_BADFORMAT 2
 
-function void ParseInt(str s, int base)
-{
-	int result = 0;
-	int sign = 1;
-	int i = 0;
+#libdefine PARSEFLAG_NOSIGN 1
+#libdefine PARSEFLAG_NOBASEPREFIX 2
 
-	if (GetChar(s, i) == '+')
-	{
-		i++;
-	}
-	else if (GetChar(s, i) == '-')
-	{
-		sign = -1;
-		i++;
-	}
+
+function int ACSUtils_ParseDigit(int c, int base)
+{
+	int digit;
+	if (c >= '0' && c <= '9')
+		digit = c - '0';
+	else if (c >= 'a' && c <= 'z')
+		digit = c - 'a' + 10;
+	else if (c >= 'A' && c <= 'Z')
+		digit = c - 'A' + 10;
+	else
+		return -1;
+		
+	if (digit <= base)
+		return digit;
+	return -1;
+}
+
+function void ACSUtils_ParseNumber(str s, int base, int flags, bool isfixed)
+{
+	int sign = 1;
+	int result = 0;
+	int i = 0;
+	int c;
+	int len = StrLen(s);
+	int digit;
 	
-	if (base == 0)
+	if (!(flags & PARSEFLAG_NOSIGN))
+	{
+		if (GetChar(s, i) == '+')
+		{
+			i++;
+		}
+		else if (GetChar(s, i) == '-')
+		{
+			sign = -1;
+			i++;
+		}
+	}
+		
+	if (!(flags & PARSEFLAG_NOBASEPREFIX))
 	{
 		if (StrEqualsAt(s, i, "0x"))
 		{
@@ -35,168 +62,109 @@ function void ParseInt(str s, int base)
 			base = 2;
 			i += 2;
 		}
-		else
-		{
-			base = 10;
-		}
 	}
 	
 	// Empty number like "" or "-0x"
 	if (i == StrLen(s))
 	{
 		r1 = PARSENUMBER_BADFORMAT;
+		r2 = 0;
 		return;
 	}
 	
-	for (; i < StrLen(s); i++)
+	bool overflowed = false;
+	for (; i < len; i++)
 	{
-		int c = GetChar(s, i);
-		if (c < '0' || c > '0' + base)
+		c = GetChar(s, i);
+		if (isfixed && c == '.')
+			break;
+	
+		digit = ACSUtils_ParseDigit(c, base);
+		if (digit < 0)
 		{
 			r1 = PARSENUMBER_BADFORMAT;
+			r2 = 0;
 			return;
 		}
 		
 		if (INT_MAX / 10 < result)
-		{	
-			r1 = PARSENUMBER_OVERFLOW;
-			r2 = sign * INT_MAX;
+			overflowed = true;
+		else
+			result = result * 10 + digit;
+	}
+	
+	if (overflowed)
+	{
+		r1 = PARSENUMBER_OVERFLOW;
+		r2 = sign * INT_MAX;
+		return;
+	}
+
+	if (i == len)
+	{
+		r1 = PARSENUMBER_SUCCESS;
+		r2 = sign * result;
+		return;
+	}
+		
+	if (!isfixed || GetChar(s, i++) != '.')
+	{
+		r1 = PARSENUMBER_BADFORMAT;
+		r2 = 0;
+		return;
+	}
+	
+	if (i == len)
+	{
+		r1 = PARSENUMBER_SUCCESS;
+		r2 = sign * result;
+		return;
+	}
+	
+	bool maxprecision = false;
+	int scale = base;
+	for (; i < len; i++)
+	{
+		digit = ACSUtils_ParseDigit(GetChar(s, i), base);
+		if (digit < 0)
+		{
+			r1 = PARSENUMBER_BADFORMAT;
+			r2 = 0;
 			return;
 		}
 		
-		result *= 10;
-		result += c - '0';
+		if (scale > INT_MAX / base)
+			maxprecision = true;
+		else
+		{
+			result += (digit<<16) / scale;
+			scale *= base;
+		}
 	}
-	
+
 	r1 = PARSENUMBER_SUCCESS;
-	r2 = sign * result;
+	r2 = result;
+	return;
+}
+
+function void ParseFixed(str s, int base, int flags)
+{
+	ACSUtils_ParseNumber(s, base, flags, true);
+}
+
+function void ParseInt(str s, int base, int flags)
+{
+	ACSUtils_ParseNumber(s, base, flags, false);
 }
 
 function int atoi(str s)
 {
-	ParseInt(s, 0);
-	if (r1 == PARSENUMBER_SUCCESS || r1 == PARSENUMBER_OVERFLOW)
-		return r2;
-	return 0;
-}
- 
-function void ParseFixed(str s, int base)
-{
-	int result;
-	int sign = 1;
-	int i = 0;
-	
-	if (GetChar(s, i) == '+')
-	{
-		i++;
-	}
-	else if (GetChar(s, i) == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	
-	if (base == 0)
-	{
-		if (StrEqualsAt(s, i, "0x"))
-		{
-			base = 16;
-			i += 2;
-		}
-		else if (StrEqualsAt(s, i, "0o"))
-		{
-			base = 8;
-			i += 2;
-		}
-		else if (StrEqualsAt(s, i, "0b"))
-		{
-			base = 2;
-			i += 2;
-		}
-		else
-		{
-			base = 10;
-		}
-	}
-	
-	// Empty number like "" or "-0x"
-	if (i == StrLen(s))
-	{
-		r1 = PARSENUMBER_BADFORMAT;
-		return;
-	}
-	
-	int c;
-	for (; i < StrLen(s); i++)
-	{
-		c = GetChar(s, i);
-		if (c == '.')
-			break;
-			
-		if (c < '0' || c > '9')
-		{
-			r1 = PARSENUMBER_BADFORMAT;
-			return;
-		}
-			
-		result *= 10;
-		result += c - '0';
-		
-		if (result > SHORT_MAX)
-		{
-			r1 = PARSENUMBER_OVERFLOW;
-			r2 = sign * 32767.0;
-			return;
-		}
-	}
-	
-	result <<= 16;
-		
-	if (i == StrLen(s))
-	{
-		r1 = PARSENUMBER_SUCCESS;
-		r2 = sign * result;
-		return;
-	}
-	
-	if (GetChar(s, i) != '.')
-	{
-		r1 = PARSENUMBER_BADFORMAT;
-		return;
-	}
-	
-	i++;
-	
-	if (i == StrLen(s))
-	{
-		r1 = PARSENUMBER_SUCCESS;
-		r2 = sign * result;
-	}
-	
-	int digit = base;
-	for (; i < StrLen(s); i++)
-	{
-		c = GetChar(s, i);
-		if (c < '0' || c > '9')
-		{
-			r1 = PARSENUMBER_BADFORMAT;
-			return;
-		}
-		
-		result += 65536 * (c - '0') / digit;
-		if (digit >= INT_MAX / base) // one billion
-			break;
-		digit *= base;
-	}
-	
-	r1 = PARSENUMBER_SUCCESS;
-	r2 = sign * result;
+	ParseInt(s, 0, 0);
+	return r2;
 }
 
 function int atof(str s)
 {
-	ParseFixed(s, 0);
-	if (r1 == PARSENUMBER_SUCCESS || r1 == PARSENUMBER_OVERFLOW)
-		return r2;
-	return 0;
+	ParseFixed(s, 0, 0);
+	return r2;
 }
