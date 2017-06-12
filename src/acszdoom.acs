@@ -98,34 +98,6 @@ function void ClearHudMessageBold(int id)
 	HudMessageBold(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
 }
 
-// Advanced activator functions
-
-function void SwapActivator(int tid)
-{
-	if (tid == 0 || ActivatorTid() == tid)
-	{
-		r1 = 0;
-		r2 = 0;
-		return;
-	}
-
-	int prevtid = ActivatorTid();
-	int temptid = NewTid();
-	Thing_ChangeTid(0, temptid);
-	setActivator(tid);
-	r1 = prevtid;
-	r2 = temptid;
-}
-
-function void RestoreActivator(int prevtid, int temptid)
-{
-	if (temptid != 0)
-	{
-		SetActivator(temptid);
-		Thing_ChangeTid(0, prevtid);
-	}
-}
-
 
 // Actor information functions
 
