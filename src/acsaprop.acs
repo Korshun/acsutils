@@ -11,7 +11,6 @@ bool ChaseGoal
 int Damage
 fixed DamageFactor
 fixed DamageMultiplier
-str DamageType
 bool Dormant
 bool Dropped
 fixed Friction
@@ -42,6 +41,14 @@ int TargetTID
 int TracerTID
 fixed ViewHeight
 int Waterlevel
+
+str DamageType
+str Nametag
+str Species
+str ActiveSound
+str DeathSound
+str PainSound
+str SeeSound
 */
 
 function int GetActorAccuracy(int tid) { return GetActorProperty(tid, APROP_Accuracy); }
@@ -98,13 +105,6 @@ function void SetActorDamageMultiplier(int tid, int DamageMultiplier)
 {
 	if (GetActorProperty(tid, APROP_DamageMultiplier) != DamageMultiplier)
 		SetActorProperty(tid, APROP_DamageMultiplier, DamageMultiplier);
-}
-
-function str GetActorDamageType(int tid) { return GetActorProperty(tid, APROP_DamageType); }
-function void SetActorDamageType(int tid, str DamageType)
-{
-	if (GetActorProperty(tid, APROP_DamageType) != DamageType)
-		SetActorProperty(tid, APROP_DamageType, DamageType);
 }
 
 function bool GetActorDormant(int tid) { return GetActorProperty(tid, APROP_Dormant); }
@@ -316,3 +316,54 @@ function void SetActorWaterlevel(int tid, int Waterlevel)
 	if (GetActorProperty(tid, APROP_Waterlevel) != Waterlevel)
 		SetActorProperty(tid, APROP_Waterlevel, Waterlevel);
 }
+
+// String properties.
+function str GetActorDamageType(int tid) { return GetActorProperty(tid, APROP_DamageType); }
+function void SetActorDamageType(int tid, str DamageType)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_DamageType), DamageType))
+		SetActorProperty(tid, APROP_DamageType, DamageType);
+}
+
+function str GetActorNametag(int tid) { return GetActorProperty(tid, APROP_Nametag); }
+function void SetActorNametag(int tid, str Nametag)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_Nametag), Nametag))
+		SetActorProperty(tid, APROP_Nametag, Nametag);
+}
+
+function str GetActorSpecies(int tid) { return GetActorProperty(tid, APROP_Species); }
+function void SetActorSpecies(int tid, str Species)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_Species), Species))
+		SetActorProperty(tid, APROP_Species, Species);
+}
+
+function str GetActorActiveSound(int tid) { return GetActorProperty(tid, APROP_ActiveSound); }
+function void SetActorActiveSound(int tid, str ActiveSound)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_ActiveSound), ActiveSound))
+		SetActorProperty(tid, APROP_ActiveSound, ActiveSound);
+}
+
+function str GetActorDeathSound(int tid) { return GetActorProperty(tid, APROP_DeathSound); }
+function void SetActorDeathSound(int tid, str DeathSound)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_DeathSound), DeathSound))
+		SetActorProperty(tid, APROP_DeathSound, DeathSound);
+}
+
+function str GetActorPainSound(int tid) { return GetActorProperty(tid, APROP_PainSound); }
+function void SetActorPainSound(int tid, str PainSound)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_PainSound), PainSound))
+		SetActorProperty(tid, APROP_PainSound, PainSound);
+}
+
+function str GetActorSeeSound(int tid) { return GetActorProperty(tid, APROP_SeeSound); }
+function void SetActorSeeSound(int tid, str SeeSound)
+{
+	if (!StrEquals(GetActorProperty(tid, APROP_SeeSound), SeeSound))
+		SetActorProperty(tid, APROP_SeeSound, SeeSound);
+}
+
