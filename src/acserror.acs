@@ -21,9 +21,9 @@ function void ACSUtils_ErrorHandler(int type, int message)
 	if (IsServer() != IsClient())
 	{
 		if (IsServer())
-			text = "[\cgserver\c-] ";
+			text = "[\cgserverside\c-] ";
 		else
-			text = "[\cdclient\c-] ";
+			text = "[\cdclientside\c-] ";
 	}
 	
 	text = StrParam(s:text, d:Timer(), s:" ACSUtils error: ", s:message);
