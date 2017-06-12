@@ -188,14 +188,14 @@ function void HudPushState(void)
 	HudStateStack[$HudStateStackTop++] = $R_TextWordWrap;
 	
 	if ($HudStateStackTop > ACSUTILS_HUDLIB_STACKSIZE)
-		LimitError("HudPushState(): state stack overflow.");
+		ACSUtils_LimitError("HudPushState(): state stack overflow.");
 }
 
 function void HudPopState(void)
 {
 	if ($HudStateStackTop == 0)
 	{
-		ProgramError("HudPopState() called with no saved state.");
+		ACSUtils_ProgramError("HudPopState() called with no saved state.");
 		return;
 	}
 
@@ -254,7 +254,7 @@ function void HudPopState(void)
 	$R_Is3DPoint = HudStateStack[--$HudStateStackTop];
 	
 	if ($HudStateStackTop < 0)
-		ProgramError("HudPushState/HudPopState are bugged. Report this bug to the acsutils project.");
+		ACSUtils_ProgramError("HudPushState/HudPopState are bugged. Report this bug to the acsutils project.");
 }
 
 function void HudSetCameraPosition(int x, int y, int z)

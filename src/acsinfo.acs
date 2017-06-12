@@ -94,7 +94,7 @@ function bool IsOpenGL(void)
 {
 	if (!IsClient())
 	{
-		ProgramError("IsOpenGL() used serverside. Assuming OpenGL renderer.");
+		ACSUtils_ProgramError("IsOpenGL() used serverside. Assuming OpenGL renderer.");
 		return true; // OpenGL generally has less limitations.
 	}
 	

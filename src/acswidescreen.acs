@@ -12,7 +12,7 @@ function int GetAspectRatio(void)
 {
 	if (!IsClient())
 	{
-		ProgramError("GetAspectRatio() called serverside. Assuming 4:3.");
+		ACSUtils_ProgramError("GetAspectRatio() called serverside. Assuming 4:3.");
 		return ASPECT_4_3;
 	}
 

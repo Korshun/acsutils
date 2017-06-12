@@ -124,9 +124,9 @@ function void ACSUtils_ClampCursor(void)
 function void SetCursorArea(int width, int height)
 {
 	if (width <= 0)
-		ProgramError(StrParam(s:"Cursor area width set to ", d:width));
+		ACSUtils_ProgramError(StrParam(s:"Cursor area width set to ", d:width));
 	if (height <= 0)
-		ProgramError(StrParam(s:"Cursor area height set to ", d:height));
+		ACSUtils_ProgramError(StrParam(s:"Cursor area height set to ", d:height));
 	
 	$CursorX = FixedMul($CursorX, FixedDiv(width, $CursorAreaWidth));
 	$CursorY = FixedMul($CursorY, FixedDiv(height, $CursorAreaHeight));
