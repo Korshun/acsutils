@@ -18,7 +18,6 @@ files = [
 	"acsparse.acs",
 	"acsaprop.acs",
 	"acsplayer.acs",
-	"acstid.acs",
 	"acscursor.acs",
 	"acsinfo.acs",
 	"acswidescreen.acs",
