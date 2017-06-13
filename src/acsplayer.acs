@@ -184,7 +184,7 @@ function int PickRandomTeamPlayer(int team)
 	int Players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
-		if (GetPlayerTeam(i) == team)
+		if (PlayerInGame(i) && GetPlayerTeam(i) == team)
 			Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
