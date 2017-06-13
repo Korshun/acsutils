@@ -179,3 +179,15 @@ function int atof(str s)
 	ParseFixed(s, 10, 0);
 	return r2;
 }
+
+function bool StrIsInt(str s)
+{
+	ParseInt(s, 10, 0);
+	return r1 != PARSENUMBER_BADFORMAT;
+}
+
+function bool StrIsFixed(str s)
+{
+	Parsefixed(s, 10, 0);
+	return r1 != PARSENUMBER_SUCCESS;
+}
