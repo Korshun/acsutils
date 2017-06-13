@@ -75,6 +75,16 @@ function bool IsClient(void)
 	return ConsolePlayerNumber() >= 0;
 }
 
+function bool IsServerOnly(void)
+{
+	return IsServer() && !IsClient();
+}
+
+function bool IsClientOnly(void)
+{
+	return IsClient() && !IsServer();
+}
+
 function bool IsOpenGL(void)
 {
 	if (!IsClient())
