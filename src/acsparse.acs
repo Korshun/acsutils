@@ -32,6 +32,17 @@ function void ACSUtils_ParseNumber(str s, int base, int flags, bool isfixed)
 	int len = StrLen(s);
 	int digit;
 	
+	if (base <= 0)
+	{
+		ACSUtils_ProgramError(StrParam(s:cond(isfixed, "ParseFixed", "ParseInt"), s:": invalid base ", d:base, s:". Assuming base 10."));
+		base = 10;
+	}
+	else if (base > 36)
+	{
+		ACSUtils_ProgramError(StrParam(s:cond(isfixed, "ParseFixed", "ParseInt"), s:" only supports bases up to 36 (10 digits + 26 letters), but was requested to parse base ", d:base, s:". Assuming base 10."));
+		base = 10;
+	}
+	
 	if (!(flags & PARSEFLAG_NOSIGN))
 	{
 		if (GetChar(s, i) == '+')
@@ -159,12 +170,12 @@ function void ParseInt(str s, int base, int flags)
 
 function int atoi(str s)
 {
-	ParseInt(s, 0, 0);
+	ParseInt(s, 10, 0);
 	return r2;
 }
 
 function int atof(str s)
 {
-	ParseFixed(s, 0, 0);
+	ParseFixed(s, 10, 0);
 	return r2;
 }
