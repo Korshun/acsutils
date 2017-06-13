@@ -24,8 +24,7 @@ files = [
 	"acshudlib.acs",
 ]
 
-HEADER = """
-/*
+HEADER = """/*
 MIT License
 
 Copyright (c) 2016-2017 Alexander Korshun and the ACSUtils contributors
@@ -132,7 +131,7 @@ def main():
 			ints.append(var)
 	
 	# generate output file
-	out = open('acsutils.acs', 'w', encoding='utf-8')
+	out = open('dist/acsutils.acs', 'w', encoding='utf-8')
 	out.write(HEADER)
 	for filename in prefixfiles:
 		out.write(readfile('src/' + filename, 'r', encoding='utf-8'))
