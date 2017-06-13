@@ -556,8 +556,20 @@ function int length2d2(int x, int y)
 	return FixedMul(x, x) + FixedMul(y, y);
 }
 
+// fixed SqVectorLength(int x, int y)
+function int SqVectorLength(int x, int y)
+{
+	return FixedMul(x, x) + FixedMul(y, y);
+}
+
 // fixed length3d2(int x, int y, int z)
 function int length3d2(int x, int y, int z)
+{
+	return FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
+}
+
+// fixed SqVectorLength3D(int x, int y, int z)
+function int SqVectorLength3D(int x, int y, int z)
 {
 	return FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
 }
