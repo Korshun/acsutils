@@ -18,7 +18,7 @@ function int ACSUtils_ParseDigit(int c, int base)
 	else
 		return -1;
 		
-	if (digit <= base)
+	if (digit < base)
 		return digit;
 	return -1;
 }
