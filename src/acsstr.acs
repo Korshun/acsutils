@@ -374,3 +374,31 @@ function str StrCapitalize(str s)
 
 	return result;
 }
+
+function str LeftPad(str s, int c, int size)
+{
+	int len = StrLen(s);
+	if (len >= size)
+		return s;
+		
+	int diff = size - len;
+	str pad = "";
+	for (int i = 0; i < diff; i++)
+		pad = StrParam(s:pad, c:c);
+		
+	return StrParam(s:pad, s:s);
+}
+
+function str RightPad(str s, int c, int size)
+{
+	int len = StrLen(s);
+	if (len >= size)
+		return s;
+		
+	int diff = size - len;
+	str pad = "";
+	for (int i = 0; i < diff; i++)
+		pad = StrParam(s:pad, c:c);
+		
+	return StrParam(s:s, s:pad);
+}
