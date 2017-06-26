@@ -188,6 +188,6 @@ function bool StrIsInt(str s)
 
 function bool StrIsFixed(str s)
 {
-	Parsefixed(s, 10, 0);
-	return r1 != PARSENUMBER_SUCCESS;
+	ParseFixed(s, 10, 0);
+	return r1 != PARSENUMBER_BADFORMAT;
 }
