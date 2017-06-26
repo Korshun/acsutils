@@ -279,6 +279,12 @@ function int tglbit(int p, int n)
 	return p ^ (1 << n);
 }
 
+// bool notflag(int flags, int flag)
+function bool notflag(int flags, int flag)
+{
+	return !(flags & flag);
+}
+
 // bool randbool()
 function bool randbool(void)
 {
