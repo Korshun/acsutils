@@ -1,3 +1,13 @@
+// Basic
+function bool StrIsEmpty(str s)
+{
+	if (!GetChar(s, 0))
+		return true;
+	return false;
+}
+
+
+// StrAdd
 function str StrAdd(str a, str b)
 {
 	return StrParam(s:a, s:b);
@@ -18,26 +28,7 @@ function str StrAddFixed(str a, int b)
 	return StrParam(s:a, f:b);
 }
 
-function str StrCut(str s, int start, int length)
-{
-	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, start + length));
-}
-
-function str StrCutRange(str s, int start, int end)
-{
-	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, end));
-}
-
-function bool StrEndsWith(str s, str what)
-{
-	int len1 = StrLen(s);
-	int len2 = StrLen(what);
-
-	if (len1 < len2)
-		return false;
-	return StrEqualsAt(s, len1 - len2, what);
-}
-
+// StrEquals
 function bool StrEquals(str a, str b)
 {
     return StrCmp(a, b) == 0;
@@ -57,9 +48,64 @@ function bool StrEqualsAt(str s, int where, str what)
 	return StrEquals(StrMid(s, where, len), what);
 }
 
+function bool StrIEqualsAt(str s, int where, str what)
+{
+	int len = StrLen(what);
+	if (where + len > StrLen(s))
+		return false;
+	
+	return StrIEquals(StrMid(s, where, len), what);
+}
+
+function bool StrStartsWith(str s, str sub)
+{
+	return StrEqualsAt(s, 0, sub);
+}
+
+function bool StrStartsWithI(str s, str sub)
+{
+	return StrIEqualsAt(s, 0, sub);
+}
+
+function bool StrEndsWith(str s, str what)
+{
+	int len1 = StrLen(s);
+	int len2 = StrLen(what);
+
+	if (len1 < len2)
+		return false;
+	return StrEqualsAt(s, len1 - len2, what);
+}
+
+function bool StrEndsWithI(str s, str what)
+{
+	int len1 = StrLen(s);
+	int len2 = StrLen(what);
+
+	if (len1 < len2)
+		return false;
+	return StrIEqualsAt(s, len1 - len2, what);
+}
+
+// StrFind
 function int StrFind(str s, str what)
 {
 	return StrFindFrom(s, what, 0);
+}
+
+function int StrFindI(str s, str what)
+{
+	return StrFindFromI(s, what, 0);
+}
+
+function int StrRFind(str s, str what)
+{
+	return StrRFindFrom(s, what, StrLen(s) - 1);
+}
+
+function int StrRFindI(str s, str what)
+{
+	return StrRFindFromI(s, what, StrLen(s) - 1);
 }
 
 function int StrFindFrom(str s, str what, int start)
@@ -74,26 +120,71 @@ function int StrFindFrom(str s, str what, int start)
 	return -1;
 }
 
-function str StrInsert(str s, int where, str what)
+function int StrFindFromI(str s, str what, int start)
 {
-	return StrParam(s:StrLeft(s, where), s:what, s:StrRightFrom(s, where));
+	int len = StrLen(s) - StrLen(what);
+	for (int i = start; i <= len; i++)
+	{
+		if (StrIEqualsAt(s, i, what))
+			return i;
+	}
+	
+	return -1;
 }
 
-function bool StrIsEmpty(str s)
+function int StrRFindFrom(str s, str what, int start)
 {
-	if (!GetChar(s, 0))
-		return true;
-	return false;
+	int len = StrLen(s) - StrLen(what);
+	for (int i = start; i >= 0; i--)
+	{
+		if (StrEqualsAt(s, i, what))
+			return i;
+	}
+	
+	return -1;
 }
 
-function str StrSlice(str s, int start, int end)
+function int StrRFindFromI(str s, str what, int start)
 {
-	return StrMid(s, start, end - start);
+	int len = StrLen(s) - StrLen(what);
+	for (int i = start; i >= 0; i--)
+	{
+		if (StrIEqualsAt(s, i, what))
+			return i;
+	}
+	
+	return -1;
+}
+
+// StrRemove
+function str StrRemove(str s, str what)
+{
+	return StrReplace(s, what, "");
+}
+
+function str StrRemoveI(str s, str what)
+{
+	return StrReplaceI(s, what, "");
 }
 
 function str StrRemoveFirst(str s, str what)
 {
 	return StrRemoveFirstFrom(s, what, 0);
+}
+
+function str StrRemoveFirstI(str s, str what)
+{
+	return StrRemoveFirstFromI(s, what, 0);
+}
+
+function str StrRemoveLast(str s, str what)
+{
+	return StrRemoveLastFrom(s, what, StrLen(s) - 1);
+}
+
+function str StrRemoveLastI(str s, str what)
+{
+	return StrRemoveLastFromI(s, what, StrLen(s) - 1);
 }
 
 function str StrRemoveFirstFrom(str s, str what, int start)
@@ -104,9 +195,12 @@ function str StrRemoveFirstFrom(str s, str what, int start)
 	return s;
 }
 
-function str StrRemoveLast(str s, str what)
+function str StrRemoveFirstFromI(str s, str what, int start)
 {
-	return StrRemoveLastFrom(s, what, StrLen(s) - 1);
+	int pos = StrFindFromI(s, what, start);
+	if (pos != -1)
+		return StrCut(s, pos, StrLen(what));
+	return s;
 }
 
 function str StrRemoveLastFrom(int s, str what, int start)
@@ -117,37 +211,15 @@ function str StrRemoveLastFrom(int s, str what, int start)
 	return s;
 }
 
-function str StrRemove(str s, str what)
+function str StrRemoveLastFromI(int s, str what, int start)
 {
-	return StrReplace(s, what, "");
-}
-
-function str StrReplaceFirstFrom(str s, str what, str with, int start)
-{
-	int pos = StrFind(s, what);
+	int pos = StrRFindFromI(s, what, start);
 	if (pos != -1)
-		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
+		return StrCut(s, pos, StrLen(what));
 	return s;
 }
 
-function str StrReplaceFirst(str s, str what, str with)
-{
-	return StrReplaceFirstFrom(s, what, with, 0);
-}
-
-function str StrReplaceLastFrom(str s, str what, str with, int start)
-{
-	int pos = StrRFind(s, what);
-	if (pos != -1)
-		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
-	return s;
-}
-
-function str StrReplaceLast(str s, str what, str with)
-{
-	return StrReplaceLastFrom(s, what, with, StrLen(s) - 1);
-}
-
+// StrReplace
 function str StrReplace(str s, str what, str with)
 {
 	int len1 = StrLen(s);
@@ -172,62 +244,132 @@ function str StrReplace(str s, str what, str with)
 	return result;
 }
 
-function int StrRFind(str s, str what)
+function str StrReplaceI(str s, str what, str with)
 {
-	return StrRFindFrom(s, what, StrLen(s) - 1);
-}
+	int len1 = StrLen(s);
+	int len2 = StrLen(what);
+	int start = 0;
+	int end = 0;
+	str result = "";
 
-function int StrRFindFrom(str s, str what, int start)
-{
-	int len = StrLen(s) - StrLen(what);
-	for (int i = start; i >= 0; i--)
+	while (true)
 	{
-		if (StrEqualsAt(s, i, what))
-			return i;
+		end = StrFindFromI(s, what, start);
+		if (end == -1)
+		{
+			result = StrParam(s:result, s:StrSlice(s, start, end));
+			break;
+		}
+
+		result = StrParam(s:result, s:StrSlice(s, start, end), s:with);
+		start = end + len2;
 	}
 	
-	return -1;
-}
-
-function str StrRightFrom(str s, int from)
-{
-	return StrRight(s, StrLen(s) - from);
-}
-
-function str StrReverse(str s)
-{
-	str tempstr = "";
-	for(int i = StrLen(s)-1; i >= 0; i--)
-		tempstr = StrParam(s:tempstr, c:GetChar(s, i));
-	return tempstr;
-}
-
-function void StrSplit(str s, str separator)
-{
-	int pos = StrFind(s, separator);
-	if (pos != -1)
-	{
-		r1 = StrLeft(s, pos);
-		r2 = StrRightFrom(s, pos + StrLen(separator));
-	}
-	else
-	{
-		r1 = s;
-		r2 = "";
-	}
-}
-
-function bool StrStartsWith(str s, str sub)
-{
-	return StrEqualsAt(s, 0, sub);
-}
-
-function str StrRepeat(str s, int n)
-{
-	int result = "";
-	for (int i = 0; i < n; i++)
-		result = StrAdd(result, s);
 	return result;
+}
+
+function str StrReplaceFirst(str s, str what, str with)
+{
+	return StrReplaceFirstFrom(s, what, with, 0);
+}
+
+function str StrReplaceFirstI(str s, str what, str with)
+{
+	return StrReplaceFirstFromI(s, what, with, 0);
+}
+
+function str StrReplaceLast(str s, str what, str with)
+{
+	return StrReplaceLastFrom(s, what, with, StrLen(s) - 1);
+}
+
+function str StrReplaceLastI(str s, str what, str with)
+{
+	return StrReplaceLastFromI(s, what, with, StrLen(s) - 1);
+}
+
+function str StrReplaceFirstFrom(str s, str what, str with, int start)
+{
+	int pos = StrFind(s, what);
+	if (pos != -1)
+		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
+	return s;
+}
+
+function str StrReplaceFirstFromI(str s, str what, str with, int start)
+{
+	int pos = StrFindI(s, what);
+	if (pos != -1)
+		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
+	return s;
+}
+
+function str StrReplaceLastFrom(str s, str what, str with, int start)
+{
+	int pos = StrRFind(s, what);
+	if (pos != -1)
+		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
+	return s;
+}
+
+function str StrReplaceLastFromI(str s, str what, str with, int start)
+{
+	int pos = StrRFindI(s, what);
+	if (pos != -1)
+		return StrInsert(StrCut(s, pos, StrLen(what)), pos, with);
+	return s;
+}
+
+// Misc
+function str LeftPad(str s, int c, int size)
+{
+	int len = StrLen(s);
+	if (len >= size)
+		return s;
+		
+	int diff = size - len;
+	str pad = "";
+	for (int i = 0; i < diff; i++)
+		pad = StrParam(s:pad, c:c);
+		
+	return StrParam(s:pad, s:s);
+}
+
+function str RightPad(str s, int c, int size)
+{
+	int len = StrLen(s);
+	if (len >= size)
+		return s;
+		
+	int diff = size - len;
+	str pad = "";
+	for (int i = 0; i < diff; i++)
+		pad = StrParam(s:pad, c:c);
+		
+	return StrParam(s:s, s:pad);
+}
+
+function str StrCapitalize(str s)
+{
+	if (StrLen(s) == 0)
+		return "";
+
+	str result = StrParam(c:toupper(GetChar(s, 0)));
+	int len = StrLen(s);
+	for (int i = 0; i < len; i++)
+		result = StrParam(s:result, c:tolower(GetChar(s, i)));
+
+	return result;
+}
+
+function str StrCut(str s, int start, int length)
+{
+	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, start + length));
+}
+
+function str StrCutRange(str s, int start, int end)
+{
+	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, end));
 }
 
 function str StrEscape(str s)
@@ -280,14 +422,58 @@ function str StrEscape(str s)
 	return result;
 }
 
+function str StrInsert(str s, int where, str what)
+{
+	return StrParam(s:StrLeft(s, where), s:what, s:StrRightFrom(s, where));
+}
+
+function str StrSlice(str s, int start, int end)
+{
+	return StrMid(s, start, end - start);
+}
+
+function void StrSplit(str s, str separator)
+{
+	int pos = StrFind(s, separator);
+	if (pos != -1)
+	{
+		r1 = StrLeft(s, pos);
+		r2 = StrRightFrom(s, pos + StrLen(separator));
+	}
+	else
+	{
+		r1 = s;
+		r2 = "";
+	}
+}
+
+function str StrRightFrom(str s, int from)
+{
+	return StrRight(s, StrLen(s) - from);
+}
+
+function str StrRepeat(str s, int n)
+{
+	int result = "";
+	for (int i = 0; i < n; i++)
+		result = StrAdd(result, s);
+	return result;
+}
+
 function str StrRepr(str s)
 {
 	return StrParam(c:'"', s:StrEscape(s), c:'"');
 }
 
+function str StrReverse(str s)
+{
+	str tempstr = "";
+	for(int i = StrLen(s)-1; i >= 0; i--)
+		tempstr = StrParam(s:tempstr, c:GetChar(s, i));
+	return tempstr;
+}
 
 // Color codes.
-
 function bool IsColorCodeChar(int c)
 {
 	return (c >= 'a' && c <= 'v')
@@ -360,45 +546,4 @@ function str StripColorCodes(str s)
 	}
 
 	return result;
-}
-
-function str StrCapitalize(str s)
-{
-	if (StrLen(s) == 0)
-		return "";
-
-	str result = StrParam(c:toupper(GetChar(s, 0)));
-	int len = StrLen(s);
-	for (int i = 0; i < len; i++)
-		result = StrParam(s:result, c:tolower(GetChar(s, i)));
-
-	return result;
-}
-
-function str LeftPad(str s, int c, int size)
-{
-	int len = StrLen(s);
-	if (len >= size)
-		return s;
-		
-	int diff = size - len;
-	str pad = "";
-	for (int i = 0; i < diff; i++)
-		pad = StrParam(s:pad, c:c);
-		
-	return StrParam(s:pad, s:s);
-}
-
-function str RightPad(str s, int c, int size)
-{
-	int len = StrLen(s);
-	if (len >= size)
-		return s;
-		
-	int diff = size - len;
-	str pad = "";
-	for (int i = 0; i < diff; i++)
-		pad = StrParam(s:pad, c:c);
-		
-	return StrParam(s:s, s:pad);
 }
