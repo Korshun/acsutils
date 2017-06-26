@@ -2,11 +2,68 @@
 #libdefine PARSENUMBER_OVERFLOW 1
 #libdefine PARSENUMBER_BADFORMAT 2
 
-#libdefine PARSEFLAG_NOSIGN 1
-#libdefine PARSEFLAG_NOBASEPREFIX 2
+function int ACSUtils_CheckRadix(int radix, str functionName)
+{
+	if (radix <= 0)
+	{
+		ACSUtils_ProgramError(StrParam(s:functionName, s:": invalid radix ", d:radix, s:". Assuming base 10."));
+		return 10;
+	}
+	else if (radix > 36)
+	{
+		ACSUtils_ProgramError(StrParam(s:functionName, s:" only supports bases up to 36 (10 digits + 26 letters), but was requested to parse base ", d:radix, s:". Assuming base 10."));
+		return 10;
+	}
+	return radix;
+}
 
+function void ACSUtils_ParseSign(str s, int i)
+{
+	if (GetChar(s, i) == '+')
+	{
+		r1 = 1;
+		r2 = i + 1;
+		return;
+	}
+	else if (GetChar(s, i) == '-')
+	{
+		r1 = -1;
+		r2 = i + 1;
+		return;
+	}
+	
+	r1 = 1;
+	r2 = i;
+	return;
+}
+	
+function void ACSUtils_ParseBasePrefix(str s, int i)
+{
+	if (StrEqualsAt(s, i, "0x"))
+	{
+		r1 = 16;
+		r2 = i + 2;
+		return;
+	}
+	else if (StrEqualsAt(s, i, "0o"))
+	{
+		r1 = 8;
+		r2 = i + 2;
+		return;
+	}
+	else if (StrEqualsAt(s, i, "0b"))
+	{
+		r1 = 2;
+		r2 = i + 2;
+		return;
+	}
+	
+	r1 = 0;
+	r2 = i;
+	return;
+}
 
-function int ACSUtils_ParseDigit(int c, int base)
+function int ACSUtils_ParseDigit(int c, int radix)
 {
 	int digit;
 	if (c >= '0' && c <= '9')
@@ -18,79 +75,34 @@ function int ACSUtils_ParseDigit(int c, int base)
 	else
 		return -1;
 		
-	if (digit < base)
+	if (digit < radix)
 		return digit;
 	return -1;
 }
 
-function void ACSUtils_ParseNumber(str s, int base, int flags, bool isfixed)
+function void ParseInt(str s, int radix)
 {
-	int sign = 1;
-	int result = 0;
 	int i = 0;
-	int c;
+	int sign = 1;
+	radix = ACSUtils_CheckRadix(radix, "ParseInt");
+	
+	ACSUtils_ParseSign(s, i);
+	sign = r1;
+	i = r2;
+
+	ACSUtils_ParseBasePrefix(s, i);
+	radix = condFalse(r1, radix);
+	i = r2;
+	
 	int len = StrLen(s);
-	int digit;
-	
-	if (base <= 0)
-	{
-		ACSUtils_ProgramError(StrParam(s:cond(isfixed, "ParseFixed", "ParseInt"), s:": invalid base ", d:base, s:". Assuming base 10."));
-		base = 10;
-	}
-	else if (base > 36)
-	{
-		ACSUtils_ProgramError(StrParam(s:cond(isfixed, "ParseFixed", "ParseInt"), s:" only supports bases up to 36 (10 digits + 26 letters), but was requested to parse base ", d:base, s:". Assuming base 10."));
-		base = 10;
-	}
-	
-	if (!(flags & PARSEFLAG_NOSIGN))
-	{
-		if (GetChar(s, i) == '+')
-		{
-			i++;
-		}
-		else if (GetChar(s, i) == '-')
-		{
-			sign = -1;
-			i++;
-		}
-	}
-		
-	if (!(flags & PARSEFLAG_NOBASEPREFIX))
-	{
-		if (StrEqualsAt(s, i, "0x"))
-		{
-			base = 16;
-			i += 2;
-		}
-		else if (StrEqualsAt(s, i, "0o"))
-		{
-			base = 8;
-			i += 2;
-		}
-		else if (StrEqualsAt(s, i, "0b"))
-		{
-			base = 2;
-			i += 2;
-		}
-	}
-	
-	// Empty number like "" or "-0x"
-	if (i == StrLen(s))
-	{
-		r1 = PARSENUMBER_BADFORMAT;
-		r2 = 0;
-		return;
-	}
-	
+	int maxresult = cond(sign, INT_MAX, INT_MIN);
+	int limit = abs(maxresult / radix);
+	int result = 0;
 	bool overflowed = false;
 	for (; i < len; i++)
 	{
-		c = GetChar(s, i);
-		if (isfixed && c == '.')
-			break;
-	
-		digit = ACSUtils_ParseDigit(c, base);
+		int c = GetChar(s, i);
+		int digit = ACSUtils_ParseDigit(c, radix);
 		if (digit < 0)
 		{
 			r1 = PARSENUMBER_BADFORMAT;
@@ -98,45 +110,57 @@ function void ACSUtils_ParseNumber(str s, int base, int flags, bool isfixed)
 			return;
 		}
 		
-		if (INT_MAX / 10 < result)
-			overflowed = true;
+		if (limit >= result)
+			result = result * radix + sign * digit;
 		else
-			result = result * 10 + digit;
+			overflowed = true;			
 	}
 	
 	if (overflowed)
 	{
 		r1 = PARSENUMBER_OVERFLOW;
-		r2 = sign * INT_MAX;
+		r2 = maxresult;
 		return;
 	}
+	else
+	{
+		r1 = PARSENUMBER_SUCCESS;
+		r2 = sign * result;
+		return;
+	}
+}
+	
+function void ParseFixed(str s, int radix)
+{
+	int i = 0;
+	int sign = 1;
+	radix = ACSUtils_CheckRadix(radix, "ParseFixed");
+	
+	ACSUtils_ParseSign(s, i);
+	sign = r1;
+	i = r2;
 
-	if (i == len)
-	{
-		r1 = PARSENUMBER_SUCCESS;
-		r2 = sign * result;
-		return;
-	}
-		
-	if (!isfixed || GetChar(s, i++) != '.')
-	{
-		r1 = PARSENUMBER_BADFORMAT;
-		r2 = 0;
-		return;
-	}
+	ACSUtils_ParseBasePrefix(s, i);
+	radix = condFalse(r1, radix);
+	i = r2;
 	
-	if (i == len)
-	{
-		r1 = PARSENUMBER_SUCCESS;
-		r2 = sign * result;
-		return;
-	}
-	
-	bool maxprecision = false;
-	int scale = base;
+	int len = StrLen(s);
+	int maxresult = cond(sign, INT_MAX, INT_MIN);
+	int limit = abs(maxresult / radix);
+	int result = 0;
+	bool overflowed = false;
+	bool hasfraction = false;
+	int digit;
 	for (; i < len; i++)
 	{
-		digit = ACSUtils_ParseDigit(GetChar(s, i), base);
+		int c = GetChar(s, i);
+		if (c == '.')
+		{
+			hasfraction = true;
+			break;
+		}
+		
+		digit = ACSUtils_ParseDigit(c, radix);
 		if (digit < 0)
 		{
 			r1 = PARSENUMBER_BADFORMAT;
@@ -144,50 +168,70 @@ function void ACSUtils_ParseNumber(str s, int base, int flags, bool isfixed)
 			return;
 		}
 		
-		if (scale > INT_MAX / base)
-			maxprecision = true;
+		if (limit >= result)
+			result = result * radix + sign * (digit<<16);
 		else
-		{
-			result += (digit<<16) / scale;
-			scale *= base;
-		}
+			overflowed = true;			
 	}
-
-	r1 = PARSENUMBER_SUCCESS;
-	r2 = result;
-	return;
+	
+	if (hasfraction)
+	{
+		i++;
+		
+		int divisor = 10;
+		for (; i < len; i++)
+		{
+			digit = ACSUtils_ParseDigit(GetChar(s, i), radix);
+			if (digit < 0)
+			{
+				r1 = PARSENUMBER_BADFORMAT;
+				r2 = 0;
+				return;
+			}
+			
+			if (divisor <= (radix<<16))
+			{
+				result = result + sign * (digit<<16) / divisor;
+				divisor *= radix;
+			}
+		}
+	}			
+	
+	if (overflowed)
+	{
+		r1 = PARSENUMBER_OVERFLOW;
+		r2 = maxresult;
+		return;
+	}
+	else
+	{
+		r1 = PARSENUMBER_SUCCESS;
+		r2 = result;
+		return;
+	}
 }
-
-function void ParseFixed(str s, int base, int flags)
-{
-	ACSUtils_ParseNumber(s, base, flags, true);
-}
-
-function void ParseInt(str s, int base, int flags)
-{
-	ACSUtils_ParseNumber(s, base, flags, false);
-}
+	
 
 function int atoi(str s)
 {
-	ParseInt(s, 10, 0);
+	ParseInt(s, 10);
 	return r2;
 }
 
 function int atof(str s)
 {
-	ParseFixed(s, 10, 0);
+	ParseFixed(s, 10);
 	return r2;
 }
 
 function bool StrIsInt(str s)
 {
-	ParseInt(s, 10, 0);
+	ParseInt(s, 10);
 	return r1 != PARSENUMBER_BADFORMAT;
 }
 
 function bool StrIsFixed(str s)
 {
-	ParseFixed(s, 10, 0);
+	ParseFixed(s, 10);
 	return r1 != PARSENUMBER_BADFORMAT;
 }
