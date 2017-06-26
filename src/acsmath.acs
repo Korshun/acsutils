@@ -100,6 +100,22 @@ function int cond(bool x, int whentrue, int whenfalse)
 	return whenfalse;
 }
 
+// any condTrue(bool x, any whentrue)
+function int condTrue(int x, int whentrue)
+{
+	if (x)
+		return whentrue;
+	return x;
+}
+
+// any condFalse(bool x, any whenfalse)
+function int condFalse(int x, int whenfalse)
+{
+	if (x)
+		return x;
+	return whenfalse;
+}
+
 
 // Rounding.
 
