@@ -269,7 +269,7 @@ function bool randbool(void)
 	return Random(false, true);
 }
 
-// from commonFuncs.h by Ijon Tichy
+// From commonFuncs.h by Ijon Tichy.
 // int randsign()
 function int randsign(void)
 {
