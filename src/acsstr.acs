@@ -408,11 +408,8 @@ function str StrEscape(str s)
 		case '\\':
 			result = StrParam(s:result, s:"\\\\");
 			break;
-		case '\'':
-			result = StrParam(s:result, s:"'");
-			break;
 		case '"':
-			result = StrParam(s:result, s:"\"");
+			result = StrParam(s:result, s:"\\\"");
 			break;
 		default:
 			result = StrParam(s:result, c:c);
