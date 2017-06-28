@@ -1,4 +1,4 @@
-#libdefine HUD_STAYTIME_TIC 0.03
+#libdefine HUDTIC 0.03
 #libdefine HUD_STAYTIME_FOREVER -1
 
 #libdefine HUD_BLENDSTYLE_NORMAL 0
