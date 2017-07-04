@@ -329,57 +329,56 @@ function void SetActorWaterlevel(int tid, int Waterlevel)
 function str GetActorDamageType(int tid) { return GetActorProperty(tid, APROP_DamageType); }
 function void SetActorDamageType(int tid, str DamageType)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_DamageType), DamageType))
+	if (!StrIEquals(GetActorProperty(tid, APROP_DamageType), DamageType))
 		SetActorProperty(tid, APROP_DamageType, DamageType);
 }
 
 function str GetActorNametag(int tid) { return GetActorProperty(tid, APROP_Nametag); }
 function void SetActorNametag(int tid, str Nametag)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_Nametag), Nametag))
+	if (!StrIEquals(GetActorProperty(tid, APROP_Nametag), Nametag))
 		SetActorProperty(tid, APROP_Nametag, Nametag);
 }
 
 function str GetActorSpecies(int tid) { return GetActorProperty(tid, APROP_Species); }
 function void SetActorSpecies(int tid, str Species)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_Species), Species))
+	if (!StrIEquals(GetActorProperty(tid, APROP_Species), Species))
 		SetActorProperty(tid, APROP_Species, Species);
 }
 
 function str GetActorActiveSound(int tid) { return GetActorProperty(tid, APROP_ActiveSound); }
 function void SetActorActiveSound(int tid, str ActiveSound)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_ActiveSound), ActiveSound))
+	if (!StrIEquals(GetActorProperty(tid, APROP_ActiveSound), ActiveSound))
 		SetActorProperty(tid, APROP_ActiveSound, ActiveSound);
 }
 
 function str GetActorAttackSound(int tid) { return GetActorProperty(tid, APROP_AttackSound); }
 function void SetActorAttackSound(int tid, str AttackSound)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_AttackSound), AttackSound))
+	if (!StrIEquals(GetActorProperty(tid, APROP_AttackSound), AttackSound))
 		SetActorProperty(tid, APROP_AttackSound, AttackSound);
 }
-
 
 function str GetActorDeathSound(int tid) { return GetActorProperty(tid, APROP_DeathSound); }
 function void SetActorDeathSound(int tid, str DeathSound)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_DeathSound), DeathSound))
+	if (!StrIEquals(GetActorProperty(tid, APROP_DeathSound), DeathSound))
 		SetActorProperty(tid, APROP_DeathSound, DeathSound);
 }
 
 function str GetActorPainSound(int tid) { return GetActorProperty(tid, APROP_PainSound); }
 function void SetActorPainSound(int tid, str PainSound)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_PainSound), PainSound))
+	if (!StrIEquals(GetActorProperty(tid, APROP_PainSound), PainSound))
 		SetActorProperty(tid, APROP_PainSound, PainSound);
 }
 
 function str GetActorSeeSound(int tid) { return GetActorProperty(tid, APROP_SeeSound); }
 function void SetActorSeeSound(int tid, str SeeSound)
 {
-	if (!StrEquals(GetActorProperty(tid, APROP_SeeSound), SeeSound))
+	if (!StrIEquals(GetActorProperty(tid, APROP_SeeSound), SeeSound))
 		SetActorProperty(tid, APROP_SeeSound, SeeSound);
 }
 
