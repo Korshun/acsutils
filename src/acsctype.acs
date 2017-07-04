@@ -206,26 +206,22 @@ function bool isxdigit(int c)
 	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISXDIGIT;
 }
 
-#define ASCII_START 0
-#define ASCII_END 127
-#define ASCII_LETTERS_OFFSET 32
-
 function bool isascii(int c)
 {
-	return c >= ASCII_START && c <= ASCII_END;
+	return c >= 0 && c < 128;
 }
 
 function int toupper(int c)
 {
 	if (islower(c))
-		return c - ASCII_LETTERS_OFFSET;
+		return c - 32;
 	return c;
 }
 
 function int tolower(int c)
 {
 	if (isupper(c))
-		return c + ASCII_LETTERS_OFFSET;
+		return c + 32;
 	return c;
 }
 
@@ -347,7 +343,7 @@ function bool StrIsAscii(str s)
 	for (int i = 0; i < len; i++)
 	{
 		int char = GetChar(s, i);
-		if (char < ASCII_START || char > ASCII_END)
+		if (char < 0 || char > 127)
 			return false;
 	}
 	return true;
