@@ -298,6 +298,84 @@ function int randsign(void)
 	return 2 * Random(0, 1) - 1;
 }
 
+// any RandomPick(any a, any b, ...)
+function int RandomPick2(int v0, int v1)
+{
+	int A[2];
+	A[0] = v0;
+	A[1] = v1;
+	return A[Random(0, 1)];
+}
+
+function int RandomPick3(int v0, int v1, int v2)
+{
+	int A[3];
+	A[0] = v0;
+	A[1] = v1;
+	A[2] = v2;
+	return A[Random(0, 2)];
+}
+
+function int RandomPick4(int v0, int v1, int v2, int v3)
+{
+	int A[4];
+	A[0] = v0;
+	A[1] = v1;
+	A[2] = v2;
+	A[3] = v3;
+	return A[Random(0, 3)];
+}
+
+function int RandomPick5(int v0, int v1, int v2, int v3, int v4)
+{
+	int A[5];
+	A[0] = v0;
+	A[1] = v1;
+	A[2] = v2;
+	A[3] = v3;
+	A[4] = v4;
+	return A[Random(0, 4)];
+}
+
+function int RandomPick6(int v0, int v1, int v2, int v3, int v4, int v5)
+{
+	int A[6];
+	A[0] = v0;
+	A[1] = v1;
+	A[2] = v2;
+	A[3] = v3;
+	A[4] = v4;
+	A[5] = v5;
+	return A[Random(0, 5)];
+}
+
+function int RandomPick7(int v0, int v1, int v2, int v3, int v4, int v5, int v6)
+{
+	int A[7];
+	A[0] = v0;
+	A[1] = v1;
+	A[2] = v2;
+	A[3] = v3;
+	A[4] = v4;
+	A[5] = v5;
+	A[6] = v6;
+	return A[Random(0, 6)];
+}
+
+function int RandomPick8(int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7)
+{
+	int A[8];
+	A[0] = v0;
+	A[1] = v1;
+	A[2] = v2;
+	A[3] = v3;
+	A[4] = v4;
+	A[5] = v5;
+	A[6] = v6;
+	A[7] = v7;
+	return A[Random(0, 7)];
+}
+
 // num npo2(num x)
 function int npo2(int v)
 {
