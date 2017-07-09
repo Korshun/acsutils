@@ -362,6 +362,16 @@ function str StrCapitalize(str s)
 	return result;
 }
 
+function bool StrContains(str s, str what)
+{
+	return StrFind(s, what) >= 0;
+}
+
+function bool StrContainsI(str s, str what)
+{
+	return StrFindI(s, what) >= 0;
+}
+
 function str StrCut(str s, int start, int length)
 {
 	return StrParam(s:StrLeft(s, start), s:StrRightFrom(s, start + length));
