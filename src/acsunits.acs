@@ -38,7 +38,7 @@ function int GetGravityG(void)
 	int sv_gravity = GetCVar("sv_gravity");
 	if (sv_gravity > SHORT_MAX || sv_gravity < SHORT_MIN)
 		return IntDiv(sv_gravity, 800);
-	return FixedDiv(GetCVarFixed("sv_gravity"), 800.0);
+	return FixedDiv(a_GetCVarFixed("sv_gravity"), 800.0);
 }
 
 function void SetGravityG(int gravity)
