@@ -119,6 +119,7 @@ function int condFalse(int x, int whenfalse)
 
 // Rounding.
 
+// fixed fract(fixed x)
 function int fract(int x)
 {
 	return x - trunc(x);
