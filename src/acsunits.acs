@@ -42,3 +42,13 @@ function int accel2grav(int accel)
 {
 	return FixedMul(accel, 800.0);
 }
+
+function int height2jumpz(int height, int gravity)
+{
+	return FixedSqrt(2 * FixedMul(height, gravity));
+}
+
+function int jumpz2height(int jumpz, int gravity)
+{
+	return FixedDiv(FixedMul(jumpz, jumpz), gravity) / 2;
+}
