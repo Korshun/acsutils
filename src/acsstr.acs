@@ -407,6 +407,21 @@ function void StrSplit(str s, str separator)
 	}
 }
 
+function void StrSplitI(str s, str separator)
+{
+	int pos = StrFindI(s, separator);
+	if (pos != -1)
+	{
+		r1 = StrLeft(s, pos);
+		r2 = StrRightFrom(s, pos + StrLen(separator));
+	}
+	else
+	{
+		r1 = s;
+		r2 = "";
+	}
+}
+
 function str StrRightFrom(str s, int from)
 {
 	return StrRight(s, StrLen(s) - from);
