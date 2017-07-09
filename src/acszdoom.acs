@@ -140,6 +140,9 @@ function bool IsAlive(void)
 
 function bool ActorIsAlive(int tid)
 {
+	if (tid == 0)
+		if (!PlayerInGame(PlayerNumber()))
+			return false;
 	return GetActorProperty(tid, APROP_HEALTH) > 0;
 }
 
