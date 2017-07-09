@@ -101,22 +101,6 @@ function void ClearHudMessageBold(int id)
 
 // Actor information functions
 
-script "ACSUtils_ActorPlayerNumber" (int tid)
-{
-	SetActivator(tid);
-	SetResultValue(PlayerNumber());
-}
-
-function int ActorPlayerNumber(int tid)
-{
-	return ACS_NamedExecuteWithResult("ACSUtils_ActorPlayerNumber", tid);
-}
-
-function bool ActorIsPlayer(int tid)
-{
-	return ActorPlayerNumber(tid) >= 0;
-}
-
 function str ActivatorName(void)
 {
 	return StrParam(n:0);
