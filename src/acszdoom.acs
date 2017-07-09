@@ -151,12 +151,12 @@ function int ActorDistance2D(int tid1, int tid2)
 
 function int GetActorVelocity(int tid)
 {
-	return length3d(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
+	return VectorLength3D(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
 }
 
 function int GetActorXYVelocity(int tid)
 {
-	return length2d(GetActorVelX(tid), GetActorVelY(tid));
+	return VectorLength(GetActorVelX(tid), GetActorVelY(tid));
 }
 
 
