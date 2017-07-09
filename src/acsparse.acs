@@ -39,19 +39,19 @@ function void ACSUtils_ParseSign(str s, int i)
 	
 function void ACSUtils_ParseBasePrefix(str s, int i)
 {
-	if (StrEqualsAt(s, i, "0x"))
+	if (StrIEqualsAt(s, i, "0x"))
 	{
 		r1 = 16;
 		r2 = i + 2;
 		return;
 	}
-	else if (StrEqualsAt(s, i, "0o"))
+	else if (StrIEqualsAt(s, i, "0o"))
 	{
 		r1 = 8;
 		r2 = i + 2;
 		return;
 	}
-	else if (StrEqualsAt(s, i, "0b"))
+	else if (StrIEqualsAt(s, i, "0b"))
 	{
 		r1 = 2;
 		r2 = i + 2;
@@ -95,7 +95,13 @@ function void ParseInt(str s, int radix)
 	i = r2;
 	
 	int len = StrLen(s);
-	int maxresult = cond(sign, INT_MAX, INT_MIN);
+	if (i == len)
+	{
+		r1 = PARSENUMBER_BADFORMAT;
+		r2 = 0;
+	}	
+	
+	int maxresult = cond(sign > 0, INT_MAX, INT_MIN);
 	int limit = abs(maxresult / radix);
 	int result = 0;
 	bool overflowed = false;
@@ -110,7 +116,7 @@ function void ParseInt(str s, int radix)
 			return;
 		}
 		
-		if (limit >= result)
+		if (limit >= abs(result) && result != INT_MIN)
 			result = result * radix + sign * digit;
 		else
 			overflowed = true;			
@@ -125,7 +131,7 @@ function void ParseInt(str s, int radix)
 	else
 	{
 		r1 = PARSENUMBER_SUCCESS;
-		r2 = sign * result;
+		r2 = result;
 		return;
 	}
 }
@@ -145,7 +151,13 @@ function void ParseFixed(str s, int radix)
 	i = r2;
 	
 	int len = StrLen(s);
-	int maxresult = cond(sign, INT_MAX, INT_MIN);
+	if (i == len)
+	{
+		r1 = PARSENUMBER_BADFORMAT;
+		r2 = 0;
+	}
+	
+	int maxresult = cond(sign > 0, INT_MAX, INT_MIN);
 	int limit = abs(maxresult / radix);
 	int result = 0;
 	bool overflowed = false;
@@ -168,7 +180,7 @@ function void ParseFixed(str s, int radix)
 			return;
 		}
 		
-		if (limit >= result)
+		if (limit >= abs(result) && result != INT_MIN)
 			result = result * radix + sign * (digit<<16);
 		else
 			overflowed = true;			
@@ -178,7 +190,7 @@ function void ParseFixed(str s, int radix)
 	{
 		i++;
 		
-		int divisor = 10;
+		int divisor = radix;
 		for (; i < len; i++)
 		{
 			digit = ACSUtils_ParseDigit(GetChar(s, i), radix);
@@ -192,6 +204,11 @@ function void ParseFixed(str s, int radix)
 			if (divisor <= (radix<<16))
 			{
 				result = result + sign * (digit<<16) / divisor;
+				if (sign < 0 && result > 0)
+				{
+					overflowed = true;
+					break;
+				}
 				divisor *= radix;
 			}
 		}
