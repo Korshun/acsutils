@@ -3,7 +3,7 @@ function bool KeyBound (str key)
 {
 	if (!IsClient())
 	{
-		ACSUtils_ProgramError("KeyBound called serverside, returning false");
+		ACSUtils_ProgramError(StrParam(s:"KeyBound called serverside with key = \"", s:key, s:"\", returning false"));
 		return false;
 	}
 	return !StrEquals(StrParam(k:key), StrParam(s:"??? (", s:key, s:")"));
