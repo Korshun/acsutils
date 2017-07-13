@@ -23,7 +23,7 @@ function str StrAddChar(str a, int b)
 	return StrParam(s:a, c:b);
 }
 
-function str StrAddFixed(str a, int b)
+function str StrAddFixed(str a, fixed b)
 {
 	return StrParam(s:a, f:b);
 }
@@ -203,7 +203,7 @@ function str StrRemoveFirstFromI(str s, str what, int start)
 	return s;
 }
 
-function str StrRemoveLastFrom(int s, str what, int start)
+function str StrRemoveLastFrom(str s, str what, int start)
 {
 	int pos = StrRFindFrom(s, what, start);
 	if (pos != -1)
@@ -211,7 +211,7 @@ function str StrRemoveLastFrom(int s, str what, int start)
 	return s;
 }
 
-function str StrRemoveLastFromI(int s, str what, int start)
+function str StrRemoveLastFromI(str s, str what, int start)
 {
 	int pos = StrRFindFromI(s, what, start);
 	if (pos != -1)
@@ -429,7 +429,7 @@ function str StrRightFrom(str s, int from)
 
 function str StrRepeat(str s, int n)
 {
-	int result = "";
+	str result = "";
 	for (int i = 0; i < n; i++)
 		result = StrAdd(result, s);
 	return result;

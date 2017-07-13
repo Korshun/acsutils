@@ -1,31 +1,31 @@
 // Angles
 
-function int deg2ang(int degrees)
+function ang deg2ang(fixed degrees)
 {
 	return FixedDiv(degrees, 360.0);
 }
 
-function int rad2ang(int radians)
+function ang rad2ang(fixed radians)
 {
 	return FixedDiv(radians, TAU);
 }
 
-function int ang2deg(int angle)
+function fixed ang2deg(ang angle)
 {
 	return FixedMul(angle, 360.0);
 }
 
-function int ang2rad(int angle)
+function fixed ang2rad(ang angle)
 {
 	return FixedMul(angle, TAU);
 }
 
-function int deg2rad(int degrees)
+function fixed deg2rad(fixed degrees)
 {
 	return FixedDiv(degrees, 57.29577951308232);
 }
 
-function int rad2deg(int radians)
+function fixed rad2deg(fixed radians)
 {
 	return FixedMul(radians, 57.29577951308232);
 }
@@ -33,7 +33,7 @@ function int rad2deg(int radians)
 
 // Gravity
 
-function int GetGravityG(void)
+function fixed GetGravityG(void)
 {
 	int sv_gravity = GetCVar("sv_gravity");
 	if (sv_gravity > SHORT_MAX || sv_gravity < SHORT_MIN)
@@ -41,27 +41,27 @@ function int GetGravityG(void)
 	return FixedDiv(a_GetCVarFixed("sv_gravity"), 800.0);
 }
 
-function void SetGravityG(int gravity)
+function void SetGravityG(fixed gravity)
 {
 	SetGravity(FixedMul(gravity, 800.0));
 }
 
-function int grav2accel(int grav)
+function fixed grav2accel(fixed grav)
 {
 	return FixedDiv(grav, 800.0);
 }
 
-function int accel2grav(int accel)
+function fixed accel2grav(fixed accel)
 {
 	return FixedMul(accel, 800.0);
 }
 
-function int height2jumpz(int height, int gravity)
+function fixed height2jumpz(fixed height, fixed gravity)
 {
-	return FixedSqrt(2 * FixedMul(height, gravity));
+	return FixedSqrt(fixed(2 * int(FixedMul(height, gravity))));
 }
 
-function int jumpz2height(int jumpz, int gravity)
+function fixed jumpz2height(fixed jumpz, fixed gravity)
 {
-	return FixedDiv(FixedMul(jumpz, jumpz), gravity) / 2;
+	return fixed(int(FixedDiv(FixedMul(jumpz, jumpz), gravity)) / 2);
 }

@@ -1,39 +1,38 @@
-#libdefine INT_MAX 0x7fffffff
-#libdefine INT_MIN 0x80000000
-#libdefine USHORT_MAX 65535
-#libdefine SHORT_MAX 32767
-#libdefine SHORT_MIN -32768
-#libdefine UBYTE_MAX 255
-#libdefine SBYTE_MAX 127
-#libdefine SBYTE_MIN -128
+@const int INT_MAX = 0x7fffffff;
+@const int INT_MIN = 0x80000000;
+@const fixed FIXED_MAX = fixed(0x7fffffff);
+@const fixed FIXED_MIN = fixed(0x80000000);
+@const int USHORT_MAX = 65535;
+@const int SHORT_MAX = 32767;
+@const int SHORT_MIN = -32768;
+@const int UBYTE_MAX = 255;
+@const int SBYTE_MAX = 127;
+@const int SBYTE_MIN = -128;
 
-#libdefine PI  3.1415926535897932384626433832795
-#libdefine TAU 6.2831853071795864769252867665590
-#libdefine SQRT_2 1.41421356237
-#libdefine MATH_E 2.7182818284590452353602874713526624977572470937
-#libdefine LOG2_E 1.44269504089
-#libdefine LOG2_10 3.32192809489
+@const fixed PI  = 3.1415926535897932384626433832795;
+@const fixed TAU = 6.2831853071795864769252867665590;
+@const fixed SQRT_2 = 1.41421356237;
+@const fixed MATH_E = 2.7182818284590452353602874713526624977572470937;
+@const fixed LOG2_E = 1.44269504089;
+@const fixed LOG2_10 = 3.32192809489;
 
 // Generic functions.
 
-// num min(num a, num b)
-function int min(int a, int b)
+function num min(num a, num b)
 {
 	if (a < b)
 		return a;
 	return b;
 }
 
-// num max(num a, num b)
-function int max(int a, int b)
+function num max(num a, num b)
 {
 	if (a > b)
 		return a;
 	return b;
 }
 
-// num clamp(num x, num a, num b)
-function int clamp(int x, int a, int b)
+function int clamp(num x, num a, num b)
 {
 	if (x > b)
 		return b;
@@ -42,8 +41,7 @@ function int clamp(int x, int a, int b)
 	return x;
 }	
 
-// int sgn(num x)
-function int sgn(int x)
+function int sgn(num x)
 {
 	if (x > 0)
 		return 1;
@@ -52,8 +50,7 @@ function int sgn(int x)
 	return 0;
 }
 
-// num abs(num x)
-function int abs(int x)
+function int abs(num x)
 {
 	if (x > 0)
 		return x;
@@ -61,15 +58,13 @@ function int abs(int x)
 }
 
 // From commonFuncs.h by Ijon Tichy.
-// num middle(num a, num b, num c)
-function int middle(int x, int y, int z)
+function num middle(num x, num y, num z)
 {
     if ((x < z) && (y < z)) { return max(x, y); }
     return max(min(x, y), z);
 }
 
-// int cmp(num a, num b)
-function int cmp(int a, int b)
+function int cmp(num a, num b)
 {
 	if (a > b)
 		return 1;
@@ -78,8 +73,7 @@ function int cmp(int a, int b)
 	return 0;
 }
 
-// num mod(num a, num b)
-function int mod(int a, int b)
+function int mod(num a, num b)
 {
 	if (a < 0)
 	{
@@ -92,91 +86,77 @@ function int mod(int a, int b)
 	return a % b;
 }
 
-// any cond(bool x, any whentrue, any shenfalse)
-function int cond(bool x, int whentrue, int whenfalse)
+function raw cond(bool x, raw whentrue, raw whenfalse)
 {
 	if (x)
 		return whentrue;
 	return whenfalse;
 }
 
-// any condTrue(bool x, any whentrue)
-function int condTrue(int x, int whentrue)
+function raw condTrue(raw x, raw whentrue)
 {
 	if (x)
 		return whentrue;
 	return x;
 }
 
-// any condFalse(bool x, any whenfalse)
-function int condFalse(int x, int whenfalse)
+function raw condFalse(raw x, raw whenfalse)
 {
 	if (x)
 		return x;
 	return whenfalse;
 }
 
-
 // Rounding.
 
-// fixed fract(fixed x)
-function int fract(int x)
+function fixed fract(fixed x)
 {
 	return x - trunc(x);
 }
 
-// fixed trunc(fixed x)
-function int trunc(int x)
+function fixed trunc(fixed x)
 {
-	return (x & 0xffff0000) + ((x < 0)<<16);
+	return fixed(int(x) & 0xffff0000) + fixed(int(int(x) < 0)<<16);
 }
 
-// fixed floor(fixed x)
-/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */ function int floor(int x)
+/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */ function fixed floor(fixed x)
 {
-	return x & 0xffff0000;
+	return fixed(int(x) & 0xffff0000);
 }
 
-// fixed ceil(fixed x)
-/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */function int ceil(int x)
+/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */function fixed ceil(fixed x)
 {
-	return ((x - 1) & 0xffff0000) + 1.0;
+	return fixed((int(x) - 1) & 0xffff0000) + 1.0;
 }
 
-// fixed round(fixed x)
-/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */ function int round(int x)
+/* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */ function fixed round(fixed x)
 {
-	return (x + 0.5) & 0xffff0000;
+	return fixed(int(x + 0.5) & 0xffff0000);
 }
 
-// int itrunc(fixed x)
-function int itrunc(int x)
+function int itrunc(fixed x)
 {
-	return (x>>16) + (x < 0);
+	return (int(x)>>16) + int(x < 0.0);
 }
 
-// int ifloor(fixed x)
-function int ifloor(int x)
+function int ifloor(fixed x)
 {
-	return x>>16;
+	return int(x)>>16;
 }
 
-// int iceil(fixed x)
-function int iceil(int x)
+function int iceil(fixed x)
 {
-	return (x - 1 >> 16) + 1;
+	return (int(x) - 1 >> 16) + 1;
 }
 
-// int iround(fixed x)
-function int iround(int x)
+function int iround(fixed x)
 {
-	return x + 0.5 >> 16;
+	return int(x + 0.5) >> 16;
 }
 
 
 // Numerical algorithms.
 
-// int ipow(int x, int y)
 function int ipow(int x, int y)
 {
     int n = 1;
@@ -185,10 +165,11 @@ function int ipow(int x, int y)
     return n;
 }
 
-// fixed fpow(fixed x, int y)
-function int fpow(int x, int y)
+function fixed fpow(fixed x_, fixed y_)
 {
-	int n = 1.0;
+	raw x = x_;
+	raw y = y_;
+	raw n = 1.0;
 	if (y > 0)
 	{
 		while (y-- > 0)
@@ -201,15 +182,13 @@ function int fpow(int x, int y)
 	return n;
 }
 
-// fixed lerp(fixed a, fixed b, fixed alpha)
-function int lerp(int a, int b, int alpha)
+function fixed lerp(fixed a, fixed b, fixed alpha)
 {
 	return FixedMul(a, 1.0 - alpha) + FixedMul(b, alpha);
 }
 
 // From commonFuncs.h by Ijon Tichy.
-// num gcf(num a, num b)
-function int gcf(int a, int b)
+function num gcf(num a, num b)
 {
     int c;
     while (1)
@@ -225,14 +204,16 @@ function int gcf(int a, int b)
 
 // By TechnoDoomed1
 // fixed IntDiv(int a, int b)
-function int IntDiv (int a, int b) {
-    int quotient = 0, current_fraction = 1.0;
+function fixed IntDiv (int a_, int b_) {
+    raw a = a_;
+	raw b = b_;
+	raw quotient = 0, current_fraction = 1.0;
 
     // Only works when the ratio is less than 32767 = 2^15 - 1.
     // Otherwise return 0.
 
     if ((abs(a) / abs(b)) > 32767) {
-        return 0;
+        return 0.0;
     }
 
     // Performs the same algorithm as hand division, but working with powers of 2 instead of 10.
@@ -244,11 +225,11 @@ function int IntDiv (int a, int b) {
         current_fraction /= 2;
     }
 
-    return quotient;
+    return fixed(quotient);
 }
 
-// any, any swap(any a, any b)
-function void swap(int a, int b)
+// raw, raw swap(raw a, raw b)
+function void swap(raw a, raw b)
 {
 	r1 = b;
 	r2 = a;
@@ -256,70 +237,62 @@ function void swap(int a, int b)
 
 // Bit math.
 
-// int getbit(int x, int n)
 function int getbit(int x, int n)
 {
 	return x & (1 << n);
 }
 
-// int clrbit(int x, int n)
 function int clrbit(int p, int n)
 {
 	return p & ~(1 << n);
 }
 
-// int setbit(int x, int n)
 function int setbit(int p, int n)
 {
 	return p | ~(1 << n);
 }
 
-// int tglbit (int x, int n)
 function int tglbit(int p, int n)
 {
 	return p ^ (1 << n);
 }
 
-// bool notflag(int flags, int flag)
 function bool notflag(int flags, int flag)
 {
 	return !(flags & flag);
 }
 
-// bool randbool()
 function bool randbool(void)
 {
-	return Random(false, true);
+	return bool(Random(0, 1));
 }
 
 // From commonFuncs.h by Ijon Tichy.
-// int randsign()
 function int randsign(void)
 {
 	return 2 * Random(0, 1) - 1;
 }
 
-// any RandomPick(any a, any b, ...)
-function int RandomPick2(int v0, int v1)
+function raw RandomPick2(raw v0, raw v1)
 {
-	int A[2];
+	raw A[2];
 	A[0] = v0;
 	A[1] = v1;
 	return A[Random(0, 1)];
 }
 
-function int RandomPick3(int v0, int v1, int v2)
+function raw RandomPick3(raw v0, raw v1, raw v2)
 {
-	int A[3];
+	raw A[3];
 	A[0] = v0;
 	A[1] = v1;
 	A[2] = v2;
 	return A[Random(0, 2)];
 }
 
-function int RandomPick4(int v0, int v1, int v2, int v3)
+function raw RandomPick4(raw v0, raw v1, raw v2, raw v3)
 {
-	int A[4];
+	raw A[4];
 	A[0] = v0;
 	A[1] = v1;
 	A[2] = v2;
@@ -327,9 +300,9 @@ function int RandomPick4(int v0, int v1, int v2, int v3)
 	return A[Random(0, 3)];
 }
 
-function int RandomPick5(int v0, int v1, int v2, int v3, int v4)
+function raw RandomPick5(raw v0, raw v1, raw v2, raw v3, raw v4)
 {
-	int A[5];
+	raw A[5];
 	A[0] = v0;
 	A[1] = v1;
 	A[2] = v2;
@@ -338,9 +311,9 @@ function int RandomPick5(int v0, int v1, int v2, int v3, int v4)
 	return A[Random(0, 4)];
 }
 
-function int RandomPick6(int v0, int v1, int v2, int v3, int v4, int v5)
+function raw RandomPick6(raw v0, raw v1, raw v2, raw v3, raw v4, raw v5)
 {
-	int A[6];
+	raw A[6];
 	A[0] = v0;
 	A[1] = v1;
 	A[2] = v2;
@@ -350,9 +323,9 @@ function int RandomPick6(int v0, int v1, int v2, int v3, int v4, int v5)
 	return A[Random(0, 5)];
 }
 
-function int RandomPick7(int v0, int v1, int v2, int v3, int v4, int v5, int v6)
+function raw RandomPick7(raw v0, raw v1, raw v2, raw v3, raw v4, raw v5, raw v6)
 {
-	int A[7];
+	raw A[7];
 	A[0] = v0;
 	A[1] = v1;
 	A[2] = v2;
@@ -363,9 +336,9 @@ function int RandomPick7(int v0, int v1, int v2, int v3, int v4, int v5, int v6)
 	return A[Random(0, 6)];
 }
 
-function int RandomPick8(int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7)
+function raw RandomPick8(raw v0, raw v1, raw v2, raw v3, raw v4, raw v5, raw v6, raw v7)
 {
-	int A[8];
+	raw A[8];
 	A[0] = v0;
 	A[1] = v1;
 	A[2] = v2;
@@ -377,7 +350,6 @@ function int RandomPick8(int v0, int v1, int v2, int v3, int v4, int v5, int v6,
 	return A[Random(0, 7)];
 }
 
-// num npo2(num x)
 function int npo2(int v)
 {
 	v--;
@@ -390,7 +362,6 @@ function int npo2(int v)
 	return v;
 }
 
-// int bitlog2(int value)
 function int bitlog2(int value)
 {
 	int bitlog2table[32] = {
@@ -413,10 +384,11 @@ function int bitlog2(int value)
 
 // All logaritm functions written by TechnoDoomed1 unless stated otherwise
 
-// fixed log2(fixed x)
-function int log2 (int x) {
-    // We calculate the integral and decimal parts of the bit logarithm of x.
-    int integer_part = 0, decimal_part = 0;
+function fixed log2 (fixed x_) {
+    raw x = x_;
+	
+	// We calculate the integral and decimal parts of the bit logarithm of x.
+    raw integer_part = 0, decimal_part = 0;
 
     // The integral part is how many times we can divide by 2 until we reach a number in the range [1, 2).
     // If the number is on the range (0, 1) then we multiply by 2 until we reach a number in the range [1, 2).
@@ -435,7 +407,7 @@ function int log2 (int x) {
     // Let's start with the fraction 1/2, and go downwards until we reach the max precision for a fixed-point number,
     // which is 1 (since it occupies the right side of the byte, it really represents 2^-16).
 
-    int current_fraction = 0.5;
+    raw current_fraction = 0.5;
 
     while (current_fraction > 1) {
         x = FixedMul(x, x);
@@ -454,10 +426,11 @@ function int log2 (int x) {
     return ((integer_part << 16) + decimal_part);
 }
 
-// fixed ilog2(int x)
-function int ilog2 (int x) {
-    // We calculate the integral and decimal parts of the bit logarithm of x.
-    int integer_part = 0, decimal_part = 0;
+function fixed ilog2 (int x_) {
+    raw x = x_;
+	
+	// We calculate the integral and decimal parts of the bit logarithm of x.
+    raw integer_part = 0, decimal_part = 0;
 
     // The integral part is how many times we can divide by 2 until we reach a number lower than 2.
     // We lose precision by not keeping the fractional part until that part fits perfectly in a fixed number variable.
@@ -479,7 +452,7 @@ function int ilog2 (int x) {
     // Let's start with the fraction 1/2, and go downwards until we reach the max precision for a fixed-point number,
     // which is 1 (since it occupies the right side of the byte, it really represents 2^-16).
 
-    int current_fraction = 0.5;
+    raw current_fraction = 0.5;
 
     while (current_fraction > 1) {
         x = FixedMul(x, x);
@@ -499,8 +472,7 @@ function int ilog2 (int x) {
 }
 
 
-// fixed ln(fixed x)
-function int ln (int x) {
+function fixed ln (fixed x) {
     // This calculates the natural logarithm of a number using the property that:   ln(x) = log_2(x) / log_2(e)
     // This is done because calculating the log_2 of a number is far easier, specially with fixed-point arithmetics. 
 
@@ -508,122 +480,107 @@ function int ln (int x) {
 }
 
 // By Korshun.
-// fixed iln(int x)
-function int iln (int x) {
+function fixed iln (int x) {
 	return FixedDiv(ilog2(x), LOG2_E);
 }
 
 // By Korshun.
-// fixed log10(int x)
-function int log10 (int x) {
+function fixed log10 (fixed x) {
 	return FixedDiv(log2(x), LOG2_10);
 }
 
 // By Korshun.
-// fixed ilog10(int x)
-function int ilog10 (int x) {
+function fixed ilog10 (int x) {
 	return FixedDiv(ilog2(x), LOG2_10);
 }
 
-// fixed logb(fixed x, fixed base)
-function int logb (int x, int base) {
+function fixed logb (fixed x, fixed base) {
     // This calculates the logarithm in any base > 1.0, by using the property that:   log_b(x) = log_2(x) / log_2(b)
     // Otherwise, returns 0.
 
     if (base > 1.0)
         return FixedDiv(log2(x), log2(base));
    
-    return 0;
+    return 0.0;
 }
 
 // By Korshun.
-// fixed ilogb(int x, fixed base)
-function int ilogb (int x, int base) {
+function fixed ilogb (int x, fixed base) {
     // This calculates the logarithm in any base > 1.0, by using the property that:   log_b(x) = log_2(x) / log_2(b)
     // Otherwise, returns 0.
 
     if (base > 1.0)
         return FixedDiv(ilog2(x), log2(base));
    
-    return 0;
+    return 0.0;
 }
 
 // Trigonometry.
 
-// fixed tan(angle x)
-function int tan(int x)
+function fixed tan(ang x)
 {
 	return FixedDiv(sin(x), cos(x));
 }
 
-// fixed cot(angle x)
-function int cot(int x)
+function fixed cot(ang x)
 {
 	return FixedDiv(cos(x), sin(x));
 }
 
-// fixed sec(angle x)
-function int sec(int x)
+function fixed sec(ang x)
 {
 	return FixedDiv(1.0, sin(x));
 }
 
-//fixed cosec(angle x)
-function int cosec(int x)
+function fixed cosec(ang x)
 {
 	return FixedDiv(1.0, cos(x));
 }
 
-// fixed atan(fixed x)
-function int atan(int x)
+function ang atan(fixed x)
 {
     return VectorAngle(1.0, x);
 }
 
-// fixed asin(fixed x)
-function int asin(int x)
+function ang asin(fixed x)
 {
 	return atan(FixedDiv(x, FixedSqrt(1.0 - FixedMul(x, x))));
 }
 
-// fixed acos(fixed x)
-function int acos(int x)
+function ang acos(fixed x)
 {
-	return 2 * atan(FixedSqrt(FixedDiv(1.0 - x, 1.0 + x)));
+	return ang(int(2) * int(atan(FixedSqrt(FixedDiv(1.0 - x, 1.0 + x)))));
 }
 
-//angle acot(fixed x)
-function int acot(int x)
+function ang acot(fixed x)
 {
  	return 0.25 - atan(x);
 }
 
-//angle asec(fixed x)
-function int asec(int x)
+function ang asec(fixed x)
 {
-	return acos(FixedDiv(1, x));
+	return acos(FixedDiv(1.0, x));
 }
 
-//angle acosec(fixed x)
-function int acosec(int x)
+function ang acosec(fixed x)
 {
-	 return asin(FixedDiv(1, x));
+	 return asin(FixedDiv(1.0, x));
 }
 
 // Vectors.
 
-// fixed, fixed RotateVector(fixed x, fixed y, angle angle);
-function void RotateVector(int x, int y, int angle)
+// fixed, fixed RotateVector(fixed x, fixed y, ang angle);
+function void RotateVector(fixed x, fixed y, ang angle)
 {
 	// Rotate around Z axis.
-	int s = sin(-angle);
-	int c = cos(-angle);
+	fixed s = sin(-angle);
+	fixed c = cos(-angle);
 	r1 = FixedMul(x, c) - FixedMul(y, s);
 	r2 = FixedMul(x, s) + FixedMul(y, c);
 }	
 
-// fixed, fixed RotatePoint(fixed x, fixed y, fixed originX, fixed originY, angle angle)
-function void RotatePoint(int x, int y, int originX, int originY, int angle)
+// fixed, fixed RotatePoint(fixed x, fixed y, fixed originX, fixed originY, ang angle)
+function void RotatePoint(fixed x, fixed y, fixed originX, fixed originY, ang angle)
 {
 	x -= originX;
 	y -= originY;
@@ -632,81 +589,70 @@ function void RotatePoint(int x, int y, int originX, int originY, int angle)
 	r2 += originY;
 }
 
-// angle, angle VectorToAngles(fixed x, fixed y, fixed z)
-function void VectorToAngles(int x, int y, int z)
+// ang, ang VectorToAngles(fixed x, fixed y, fixed z)
+function void VectorToAngles(fixed x, fixed y, fixed z)
 {
-	int xy = length2d(x, y);
+	fixed xy = length2d(x, y);
 		
 	r1 = VectorAngle(x, y);
 	r2 = VectorAngle(xy, z);
 }
 
-// fixed length2d(fixed x, fixed y)
-function int length2d(int x, int y)
+function fixed length2d(fixed x, fixed y)
 {
 	 return VectorLength(x, y);
 }
 
-// fixed VectorLength3D(fixed x, fixed y, fixed z)
-function int VectorLength3D(int x, int y, int z)
+function fixed VectorLength3D(fixed x, fixed y, fixed z)
 {
 	 return VectorLength(VectorLength(x, y), z);
 }
 
-// fixed length3d(fixed x, fixed y, fixed z)
-function int length3d(int x, int y, int z)
+function fixed length3d(fixed x, fixed y, fixed z)
 {
 	return VectorLength(VectorLength(x, y), z);
 }
 
-// fixed length2d2(int x, int y)
-function int length2d2(int x, int y)
+function fixed length2d2(fixed x, fixed y)
 {
 	return FixedMul(x, x) + FixedMul(y, y);
 }
 
-// fixed SqVectorLength(int x, int y)
-function int SqVectorLength(int x, int y)
+function fixed SqVectorLength(fixed x, fixed y)
 {
 	return FixedMul(x, x) + FixedMul(y, y);
 }
 
-// fixed length3d2(int x, int y, int z)
-function int length3d2(int x, int y, int z)
+function fixed length3d2(fixed x, fixed y, fixed z)
 {
 	return FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
 }
 
-// fixed SqVectorLength3D(int x, int y, int z)
-function int SqVectorLength3D(int x, int y, int z)
+function fixed SqVectorLength3D(fixed x, fixed y, fixed z)
 {
 	return FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
 }
 
-// fixed dot2(fixed x1, fixed y1, fixed x2, fixed y2)
-function int dot2(int x1, int y1, int x2, int y2)
+function fixed dot2(fixed x1, fixed y1, fixed x2, fixed y2)
 {
 	return FixedMul(x1, x2) + FixedMul(y1, y2);
 }
 
-// fixed dot3(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2)
-function int dot3(int x1, int y1, int z1, int x2, int y2, int z2)
+function fixed dot3(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2)
 {
 	return FixedMul(x1, x2) + FixedMul(y1, y2) + FixedMul(z1, z2);
 }
 
-// fixed, fixed normalize2d(fixed x, fixed y)
-function void normalize2d(int x, int y)
+function void normalize2d(fixed x, fixed y)
 {
-	int l = length2d(x, y);
+	fixed l = length2d(x, y);
 	r1 = FixedDiv(x, l);
 	r2 = FixedDiv(y, l);
 }
 
-// fixed, fixed, fixed normalize3d(fixed x, fixed y, fixed z)
-function void normalize3d(int x, int y, int z)
+function void normalize3d(fixed x, fixed y, fixed z)
 {
-	int l = length3d(x, y, z);
+	fixed l = length3d(x, y, z);
 	r1 = FixedDiv(x, l);
 	r2 = FixedDiv(y, l);
 	r3 = FixedDiv(z, l);

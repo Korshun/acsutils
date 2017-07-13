@@ -19,9 +19,9 @@ function bool ActorIsPlayer(int tid)
 	return ClassifyActor(tid) & ACTOR_PLAYER;
 }
 
-function str PlayerName(int num)
+function str PlayerName(int player)
 {
-	return StrParam(n:(num+1));
+	return StrParam(n:player + 1);
 }
 
 function int GetPlayerTeam(int player)

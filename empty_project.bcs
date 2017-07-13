@@ -1,0 +1,11 @@
+#library "project"
+
+#include "zcommon.acs"
+#include "bcsutils.bcs"
+
+using BCSUtils;
+
+script 1 ENTER
+{
+	print(s:KeyPressed(BT_FORWARD));
+}

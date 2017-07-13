@@ -1,15 +1,15 @@
-#libdefine HUDTIC 0.03
-#libdefine HUD_STAYTIME_FOREVER -1
+@const fixed HUDTIC = 0.03;
+@const fixed HUD_STAYTIME_FOREVER = fixed(-1);
 
-#libdefine HUD_BLENDSTYLE_NORMAL 0
-#libdefine HUD_BLENDSTYLE_ADDITIVE 1
+@const int HUD_BLENDSTYLE_NORMAL = 0;
+@const int HUD_BLENDSTYLE_ADDITIVE = 1;
 
-#libdefine HUD_TEXTORIGIN_CENTER 0
-#libdefine HUD_TEXTORIGIN_LEFT 1
-#libdefine HUD_TEXTORIGIN_RIGHT 2
-#libdefine HUD_TEXTORIGIN_TOP 1
-#libdefine HUD_TEXTORIGIN_BOTTOM 2
+@const int HUD_TEXTORIGIN_CENTER = 0;
+@const int HUD_TEXTORIGIN_LEFT = 1;
+@const int HUD_TEXTORIGIN_RIGHT = 2;
+@const int HUD_TEXTORIGIN_TOP = 1;
+@const int HUD_TEXTORIGIN_BOTTOM = 2;
 
-#libdefine HUD_PROJECTION_AUTO 0
-#libdefine HUD_PROJECTION_3D 1
-#libdefine HUD_PROJECTION_YSHEARING 2
+@const int HUD_PROJECTION_AUTO = 0;
+@const int HUD_PROJECTION_3D = 1;
+@const int HUD_PROJECTION_YSHEARING = 2;

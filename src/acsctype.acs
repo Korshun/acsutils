@@ -1,17 +1,17 @@
-#libdefine COLORCODE 28
+@const int COLORCODE = 28;
 
-#define ACSUTILS_ISALNUM 1<<0
-#define ACSUTILS_ISALPHA 1<<1
-#define ACSUTILS_ISBLANK 1<<2
-#define ACSUTILS_ISCNTRL 1<<3
-#define ACSUTILS_ISDIGIT 1<<4
-#define ACSUTILS_ISGRAPH 1<<5
-#define ACSUTILS_ISLOWER 1<<6
-#define ACSUTILS_ISPRINT 1<<7
-#define ACSUTILS_ISPUNCT 1<<8
-#define ACSUTILS_ISSPACE 1<<9
-#define ACSUTILS_ISUPPER 1<<10
-#define ACSUTILS_ISXDIGIT 1<<11
+@privconst int ACSUTILS_ISALNUM = 1<<0;
+@privconst int ACSUTILS_ISALPHA = 1<<1;
+@privconst int ACSUTILS_ISBLANK = 1<<2;
+@privconst int ACSUTILS_ISCNTRL = 1<<3;
+@privconst int ACSUTILS_ISDIGIT = 1<<4;
+@privconst int ACSUTILS_ISGRAPH = 1<<5;
+@privconst int ACSUTILS_ISLOWER = 1<<6;
+@privconst int ACSUTILS_ISPRINT = 1<<7;
+@privconst int ACSUTILS_ISPUNCT = 1<<8;
+@privconst int ACSUTILS_ISSPACE = 1<<9;
+@privconst int ACSUTILS_ISUPPER = 1<<10;
+@privconst int ACSUTILS_ISXDIGIT = 1<<11;
 
 
 int ACSUtils_AsciiTypes[128] =
@@ -148,62 +148,62 @@ ACSUTILS_ISCNTRL, // DEL
 
 function bool isalnum(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISALNUM;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISALNUM);
 }
 
 function bool isalpha(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISALPHA;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISALPHA);
 }
 
 function bool isblank(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISBLANK;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISBLANK);
 }
 
 function bool iscntrl(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISCNTRL;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISCNTRL);
 }
 
 function bool isdigit(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISDIGIT;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISDIGIT);
 }
 
 function bool isgraph(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISGRAPH;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISGRAPH);
 }
 
 function bool islower(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISLOWER;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISLOWER);
 }
 
 function bool isprint(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISPRINT;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISPRINT);
 }
 
 function bool ispunct(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISPUNCT;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISPUNCT);
 }
 
 function bool isspace(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISSPACE;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISSPACE);
 }
 
 function bool isupper(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISUPPER;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISUPPER);
 }
 
 function bool isxdigit(int c)
 {
-	return ACSUtils_AsciiTypes[c] & ACSUTILS_ISXDIGIT;
+	return bool(ACSUtils_AsciiTypes[c] & ACSUTILS_ISXDIGIT);
 }
 
 function bool isascii(int c)
@@ -227,7 +227,7 @@ function int tolower(int c)
 
 
 // String versions
-function str StrIsAlNum(str s)
+function bool StrIsAlNum(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -237,7 +237,7 @@ function str StrIsAlNum(str s)
 	return true;
 }
 
-function str StrIsAlpha(str s)
+function bool StrIsAlpha(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -247,7 +247,7 @@ function str StrIsAlpha(str s)
 	return true;
 }
 
-function str StrIsBlank(str s)
+function bool StrIsBlank(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -257,7 +257,7 @@ function str StrIsBlank(str s)
 	return true;
 }
 
-function str StrIsCntrl(str s)
+function bool StrIsCntrl(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -267,7 +267,7 @@ function str StrIsCntrl(str s)
 	return true;
 }
 
-function str StrIsDigit(str s)
+function bool StrIsDigit(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -277,7 +277,7 @@ function str StrIsDigit(str s)
 	return true;
 }
 
-function str StrIsGraph(str s)
+function bool StrIsGraph(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -287,7 +287,7 @@ function str StrIsGraph(str s)
 	return true;
 }
 
-function str StrIsLower(str s)
+function bool StrIsLower(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -297,7 +297,7 @@ function str StrIsLower(str s)
 	return true;
 }
 
-function str StrIsPrint(str s)
+function bool StrIsPrint(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -307,7 +307,7 @@ function str StrIsPrint(str s)
 	return true;
 }
 
-function str StrIsSpace(str s)
+function bool StrIsSpace(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -317,7 +317,7 @@ function str StrIsSpace(str s)
 	return true;
 }
 
-function str StrIsUpper(str s)
+function bool StrIsUpper(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)
@@ -327,7 +327,7 @@ function str StrIsUpper(str s)
 	return true;
 }
 
-function str StrIsXDigit(str s)
+function bool StrIsXDigit(str s)
 {
 	int len = StrLen(s);
 	for (int i = 0; i < len; i++)

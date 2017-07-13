@@ -1,6 +1,6 @@
-#libdefine PORT_ZDOOM 1
-#libdefine PORT_GZDOOM 2
-#libdefine PORT_ZANDRONUM 3
+@const int PORT_ZDOOM = 1;
+@const int PORT_GZDOOM = 2;
+@const int PORT_ZANDRONUM = 3;
 
 @int CachedPort = -1;
 

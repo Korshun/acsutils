@@ -1,6 +1,6 @@
-#libdefine PARSENUMBER_SUCCESS 0
-#libdefine PARSENUMBER_OVERFLOW 1
-#libdefine PARSENUMBER_BADFORMAT 2
+@const int PARSENUMBER_SUCCESS = 0;
+@const int PARSENUMBER_OVERFLOW = 1;
+@const int PARSENUMBER_BADFORMAT = 2;
 
 function int ACSUtils_CheckRadix(int radix, str functionName)
 {
@@ -235,7 +235,7 @@ function int atoi(str s)
 	return r2;
 }
 
-function int atof(str s)
+function fixed atof(str s)
 {
 	ParseFixed(s, 10);
 	return r2;

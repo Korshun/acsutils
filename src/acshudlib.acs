@@ -1,7 +1,7 @@
 // When adding new properties, don't forget to edit ACSUTILS_HUDSTATE_SIZE.
-#define ACSUTILS_HUDLIB_SAVEDSTATES 16
-#define ACSUTILS_HUDSTATE_SIZE 39
-#define ACSUTILS_HUDLIB_STACKSIZE ACSUTILS_HUDSTATE_SIZE * ACSUTILS_HUDLIB_SAVEDSTATES
+@privconst int ACSUTILS_HUDLIB_SAVEDSTATES = 16;
+@privconst int ACSUTILS_HUDSTATE_SIZE = 39;
+@privconst int ACSUTILS_HUDLIB_STACKSIZE = ACSUTILS_HUDSTATE_SIZE * ACSUTILS_HUDLIB_SAVEDSTATES;
 
 @bool R_Is3DPoint = false;
 
@@ -123,8 +123,7 @@ function void HudResetState(void)
 	$R_TextWordWrap = false;
 }
 
-int HudStateStack[ACSUTILS_HUDLIB_STACKSIZE];
-//int $HudStateStackTop;
+raw HudStateStack[ACSUTILS_HUDLIB_STACKSIZE];
 
 function void HudClearStateStack(void)
 {
@@ -257,20 +256,20 @@ function void HudPopState(void)
 		ACSUtils_ProgramError("HudPushState/HudPopState are bugged. Report this bug to the acsutils project.");
 }
 
-function void HudSetCameraPosition(int x, int y, int z)
+function void HudSetCameraPosition(fixed x, fixed y, fixed z)
 {
 	$R3D_CameraX = x;
 	$R3D_CameraY = y;
 	$R3D_CameraZ = z;
 }
 
-function void HudSetCameraAngles(int angle, int pitch)
+function void HudSetCameraAngles(ang angle, ang pitch)
 {
 	$R3D_CameraAngle = angle;
 	$R3D_CameraPitch = pitch;
 }
 
-function void HudSetCameraVector(int x, int y, int z)
+function void HudSetCameraVector(fixed x, fixed y, fixed z)
 {
 	VectorToAngles(x, y, z);
 	$R3D_CameraAngle = r1;
@@ -278,18 +277,18 @@ function void HudSetCameraVector(int x, int y, int z)
 }
 
 
-#libdefine HUD_CAMERAACTOR_NOPOSITION 1
-#libdefine HUD_CAMERAACTOR_NOPREDICTION 2
-#libdefine HUD_CAMERAACTOR_NODIRECTION 4
-#libdefine HUD_CAMERAACTOR_NOVIEWHEIGHT 8
+@const int HUD_CAMERAACTOR_NOPOSITION = 1;
+@const int HUD_CAMERAACTOR_NOPREDICTION = 2;
+@const int HUD_CAMERAACTOR_NODIRECTION = 4;
+@const int HUD_CAMERAACTOR_NOVIEWHEIGHT = 8;
 
 function void HudSetCameraActorAdvanced(int tid, int flags)
 {
 	if (!(flags & HUD_CAMERAACTOR_NOPOSITION))
 	{
-		int x = GetActorX(tid);
-		int y = GetActorY(tid);
-		int z = GetActorZ(tid);
+		fixed x = GetActorX(tid);
+		fixed y = GetActorY(tid);
+		fixed z = GetActorZ(tid);
 		
 		if (!(flags & HUD_CAMERAACTOR_NOVIEWHEIGHT))
 			z += GetActorViewHeight(tid);
@@ -313,7 +312,7 @@ function void HudSetCameraActor(int tid)
 	HudSetCameraActorAdvanced(tid, 0);
 }
 
-function void HudSetPoint3D(int x, int y, int z)
+function void HudSetPoint3D(fixed x, fixed y, fixed z)
 {
 	$R_Is3DPoint = true;
 	$R3D_X = x;
@@ -321,7 +320,7 @@ function void HudSetPoint3D(int x, int y, int z)
 	$R3D_Z = z;
 }
 
-function void HudSet2DOffset(int x, int y)
+function void HudSet2DOffset(fixed x, fixed y)
 {
 	$R3D_2DOffsetX = x;
 	$R3D_2DOffsetY = y;
@@ -337,7 +336,7 @@ function void HudSetProjectionMode(int mode)
 	$R3D_ProjectionMode = mode;
 }
 
-function void HudSetVirtualSize(int width, int height)
+function void HudSetVirtualSize(fixed width, fixed height)
 {
 	$R_BaseWidth = width;
 	$R_BaseHeight = height;
@@ -351,36 +350,36 @@ function void HudUseDefaultSize(void)
 
 function void HudUseRealSize(void)
 {
-	$R_BaseWidth = GetScreenWidth()<<16;
-	$R_BaseHeight = GetScreenHeight()<<16;
+	$R_BaseWidth = fixed(GetScreenWidth()<<16);
+	$R_BaseHeight = fixed(GetScreenHeight()<<16);
 }
 
-function int HudBorderX(void)
+function fixed HudBorderX(void)
 {
 	return HudBorderXFor($R_BaseWidth);
 }
 
-function int HudBorderY(void)
+function fixed HudBorderY(void)
 {
 	return HudBorderXFor($R_BaseHeight);
 }
 
-function int HudLeft(void)
+function fixed HudLeft(void)
 {
 	return HudLeftFor($R_BaseWidth);
 }
 
-function int HudRight(void)
+function fixed HudRight(void)
 {
 	return HudRightFor($R_BaseWidth);
 }
 
-function int HudTop(void)
+function fixed HudTop(void)
 {
 	return HudTopFor($R_BaseHeight);
 }
 
-function int HudBottom(void)
+function fixed HudBottom(void)
 {
 	return HudBottomFor($R_BaseHeight);
 }
@@ -390,38 +389,38 @@ function void HudSetExcludeStatusBar(bool exclude)
 	$R_ExcludeStatusBar = exclude;
 }
 
-function void HudSetPoint(int x, int y)
+function void HudSetPoint(fixed x, fixed y)
 {
 	$R_Is3DPoint = false;
 	$R_X = x;
 	$R_Y = y;
 }
 
-function void HudSetScaleXY(int scaleX, int scaleY)
+function void HudSetScaleXY(fixed scaleX, fixed scaleY)
 {
-	if (scaleX != 0)
+	if (scaleX != 0.0)
 		$R_IScaleX = FixedDiv(1.0, scaleX);
 	else
-		$R_IScaleX = 0;
+		$R_IScaleX = 0.0;
 	
-	if (scaleY != 0)
+	if (scaleY != 0.0)
 		$R_IScaleY = FixedDiv(1.0, scaleY);
 	else
-		$R_IScaleY = 0;
+		$R_IScaleY = 0.0;
 }
 
-function void HudSetScale(int scale)
+function void HudSetScale(fixed scale)
 {
 	HudSetScaleXY(scale, scale);
 }
 
-function void HudSetInvScale(int invScale)
+function void HudSetInvScale(fixed invScale)
 {
 	$R_IScaleX = invScale;
 	$R_IScaleY = invScale;
 }
 
-function void HudSetInvScaleXY(int invScaleX, int invScaleY)
+function void HudSetInvScaleXY(fixed invScaleX, fixed invScaleY)
 {
 	$R_IScaleX = invScaleX;
 	$R_IScaleY = invScaleY;
@@ -432,17 +431,17 @@ function void HudSetShowToEveryone(bool showToEveryone)
 	$R_ShowToEveryone = showToEveryone;
 }
 
-function void HudSetAppearTime(int appearTime)
+function void HudSetAppearTime(fixed appearTime)
 {
 	$R_AppearTime = appearTime;
 }
 
-function void HudSetStayTime(int stayTime)
+function void HudSetStayTime(fixed stayTime)
 {
 	$R_StayTime = stayTime;
 }
 
-function void HudSetDisappearTime(int disappearTime)
+function void HudSetDisappearTime(fixed disappearTime)
 {
 	$R_DisappearTime = disappearTime;
 }
@@ -452,7 +451,7 @@ function void HudSetBlendStyle(int style)
 	$R_BlendStyle = style;
 }
 
-function void HudSetAlpha(int alpha)
+function void HudSetAlpha(fixed alpha)
 {
 	$R_Alpha = alpha;
 }
@@ -499,18 +498,18 @@ function void HudSetCenterText(bool centerText)
 	$R_CenterText = centerText;
 }
 
-function void HudSetTextOrigin(int originX, int originY)
+function void HudSetTextOrigin(fixed originX, fixed originY)
 {
 	$R_TextOriginX = originX;
 	$R_TextOriginY = originY;
 }
 
-function void HudSetTextOriginX(int originX)
+function void HudSetTextOriginX(fixed originX)
 {
 	$R_TextOriginX = originX;
 }
 
-function void HudSetTextOriginY(int originY)
+function void HudSetTextOriginY(fixed originY)
 {
 	$R_TextOriginY = originY;
 }
@@ -546,12 +545,12 @@ function bool ACSUtils_IsYShearing(void)
 function void ACSUtils_HudRotate3DPoint(void)
 {
 	// Translated point coordinates.
-	int x = $R3D_X - $R3D_CameraX;
-	int y = $R3D_Y - $R3D_CameraY;
-	int z = $R3D_Z - $R3D_CameraZ;
+	fixed x = $R3D_X - $R3D_CameraX;
+	fixed y = $R3D_Y - $R3D_CameraY;
+	fixed z = $R3D_Z - $R3D_CameraZ;
 
-	int rx, ry, rz;
-	int s, c;
+	fixed rx, ry, rz;
+	fixed s, c;
 
 	// Rotate around Z axis.
 	s = sin(-$R3D_CameraAngle);
@@ -582,7 +581,7 @@ function int HudGetDistance(void)
 }
 
 
-#libdefine CAMERA_BASE_DISTANCE 128
+@const int CAMERA_BASE_DISTANCE = 128;
 
 function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText)
 {
@@ -602,10 +601,10 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 	else if ($R_Alpha != 1.0)
 		type |= HUDMSG_ALPHA;
 
-	int x = $R_X;
-	int y = $R_Y;
-	int iScaleX = $R_IScaleX;
-	int iScaleY = $R_IScaleY;
+	fixed x = $R_X;
+	fixed y = $R_Y;
+	fixed iScaleX = $R_IScaleX;
+	fixed iScaleY = $R_IScaleY;
 	
 	if ($R_Is3DPoint)
 	{
@@ -619,13 +618,13 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 		}
 			
 		// I don't know what this factor means, but it fixes positioning bugs.
-		int yFactor = 1.6;
+		fixed yFactor = 1.6;
 		if (StatusBarVisible())
 			yFactor = 1.9;
 
 		// Half heights.
-		int hw = $R_BaseWidth>>1;
-		int hh = $R_BaseHeight>>1;		
+		fixed hw = $R_BaseWidth / 2.0;
+		fixed hh = $R_BaseHeight / 2.0;		
 
 		// Project point.
 		x = -FixedDiv($R_RotatedY, $R_RotatedX);
@@ -645,8 +644,8 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 		}
 	}
 	
-	int w = FixedMul($R_BaseWidth, iScaleX);
-	int h = FixedMul($R_BaseHeight, iScaleY);
+	fixed w = FixedMul($R_BaseWidth, iScaleX);
+	fixed h = FixedMul($R_BaseHeight, iScaleY);
 	SetHudSize(itrunc(w), itrunc(h), !($R_Is3DPoint || $R_ExcludeStatusBar));
 	
 	x = trunc(FixedMul(x, iScaleX));
@@ -667,9 +666,9 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 	
 	// BUG: this really simplifies the code, but the messages will only stay
 	// for 9 hours.
-	int stayTime = $R_StayTime;
-	if (stayTime < 0)
-		stayTime = INT_MAX;
+	fixed stayTime = $R_StayTime;
+	if (stayTime < 0.0)
+		stayTime = FIXED_MAX;
 	
 	if ($R_ShowToEveryone)
 	{

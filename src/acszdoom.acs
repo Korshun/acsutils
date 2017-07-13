@@ -1,6 +1,6 @@
-#libdefine MAX_PLAYERS 64
-#libdefine MAX_PLAYERS_ZDOOM 8
-#libdefine TEAM_NONE 255
+@const int MAX_PLAYERS = 64;
+@const int MAX_PLAYERS_ZDOOM = 8;
+@const int TEAM_NONE = 255;
 
 // Inventory functions.
 
@@ -61,18 +61,18 @@ function void ToggleActorInventory(int tid, str item)
 
 // CVar functions.
 
-function int a_GetCVarFixed(str name)
+function fixed a_GetCVarFixed(str name)
 {
 	str value = GetCVarString(name);
-	if (value != 0)
+	if (int(value) != 0)
 		return atof(GetCVarString(name));
 	return 0.0;
 }
 
-function int a_GetUserCVarFixed(int player, str name)
+function fixed a_GetUserCVarFixed(int player, str name)
 {
 	str value = GetUserCVarString(player, name);
-	if (value != 0)
+	if (int(value) != 0)
 		return atof(GetUserCVarString(player, name));
 	return 0.0;
 }
@@ -80,7 +80,7 @@ function int a_GetUserCVarFixed(int player, str name)
 
 // Screen info functions.
 
-function int StatusBarVisible(void)
+function bool StatusBarVisible(void)
 {
 	return GetCVar("screenblocks") <= 10;
 }
@@ -90,12 +90,12 @@ function int StatusBarVisible(void)
 
 function void ClearHudMessage(int id)
 {
-	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
+	HudMessage(s:""; HUDMSG_PLAIN, id, 0, 0.0, 0.0, 0.0, 0.0);
 }
 
 function void ClearHudMessageBold(int id)
 {
-	HudMessageBold(s:""; HUDMSG_PLAIN, id, 0, 0, 0, 0, 0);
+	HudMessageBold(s:""; HUDMSG_PLAIN, id, 0, 0.0, 0.0, 0.0, 0.0);
 }
 
 
@@ -109,7 +109,7 @@ function str ActivatorName(void)
 script "ACSUtils_GetActorName" (int tid)
 {
 	SetActivator(tid);
-	SetResultValue(StrParam(n:0));
+	SetResultValue(int(StrParam(n:0)));
 }
 
 function str GetActorName(int tid)
@@ -136,25 +136,25 @@ function bool ActorIsAlive(int tid)
 
 // Actor math functions.
 
-function int ActorDistance(int tid1, int tid2)
+function fixed ActorDistance(int tid1, int tid2)
 {
 	return VectorLength3D(GetActorX(tid2) - GetActorX(tid1),
 	                      GetActorY(tid2) - GetActorY(tid1),
 	                      GetActorZ(tid2) - GetActorZ(tid1));
 }
 
-function int ActorDistance2D(int tid1, int tid2)
+function fixed ActorDistance2D(int tid1, int tid2)
 {
 	return VectorLength(GetActorX(tid2) - GetActorX(tid1),
 	                    GetActorY(tid2) - GetActorY(tid1));
 }
 
-function int GetActorVelocity(int tid)
+function fixed GetActorVelocity(int tid)
 {
 	return VectorLength3D(GetActorVelX(tid), GetActorVelY(tid), GetActorVelZ(tid));
 }
 
-function int GetActorXYVelocity(int tid)
+function fixed GetActorXYVelocity(int tid)
 {
 	return VectorLength(GetActorVelX(tid), GetActorVelY(tid));
 }
@@ -162,7 +162,7 @@ function int GetActorXYVelocity(int tid)
 
 // Actor utility functions.
 
-function bool HasRoomFor(str classname, int x, int y, int z)
+function bool HasRoomFor(str classname, fixed x, fixed y, fixed z)
 {
 	int tid = UniqueTid();
 	if (!Spawn(classname, x, y, z, tid))
@@ -171,15 +171,15 @@ function bool HasRoomFor(str classname, int x, int y, int z)
 	return true;
 }
 
-function void LookAtPoint(int tid, int x, int y, int z)
+function void LookAtPoint(int tid, fixed x, fixed y, fixed z)
 { 	
 	x -= GetActorX(tid);
 	y -= GetActorY(tid);
 	z -= GetActorZ(tid) + GetActorViewHeight(tid);
 
 	VectorToAngles(x, y, z);
-	int angle = r1;
-	int pitch = r2;
+	ang angle = r1;
+	ang pitch = r2;
 
 	SetActorAngle(tid, angle);
 	SetActorPitch(tid, -pitch);
@@ -187,9 +187,9 @@ function void LookAtPoint(int tid, int x, int y, int z)
 
 function void LookAt(int tid, int target)
 {
-	int x = GetActorX(target);
-	int y = GetActorY(target);
-	int z = GetActorZ(target) + GetActorViewHeight(target);
+	fixed x = GetActorX(target);
+	fixed y = GetActorY(target);
+	fixed z = GetActorZ(target) + GetActorViewHeight(target);
 	LookAtPoint(tid, x, y, z);
 }
 
@@ -200,7 +200,7 @@ function void LookAt(int tid, int target)
 
 function str ACSUtils_ChangeFlagName(str flag, bool value)
 {
-	return StrParam(s:"ACSUtils_CF_", s:flag, s:"_", d:!!value);
+	return StrParam(s:"ACSUtils_CF_", s:flag, s:"_", d:int(!!value));
 }
 
 function void ChangeFlag(str flag, bool value)
@@ -219,7 +219,7 @@ function void ChangeActorFlag(int tid, str flag, bool value)
 // From ZDoom wiki.
 function int SyncSpeed(int newdistance, int syncdistance, int syncspd)
 {
-	int t = fixeddiv(syncdistance<<16, syncspd<<16);
-	int r = fixeddiv(newdistance<<16, t);
-	return r>>16;
+	fixed t = fixeddiv(fixed(syncdistance<<16), fixed(syncspd<<16));
+	fixed r = fixeddiv(fixed(newdistance<<16), t);
+	return int(r)>>16;
 }

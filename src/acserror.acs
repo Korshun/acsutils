@@ -1,6 +1,6 @@
-#define ACSUTILS_ERROR_PROGRAM 0
-#define ACSUTILS_ERROR_MAPPING 1
-#define ACSUTILS_ERROR_LIMIT 2
+@privconst int ACSUTILS_ERROR_PROGRAM = 0;
+@privconst int ACSUTILS_ERROR_MAPPING = 1;
+@privconst int ACSUTILS_ERROR_LIMIT = 2;
 
 function void ACSUtils_ProgramError(str message)
 {
@@ -12,7 +12,7 @@ function void ACSUtils_LimitError(str message)
 	ACSUtils_ErrorHandler(ACSUTILS_ERROR_LIMIT, message);
 }
 
-function void ACSUtils_ErrorHandler(int type, int message)
+function void ACSUtils_ErrorHandler(int type, str message)
 {
 	if (GetCVar("acsutils_noerrors"))
 		return;

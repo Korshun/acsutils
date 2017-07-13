@@ -17,56 +17,56 @@
 @bool CursorWrapY = false;
 	
 
-function int CursorX(void)
+function fixed CursorX(void)
 {
 	return $CursorX;
 }
 
-function int CursorY(void)
+function fixed CursorY(void)
 {
 	return $CursorY;
 }
 
-function int CursorDeltaX(void)
+function fixed CursorDeltaX(void)
 {
 	if ($CursorWrapX)
 		return CursorMotionX();
 	return $CursorX - $CursorPrevX;
 }
-function int CursorDeltaY(void)
+function fixed CursorDeltaY(void)
 {
 	if ($CursorWrapY)
 		return CursorMotionY();
 	return $CursorY - $CursorPrevY;
 }
 
-function int CursorMotionX(void)
+function fixed CursorMotionX(void)
 {
 	return $CursorMotionX;
 }
 
-function int CursorMotionY(void)
+function fixed CursorMotionY(void)
 {
 	return $CursorMotionY;
 }
 
-function void SetCursorSpeed(int speed)
+function void SetCursorSpeed(fixed speed)
 {
 	$CursorSpeedX = speed;
 	$CursorSpeedY = speed;
 }
 
-function void SetCursorSpeedX(int speed)
+function void SetCursorSpeedX(fixed speed)
 {
 	$CursorSpeedX = speed;
 }
 
-function void SetCursorSpeedY(int speed)
+function void SetCursorSpeedY(fixed speed)
 {
 	$CursorSpeedY = speed;
 }
 
-function void SetCursorPosition(int x, int y)
+function void SetCursorPosition(fixed x, fixed y)
 {
 	$CursorX = x;
 	$CursorY = y;
@@ -95,17 +95,17 @@ function void EnableCursorWrapY(bool enable)
 
 function void ACSUtils_ClampCursor(void)
 {
-	int width = $CursorAreaWidth;
-	int height = $CursorAreaHeight;
+	fixed width = $CursorAreaWidth;
+	fixed height = $CursorAreaHeight;
 	
-	int borderX = HudBorderXFor(width);
-	int borderY = HudBorderYFor(height);
+	fixed borderX = HudBorderXFor(width);
+	fixed borderY = HudBorderYFor(height);
 	
 	$CursorX += borderX;
 	$CursorY += borderY;
 	
-	width +=  borderX * 2;
-	height += borderY * 2;
+	width +=  fixed(int(borderX) * 2);
+	height += fixed(int(borderY) * 2);
 
 	if ($CursorWrapX)
 		$CursorX = mod($CursorX, width);
@@ -121,12 +121,12 @@ function void ACSUtils_ClampCursor(void)
 	$CursorY -= borderY;
 }
 
-function void SetCursorArea(int width, int height)
+function void SetCursorArea(fixed width, fixed height)
 {
-	if (width <= 0)
-		ACSUtils_ProgramError(StrParam(s:"Cursor area width set to ", d:width));
-	if (height <= 0)
-		ACSUtils_ProgramError(StrParam(s:"Cursor area height set to ", d:height));
+	if (width <= 0.0)
+		ACSUtils_ProgramError(StrParam(s:"Cursor area width set to ", f:width));
+	if (height <= 0.0)
+		ACSUtils_ProgramError(StrParam(s:"Cursor area height set to ", f:height));
 	
 	$CursorX = FixedMul($CursorX, FixedDiv(width, $CursorAreaWidth));
 	$CursorY = FixedMul($CursorY, FixedDiv(height, $CursorAreaHeight));
@@ -144,15 +144,15 @@ function void UpdateCursor(void)
 	$CursorPrevX = $CursorX;
 	$CursorPrevY = $CursorY;
 
-	int sensitivity = a_GetCVarFixed("mouse_sensitivity");
-	int speedX = FixedDiv($CursorSpeedX, FixedMul(a_GetCVarFixed("m_yaw"), sensitivity));
-	int speedY = FixedDiv($CursorSpeedY, FixedMul(a_GetCVarFixed("m_pitch"), sensitivity));
+	fixed sensitivity = a_GetCVarFixed("mouse_sensitivity");
+	fixed speedX = FixedDiv($CursorSpeedX, FixedMul(a_GetCVarFixed("m_yaw"), sensitivity));
+	fixed speedY = FixedDiv($CursorSpeedY, FixedMul(a_GetCVarFixed("m_pitch"), sensitivity));
 	
-	speedX = FixedMul(speedX * 2, $CursorAreaWidth) / 64000;
-	speedY = FixedMul(speedY * 2, $CursorAreaHeight) / 32000;
+	speedX = fixed(int(FixedMul(fixed(int(speedX) * 2), $CursorAreaWidth)) / 64000);
+	speedY = fixed(int(FixedMul(fixed(int(speedY) * 2), $CursorAreaHeight)) / 32000);
 
-	int dx = -GetPlayerInput(ConsolePlayerNumber(), INPUT_YAW)   * speedX;
-    int dy = -GetPlayerInput(ConsolePlayerNumber(), INPUT_PITCH) * speedY;
+	fixed dx = fixed(-GetPlayerInput(ConsolePlayerNumber(), INPUT_YAW)   * int(speedX));
+    fixed dy = fixed(-GetPlayerInput(ConsolePlayerNumber(), INPUT_PITCH) * int(speedY));
 
 	if (GetCVar("invertmouse"))
         dy = -dy;

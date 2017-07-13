@@ -2,13 +2,14 @@
 // See http://forum.zdoom.org/viewtopic.php?f=3&t=35383
 // Interface 
 
-#libdefine ASPECT_4_3 (4.0 / 3)
-#libdefine ASPECT_5_4 1.25
-#libdefine ASPECT_16_9 (16.0 / 9)
-#libdefine ASPECT_16_10 1.6
-#libdefine ASPECT_17_10 1.7
+// BCC type
+@const fixed ASPECT_4_3 = fixed(int(4.0) / 3);
+@const fixed ASPECT_5_4 = 1.25;
+@const fixed ASPECT_16_9 = fixed(int(16.0) / 9);
+@const fixed ASPECT_16_10 = 1.6;
+@const fixed ASPECT_17_10 = 1.7;
 
-function int GetAspectRatio(void)
+function fixed GetAspectRatio(void)
 {
 	if (!IsClient())
 	{
@@ -16,11 +17,11 @@ function int GetAspectRatio(void)
 		return ASPECT_4_3;
 	}
 
-	int width = GetCVar("vid_defwidth");
-	int height = GetCVar("vid_defheight");
-	int nowidescreen = GetCVar("vid_nowidescreen");
-	int tft = GetCVar("vid_tft");
-	int aspect = GetCVar("vid_aspect");
+	raw width = GetCVar("vid_defwidth");
+	raw height = GetCVar("vid_defheight");
+	raw nowidescreen = GetCVar("vid_nowidescreen");
+	raw tft = GetCVar("vid_tft");
+	raw aspect = GetCVar("vid_aspect");
 	switch(aspect)
 	{
 		case 1:	return ASPECT_16_9;
@@ -68,42 +69,42 @@ function int GetAspectRatio(void)
  *    Original HUD edge positioning functions by bagheadspidey
  */
 
-function int HudBorderXFor(int width)
+function fixed HudBorderXFor(fixed width)
 {
-	int ar = GetAspectRatio();
+	fixed ar = GetAspectRatio();
 	switch (ar)
 	{
-		case ASPECT_4_3: return 0;
-		case ASPECT_16_9: return width / 6;
-		case ASPECT_16_10: return width / 10;
-		case ASPECT_17_10: return width / 80;
+		case ASPECT_4_3: return 0.0;
+		case ASPECT_16_9: return fixed(int(width) / 6);
+		case ASPECT_16_10: return fixed(int(width) / 10);
+		case ASPECT_17_10: return fixed(int(width) / 80);
 	}
-	return 0;
+	return 0.0;
 }
 
-function int HudBorderYFor(int height)
+function fixed HudBorderYFor(fixed height)
 {
 	if (GetAspectRatio() == ASPECT_5_4)
-		return height / 30;
-	return 0;
+		return fixed(int(height) / 30);
+	return 0.0;
 }
 
-function int HudLeftFor(int width)
+function fixed HudLeftFor(fixed width)
 {
 	return -HudBorderXFor(width);
 }
 
-function int HudRightFor(int width)
+function fixed HudRightFor(fixed width)
 {
 	return width + HudBorderXFor(width);
 }
 
-function int HudTopFor(int height)
+function fixed HudTopFor(fixed height)
 {
 	return -HudBorderYFor(height);
 }
 
-function int HudBottomFor(int height)
+function fixed HudBottomFor(fixed height)
 {
 	return height + HudBorderYFor(height);
 }
