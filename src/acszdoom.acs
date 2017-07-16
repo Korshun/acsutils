@@ -133,6 +133,12 @@ function bool ActorIsAlive(int tid)
 	return GetActorProperty(tid, APROP_HEALTH) > 0;
 }
 
+function bool ActorExists(int tid)
+{
+	if (tid != 0)
+		return ClassifyActor(tid) != ACTOR_NONE;
+	return notflag(ClassifyActor(tid), ACTOR_WORLD);
+}
 
 // Actor math functions.
 
