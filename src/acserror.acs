@@ -14,9 +14,6 @@ function void ACSUtils_LimitError(str message)
 
 function void ACSUtils_ErrorHandler(int type, str message)
 {
-	if (GetCVar("acsutils_noerrors"))
-		return;
-
 	str text = "";
 	if (IsServer() != IsClient())
 	{
@@ -29,6 +26,9 @@ function void ACSUtils_ErrorHandler(int type, str message)
 	text = StrParam(s:text, d:Timer(), s:" ACSUtils error: ", s:message);
 	if (!IsClient())
 		Log(s:text);
+
+	if (GetCVar("acsutils_noerrors"))
+		return;
 
 	printbold(s:text);
 }
