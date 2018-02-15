@@ -73,7 +73,7 @@ function int cmp(num a, num b)
 	return 0;
 }
 
-function int mod(num a, num b)
+function num mod(num a, num b)
 {
 	if (a < 0)
 	{
