@@ -600,15 +600,10 @@ function void RotatePoint(fixed x, fixed y, fixed originX, fixed originY, ang an
 // ang, ang VectorToAngles(fixed x, fixed y, fixed z)
 function void VectorToAngles(fixed x, fixed y, fixed z)
 {
-	fixed xy = length2d(x, y);
+	fixed xy = VectorLength(x, y);
 		
 	r1 = VectorAngle(x, y);
 	r2 = VectorAngle(xy, z);
-}
-
-function fixed length2d(fixed x, fixed y)
-{
-	 return VectorLength(x, y);
 }
 
 function fixed VectorLength3D(fixed x, fixed y, fixed z)
@@ -616,24 +611,9 @@ function fixed VectorLength3D(fixed x, fixed y, fixed z)
 	 return VectorLength(VectorLength(x, y), z);
 }
 
-function fixed length3d(fixed x, fixed y, fixed z)
-{
-	return VectorLength(VectorLength(x, y), z);
-}
-
-function fixed length2d2(fixed x, fixed y)
-{
-	return FixedMul(x, x) + FixedMul(y, y);
-}
-
 function fixed SqVectorLength(fixed x, fixed y)
 {
 	return FixedMul(x, x) + FixedMul(y, y);
-}
-
-function fixed length3d2(fixed x, fixed y, fixed z)
-{
-	return FixedMul(x, x) + FixedMul(y, y) + FixedMul(z, z);
 }
 
 function fixed SqVectorLength3D(fixed x, fixed y, fixed z)
@@ -653,14 +633,14 @@ function fixed dot3(fixed x1, fixed y1, fixed z1, fixed x2, fixed y2, fixed z2)
 
 function void normalize2d(fixed x, fixed y)
 {
-	fixed l = length2d(x, y);
+	fixed l = VectorLength(x, y);
 	r1 = FixedDiv(x, l);
 	r2 = FixedDiv(y, l);
 }
 
 function void normalize3d(fixed x, fixed y, fixed z)
 {
-	fixed l = length3d(x, y, z);
+	fixed l = VectorLength3D(x, y, z);
 	r1 = FixedDiv(x, l);
 	r2 = FixedDiv(y, l);
 	r3 = FixedDiv(z, l);
