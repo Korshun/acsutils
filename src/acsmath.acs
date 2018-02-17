@@ -606,6 +606,15 @@ function void VectorToAngles(fixed x, fixed y, fixed z)
 	r2 = VectorAngle(xy, z);
 }
 
+// fixed, fixed, fixed AnglesToVector(ang angle, ang pitch)
+function void AnglesToVector(ang angle, ang pitch)
+{
+	int cos_pitch = cos(pitch);
+	r1 = cos_pitch * cos(angle);
+    r2 = cos_pitch * sin(angle);
+    r3 = sin(pitch);
+}
+
 function fixed VectorLength3D(fixed x, fixed y, fixed z)
 {
 	 return VectorLength(VectorLength(x, y), z);
