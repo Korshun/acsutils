@@ -577,7 +577,15 @@ function void RotateVector(fixed x, fixed y, ang angle)
 	fixed c = cos(-angle);
 	r1 = FixedMul(x, c) - FixedMul(y, s);
 	r2 = FixedMul(x, s) + FixedMul(y, c);
-}	
+}
+
+// fixed, fixed RotateVectorSC(fixed x, fixed y, fixed s, fixed c);
+function void RotateVectorSC(fixed x, fixed y, fixed s, fixed c)
+{
+	// Rotate around Z axis.
+	r1 = FixedMul(x, c) - FixedMul(y, s);
+	r2 = FixedMul(x, s) + FixedMul(y, c);
+}
 
 // fixed, fixed RotatePoint(fixed x, fixed y, fixed originX, fixed originY, ang angle)
 function void RotatePoint(fixed x, fixed y, fixed originX, fixed originY, ang angle)
