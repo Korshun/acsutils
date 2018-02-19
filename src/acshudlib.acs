@@ -623,8 +623,8 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 			yFactor = 1.9;
 
 		// Half heights.
-		fixed hw = $R_BaseWidth / 2.0;
-		fixed hh = $R_BaseHeight / 2.0;		
+		fixed hw = fixed(int($R_BaseWidth) / 2);
+		fixed hh = fixed(int($R_BaseHeight) / 2);
 
 		// Project point.
 		x = -FixedDiv($R_RotatedY, $R_RotatedX);
