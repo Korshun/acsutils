@@ -116,7 +116,9 @@ function fixed fract(fixed x)
 
 function fixed trunc(fixed x)
 {
-	return fixed(int(x) & 0xffff0000) + fixed(int(int(x) < 0)<<16);
+	if (x > 0.0)
+		return floor(x);
+	return ceil(x);
 }
 
 /* ZDOOM DEFINES ITS OWN VERSIONS OF floor, ceil AND round THAT SILENTLY RETURN 0 IN ZANDRONUM, PLEASE REMOVE THESE FUNCTIONS FROM FROM zspecial.acs OR RENAME THE ACSUTILS OR ZDOOM FUNCTIONS TO SOMETHING ELSE. */ function fixed floor(fixed x)
@@ -136,7 +138,9 @@ function fixed trunc(fixed x)
 
 function int itrunc(fixed x)
 {
-	return (int(x)>>16) + int(x < 0.0);
+	if (x > 0.0)
+		return ifloor(x);
+	return iceil(x);
 }
 
 function int ifloor(fixed x)
