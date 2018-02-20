@@ -1,6 +1,6 @@
 @const int ACSUTILS_VERSION_MAJOR = 1;
-@const int ACSUTILS_VERSION_MINOR = 6;
-@const int ACSUTILS_VERSION_PATCH = 1;
+@const int ACSUTILS_VERSION_MINOR = 7;
+@const int ACSUTILS_VERSION_PATCH = 0;
 
 function str ACSUtilsVersion(void)
 {
