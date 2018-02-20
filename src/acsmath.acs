@@ -267,6 +267,11 @@ function bool randbool(void)
 	return bool(Random(0, 1));
 }
 
+function int randint(void)
+{
+	return Random(INT_MIN, INT_MAX);
+}
+
 // From commonFuncs.h by Ijon Tichy.
 function int randsign(void)
 {
