@@ -45,8 +45,8 @@
 
 @bool R_Layer = HUDMSG_LAYER_OVERHUD;
 
-@int R_TextOriginX = HUD_TEXTORIGIN_CENTER;
-@int R_TextOriginY = HUD_TEXTORIGIN_CENTER;
+@int R_AlignX = HUD_ALIGN_CENTER;
+@int R_AlignY = HUD_ALIGN_CENTER;
 @bool R_CenterText = false;
 @bool R_TextColorIsString = false;
 @int R_TextColor = CR_UNTRANSLATED;
@@ -112,8 +112,8 @@ function void HudResetState(void)
 
 	$R_Layer = HUDMSG_LAYER_OVERHUD;
 
-	$R_TextOriginX = HUD_TEXTORIGIN_CENTER;
-	$R_TextOriginY = HUD_TEXTORIGIN_CENTER;
+	$R_AlignX = HUD_ALIGN_CENTER;
+	$R_AlignY = HUD_ALIGN_CENTER;
 	$R_CenterText = false;
 	$R_TextFont = "SMALLFONT";
 	$R_TextColorIsString = false;
@@ -176,8 +176,8 @@ function void HudPushState(void)
 
 	HudStateStack[$HudStateStackTop++] = $R_Layer;
 
-	HudStateStack[$HudStateStackTop++] = $R_TextOriginX;
-	HudStateStack[$HudStateStackTop++] = $R_TextOriginY;
+	HudStateStack[$HudStateStackTop++] = $R_AlignX;
+	HudStateStack[$HudStateStackTop++] = $R_AlignY;
 	HudStateStack[$HudStateStackTop++] = $R_CenterText;
 	HudStateStack[$HudStateStackTop++] = $R_TextFont;
 	HudStateStack[$HudStateStackTop++] = $R_TextColorIsString;
@@ -205,8 +205,8 @@ function void HudPopState(void)
 	$R_TextColorIsString = HudStateStack[--$HudStateStackTop];
 	$R_TextFont = HudStateStack[--$HudStateStackTop];
 	$R_CenterText = HudStateStack[--$HudStateStackTop];
-	$R_TextOriginY = HudStateStack[--$HudStateStackTop];
-	$R_TextOriginX = HudStateStack[--$HudStateStackTop];
+	$R_AlignY = HudStateStack[--$HudStateStackTop];
+	$R_AlignX = HudStateStack[--$HudStateStackTop];
 
 	$R_Layer = HudStateStack[--$HudStateStackTop];
 
@@ -498,20 +498,20 @@ function void HudSetCenterText(bool centerText)
 	$R_CenterText = centerText;
 }
 
-function void HudSetTextOrigin(fixed originX, fixed originY)
+function void HudSetAlignment(fixed alignX, fixed alignY)
 {
-	$R_TextOriginX = originX;
-	$R_TextOriginY = originY;
+	$R_AlignX = alignX;
+	$R_AlignY = alignY;
 }
 
-function void HudSetTextOriginX(fixed originX)
+function void HudSetAlignmentX(fixed alignX)
 {
-	$R_TextOriginX = originX;
+	$R_AlignX = alignX;
 }
 
-function void HudSetTextOriginY(fixed originY)
+function void HudSetAlignmentY(fixed alignY)
 {
-	$R_TextOriginY = originY;
+	$R_AlignY = alignY;
 }
 
 function void HudSetTextTypeOn(bool textTypeOn)
@@ -651,14 +651,14 @@ function void ACSUtils_HudDrawHudMessage(int id, int type, str text, bool isText
 	x = trunc(FixedMul(x, iScaleX));
 	y = trunc(FixedMul(y, iScaleY));
 	
-	if ($R_TextOriginX == HUD_TEXTORIGIN_LEFT)
+	if ($R_AlignX == HUD_ALIGN_LEFT)
 		x += 0.1;
-	else if ($R_TextOriginX == HUD_TEXTORIGIN_RIGHT)
+	else if ($R_AlignX == HUD_ALIGN_RIGHT)
 		x += 0.2;
 		
-	if ($R_TextOriginY == HUD_TEXTORIGIN_TOP)
+	if ($R_AlignY == HUD_ALIGN_TOP)
 		y += 0.1;
-	else if ($R_TextOriginY == HUD_TEXTORIGIN_BOTTOM)
+	else if ($R_AlignY == HUD_ALIGN_BOTTOM)
 		y += 0.2;
 		
 	if ($R_CenterText)
