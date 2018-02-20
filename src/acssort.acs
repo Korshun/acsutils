@@ -1,0 +1,90 @@
+// Contributed to ACSUtils by Konda
+
+// Sorts an array, given the named scripts for comparing and swapping array elements
+function void SortArray(int begin_index, int end_index, str less_than, str cb_swap)
+{
+    ACSUtils_heap_sort(begin_index, end_index - 1, less_than, cb_swap);
+    //_selection_sort(begin_index, end_index - 1, less_than, cb_swap);
+}
+
+/*
+function void _selection_sort(int begin, int end, str lt, str cb_swap)
+{
+    for(int i = begin; i <= end-1; i++)
+    for(int j = i+1; j <= end; j++)
+        if(ACS_NamedExecuteWithResult(lt, j, i))
+            ACS_NamedExecuteWithResult(cb_swap, j, i);
+}
+*/
+
+function void ACSUtils_heap_sort(int begin, int end, str lt, str cb_swap)
+{
+    if(begin >= end) return;
+    int heap_size;
+    
+    // Since the supplied comparison function is a min function, we build a max heap to finally cb_swap the max with the last element in the array range
+    ACSUtils_build_max_heap(begin, end, lt, cb_swap);
+    
+    // At this point in execution the heap size will be >= 2
+    do
+    {
+        // Protip: use ExecuteWithResult even when ur not expecting a result, otherwise the execution order will be fucked up if a script is called from inside a function (i almost ragequit acs again until i figured this out)
+        //Log(s:"Imma cb_swap yo momma");
+        ACS_NamedExecuteWithResult(cb_swap, begin, end);
+        heap_size = --end - begin + 1;
+        
+        // There's only a single violation of the max-heap property - at the root of the entire heap, from now on
+        ACSUtils_max_heapify(begin, begin, end, lt, cb_swap);
+    }
+    while(heap_size > 1);
+}
+
+// Reorders the entire array range to establish the max-heap invariant
+function void ACSUtils_build_max_heap(int begin, int end, str lt, str cb_swap)
+{
+    // i = n/2 downto 1 inclusive, for arrays whose indexing is in range 1..n
+    for(int i = begin + (end - begin) / 2; i >= begin; i--)
+        ACSUtils_max_heapify(i, begin, end, lt, cb_swap);
+}
+
+// Corrects a single violation of the max-heap property at the given index, continuing to one of its subtrees after correction
+function void ACSUtils_max_heapify(int index, int begin, int end, str lt, str cb_swap)
+{
+    // Implemented as 2 functions to avoid recursion, just in case of some acs shitrestriction
+    do
+    {
+        index = ACSUtils_max_heapify_step(index, begin, end, lt, cb_swap);
+    }
+    while(index != -1);
+}
+
+// Returns index of the next subtree to be checked for the max-heap property and corrected; Returns -1 when done
+function int ACSUtils_max_heapify_step(int index, int begin, int end, str lt, str cb_swap)
+{
+    int lchild = ACSUtils_heap_lchild(index, begin);
+    int rchild = ACSUtils_heap_rchild(index, begin);
+    
+    // Check the max-heap property for the subtree rooted at _index_
+    int max_i = index;
+    if((lchild <= end) && ACS_NamedExecuteWithResult(lt, max_i, lchild))
+        max_i = lchild;
+    if((rchild <= end) && ACS_NamedExecuteWithResult(lt, max_i, rchild))
+        max_i = rchild;
+    if(max_i != index)
+    {
+        ACS_NamedExecuteWithResult(cb_swap, index, max_i);
+        return max_i;
+    }
+    return -1;
+}
+
+// Heap node children index functions
+function int ACSUtils_heap_lchild(int index, int begin)
+{
+    return begin + 2*(index - begin);
+}
+
+function int ACSUtils_heap_rchild(int index, int begin)
+{
+    return begin + 2*(index - begin) + 1;
+}

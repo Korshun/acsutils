@@ -22,6 +22,7 @@ files = [
     "acscursor.acs",
     "acsinfo.acs",
     "acswidescreen.acs",
+	"acssort.acs",
     "acshudlib.acs",
 ]
 
