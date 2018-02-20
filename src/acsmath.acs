@@ -161,6 +161,16 @@ function int iround(fixed x)
 
 // Numerical algorithms.
 
+function fixed AngleDiff(fixed a, fixed b)
+{
+	fixed diff = fixed(int(b - a) % int(1.0));
+	if (diff > 0.5)
+		diff = 1.0 - diff;
+	else if (diff < -0.5)
+		diff = -1.0 - diff;
+	return diff;
+}
+
 function int ipow(int x, int y)
 {
     int n = 1;
