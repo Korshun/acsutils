@@ -16,7 +16,7 @@ function int UnpackByte4(int x) { return (x>>0)  & 0x000000FF; }
 // Pack signed 16-bit values. =========================================
 function int PackShorts(int a, int b)
 {
-	return ((a + 0x8000)<<16) | (b + 0x8000);
+	return ((a + 0x8000)<<16) | ((b + 0x8000) & 0x0000FFFF);
 }
-function int UnpackShort1(int x) { return ((x & 0xFFFF0000)>>16) - 0x8000; }
-function int UnpackShort2(int x) { return ((x & 0x0000FFFF)) - 0x8000; }
+function int UnpackShort1(int x) { return ((x>>16) & 0x0000FFFF) - 0x8000; }
+function int UnpackShort2(int x) { return ((x    ) & 0x0000FFFF) - 0x8000; }
