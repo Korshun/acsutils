@@ -13,7 +13,9 @@ del acs\*.o
 
 rmdir dist /S /Q
 mkdir dist
-mkdir dist\decorate
+
+copy cvarinfo.acsutils dist\
+copy decorate.acsutils dist\
 
 py build.py
 @if ERRORLEVEL 1 (
@@ -23,9 +25,11 @@ py build.py
 )
 
 py changeflaggen.py
-
-copy cvarinfo.acsutils dist\
-copy decorate\radiusgive.txt dist\decorate\radiusgive.txt
+@if ERRORLEVEL 1 (
+	echo CHANGEFLAGGEN FAILED
+	PAUSE
+	EXIT
+)
 
 %ACC_DIR%\acc.exe -i dist\ empty_project.acs acs\acc.o
 @if ERRORLEVEL 1 (

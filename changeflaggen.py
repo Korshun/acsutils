@@ -28,7 +28,7 @@ Actor "ACSUtils_CF_{flag}_1" : CustomInventory
 
 def main():
 	flags = open('flags.txt', 'r').read().splitlines()
-	out = open('dist/decorate/changeflag.txt', 'w')
+	out = open('dist/decorate.acsutils', 'a')
 
 	out.write('// Supported flags:\n')
 	for flag in flags:
