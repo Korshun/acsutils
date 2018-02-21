@@ -93,18 +93,35 @@ function fixed HudLeftFor(fixed width)
 {
 	return -HudBorderXFor(width);
 }
+function fixed HudX1For(fixed width)
+{
+	return -HudBorderXFor(width);
+}
 
 function fixed HudRightFor(fixed width)
 {
 	return width + HudBorderXFor(width);
 }
+function fixed HudX2For(fixed width)
+{
+	return width + HudBorderXFor(width);
+}
+
 
 function fixed HudTopFor(fixed height)
 {
 	return -HudBorderYFor(height);
 }
+function fixed HudY1For(fixed height)
+{
+	return -HudBorderYFor(height);
+}
 
 function fixed HudBottomFor(fixed height)
+{
+	return height + HudBorderYFor(height);
+}
+function fixed HudY2For(fixed height)
 {
 	return height + HudBorderYFor(height);
 }

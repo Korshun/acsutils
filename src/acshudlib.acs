@@ -368,20 +368,36 @@ function fixed HudLeft(void)
 {
 	return HudLeftFor($R_BaseWidth);
 }
+function fixed HudX1(void)
+{
+	return HudX1For($R_BaseWidth);
+}
 
 function fixed HudRight(void)
 {
 	return HudRightFor($R_BaseWidth);
+}
+function fixed HudX2(void)
+{
+	return HudX2For($R_BaseWidth);
 }
 
 function fixed HudTop(void)
 {
 	return HudTopFor($R_BaseHeight);
 }
+function fixed HudY1(void)
+{
+	return HudY1For($R_BaseHeight);
+}
 
 function fixed HudBottom(void)
 {
 	return HudBottomFor($R_BaseHeight);
+}
+function fixed HudY2(void)
+{
+	return HudY2For($R_BaseHeight);
 }
 
 function void HudSetExcludeStatusBar(bool exclude)
