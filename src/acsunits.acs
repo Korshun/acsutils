@@ -30,6 +30,15 @@ function fixed rad2deg(fixed radians)
 	return FixedMul(radians, 57.29577951308232);
 }
 
+function int ang2byte(fixed angle)
+{
+    return int(angle)>>8;
+}
+
+function fixed byte2ang(int angle)
+{
+    return fixed(angle<<8);
+}
 
 // Gravity
 
