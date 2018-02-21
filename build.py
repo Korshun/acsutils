@@ -23,6 +23,7 @@ files = [
     "acsinfo.acs",
     "acswidescreen.acs",
 	"acssort.acs",
+	"acsshuffle.acs",
     "acshudlib.acs",
 ]
 

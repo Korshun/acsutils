@@ -1,0 +1,12 @@
+// Contributed to ACSUtils by Konda
+
+function void ShuffleArray(int begin, int end, str cb_swap)
+{
+	end--;
+    for(int pick = begin; pick < end; pick++)
+    {
+        int index = random(pick, end);
+        if(index != pick)
+            ACS_NamedExecuteWithResult(cb_swap, pick, index);
+    }
+}
