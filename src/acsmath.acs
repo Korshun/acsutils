@@ -592,8 +592,8 @@ function ang acosec(fixed x)
 function void RotateVector(fixed x, fixed y, ang angle)
 {
 	// Rotate around Z axis.
-	fixed s = sin(-angle);
-	fixed c = cos(-angle);
+	fixed s = sin(angle);
+	fixed c = cos(angle);
 	r1 = FixedMul(x, c) - FixedMul(y, s);
 	r2 = FixedMul(x, s) + FixedMul(y, c);
 }
