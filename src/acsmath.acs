@@ -598,8 +598,8 @@ function void RotateVector(fixed x, fixed y, ang angle)
 	r2 = FixedMul(x, s) + FixedMul(y, c);
 }
 
-// fixed, fixed RotateVectorSC(fixed x, fixed y, fixed s, fixed c);
-function void RotateVectorSC(fixed x, fixed y, fixed s, fixed c)
+// fixed, fixed RotateVectorCS(fixed x, fixed y, fixed c, fixed s);
+function void RotateVectorCS(fixed x, fixed y, fixed c, fixed s)
 {
 	// Rotate around Z axis.
 	r1 = FixedMul(x, c) - FixedMul(y, s);
