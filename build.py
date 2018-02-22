@@ -24,6 +24,7 @@ files = [
     "acswidescreen.acs",
 	"acssort.acs",
 	"acsshuffle.acs",
+    "acssync.acs",
     "acshudlib.acs",
 ]
 

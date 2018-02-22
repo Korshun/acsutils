@@ -1,0 +1,28 @@
+function void SyncVariable(int tid, num value)
+{
+	if (ClassifyActor(tid) == ACTOR_NONE)
+	{
+		if (!SpawnForced("ACSUtils_Sync", 0.0, 0.0, 0.0, tid))	
+		{
+			ACSUtils_ProgramError(StrParam
+			(
+				s:"Failed to spawn sync actor for tid ", d:tid, s:". ",
+				s:"Make sure you copied \cjdecorate.acsutils \c-to your project."
+			));
+		}
+	}
+					
+	SetActorProperty(tid, APROP_SPEED, value);
+}
+
+function num GetSyncVar(int tid)
+{
+	return GetActorProperty(tid, APROP_SPEED);
+}
+
+function num GetSyncVarDefault(int tid, num default_value)
+{
+	if (ClassifyActor(tid) == ACTOR_NONE)
+		return default_value;
+	return GetActorProperty(tid, APROP_SPEED);
+}

@@ -1,8 +1,8 @@
 Actor ACSUtils_Sync
 {
-	+CLIENTSIDEONLY
 	+NOBLOCKMAP
 	+NOINTERACTION
+	+NOCLIP
 
 	States
 	{
