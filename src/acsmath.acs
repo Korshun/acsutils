@@ -413,9 +413,9 @@ function int getNumDigits(int base, int number)
 	return digits;
 }
 
-function int bitlog2(int x)
+function int flag2index(int x)
 {
-	return getNumDigits(2, x);
+	return getNumDigits(2, x) - 1;
 }
 
 
