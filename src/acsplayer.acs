@@ -125,86 +125,82 @@ function int SpectatorCount(void)
 }
 
 
+int ACSUtils_Players[MAX_PLAYERS];
+
 function int PickRandomBot(void)
 {
-	int Players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsBot(i))
-			Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomClient(void)
 {
-	int Players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsConnected(i))
-			Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomDeadSpectator(void)
 {
-	int Players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsDeadSpectator(i))
-			Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomPlayer(void)
 {
-	int Players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerInGame(i))
-			Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomSpectator(void)
 {
-	int Players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerIsSpectator(i))
-			Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
 
 function int PickRandomTeamPlayer(int team)
 {
-	int Players[MAX_PLAYERS];
 	int numPlayers = 0;
 	for (int i = 0; i < MAX_PLAYERS; i++)
 		if (PlayerInGame(i) && GetPlayerTeam(i) == team)
-			Players[numPlayers++] = i;
+			ACSUtils_Players[numPlayers++] = i;
 	
 	if (numPlayers == 0)
 		return -1;
 	
-	return Players[Random(0, numPlayers - 1)];
+	return ACSUtils_Players[Random(0, numPlayers - 1)];
 }
