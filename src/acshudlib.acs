@@ -520,12 +520,28 @@ function void HudSetAlignment(fixed alignX, fixed alignY)
 	$R_AlignY = alignY;
 }
 
+function void HudSetAlign(fixed alignX, fixed alignY)
+{
+	$R_AlignX = alignX;
+	$R_AlignY = alignY;
+}
+
 function void HudSetAlignmentX(fixed alignX)
 {
 	$R_AlignX = alignX;
 }
 
+function void HudSetAlignX(fixed alignX)
+{
+	$R_AlignX = alignX;
+}
+
 function void HudSetAlignmentY(fixed alignY)
+{
+	$R_AlignY = alignY;
+}
+
+function void HudSetAlignY(fixed alignY)
 {
 	$R_AlignY = alignY;
 }
