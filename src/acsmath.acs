@@ -298,79 +298,96 @@ function int randsign(void)
 
 function raw RandomPick2(raw v0, raw v1)
 {
-	raw A[2];
-	A[0] = v0;
-	A[1] = v1;
-	return A[Random(0, 1)];
+	if (Random(0, 1))
+		return v0;
+	return v1;
 }
 
 function raw RandomPick3(raw v0, raw v1, raw v2)
 {
-	raw A[3];
-	A[0] = v0;
-	A[1] = v1;
-	A[2] = v2;
-	return A[Random(0, 2)];
+	int x = Random(0, 2);
+	switch (x)
+	{
+	case 0: return v0;
+	case 1: return v1;
+	}
+
+	return v2;
 }
 
 function raw RandomPick4(raw v0, raw v1, raw v2, raw v3)
 {
-	raw A[4];
-	A[0] = v0;
-	A[1] = v1;
-	A[2] = v2;
-	A[3] = v3;
-	return A[Random(0, 3)];
+	int x = Random(0, 3);
+	switch (x)
+	{
+	case 0: return v0;
+	case 1: return v1;
+	case 2: return v2;
+	}
+
+	return v3;
 }
 
 function raw RandomPick5(raw v0, raw v1, raw v2, raw v3, raw v4)
 {
-	raw A[5];
-	A[0] = v0;
-	A[1] = v1;
-	A[2] = v2;
-	A[3] = v3;
-	A[4] = v4;
-	return A[Random(0, 4)];
+	int x = Random(0, 4);
+	switch (x)
+	{
+	case 0: return v0;
+	case 1: return v1;
+	case 2: return v2;
+	case 3: return v3;
+	}
+
+	return v4;
 }
 
 function raw RandomPick6(raw v0, raw v1, raw v2, raw v3, raw v4, raw v5)
 {
-	raw A[6];
-	A[0] = v0;
-	A[1] = v1;
-	A[2] = v2;
-	A[3] = v3;
-	A[4] = v4;
-	A[5] = v5;
-	return A[Random(0, 5)];
+	int x = Random(0, 5);
+	switch (x)
+	{
+	case 0: return v0;
+	case 1: return v1;
+	case 2: return v2;
+	case 3: return v3;
+	case 4: return v4;
+	}
+
+	return v5;
 }
 
 function raw RandomPick7(raw v0, raw v1, raw v2, raw v3, raw v4, raw v5, raw v6)
 {
-	raw A[7];
-	A[0] = v0;
-	A[1] = v1;
-	A[2] = v2;
-	A[3] = v3;
-	A[4] = v4;
-	A[5] = v5;
-	A[6] = v6;
-	return A[Random(0, 6)];
+	int x = Random(0, 6);
+	switch (x)
+	{
+	case 0: return v0;
+	case 1: return v1;
+	case 2: return v2;
+	case 3: return v3;
+	case 4: return v4;
+	case 5: return v5;
+	}
+
+	return v6;
 }
 
 function raw RandomPick8(raw v0, raw v1, raw v2, raw v3, raw v4, raw v5, raw v6, raw v7)
 {
-	raw A[8];
-	A[0] = v0;
-	A[1] = v1;
-	A[2] = v2;
-	A[3] = v3;
-	A[4] = v4;
-	A[5] = v5;
-	A[6] = v6;
-	A[7] = v7;
-	return A[Random(0, 7)];
+	int x = Random(0, 7);
+	switch (x)
+	{
+	case 0: return v0;
+	case 1: return v1;
+	case 2: return v2;
+	case 3: return v3;
+	case 4: return v4;
+	case 5: return v5;
+	case 6: return v6;
+	}
+
+	return v7;
 }
 
 function int npo2(int v)
