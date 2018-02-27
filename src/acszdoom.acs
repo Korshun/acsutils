@@ -165,6 +165,10 @@ function fixed GetActorXYVelocity(int tid)
 	return VectorLength(GetActorVelX(tid), GetActorVelY(tid));
 }
 
+function fixed GetActorVelocityXY(int tid)
+{
+	return VectorLength(GetActorVelX(tid), GetActorVelY(tid));
+}
 
 // Actor utility functions.
 
