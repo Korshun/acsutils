@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 
-import urllib.request
-import re
-
 template = """
 Actor "ACSUtils_CF_{flag}_0" : CustomInventory
 {{
@@ -37,7 +34,7 @@ def main():
 	for flag in flags:
 		out.write(template.format(flag=flag))
 		if '.' in flag:
-			flag = flag.split('.')[1]
+			_, flag = flag.split('.')
 			out.write(template.format(flag=flag))
 		
 if __name__ == '__main__':
