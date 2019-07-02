@@ -14,45 +14,45 @@ del acs\*.o
 rmdir dist /S /Q
 mkdir dist
 
-copy cvarinfo.acsutils dist\
-copy decorate.acsutils dist\
+copy misc\cvarinfo.acsutils dist\
+copy misc\decorate.acsutils dist\
 
-py build.py
+py tools\preprocess.py
 @if ERRORLEVEL 1 (
-	echo BUILD.PY FAILED
+	echo PREPROCESS.PY FAILED
 	PAUSE
 	EXIT
 )
 
-py changeflaggen.py
+py tools\changeflaggen.py
 @if ERRORLEVEL 1 (
 	echo CHANGEFLAGGEN FAILED
 	PAUSE
 	EXIT
 )
 
-%ACC_DIR%\acc.exe -i dist\ empty_project.acs acs\acc.o
+%ACC_DIR%\acc.exe -i dist\ misc\empty_project.acs acs\acc.o
 @if ERRORLEVEL 1 (
 	echo ACC FAILED
 	PAUSE
 	EXIT
 )
 
-%BCC_DIR%\bcc.exe -i %ACC_DIR% -i dist\ -acc-stats empty_project.acs acs\bcc.o
+%BCC_DIR%\bcc.exe -i %ACC_DIR% -i dist\ -acc-stats misc\empty_project.acs acs\bcc.o
 @if ERRORLEVEL 1 (
 	echo BCC FAILED
 	PAUSE
 	EXIT
 )
 
-%GDCC_DIR%\gdcc-acc.exe -i dist\ empty_project.acs acs\gdcc.o --no-warn-forward-reference
+%GDCC_DIR%\gdcc-acc.exe -i dist\ misc\empty_project.acs acs\gdcc.o --no-warn-forward-reference
 @if ERRORLEVEL 1 (
 	echo GDCC FAILED
 	PAUSE
 	EXIT
 )
 
-%BCC_DIR%\\bcc.exe -i dist\ -acc-stats empty_project.bcs acs\bcsutils.o
+%BCC_DIR%\\bcc.exe -i dist\ -acc-stats misc\empty_project.bcs acs\bcsutils.o
 @if ERRORLEVEL 1 (
 	echo BCC BCSUTILS FAILED
 	PAUSE
